@@ -1,0 +1,237 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
+.root{background:linear-gradient(160deg,#fff0f8 0%,#fff9fc 50%,#ffe8f3 100%);min-height:100vh;position:relative;overflow:hidden;}
+.scanlines{position:fixed;inset:0;pointer-events:none;opacity:.18;background:repeating-linear-gradient(135deg,rgba(255,126,183,.2) 0 1px,transparent 1px 7px);mix-blend-mode:multiply;z-index:0;}
+.deco{position:absolute;pointer-events:none;opacity:.55;font-size:36px;filter:drop-shadow(0 4px 0 rgba(255,126,183,.14));}
+.d1{left:18px;top:60px;transform:rotate(-12deg);}
+.d2{right:20px;top:80px;transform:rotate(10deg);}
+.d3{left:28px;bottom:160px;transform:rotate(-8deg);}
+.d4{right:22px;bottom:200px;transform:rotate(8deg);}
+.inner{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:28px 16px 32px;}
+
+/* header */
+.header{text-align:center;margin-bottom:18px;}
+.topbrand{display:inline-block;border:2px solid #ffc6df;background:#fff;border-radius:999px;padding:5px 16px;font-size:12px;font-weight:900;color:#ff70aa;box-shadow:3px 3px 0 #ffe5f0;margin-bottom:10px;letter-spacing:.5px;}
+.title{font-size:26px;font-weight:900;color:#ff70aa;text-shadow:2px 2px 0 #fff,3px 3px 0 #ffd1e6;letter-spacing:1px;margin-bottom:4px;}
+.subtitle{font-size:13px;font-weight:800;color:#ffaacb;letter-spacing:1px;}
+.price-pill{display:inline-flex;align-items:baseline;gap:3px;margin-top:10px;background:linear-gradient(135deg,#FF6B9D,#E91E8C);color:#fff;font-weight:900;padding:7px 20px;border-radius:999px;box-shadow:0 6px 20px rgba(233,30,140,.35);}
+.price-pill .y{font-size:13px;opacity:.9;}
+.price-pill .n{font-size:22px;}
+.price-pill .u{font-size:12px;opacity:.85;}
+
+/* === BOX (first version) === */
+.box-area{display:flex;justify-content:center;align-items:center;padding:1.2rem 1rem 0.4rem;position:relative;}
+.box-container{position:relative;cursor:pointer;}
+.box-wrap{position:relative;width:160px;height:160px;}
+.box-body{width:160px;height:120px;background:linear-gradient(135deg,#FF6B9D,#E91E8C);border-radius:16px 16px 20px 20px;position:absolute;bottom:0;box-shadow:0 8px 24px rgba(233,30,140,.35),inset 0 1px 0 rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;}
+.box-body::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;height:2px;background:rgba(255,255,255,.5);border-radius:2px;}
+.box-ribbon{position:absolute;top:40px;left:0;right:0;height:40px;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;}
+.bow{font-size:36px;position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:5;transition:transform .4s,opacity .3s;}
+.bow.open{transform:translateX(-50%) translateY(-60px) scale(.4);opacity:0;}
+.box-lid{width:174px;height:44px;background:linear-gradient(135deg,#FF85B8,#FF4D9D);border-radius:10px;position:absolute;top:0;left:-7px;box-shadow:0 4px 12px rgba(233,30,140,.3),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .6s cubic-bezier(.4,2,.6,1),opacity .5s;transform-origin:center top;z-index:6;}
+.box-lid.open{transform:translateY(-60px) rotateX(-40deg);opacity:0;}
+.box-shine{position:absolute;top:8px;left:14px;width:24px;height:10px;background:rgba(255,255,255,.45);border-radius:10px;z-index:3;}
+.box-icon{font-size:40px;opacity:0;position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);z-index:3;transition:opacity .3s,transform .35s;}
+.box-icon.show{opacity:.9;transform:translate(-50%,-65%);}
+.sparkles{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;}
+.sparkle{position:absolute;font-size:14px;animation:floatUp 1.2s ease-out forwards;opacity:0;}
+@keyframes floatUp{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4);}}
+@keyframes shake{0%,100%{transform:rotate(0);}20%{transform:rotate(-5deg);}40%{transform:rotate(5deg);}60%{transform:rotate(-4deg);}80%{transform:rotate(4deg);}}
+.shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97);}
+
+/* === BUTTONS (first version) === */
+.btns{display:flex;gap:12px;justify-content:center;margin-top:6px;flex-wrap:wrap;}
+.btn-open{background:linear-gradient(135deg,#FF6B9D,#E91E8C);color:white;border:none;font-family:inherit;font-size:16px;font-weight:800;padding:14px 36px;border-radius:50px;cursor:pointer;box-shadow:0 6px 20px rgba(233,30,140,.4);transition:all .2s;letter-spacing:.3px;}
+.btn-open:hover{filter:brightness(1.05);}
+.btn-open:active:not(:disabled){transform:scale(.96);}
+.btn-open:disabled{opacity:.7;cursor:not-allowed;transform:none;}
+.btn-sub{background:white;color:#E91E8C;border:2px solid #FF6B9D;font-family:inherit;font-size:14px;font-weight:800;padding:12px 20px;border-radius:50px;cursor:pointer;transition:all .2s;}
+.btn-sub:hover{background:#FFF0F7;}
+.btn-sub:active{transform:scale(.96);}
+
+/* result */
+.result-box{margin:14px 0 0;border:3px solid #ffc0dc;background:rgba(255,255,255,.9);border-radius:20px;padding:13px 16px;text-align:center;font-weight:900;color:#70445d;box-shadow:0 8px 0 rgba(255,157,201,.2);font-size:14px;line-height:1.65;min-height:58px;}
+.result-box strong{color:#ff5fa3;font-size:20px;text-shadow:1px 1px 0 #fff;}
+.rtag{display:inline-block;border-radius:999px;padding:2px 10px;font-size:11px;font-weight:900;margin-bottom:4px;}
+@keyframes resPop{from{transform:scale(.75);opacity:0;}to{transform:scale(1);opacity:1;}}
+.res-pop{animation:resPop .4s cubic-bezier(.4,2,.5,1);}
+
+/* cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+.card{border:3px solid #ffc0dc;background:rgba(255,255,255,.88);border-radius:22px;padding:13px;box-shadow:0 8px 0 rgba(255,157,201,.18);}
+.card-title{display:inline-block;border:2px solid #ffc6df;background:#fff;border-radius:14px;padding:5px 12px;color:#ff70aa;font-weight:900;font-size:14px;box-shadow:3px 3px 0 #ffe5f0;margin-bottom:10px;}
+.prow{display:flex;align-items:center;gap:8px;border:2px solid #ffd0e4;background:linear-gradient(180deg,#fff,#fff5fa);border-radius:13px;padding:7px 9px;margin-bottom:7px;font-weight:900;font-size:13px;}
+.prow:last-child{margin-bottom:0;}
+.pbadge{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#fff0f7;border:2px solid #fff;box-shadow:2px 2px 0 #ffd3e7;font-size:15px;flex-shrink:0;}
+.pname{flex:1;font-size:12px;}
+.pprob{color:#ff7fb7;background:#fff2f8;border:2px solid #ffd2e6;border-radius:999px;padding:3px 8px;font-size:12px;}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;}
+.snum{border:2px solid #ffc8df;background:linear-gradient(180deg,#fff,#fff5fa);border-radius:13px;padding:8px 6px;text-align:center;box-shadow:0 4px 0 rgba(255,157,201,.16);}
+.snum .sl{font-size:10px;font-weight:800;color:#ffaaca;margin-bottom:2px;}
+.snum .sv{font-size:20px;font-weight:900;color:#e91e8c;line-height:1.1;}
+.snum .su{font-size:10px;color:#ffb8d6;font-weight:800;}
+.brow{display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:11px;}
+.bname{font-weight:800;color:#8b536d;flex:0 0 52px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.btrack{flex:1;height:8px;background:#ffe0ef;border-radius:4px;overflow:hidden;}
+.bfill{height:100%;border-radius:4px;transition:width .7s cubic-bezier(.4,0,.2,1);}
+.bcnt{font-weight:900;color:#e91e8c;min-width:20px;text-align:right;}
+.hchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+.hc{font-size:11px;font-weight:800;padding:3px 9px;border-radius:9px;border:2px solid transparent;}
+.hdr{font-size:11px;font-weight:800;color:#ffaaca;margin-top:8px;margin-bottom:4px;}
+@keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0);}100%{opacity:0;transform:translateY(180px) rotate(360deg);}}
+.conf{position:fixed;pointer-events:none;z-index:999;font-size:16px;animation:confettiFall 1.6s ease-out forwards;}
+</style>
+
+<div class="root">
+  <div class="scanlines"></div>
+  <div class="deco d1">🌹</div><div class="deco d2">💝</div>
+  <div class="deco d3">🌸</div><div class="deco d4">💗</div>
+
+  <div class="inner">
+    <div class="header">
+      <div class="topbrand">垂耳兔电竞 · 5.20 LOVE CLUB</div>
+      <div class="title">华耳兔CLUB · 心动盲盒</div>
+      <div class="subtitle">✨ 5.20 我爱你 限定活动 ✨</div>
+      <div><span class="price-pill"><span class="y">¥</span><span class="n">188</span><span class="u">&nbsp;/盒</span></span></div>
+    </div>
+
+    <div class="box-area">
+      <div class="box-container">
+        <div class="box-wrap" id="boxWrap">
+          <div class="bow" id="bow">🎀</div>
+          <div class="box-lid" id="lid"></div>
+          <div class="box-body">
+            <div class="box-shine"></div>
+            <div class="box-ribbon"></div>
+            <div class="box-icon" id="boxIcon"></div>
+          </div>
+        </div>
+        <div class="sparkles" id="sparkles"></div>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button class="btn-open" id="btnOpen">💝 开一盒</button>
+      <button class="btn-sub" id="btnReset">🔄 重置</button>
+    </div>
+
+    <div class="result-box" id="rbox">点击「开一盒」，开启垂耳兔电竞 5.20 专属好运 ovo</div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">🎁 稀有奖项</div>
+        <div id="prizeList"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 开箱统计</div>
+        <div class="sgrid">
+          <div class="snum"><div class="sl">开箱次数</div><div class="sv" id="scount">0</div><div class="su">次</div></div>
+          <div class="snum"><div class="sl">总花费</div><div class="sv" id="sspend">0</div><div class="su">元</div></div>
+        </div>
+        <div id="barList"></div>
+        <div class="hdr">📜 最近记录</div>
+        <div class="hchips" id="hchips"><span style="font-size:11px;font-weight:700;color:#ffb8d0;">暂无记录</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const prizes=[
+  {name:'108机密保588',   short:'机密588', prob:10,icon:'💜',bg:'#f5e6ff',tc:'#7c3aed',bc:'#e9d5ff'},
+  {name:'158保1088限时复刻版',short:'1088复刻',prob:15,icon:'⭐',bg:'#fef3c7',tc:'#b45309',bc:'#fde68a'},
+  {name:'158保888',       short:'保888',   prob:35,icon:'💗',bg:'#ffe4ef',tc:'#be185d',bc:'#ffc0d8'},
+  {name:'288趣味单任选',   short:'趣味288', prob:20,icon:'✨',bg:'#d1fae5',tc:'#059669',bc:'#a7f3d0'},
+  {name:'328保2188',      short:'保2188',  prob:15,icon:'🔥',bg:'#ffedd5',tc:'#c2410c',bc:'#fed7aa'},
+  {name:'388趣味单任选',   short:'趣味388', prob:5, icon:'💎',bg:'#fff0f7',tc:'#9d174d',bc:'#fce7f3'},
+];
+const barColors=['#c084fc','#f59e0b','#ff6b9d','#34d399','#f97316','#e91e8c'];
+const totalProb=prizes.reduce((s,p)=>s+p.prob,0);
+let count=0,spend=0,pcounts=prizes.map(()=>0),hist=[];
+let opening=false;
+
+function rng(){if(window.crypto&&crypto.getRandomValues){const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]/4294967296;}return Math.random();}
+function roll(){let r=rng()*totalProb,acc=0;for(let i=0;i<prizes.length;i++){acc+=prizes[i].prob;if(r<acc)return i;}return prizes.length-1;}
+
+function renderPrizes(){
+  document.getElementById('prizeList').innerHTML=prizes.map(p=>`
+    <div class="prow"><div class="pbadge">${p.icon}</div><div class="pname">${p.name}</div><div class="pprob">${p.prob}%</div></div>`).join('');
+}
+function renderBars(){
+  const max=Math.max(...pcounts,1);
+  document.getElementById('barList').innerHTML=prizes.map((p,i)=>`
+    <div class="brow"><div class="bname">${p.icon}${p.short}</div>
+    <div class="btrack"><div class="bfill" style="width:${count?pcounts[i]/max*100:0}%;background:${barColors[i]};"></div></div>
+    <div class="bcnt">${pcounts[i]}</div></div>`).join('');
+}
+function renderHist(){
+  const el=document.getElementById('hchips');
+  if(!hist.length){el.innerHTML='<span style="font-size:11px;font-weight:700;color:#ffb8d0;">暂无记录</span>';return;}
+  el.innerHTML=hist.slice(-20).reverse().map(i=>{const p=prizes[i];return`<span class="hc" style="background:${p.bg};color:${p.tc};border-color:${p.bc};">${p.icon}${p.short}</span>`;}).join('');
+}
+function updateStats(){
+  document.getElementById('scount').textContent=count;
+  document.getElementById('sspend').textContent=spend;
+}
+function spawnSp(){
+  const w=document.getElementById('sparkles');
+  const icons=['💖','✨','🌸','💫','⭐','🎀','💕','🌷'];
+  for(let i=0;i<10;i++){
+    const el=document.createElement('div');el.className='sparkle';
+    el.textContent=icons[Math.floor(rng()*icons.length)];
+    const a=rng()*Math.PI*2,d=55+rng()*55;
+    el.style.cssText=`left:${40+rng()*20}%;top:${35+rng()*25}%;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;animation-delay:${i*0.08}s;`;
+    w.appendChild(el);setTimeout(()=>el.remove(),1400);
+  }
+}
+function spawnConf(n){
+  const em=['💖','✨','🌸','💝','⭐','🎊','💕','🎀','💫'];
+  for(let i=0;i<n;i++){
+    const el=document.createElement('div');el.className='conf';
+    el.textContent=em[Math.floor(rng()*em.length)];
+    el.style.cssText=`left:${rng()*100}vw;top:-20px;animation-delay:${rng()*.9}s;`;
+    document.body.appendChild(el);setTimeout(()=>el.remove(),2800);
+  }
+}
+
+function openBox(){
+  if(opening)return;opening=true;
+  document.getElementById('btnOpen').disabled=true;
+  const wrap=document.getElementById('boxWrap');
+  const lid=document.getElementById('lid');
+  const bow=document.getElementById('bow');
+  const bicon=document.getElementById('boxIcon');
+  const rbox=document.getElementById('rbox');
+  bicon.className='box-icon';bicon.textContent='';
+  wrap.classList.add('shake');
+  setTimeout(()=>{
+    wrap.classList.remove('shake');
+    lid.classList.add('open');bow.classList.add('open');
+    spawnSp();
+    setTimeout(()=>{
+      const idx=roll();const p=prizes[idx];
+      pcounts[idx]++;hist.push(idx);count++;spend+=188;
+      bicon.textContent=p.icon;bicon.classList.add('show');
+      rbox.className='result-box res-pop';
+      rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};">${p.prob<=5?'珍贵':p.prob<=15?'稀有':'普通'}奖项</span><br>恭喜抽中：<strong>${p.name}</strong><br><span style="font-size:12px;font-weight:800;color:#b16b88;">概率 ${p.prob}% · 请截图联系客服兑奖</span>`;
+      if(p.prob<=15)spawnConf(16);else spawnConf(6);
+      renderBars();renderHist();updateStats();
+      setTimeout(()=>{lid.classList.remove('open');bow.classList.remove('open');bicon.className='box-icon';opening=false;document.getElementById('btnOpen').disabled=false;},1800);
+    },480);
+  },550);
+}
+
+function resetAll(){
+  count=0;spend=0;pcounts=prizes.map(()=>0);hist=[];
+  document.getElementById('rbox').className='result-box';
+  document.getElementById('rbox').innerHTML='点击「开一盒」，开启垂耳兔电竞 5.20 专属好运 ovo';
+  renderBars();renderHist();updateStats();
+}
+
+renderPrizes();renderBars();updateStats();
+document.getElementById('btnOpen').addEventListener('click',openBox);
+document.getElementById('btnReset').addEventListener('click',resetAll);
+</script>
