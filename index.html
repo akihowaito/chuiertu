@@ -1,4 +1,9 @@
-
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>垂耳兔电竞 - 活动中心</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -14,10 +19,10 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 
 /* header */
 .header{text-align:center;margin-bottom:18px;}
-.topbrand{display:inline-block;border:2px solid #ffc6df;background:#fff;border-radius:999px;padding:5px 16px;font-size:12px;font-weight:900;color:#ff70aa;box-shadow:3px 3px 0 #ffe5f0;margin-bottom:10px;letter-spacing:.5px;}
+.topbrand{display:inline-block;border:2px solid #ffc6df;background:#fff;border-radius:999px;padding:5px 16px;font-size:12px;font-weight:900;color:#ff70aa;box-shadow:3px 3px 0 #ffe5f0;margin-bottom:10px;}
 .title{font-size:26px;font-weight:900;color:#ff70aa;text-shadow:2px 2px 0 #fff,3px 3px 0 #ffd1e6;letter-spacing:1px;margin-bottom:4px;}
 .subtitle{font-size:13px;font-weight:800;color:#ffaacb;letter-spacing:1px;}
-.price-pill{display:inline-flex;align-items:baseline;gap:3px;margin-top:10px;background:linear-gradient(135deg,#FF6B9D,#E91E8C);color:#fff;font-weight:900;padding:7px 20px;border-radius:999px;box-shadow:0 6px 20px rgba(233,30,140,.35);}
+.price-pill{display:inline-flex;align-items:baseline;gap:3px;margin-top:10px;background:linear-gradient(135deg,#FF6B9D,#E91E8C);color:#fff;font-weight:900;padding:7px 20px;border-radius:999px;box-shadow:0 6px 0 rgba(233,30,140,.3);}
 .price-pill .y{font-size:13px;opacity:.9;}
 .price-pill .n{font-size:22px;}
 .price-pill .u{font-size:12px;opacity:.85;}
@@ -26,12 +31,12 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 .box-area{display:flex;justify-content:center;align-items:center;padding:1.2rem 1rem 0.4rem;position:relative;}
 .box-container{position:relative;cursor:pointer;}
 .box-wrap{position:relative;width:160px;height:160px;}
-.box-body{width:160px;height:120px;background:linear-gradient(135deg,#FF6B9D,#E91E8C);border-radius:16px 16px 20px 20px;position:absolute;bottom:0;box-shadow:0 8px 24px rgba(233,30,140,.35),inset 0 1px 0 rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;}
+.box-body{width:160px;height:120px;background:linear-gradient(135deg,#FF6B9D,#E91E8C);border-radius:16px 16px 20px 20px;position:absolute;bottom:0;box-shadow:0 8px 24px rgba(233,30,140,.35),inset 0 1px 0 rgba(255,255,255,.3);}
 .box-body::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;height:2px;background:rgba(255,255,255,.5);border-radius:2px;}
 .box-ribbon{position:absolute;top:40px;left:0;right:0;height:40px;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;}
 .bow{font-size:36px;position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:5;transition:transform .4s,opacity .3s;}
 .bow.open{transform:translateX(-50%) translateY(-60px) scale(.4);opacity:0;}
-.box-lid{width:174px;height:44px;background:linear-gradient(135deg,#FF85B8,#FF4D9D);border-radius:10px;position:absolute;top:0;left:-7px;box-shadow:0 4px 12px rgba(233,30,140,.3),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .6s cubic-bezier(.4,2,.6,1),opacity .5s;transform-origin:center top;z-index:6;}
+.box-lid{width:174px;height:44px;background:linear-gradient(135deg,#FF85B8,#FF4D9D);border-radius:10px;position:absolute;top:0;left:-7px;box-shadow:0 4px 12px rgba(233,30,140,.3),inset 0 1px 0 rgba(255,255,255,.15);}
 .box-lid.open{transform:translateY(-60px) rotateX(-40deg);opacity:0;}
 .box-shine{position:absolute;top:8px;left:14px;width:24px;height:10px;background:rgba(255,255,255,.45);border-radius:10px;z-index:3;}
 .box-icon{font-size:40px;opacity:0;position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);z-index:3;transition:opacity .3s,transform .35s;}
@@ -44,7 +49,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 
 /* === BUTTONS (first version) === */
 .btns{display:flex;gap:12px;justify-content:center;margin-top:6px;flex-wrap:wrap;}
-.btn-open{background:linear-gradient(135deg,#FF6B9D,#E91E8C);color:white;border:none;font-family:inherit;font-size:16px;font-weight:800;padding:14px 36px;border-radius:50px;cursor:pointer;box-shadow:0 6px 20px rgba(233,30,140,.4);transition:all .2s;letter-spacing:.3px;}
+.btn-open{background:linear-gradient(135deg,#FF6B9D,#E91E8C);color:white;border:none;font-family:inherit;font-size:16px;font-weight:800;padding:14px 36px;border-radius:50px;cursor:pointer;box-shadow:0 8px 0 rgba(233,30,140,.3);}
 .btn-open:hover{filter:brightness(1.05);}
 .btn-open:active:not(:disabled){transform:scale(.96);}
 .btn-open:disabled{opacity:.7;cursor:not-allowed;transform:none;}
@@ -53,7 +58,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 .btn-sub:active{transform:scale(.96);}
 
 /* result */
-.result-box{margin:14px 0 0;border:3px solid #ffc0dc;background:rgba(255,255,255,.9);border-radius:20px;padding:13px 16px;text-align:center;font-weight:900;color:#70445d;box-shadow:0 8px 0 rgba(255,157,201,.2);font-size:14px;line-height:1.65;min-height:58px;}
+.result-box{margin:14px 0 0;border:3px solid #ffc0dc;background:rgba(255,255,255,.9);border-radius:20px;padding:13px 16px;text-align:center;font-weight:900;color:#70445d;box-shadow:0 8px 0 rgba(255,157,201,.18);}
 .result-box strong{color:#ff5fa3;font-size:20px;text-shadow:1px 1px 0 #fff;}
 .rtag{display:inline-block;border-radius:999px;padding:2px 10px;font-size:11px;font-weight:900;margin-bottom:4px;}
 @keyframes resPop{from{transform:scale(.75);opacity:0;}to{transform:scale(1);opacity:1;}}
@@ -84,6 +89,8 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 @keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0);}100%{opacity:0;transform:translateY(180px) rotate(360deg);}}
 .conf{position:fixed;pointer-events:none;z-index:999;font-size:16px;animation:confettiFall 1.6s ease-out forwards;}
 </style>
+</head>
+<body>
 
 <div class="root">
   <div class="scanlines"></div>
@@ -216,7 +223,7 @@ function openBox(){
       pcounts[idx]++;hist.push(idx);count++;spend+=188;
       bicon.textContent=p.icon;bicon.classList.add('show');
       rbox.className='result-box res-pop';
-      rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};">${p.prob<=5?'珍贵':p.prob<=15?'稀有':'普通'}奖项</span><br>恭喜抽中：<strong>${p.name}</strong><br><span style="font-size:12px;font-weight:800;color:#b16b88;">概率 ${p.prob}% · 请截图联系客服兑奖</span>`;
+      rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};">${p.prob<=5?'珍贵':p.prob<=15?'稀有':'普通'}奖项</span><br>恭喜抽中：<strong>${p.name}</strong><br><span style="font-size:12px;">请截图联系垂耳兔电竞客服兑奖 ♡</span>`;
       if(p.prob<=15)spawnConf(16);else spawnConf(6);
       renderBars();renderHist();updateStats();
       setTimeout(()=>{lid.classList.remove('open');bow.classList.remove('open');bicon.className='box-icon';opening=false;document.getElementById('btnOpen').disabled=false;},1800);
@@ -235,3 +242,6 @@ renderPrizes();renderBars();updateStats();
 document.getElementById('btnOpen').addEventListener('click',openBox);
 document.getElementById('btnReset').addEventListener('click',resetAll);
 </script>
+
+</body>
+</html>
