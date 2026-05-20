@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>垂耳兔电竞 5.20 心动盲盒</title>
+<title>垂耳兔CLUB · 心动盲盒</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -234,7 +234,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 .sc-header-title{color:#fff;font-size:14px;font-weight:900;letter-spacing:.5px;}
 .sc-body{padding:12px;}
 .stat-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
-.stat-num{background:linear-gradient(180deg,#fff,#fff5fa);border:2px solid #ffc8df;border-radius:14px;padding:10px 6px;text-align:center;}
+.stat-num{background:linear-gradient(180deg,#fff,#fff5fa);border:2px solid #ffd0e4;border-radius:14px;padding:10px 6px;text-align:center;}
 .sn-label{font-size:10px;font-weight:800;color:#ffaaca;margin-bottom:3px;}
 .sn-val{font-size:22px;font-weight:900;color:#e91e8c;line-height:1;}
 .sn-unit{font-size:10px;font-weight:800;color:#ffb8d6;margin-top:1px;}
@@ -281,6 +281,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
   <div class="deco d3">🌸</div><div class="deco d4">💗</div>
 
   <div class="inner">
+    <!-- ===== HEADER (unchanged) ===== -->
     <div class="header">
       <div class="topbrand">垂耳兔电竞 · kook 7686</div>
       <div class="title">垂耳兔CLUB · 心动盲盒</div>
@@ -288,6 +289,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
       <div><span class="price-pill"><span class="y">¥</span><span class="n">188</span><span class="u">&nbsp;/盒</span></span></div>
     </div>
 
+    <!-- ===== BOX (unchanged) ===== -->
     <div class="box-area">
       <div class="box-container">
         <div class="box-wrap" id="boxWrap">
@@ -309,8 +311,10 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 
     <div class="result-box" id="rbox">点击「开一盒」，开启垂耳兔电竞 5.20 专属好运 ovo</div>
 
+    <!-- ===== BOTTOM (redesigned) ===== -->
     <div class="bottom">
 
+      <!-- 奖项说明 -->
       <div class="prize-card">
         <div class="pc-header">
           <div class="pc-header-title">🎁 奖项一览</div>
@@ -321,6 +325,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
         </div>
       </div>
 
+      <!-- 统计 -->
       <div class="stats-card">
         <div class="sc-header">
           <div class="sc-header-title">📊 我的战绩</div>
@@ -348,6 +353,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
         </div>
       </div>
 
+      <!-- 历史记录 -->
       <div class="hist-card">
         <div class="hc-header">
           <div class="hc-header-title">📜 开箱记录</div>
@@ -358,7 +364,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
         </div>
       </div>
 
-    </div>
+    </div><!-- /bottom -->
 
     <div class="footer">© 2026 垂耳兔电竞 · 最终解释权归垂耳兔电竞所有 · akihowaito</div>
   </div>
@@ -378,6 +384,7 @@ const STORAGE_KEY='chuiertu_blindbox_v1';
 const totalProb=prizes.reduce((s,p)=>s+p.prob,0);
 let opening=false;
 
+// --- persistence ---
 function loadState(){
   try{
     const raw=localStorage.getItem(STORAGE_KEY);
@@ -398,9 +405,11 @@ function saveState(){
 }
 let {count,spend,pcounts,hist}=loadState();
 
+// --- rng ---
 function rng(){if(window.crypto&&crypto.getRandomValues){const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]/4294967296;}return Math.random();}
 function roll(){let r=rng()*totalProb,acc=0;for(let i=0;i<prizes.length;i++){acc+=prizes[i].prob;if(r<acc)return i;}return prizes.length-1;}
 
+// --- render: prize grid ---
 function renderPrizes(){
   document.getElementById('prizeList').innerHTML=prizes.map((p)=>`
     <div class="prize-item">
@@ -412,6 +421,7 @@ function renderPrizes(){
     </div>`).join('');
 }
 
+// --- render: bars ---
 function renderBars(){
   const max=Math.max(...pcounts,1);
   document.getElementById('barList').innerHTML=prizes.map((p,i)=>`
@@ -422,20 +432,35 @@ function renderBars(){
     </div>`).join('');
 }
 
+// --- render: stats ---
 function renderStats(){
   document.getElementById('scount').textContent=count;
   document.getElementById('sspend').textContent=spend;
+  // best prize = rarest drawn
   const drawn=pcounts.map((c,i)=>({c,i})).filter(x=>x.c>0);
   if(drawn.length){
     const best=drawn.reduce((a,b)=>prizes[a.i].prob<prizes[b.i].prob?a:b);
     document.getElementById('sbest').textContent=prizes[best.i].icon;
     document.getElementById('sbestlabel').textContent=prizes[best.i].short;
-  }else{
+  } else {
     document.getElementById('sbest').textContent='—';
     document.getElementById('sbestlabel').textContent='暂无';
   }
 }
 
+// --- claim code: helps manual checking, but true anti-cheat still needs server logging ---
+function makeClaimCode(idx){
+  const d=new Date();
+  const y=d.getFullYear().toString().slice(2);
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  const a=new Uint32Array(1);
+  if(window.crypto&&crypto.getRandomValues){crypto.getRandomValues(a);}else{a[0]=Math.floor(Math.random()*0xffffffff);}
+  const rand=a[0].toString(36).toUpperCase().slice(0,5).padStart(5,'0');
+  return `CT${y}${m}${day}-${String(idx+1).padStart(2,'0')}-${rand}`;
+}
+
+// --- render: history ---
 function fmtTime(ts){
   if(!ts)return'';
   const d=new Date(ts);
@@ -446,23 +471,31 @@ function fmtTime(ts){
   const hm=d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
   if(diff===0)return'今天 '+hm;
   if(diff===1)return'昨天 '+hm;
-  return(d.getMonth()+1)+'/'+d.getDate()+' '+hm;
+  return`${d.getMonth()+1}/${d.getDate()} ${hm}`;
 }
-
 function renderHist(){
+  const el=document.getElementById('histBody');
   document.getElementById('histCount').textContent='共 '+hist.length+' 次';
-  if(!hist.length){
-    document.getElementById('histBody').innerHTML='<div class="hist-empty">🎀 还没有开箱记录哦～</div>';
-    return;
-  }
-  const items=hist.slice(-20).reverse().map((item,i)=>{
-    const p=prizes[item.idx];
+  if(!hist.length){el.innerHTML='<div class="hist-empty">🎀 还没有开箱记录哦～</div>';return;}
+  const items=[...hist].reverse().slice(0,50);
+  el.innerHTML='<div class="hist-list">'+items.map((h,i)=>{
+    const p=prizes[h.idx];
     const rarity=p.prob<=5?'珍贵':p.prob<=15?'稀有':'普通';
-    return`<div class="hist-item"><div class="hi-num">#${hist.length-i}</div><div class="hi-icon">${p.icon}</div><div class="hi-info"><div class="hi-name">${p.short}</div><div class="hi-time">${fmtTime(item.ts)}</div></div><div class="hi-badge" style="background:${p.bg};color:${p.tc};">${rarity}</div></div>`;
-  }).join('');
-  document.getElementById('histBody').innerHTML='<div class="hist-list slide-in">'+items+'</div>';
+    return`<div class="hist-item${i===0?' slide-in':''}">
+      <div class="hi-num">#${hist.length-i}</div>
+      <div class="hi-icon">${p.icon}</div>
+      <div class="hi-info">
+        <div class="hi-name">${p.name}</div>
+        <div class="hi-time">${fmtTime(h.ts)}${h.code?' · '+h.code:''}</div>
+      </div>
+      <div class="hi-badge" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">${rarity}</div>
+    </div>`;
+  }).join('')+'</div>';
 }
 
+function renderAll(){renderBars();renderStats();renderHist();}
+
+// --- sparkles & confetti ---
 function spawnSp(){
   const w=document.getElementById('sparkles');
   const icons=['💖','✨','🌸','💫','⭐','🎀','💕','🌷'];
@@ -474,7 +507,6 @@ function spawnSp(){
     w.appendChild(el);setTimeout(()=>el.remove(),1400);
   }
 }
-
 function spawnConf(n){
   const em=['💖','✨','🌸','💝','⭐','🎊','💕','🎀','💫'];
   for(let i=0;i<n;i++){
@@ -485,55 +517,144 @@ function spawnConf(n){
   }
 }
 
-function spawnWowBurst(idx){
-  const el=document.createElement('div');
-  el.className='wow-burst';
-  el.textContent=prizes[idx].icon;
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),1400);
+// --- 🔊 sound engine (Web Audio API, no external files) ---
+let _actx=null;
+function getCtx(){
+  if(!_actx){
+    try{_actx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}
+  }
+  return _actx;
+}
+function resumeCtx(){const c=getCtx();if(c&&c.state==='suspended')c.resume();}
+
+function beep(freq,type,vol,start,dur,c){
+  const osc=c.createOscillator(),g=c.createGain();
+  osc.connect(g);g.connect(c.destination);
+  osc.type=type;osc.frequency.setValueAtTime(freq,c.currentTime+start);
+  g.gain.setValueAtTime(0,c.currentTime+start);
+  g.gain.linearRampToValueAtTime(vol,c.currentTime+start+0.02);
+  g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+start+dur);
+  osc.start(c.currentTime+start);osc.stop(c.currentTime+start+dur+0.05);
+}
+function sweep(f0,f1,type,vol,start,dur,c){
+  const osc=c.createOscillator(),g=c.createGain();
+  osc.connect(g);g.connect(c.destination);
+  osc.type=type;
+  osc.frequency.setValueAtTime(f0,c.currentTime+start);
+  osc.frequency.exponentialRampToValueAtTime(f1,c.currentTime+start+dur);
+  g.gain.setValueAtTime(0,c.currentTime+start);
+  g.gain.linearRampToValueAtTime(vol,c.currentTime+start+0.03);
+  g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+start+dur);
+  osc.start(c.currentTime+start);osc.stop(c.currentTime+start+dur+0.05);
 }
 
+function playShake(){
+  const c=getCtx();if(!c)return;
+  // rumble: low noise burst
+  const buf=c.createBuffer(1,c.sampleRate*0.3,c.sampleRate);
+  const d=buf.getChannelData(0);
+  for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,2)*0.25;
+  const src=c.createBufferSource(),g=c.createGain();
+  src.buffer=buf;g.gain.value=0.6;
+  src.connect(g);g.connect(c.destination);src.start();
+}
+function playOpen(){
+  const c=getCtx();if(!c)return;
+  sweep(200,600,'sine',0.18,0,0.22,c);
+  sweep(300,900,'sine',0.10,0.08,0.18,c);
+}
+function playWowEffect(){
+  const c=getCtx();if(!c)return;
+  const t=c.currentTime;
+  const osc=c.createOscillator();
+  const osc2=c.createOscillator();
+  const filter=c.createBiquadFilter();
+  const g=c.createGain();
+  osc.type='sawtooth';
+  osc2.type='triangle';
+  osc.frequency.setValueAtTime(190,t);
+  osc.frequency.exponentialRampToValueAtTime(430,t+0.18);
+  osc.frequency.exponentialRampToValueAtTime(170,t+0.58);
+  osc2.frequency.setValueAtTime(95,t);
+  osc2.frequency.exponentialRampToValueAtTime(215,t+0.18);
+  osc2.frequency.exponentialRampToValueAtTime(85,t+0.58);
+  filter.type='bandpass';
+  filter.Q.setValueAtTime(8,t);
+  filter.frequency.setValueAtTime(420,t);
+  filter.frequency.exponentialRampToValueAtTime(1120,t+0.2);
+  filter.frequency.exponentialRampToValueAtTime(520,t+0.58);
+  g.gain.setValueAtTime(0.001,t);
+  g.gain.linearRampToValueAtTime(0.28,t+0.04);
+  g.gain.exponentialRampToValueAtTime(0.001,t+0.68);
+  osc.connect(filter);osc2.connect(filter);filter.connect(g);g.connect(c.destination);
+  osc.start(t);osc2.start(t);osc.stop(t+0.72);osc2.stop(t+0.72);
+  [[1047,.12],[1319,.22],[1568,.32]].forEach(([f,st])=>beep(f,'sine',0.11,st,0.26,c));
+}
+function spawnWowText(){
+  const el=document.createElement('div');
+  el.className='wow-burst';
+  el.textContent='WOW!';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),1100);
+}
+function playSound(kind){
+  const c=getCtx();if(!c)return;
+  if(kind==='normal'){
+    // cute 3-note chime: C E G
+    [[523,.0],[659,.12],[784,.24]].forEach(([f,t])=>beep(f,'sine',0.22,t,0.28,c));
+  }else if(kind==='rare'){
+    // rising fanfare: C E G C5
+    [[523,.0],[659,.10],[784,.20],[1047,.32]].forEach(([f,t])=>beep(f,'sine',0.25,t,0.32,c));
+    beep(1047,'triangle',0.15,0.32,0.45,c);
+  }else if(kind==='super'){
+    // full sparkle arpeggio + WOW wah sound
+    [[523,.0],[659,.09],[784,.18],[1047,.27],[1319,.36],[1568,.45]].forEach(([f,t])=>beep(f,'sine',0.26,t,0.35,c));
+    sweep(800,1600,'sine',0.10,0.5,0.5,c);
+    playWowEffect();
+    setTimeout(()=>{
+      [[1047,.0],[784,.12],[523,.24]].forEach(([f,t])=>beep(f,'triangle',0.14,t,0.22,c));
+    },400);
+  }
+}
+
+// --- open box ---
 function openBox(){
-  if(opening)return;
-  opening=true;
+  if(opening)return;opening=true;
   document.getElementById('btnOpen').disabled=true;
   const wrap=document.getElementById('boxWrap');
   const lid=document.getElementById('lid');
   const bow=document.getElementById('bow');
   const bicon=document.getElementById('boxIcon');
   const rbox=document.getElementById('rbox');
-  bicon.className='box-icon';
-  bicon.textContent='';
+  bicon.className='box-icon';bicon.textContent='';
+  resumeCtx();
+  playShake();
   wrap.classList.add('shake');
   setTimeout(()=>{
     wrap.classList.remove('shake');
-    lid.classList.add('open');
-    bow.classList.add('open');
+    lid.classList.add('open');bow.classList.add('open');
+    playOpen();
     spawnSp();
     setTimeout(()=>{
-      const idx=roll();
-      const p=prizes[idx];
+      const idx=roll();const p=prizes[idx];
       pcounts[idx]++;
-      hist.push({idx,ts:Date.now()});
-      count++;
-      spend+=188;
+      const claimCode=makeClaimCode(idx);
+      hist.push({idx,ts:Date.now(),code:claimCode});
+      count++;spend+=188;
       saveState();
-      bicon.textContent=p.icon;
-      bicon.classList.add('show');
-      rbox.className='result-box res-pop';
-      let rarityClass='';
-      if(p.prob<=5)rarityClass='result-super-diamond';
-      else if(p.prob<=15)rarityClass='result-rare-purple';
-      rbox.classList.add(rarityClass);
-      rbox.innerHTML=`<div><div class="result-congrats">恭喜抽中</div><div class="result-name">${p.name}</div><div class="result-note">概率 ${p.prob}% · 请截图兑奖</div></div>`;
-      if(p.prob<=5)spawnWowBurst(idx);
-      if(p.prob<=15)spawnConf(16);else spawnConf(6);
-      renderBars();
-      renderHist();
-      renderStats();
+      bicon.textContent=p.icon;bicon.classList.add('show');
+      const isSuper=p.prob<=5, isRare=p.prob<=15&&p.prob>5;
+      const isPurpleRare=p.prob<=10&&p.prob>5;
+      const rarity=isSuper?'珍贵奖项 💎':isRare?'稀有奖项 ⭐':'普通奖项';
+      const fxClass=isSuper?' result-super-diamond':(isPurpleRare?' result-rare-purple':(isRare?' result-rare-gold':''));
+      rbox.className='result-box res-pop'+fxClass;
+      rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">${rarity}</span><br><span class="result-congrats">恭喜抽中：</span><br><span class="result-name">${p.name}!</span><br><span class="result-note">请截图联系客服兑奖 Thanks♪(･ω･)ﾉ</span><br><span class="claim-code">兑奖码 ${claimCode}</span>`;
+      if(isSuper){spawnConf(28);spawnWowText();playSound('super');}
+      else if(isRare){spawnConf(isPurpleRare?18:16);playSound('rare');}
+      else{spawnConf(6);playSound('normal');}
+      renderAll();
       setTimeout(()=>{
-        lid.classList.remove('open');
-        bow.classList.remove('open');
+        lid.classList.remove('open');bow.classList.remove('open');
         bicon.className='box-icon';
         opening=false;
         document.getElementById('btnOpen').disabled=false;
@@ -542,24 +663,18 @@ function openBox(){
   },550);
 }
 
+// --- prize toggle ---
+let prizeOpen=true;
 document.getElementById('prizeToggle').addEventListener('click',()=>{
-  const wrap=document.getElementById('prizeGridWrap');
-  const btn=document.getElementById('prizeToggle');
-  if(wrap.style.display==='none'){
-    wrap.style.display='block';
-    btn.textContent='收起 ▲';
-  }else{
-    wrap.style.display='none';
-    btn.textContent='展开 ▼';
-  }
+  prizeOpen=!prizeOpen;
+  document.getElementById('prizeGridWrap').style.display=prizeOpen?'':'none';
+  document.getElementById('prizeToggle').textContent=prizeOpen?'收起 ▲':'展开 ▼';
 });
 
+// --- init ---
 renderPrizes();
-renderBars();
-renderStats();
-renderHist();
+renderAll();
 document.getElementById('btnOpen').addEventListener('click',openBox);
 </script>
-
 </body>
 </html>
