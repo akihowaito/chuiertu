@@ -46,12 +46,14 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 
 /* === BOX === */
 .box-area{display:flex;justify-content:center;align-items:center;padding:1.2rem 1rem 0.4rem;position:relative;}
-.box-container{position:relative;cursor:pointer;}
-.box-wrap{position:relative;width:160px;height:160px;}
+.box-container{position:relative;cursor:pointer;animation:giftIdleFloat 3.2s ease-in-out infinite;}
+.box-container::before{content:'';position:absolute;left:50%;bottom:-8px;width:132px;height:18px;background:radial-gradient(ellipse,rgba(233,30,140,.18) 0%,rgba(233,30,140,.08) 45%,transparent 72%);transform:translateX(-50%);border-radius:50%;animation:giftIdleShadow 3.2s ease-in-out infinite;z-index:-1;}
+.box-container::after{content:'✦';position:absolute;right:-18px;top:18px;color:#ff9aca;font-size:18px;text-shadow:-42px 32px 0 #ffd2e7, -16px -18px 0 #ffc0dc, 18px 62px 0 #ffe2f0;animation:giftIdleSparkle 2.4s ease-in-out infinite;pointer-events:none;}
+.box-wrap{position:relative;width:160px;height:160px;animation:giftIdleTilt 3.2s ease-in-out infinite;transform-origin:center bottom;}
 .box-body{width:160px;height:120px;background:linear-gradient(135deg,#FF6B9D,#E91E8C);border-radius:16px 16px 20px 20px;position:absolute;bottom:0;box-shadow:0 8px 24px rgba(233,30,140,.35),inset 0 1px 0 rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;}
 .box-body::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;height:2px;background:rgba(255,255,255,.5);border-radius:2px;}
 .box-ribbon{position:absolute;top:40px;left:0;right:0;height:40px;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;}
-.bow{font-size:36px;position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:5;transition:transform .4s,opacity .3s;}
+.bow{font-size:36px;position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:5;transition:transform .4s,opacity .3s;animation:bowIdlePulse 1.9s ease-in-out infinite;}
 .bow.open{transform:translateX(-50%) translateY(-60px) scale(.4);opacity:0;}
 .box-lid{width:174px;height:44px;background:linear-gradient(135deg,#FF85B8,#FF4D9D);border-radius:10px;position:absolute;top:0;left:-7px;box-shadow:0 4px 12px rgba(233,30,140,.3),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .6s cubic-bezier(.4,2,.6,1),opacity .5s;transform-origin:center top;z-index:6;}
 .box-lid.open{transform:translateY(-60px) rotateX(-40deg);opacity:0;}
@@ -62,7 +64,13 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 .sparkle{position:absolute;font-size:14px;animation:floatUp 1.2s ease-out forwards;opacity:0;}
 @keyframes floatUp{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4);}}
 @keyframes shake{0%,100%{transform:rotate(0);}20%{transform:rotate(-5deg);}40%{transform:rotate(5deg);}60%{transform:rotate(-4deg);}80%{transform:rotate(4deg);}}
-.shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97);}
+@keyframes giftIdleFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+@keyframes giftIdleTilt{0%,100%{transform:rotate(-1deg);}50%{transform:rotate(1.4deg);}}
+@keyframes giftIdleShadow{0%,100%{opacity:.56;transform:translateX(-50%) scale(1);}50%{opacity:.32;transform:translateX(-50%) scale(.84);}}
+@keyframes giftIdleSparkle{0%,100%{opacity:.35;transform:scale(.86) rotate(0deg);}50%{opacity:1;transform:scale(1.14) rotate(10deg);}}
+@keyframes bowIdlePulse{0%,100%{filter:drop-shadow(0 2px 0 rgba(255,126,183,.18));}50%{filter:drop-shadow(0 5px 6px rgba(255,126,183,.28));}}
+.shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97)!important;}
+.shake,.shake *{animation-play-state:running;}
 
 /* === BUTTON === */
 .btns{display:flex;gap:12px;justify-content:center;margin-top:6px;}
@@ -416,6 +424,48 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
   transform:translateX(-50%) translateY(0);
 }
 
+
+.gate-divider{display:flex;align-items:center;gap:10px;margin:14px 0 10px;color:#ffb1cf;font-size:10px;font-weight:900;letter-spacing:.4px;}
+.gate-divider::before,.gate-divider::after{content:'';height:1.5px;flex:1;background:linear-gradient(90deg,transparent,#ffd0e4,transparent);}
+.gate-guest-btn{
+  width:100%;
+  background:linear-gradient(135deg,#fff7fb,#f4fbff);
+  color:#e91e8c;
+  border:2.5px solid #ffc0dc;
+  font-family:inherit;
+  font-size:14px;
+  font-weight:900;
+  padding:12px;
+  border-radius:50px;
+  cursor:pointer;
+  box-shadow:0 5px 0 rgba(255,157,201,.18),0 8px 22px rgba(233,30,140,.08);
+  transition:transform .18s,filter .18s,box-shadow .18s;
+  letter-spacing:.3px;
+}
+.gate-guest-btn:hover{filter:brightness(1.03);box-shadow:0 6px 0 rgba(255,157,201,.22),0 10px 26px rgba(233,30,140,.1);}
+.gate-guest-btn:active{transform:scale(.97);}
+.gate-guest-note{font-size:10px;font-weight:800;color:#ff9bc4;margin-top:8px;line-height:1.45;}
+.unlocked-badge.guest-mode{border-color:#bae6fd;background:#f0fbff;color:#0284c7;}
+.guest-demo-tag{display:inline-block;margin-top:6px;padding:3px 10px;border-radius:999px;background:#f0fbff;border:1.5px solid #bae6fd;color:#0284c7;font-size:10px;font-weight:900;}
+
+.mode-actions{display:flex;justify-content:center;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.mode-switch-btn{
+  border:none;
+  font-family:inherit;
+  font-size:11px;
+  font-weight:900;
+  padding:7px 13px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:transform .18s,filter .18s,box-shadow .18s;
+  box-shadow:0 4px 0 rgba(255,157,201,.16),0 7px 18px rgba(233,30,140,.08);
+}
+.mode-switch-btn:active{transform:scale(.96);}
+.mode-switch-btn:hover{filter:brightness(1.04);}
+.mode-switch-guest{background:linear-gradient(135deg,#f0fbff,#fff7fb);border:2px solid #bae6fd;color:#0284c7;}
+.mode-switch-official{background:linear-gradient(135deg,#ff6b9d,#e91e8c);border:2px solid #ffc0dc;color:#fff;}
+.mode-switch-btn.hidden{display:none;}
+
 .device-info{display:inline-block;margin-top:7px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.75);border:1.5px solid rgba(125,211,252,.38);color:#5b7890;font-size:10px;font-weight:900;}
 .result-time{display:inline-block;margin-top:7px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.75);border:1.5px solid rgba(255,126,183,.28);color:#9b5f78;font-size:10px;font-weight:900;}
 
@@ -436,6 +486,9 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
              autocomplete="off" spellcheck="false" inputmode="text">
       <div id="gateError" class="gate-error">❌ 入场码无效，请联系客服</div>
       <button id="gateBtn" class="gate-btn" onclick="verifyCode()">💝 进入活动</button>
+      <div class="gate-divider"><span>OR</span></div>
+      <button id="guestBtn" class="gate-guest-btn" onclick="enterGuestMode()">🎮 游客试玩模式</button>
+      <div class="gate-guest-note">游客模式仅供预览体验，不生成正式兑换口令，不可兑奖</div>
       <div class="gate-note">
         每位板板有自己的独立专属入场码<br>请联系垂耳兔客服获得
       </div>
@@ -475,6 +528,10 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 
     <div class="btns">
       <button class="btn-open" id="btnOpen">💝 开一盒</button>
+    </div>
+    <div class="mode-actions">
+      <button class="mode-switch-btn mode-switch-guest" id="switchGuestBtn" type="button">🎮 游客试玩</button>
+      <button class="mode-switch-btn mode-switch-official hidden" id="switchOfficialBtn" type="button">💝 我要玩正式版</button>
     </div>
 <div class="result-box" id="rbox">每位板板仅有一次开盒机会，点击「开一盒」开启专属好运 ovo</div>
 
@@ -556,6 +613,7 @@ const COOKIE_STATE_KEY='chuiertu_blindbox_cookie_v3';
 const IDB_NAME='chuiertu_blindbox_db_v3';
 const IDB_STORE='state';
 let currentEntryCode='';
+let guestMode=false;
 
 function getCookie(name){
   try{
@@ -736,8 +794,12 @@ function formatFullTime(ts){
 function updateIdleResultForDrawState(){
   const rbox=document.getElementById('rbox');
   if(!rbox)return;
-  const hasPrize=/result-name|claim-code|开奖时间/.test(rbox.innerHTML);
+  const hasPrize=/result-name|claim-code|开奖时间|游客试玩结果/.test(rbox.innerHTML);
   if(hasPrize)return;
+  if(guestMode){
+    rbox.innerHTML='🎮 游客试玩模式：可以反复开盒预览效果，但结果不可兑奖 ovo';
+    return;
+  }
   if(drawCredits<=0){
     rbox.innerHTML='本次开盒机会已使用，如需再次开盒请联系垂耳兔客服 ovo';
   }else{
@@ -745,12 +807,25 @@ function updateIdleResultForDrawState(){
   }
 }
 
+function updateModeActions(){
+  const guestBtn=document.getElementById('switchGuestBtn');
+  const officialBtn=document.getElementById('switchOfficialBtn');
+  if(guestBtn) guestBtn.classList.toggle('hidden', guestMode);
+  if(officialBtn) officialBtn.classList.toggle('hidden', !guestMode);
+}
+
 function updateDrawStatus(){
   const btn=document.getElementById('btnOpen');
   if(btn&&!opening){
-    btn.disabled=drawCredits<=0;
-    btn.textContent=drawCredits>0?'💝 开一盒':'已开盒';
+    if(guestMode){
+      btn.disabled=false;
+      btn.textContent='🎮 游客试玩开盒';
+    }else{
+      btn.disabled=drawCredits<=0;
+      btn.textContent=drawCredits>0?'💝 开一盒':'已开盒';
+    }
   }
+  updateModeActions();
   updateIdleResultForDrawState();
 }
 function showExtraMsg(msg, ok=false){
@@ -1038,8 +1113,8 @@ function playSound(kind){
 function openBox(){
   if(opening)return;
   if(window.__activityExpired){showExtraMsg('活动已结束，无法开盒');return;}
-  if((boundEntryCode||currentEntryCode) && hasEntryOpened(boundEntryCode||currentEntryCode) && drawCredits<=0){updateDrawStatus();showExtraMsg('此入场码已完成开盒，请联系客服');return;}
-  if(drawCredits<=0){updateDrawStatus();showExtraMsg('本次开盒机会已用完，请联系垂耳兔客服');return;}
+  if(!guestMode && (boundEntryCode||currentEntryCode) && hasEntryOpened(boundEntryCode||currentEntryCode) && drawCredits<=0){updateDrawStatus();showExtraMsg('此入场码已完成开盒，请联系客服');return;}
+  if(!guestMode && drawCredits<=0){updateDrawStatus();showExtraMsg('本次开盒机会已用完，请联系垂耳兔客服');return;}
   opening=true;
   document.getElementById('btnOpen').disabled=true;
   const wrap=document.getElementById('boxWrap');
@@ -1059,13 +1134,16 @@ function openBox(){
     setTimeout(()=>{
       const idx=roll();const p=prizes[idx];
       const resultTs=Date.now();
-      const claimCode=generateClaimCode();
-      drawCredits=Math.max(0,drawCredits-1);
+      const claimCode=guestMode?'':generateClaimCode();
+      if(!guestMode) drawCredits=Math.max(0,drawCredits-1);
       pcounts[idx]++;
-      hist.push({idx,ts:resultTs,code:claimCode,entryCode:boundEntryCode||currentEntryCode||''});
-      markEntryOpened(boundEntryCode||currentEntryCode||'',{opened:true,openCount:(entryRecords[boundEntryCode||currentEntryCode||'']?.openCount||0)+1,lastTs:resultTs,lastPrize:p.name,lastClaimCode:claimCode});
-      count++;spend+=188;
-      saveState();
+      hist.push({idx,ts:resultTs,code:claimCode,entryCode:guestMode?'GUEST-DEMO':(boundEntryCode||currentEntryCode||'')});
+      if(!guestMode){
+        markEntryOpened(boundEntryCode||currentEntryCode||'',{opened:true,openCount:(entryRecords[boundEntryCode||currentEntryCode||'']?.openCount||0)+1,lastTs:resultTs,lastPrize:p.name,lastClaimCode:claimCode});
+      }
+      count++;
+      if(!guestMode) spend+=188;
+      if(!guestMode) saveState();
       bicon.textContent=p.icon;bicon.classList.add('show');
       const isLegend=p.name==='388趣味单任选';
       const isPrecious=p.name==='328保2188';
@@ -1075,7 +1153,11 @@ function openBox(){
       const rarity=isLegend?'传说奖项 👑':(isPrecious?'珍贵奖项 🌷':(isRare?'稀有奖项 ⭐':'普通奖项'));
       const fxClass=isLegend?' result-super-diamond':(isPrecious?' result-super-pinkmint':(isPurpleRare?' result-rare-purple':(isGoldRare?' result-rare-gold':'')));
       rbox.className='result-box res-pop'+fxClass;
-      rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">${rarity}</span><br><span class="result-congrats">恭喜抽中：</span><br><span class="result-name">${p.name}!</span><br><span class="result-note">请截图联系客服兑奖 Thanks♪(･ω･)ﾉ</span><br><span class="result-time">开奖时间 ${formatFullTime(resultTs)}</span><br><span class="device-info">设备 ${getDeviceLabel()} · FP:${getDeviceFingerprint()}</span><br><span class="claim-code">兑换口令 ${claimCode}</span>`;
+      if(guestMode){
+        rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">游客试玩结果</span><br><span class="result-congrats">试玩抽中：</span><br><span class="result-name">${p.name}!</span><br><span class="result-note">此结果仅供预览体验，不可兑奖，不记录正式口令</span><br><span class="result-time">试玩时间 ${formatFullTime(resultTs)}</span><br><span class="guest-demo-tag">DEMO MODE</span>`;
+      }else{
+        rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">${rarity}</span><br><span class="result-congrats">恭喜抽中：</span><br><span class="result-name">${p.name}!</span><br><span class="result-note">请截图联系客服兑奖 Thanks♪(･ω･)ﾉ</span><br><span class="result-time">开奖时间 ${formatFullTime(resultTs)}</span><br><span class="device-info">设备 ${getDeviceLabel()} · FP:${getDeviceFingerprint()}</span><br><span class="claim-code">兑换口令 ${claimCode}</span>`;
+      }
       if(isLegend){spawnConf(28);spawnWowText();playSound('super');}
       else if(isPrecious){spawnConf(22);spawnYeahText();playSound('yeah');}
       else if(isRare){spawnConf(isPurpleRare?18:16);playSound('rare');}
@@ -1121,6 +1203,8 @@ updateDrawStatus();
 updateDynamicTime();
 setInterval(updateDynamicTime,1000);
 document.getElementById('btnOpen').addEventListener('click',openBox);
+document.getElementById('switchGuestBtn').addEventListener('click',enterGuestMode);
+document.getElementById('switchOfficialBtn').addEventListener('click',showOfficialEntry);
 restoreFromIndexedDB();
 
 let hiddenCodeBuffer='';
@@ -1146,7 +1230,7 @@ document.addEventListener('keydown',e=>{
 
 // 活动时间窗口（本地时间）— 可按需修改日期
 const ACTIVITY_START = new Date('2026-05-20T00:00:00');
-const ACTIVITY_END   = new Date('2026-05-20T23:59:59');
+const ACTIVITY_END   = new Date('2026-05-26T23:59:59');
 (function checkTimeWindow(){
   const now = new Date();
   if(now < ACTIVITY_START || now > ACTIVITY_END){
@@ -1157,7 +1241,7 @@ const ACTIVITY_END   = new Date('2026-05-20T23:59:59');
         <div style="font-size:48px;margin-bottom:10px;">🌸</div>
         <div style="font-size:20px;font-weight:900;color:#ff70aa;margin-bottom:8px;">活动已结束</div>
         <div style="font-size:13px;font-weight:700;color:#b06080;line-height:1.6;">
-          垂耳兔CLUB · 心动盲盒<br>5.20 限定活动已结束<br>感谢每一位板板的参与 💝
+          垂耳兔CLUB · 心动盲盒<br>活动时间：5.20 ~ 5.26<br>感谢每一位板板的参与 💝
         </div>`;
     }
     if(overlay) overlay.classList.remove('hidden');
@@ -1176,6 +1260,24 @@ const ENTRY_CODES=(function(){
 
 
 const GATE_KEY = 'chuiertu_gate_v3';
+
+function getSavedOfficialCode(){
+  try{
+    const sources=[
+      localStorage.getItem(GATE_KEY),
+      sessionStorage.getItem(GATE_KEY),
+      getCookie('chuiertu_gate_cookie_v3')
+    ];
+    for(const raw of sources){
+      const saved=safeParse(raw);
+      const code=(saved&&saved.code?String(saved.code):'').trim().toUpperCase();
+      if(code&&code!=='GUEST-DEMO'&&ENTRY_CODES.includes(code)) return code;
+    }
+  }catch(e){}
+  const realBound=(boundEntryCode&&boundEntryCode!=='GUEST-DEMO')?String(boundEntryCode).trim().toUpperCase():'';
+  if(realBound&&ENTRY_CODES.includes(realBound)) return realBound;
+  return '';
+}
 
 (function checkGate() {
   try {
@@ -1198,6 +1300,78 @@ const GATE_KEY = 'chuiertu_gate_v3';
     });
   }
 })();
+
+
+function enterGuestMode() {
+  guestMode=true;
+  currentEntryCode='GUEST-DEMO';
+  // 游客模式只做前端演示，不绑定正式入场码，也不写入正式兑奖记录。
+  const demoPcounts=prizes.map(()=>0);
+  count=0;
+  spend=0;
+  pcounts=demoPcounts;
+  hist=[];
+  drawCredits=999;
+
+  const overlay = document.getElementById('gateOverlay');
+  if (overlay) {
+    overlay.style.transition = 'opacity .45s';
+    overlay.style.opacity = '0';
+    setTimeout(() => overlay.classList.add('hidden'), 450);
+  }
+
+  const badge = document.getElementById('unlockedBadge');
+  const codeSpan = document.getElementById('unlockedCode');
+  if (badge && codeSpan) {
+    badge.classList.add('guest-mode');
+    codeSpan.textContent = '游客试玩模式';
+    badge.style.display = 'inline-flex';
+  }
+
+  const rbox=document.getElementById('rbox');
+  if(rbox){
+    rbox.className='result-box';
+    rbox.innerHTML='🎮 游客试玩模式：可以反复开盒预览效果，但结果不可兑奖。想玩正式版请点击「我要玩正式版」。已验证过的设备会自动回到正式版 ovo';
+  }
+  renderAll();
+  showExtraMsg('已进入游客试玩模式');
+}
+
+function restoreOfficialState(){
+  const s=loadState();
+  count=s.count;
+  spend=s.spend;
+  pcounts=s.pcounts;
+  hist=s.hist;
+  drawCredits=s.drawCredits;
+  usedExtraCodes=s.usedExtraCodes;
+  entryRecords=s.entryRecords||{};
+  boundEntryCode=s.boundEntryCode||boundEntryCode||'';
+}
+
+function showOfficialEntry(){
+  const savedCode=getSavedOfficialCode();
+  if(savedCode){
+    unlockGate(savedCode, true);
+    showExtraMsg('已恢复正式版，无需重新输入入场码');
+    return;
+  }
+
+  const overlay=document.getElementById('gateOverlay');
+  const input=document.getElementById('gateInput');
+  const errEl=document.getElementById('gateError');
+  const btn=document.getElementById('gateBtn');
+  if(errEl){errEl.textContent='请输入正式入场码后进入正式版';errEl.classList.remove('show');}
+  if(btn){btn.disabled=false;btn.textContent='💝 进入正式活动';}
+  if(input){input.value='';}
+  if(overlay){
+    overlay.classList.remove('hidden');
+    overlay.style.transition='opacity .35s';
+    overlay.style.opacity='1';
+    setTimeout(()=>{if(input)input.focus();},80);
+  }
+  showExtraMsg('请输入入场码进入正式版');
+}
 
 function verifyCode() {
   const input = document.getElementById('gateInput');
@@ -1222,8 +1396,10 @@ function verifyCode() {
 
   try {
     const saved = JSON.parse(localStorage.getItem(GATE_KEY) || 'null');
-    if ((saved && saved.code && saved.code !== raw) || (boundEntryCode && boundEntryCode !== raw)) {
-      errEl.textContent = '❌ 此设备已绑定入场码 ' + ((saved&&saved.code)||boundEntryCode||'');
+    const savedCode = saved && saved.code ? saved.code : '';
+    const realBound = (boundEntryCode && boundEntryCode !== 'GUEST-DEMO') ? boundEntryCode : '';
+    if ((savedCode && savedCode !== raw) || (realBound && realBound !== raw)) {
+      errEl.textContent = '❌ 此设备已绑定入场码 ' + (savedCode || realBound || '');
       errEl.classList.add('show');
       return;
     }
@@ -1235,8 +1411,10 @@ function verifyCode() {
 }
 
 function unlockGate(code, isNew) {
+  guestMode=false;
+  restoreOfficialState();
   currentEntryCode=code;
-  if(!boundEntryCode) boundEntryCode=code;
+  if(!boundEntryCode || boundEntryCode==='GUEST-DEMO') boundEntryCode=code;
   try {
     localStorage.setItem(GATE_KEY, JSON.stringify({ code, ts: Date.now() }));
     sessionStorage.setItem(GATE_KEY, JSON.stringify({ code, ts: Date.now() }));
@@ -1258,9 +1436,16 @@ function unlockGate(code, isNew) {
   const badge = document.getElementById('unlockedBadge');
   const codeSpan = document.getElementById('unlockedCode');
   if (badge && codeSpan) {
+    badge.classList.remove('guest-mode');
     codeSpan.textContent = code;
     badge.style.display = 'inline-flex';
   }
+  const rbox=document.getElementById('rbox');
+  if(rbox){
+    rbox.className='result-box';
+    rbox.innerHTML=drawCredits>0?'正式版已进入，可以开始正式开盒。请截图保存兑奖口令 ovo':'此入场码已完成开盒，如需再次开盒请联系客服 ovo';
+  }
+  renderAll();
 }
 
 </script>
