@@ -27,6 +27,23 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 .price-pill .n{font-size:22px;}
 .price-pill .u{font-size:12px;opacity:.85;}
 
+.dynamic-time{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  margin-top:8px;
+  padding:5px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.86);
+  border:1.8px solid #ffd0e4;
+  color:#ff6ba8;
+  font-size:11px;
+  font-weight:900;
+  box-shadow:2px 2px 0 #ffe5f0;
+  letter-spacing:.2px;
+}
+
 /* === BOX === */
 .box-area{display:flex;justify-content:center;align-items:center;padding:1.2rem 1rem 0.4rem;position:relative;}
 .box-container{position:relative;cursor:pointer;}
@@ -115,12 +132,23 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
   background:linear-gradient(135deg,#ffffff 0%,#f0fbff 44%,#f8fdff 72%,#fff7fb 100%);
   box-shadow:0 8px 0 rgba(125,211,252,.24),0 0 0 3px rgba(186,230,253,.95),0 0 26px rgba(56,189,248,.28),0 0 48px rgba(147,197,253,.18);
 }
+.result-box.result-super-pinkmint{
+  border-color:#9de7cf;
+  background:linear-gradient(135deg,#fffafc 0%,#fff0f7 34%,#f2fff8 68%,#f8fff9 100%);
+  box-shadow:0 8px 0 rgba(157,231,207,.22),0 0 0 3px rgba(255,203,225,.95),0 0 28px rgba(133,231,190,.22),0 0 46px rgba(255,171,212,.18);
+}
+.result-box.result-super-pinkmint::before{
+  opacity:.45;
+  background:conic-gradient(from 0deg,rgba(255,205,226,.55),rgba(201,255,230,.48),rgba(255,244,248,.72),rgba(169,244,214,.45),rgba(255,205,226,.55));
+  animation:diamondSpin 4s linear infinite;
+}
 .result-box.result-super-diamond::before{
   opacity:.42;
   background:conic-gradient(from 0deg,rgba(186,230,253,.55),rgba(255,182,213,.32),rgba(125,211,252,.42),rgba(255,255,255,.62),rgba(186,230,253,.55));
   animation:diamondSpin 3.6s linear infinite;
 }
 .result-box.result-super-diamond::after,
+.result-box.result-super-pinkmint::after,
 .result-box.result-rare-gold::after,
 .result-box.result-rare-purple::after{opacity:.9;}
 .result-congrats{
@@ -155,6 +183,16 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
   color:transparent;
   text-shadow:none;
   filter:drop-shadow(0 0 6px rgba(56,189,248,.28));
+  animation:nameShine 2.4s ease-in-out infinite;
+}
+.result-super-pinkmint .result-name{
+  color:#ec4899;
+  background:linear-gradient(90deg,#fb7185,#f9a8d4,#6ee7b7,#34d399,#f9a8d4);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:none;
+  filter:drop-shadow(0 0 6px rgba(74,222,128,.22));
   animation:nameShine 2.4s ease-in-out infinite;
 }
 .result-note{
@@ -194,6 +232,24 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
   box-shadow:0 0 28px rgba(125,211,252,.45),0 8px 0 rgba(125,211,252,.18);
   animation:wowPop 1s cubic-bezier(.34,1.56,.64,1) forwards;
 }
+.yeah-burst{
+  position:fixed;
+  left:50%;
+  top:22%;
+  transform:translate(-50%,-50%) scale(.5);
+  z-index:1000;
+  pointer-events:none;
+  padding:6px 18px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#fff1f7,#ffffff,#effff7);
+  border:3px solid #a7f3d0;
+  color:#ec4899;
+  font-size:28px;
+  font-weight:900;
+  text-shadow:1px 1px 0 #fff,0 0 12px rgba(52,211,153,.28);
+  box-shadow:0 0 28px rgba(167,243,208,.45),0 8px 0 rgba(251,182,206,.18);
+  animation:wowPop 1s cubic-bezier(.34,1.56,.64,1) forwards;
+}
 @keyframes wowPop{
   0%{opacity:0;transform:translate(-50%,-50%) scale(.35) rotate(-9deg);}
   18%{opacity:1;transform:translate(-50%,-50%) scale(1.08) rotate(5deg);}
@@ -208,10 +264,12 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 @keyframes goldPulse{0%,100%{box-shadow:0 8px 0 rgba(247,183,51,.28),0 0 0 3px rgba(255,215,110,.7),0 0 26px rgba(247,183,51,.32);}50%{box-shadow:0 8px 0 rgba(247,183,51,.34),0 0 0 3px rgba(255,215,110,.9),0 0 38px rgba(247,183,51,.45);}}
 @keyframes purplePulse{0%,100%{box-shadow:0 8px 0 rgba(168,85,247,.22),0 0 0 3px rgba(192,132,252,.65),0 0 28px rgba(168,85,247,.34);}50%{box-shadow:0 8px 0 rgba(168,85,247,.3),0 0 0 3px rgba(192,132,252,.9),0 0 42px rgba(168,85,247,.48);}}
 @keyframes diamondPulse{0%,100%{box-shadow:0 8px 0 rgba(125,211,252,.24),0 0 0 3px rgba(186,230,253,.95),0 0 26px rgba(56,189,248,.28),0 0 48px rgba(147,197,253,.18);}50%{box-shadow:0 8px 0 rgba(125,211,252,.28),0 0 0 3px rgba(125,211,252,.95),0 0 38px rgba(56,189,248,.36),0 0 62px rgba(147,197,253,.24);}}
+@keyframes mintPulse{0%,100%{box-shadow:0 8px 0 rgba(157,231,207,.22),0 0 0 3px rgba(255,203,225,.95),0 0 28px rgba(133,231,190,.22),0 0 46px rgba(255,171,212,.18);}50%{box-shadow:0 8px 0 rgba(157,231,207,.3),0 0 0 3px rgba(167,243,208,.98),0 0 38px rgba(52,211,153,.28),0 0 60px rgba(255,171,212,.24);}}
 .res-pop{animation:resPop .45s cubic-bezier(.34,1.56,.64,1);}
 .result-rare-gold{animation:resPop .45s cubic-bezier(.34,1.56,.64,1),goldPulse 2.2s ease-in-out .5s infinite!important;}
 .result-rare-purple{animation:resPop .45s cubic-bezier(.34,1.56,.64,1),purplePulse 2.2s ease-in-out .5s infinite!important;}
 .result-super-diamond{animation:resPop .45s cubic-bezier(.34,1.56,.64,1),diamondPulse 2s ease-in-out .5s infinite!important;}
+.result-super-pinkmint{animation:resPop .45s cubic-bezier(.34,1.56,.64,1),mintPulse 2s ease-in-out .5s infinite!important;}
 
 /* ===== BOTTOM SECTION (REDESIGNED) ===== */
 .bottom{margin-top:18px;display:flex;flex-direction:column;gap:14px;}
@@ -272,10 +330,89 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 .conf{position:fixed;pointer-events:none;z-index:999;font-size:16px;animation:confettiFall 1.6s ease-out forwards;}
 @keyframes slideIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
 .slide-in{animation:slideIn .35s ease-out;}
+
+/* ===== GATE OVERLAY ===== */
+.gate-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(160deg,#fff0f8 0%,#fff9fc 50%,#ffe8f3 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+}
+.gate-overlay.hidden{display:none;}
+.gate-card{
+  background:rgba(255,255,255,.96);
+  border:3px solid #ffc0dc;
+  border-radius:28px;
+  box-shadow:0 12px 0 rgba(255,157,201,.22),0 24px 48px rgba(233,30,140,.1);
+  padding:32px 28px 28px;
+  max-width:380px;width:100%;text-align:center;
+}
+.gate-lock{font-size:44px;margin-bottom:8px;filter:drop-shadow(0 4px 0 rgba(255,126,183,.2));}
+.gate-brand{display:inline-block;border:2px solid #ffc6df;background:#fff;border-radius:999px;padding:4px 14px;font-size:11px;font-weight:900;color:#ff70aa;box-shadow:2px 2px 0 #ffe5f0;margin-bottom:10px;letter-spacing:.5px;}
+.gate-title{font-size:22px;font-weight:900;color:#ff70aa;text-shadow:2px 2px 0 #fff,3px 3px 0 #ffd1e6;letter-spacing:1px;margin-bottom:4px;}
+.gate-subtitle{font-size:13px;font-weight:800;color:#b06080;margin-bottom:4px;}
+.gate-hint{font-size:11px;font-weight:700;color:#ffaacb;margin-bottom:20px;}
+.gate-input{
+  width:100%;padding:13px 16px;
+  border:2.5px solid #ffc0dc;border-radius:14px;
+  font-family:inherit;font-size:15px;font-weight:900;
+  color:#70445d;text-align:center;letter-spacing:2px;
+  background:#fff8fc;outline:none;
+  transition:border-color .2s,box-shadow .2s;
+  text-transform:uppercase;
+}
+.gate-input:focus{border-color:#ff70aa;box-shadow:0 0 0 3px rgba(255,112,170,.15);}
+.gate-input::placeholder{color:#ffb8d6;letter-spacing:1px;font-size:13px;}
+.gate-error{
+  min-height:22px;margin:8px 0 4px;
+  font-size:12px;font-weight:800;color:#e91e8c;
+  opacity:0;transition:opacity .2s;
+}
+.gate-error.show{opacity:1;}
+.gate-btn{
+  width:100%;background:linear-gradient(135deg,#FF6B9D,#E91E8C);
+  color:#fff;border:none;font-family:inherit;font-size:15px;font-weight:800;
+  padding:13px;border-radius:50px;cursor:pointer;
+  box-shadow:0 6px 20px rgba(233,30,140,.38);
+  transition:all .2s;letter-spacing:.3px;margin-top:4px;
+}
+.gate-btn:hover{filter:brightness(1.06);}
+.gate-btn:active{transform:scale(.97);}
+.gate-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.gate-note{font-size:10px;font-weight:700;color:#ffb8d0;margin-top:12px;line-height:1.5;}
+.unlocked-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  border:1.5px solid #a7f3d0;background:#f0fdf4;
+  color:#059669;font-size:10px;font-weight:900;
+  padding:3px 10px;border-radius:999px;
+  margin-bottom:6px;letter-spacing:.3px;
+}
+@keyframes gateIn{from{opacity:0;transform:scale(.92) translateY(12px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.gate-card{animation:gateIn .4s cubic-bezier(.34,1.56,.64,1);}
+
 </style>
 </head>
 <body>
 <div class="root">
+
+  <!-- ===== GATE OVERLAY ===== -->
+  <div id="gateOverlay" class="gate-overlay">
+    <div class="gate-card">
+      <div class="gate-lock">🔐</div>
+      <div class="gate-brand">垂耳兔电竞 · kook 7686</div>
+      <div class="gate-title">垂耳兔CLUB · 心动盲盒</div>
+      <div class="gate-subtitle">✨ 5.20 我爱你 限定活动 ✨</div>
+      <div class="gate-hint">请输入你的专属入场码（付款后由客服发放）</div>
+      <input id="gateInput" class="gate-input" placeholder="PAY-5520-XXXXXX" maxlength="20"
+             autocomplete="off" spellcheck="false" inputmode="text">
+      <div id="gateError" class="gate-error">❌ 入场码无效，请联系客服</div>
+      <button id="gateBtn" class="gate-btn" onclick="verifyCode()">💝 进入活动</button>
+      <div class="gate-note">
+        每位板板有自己的独立专属入场码<br>请联系垂耳兔客服获得
+      </div>
+    </div>
+  </div>
+
   <div class="scanlines"></div>
   <div class="deco d1">🌹</div><div class="deco d2">💝</div>
   <div class="deco d3">🌸</div><div class="deco d4">💗</div>
@@ -284,8 +421,10 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
     <!-- ===== HEADER (unchanged) ===== -->
     <div class="header">
       <div class="topbrand">垂耳兔电竞 · kook 7686</div>
+      <div id="unlockedBadge" class="unlocked-badge" style="display:none;">✅ 已验证入场 · <span id="unlockedCode"></span></div>
       <div class="title">垂耳兔CLUB · 心动盲盒</div>
       <div class="subtitle">✨ 5.20 我爱你 限定活动 ✨</div>
+      <div class="dynamic-time" id="dynamicTime">📅 正在同步活动时间…</div>
       <div><span class="price-pill"><span class="y">¥</span><span class="n">188</span><span class="u">&nbsp;/盒</span></span></div>
     </div>
 
@@ -409,6 +548,30 @@ let {count,spend,pcounts,hist}=loadState();
 function rng(){if(window.crypto&&crypto.getRandomValues){const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]/4294967296;}return Math.random();}
 function roll(){let r=rng()*totalProb,acc=0;for(let i=0;i<prizes.length;i++){acc+=prizes[i].prob;if(r<acc)return i;}return prizes.length-1;}
 
+function getExistingClaimCodes(){
+  return new Set((hist||[]).map(h=>h.code).filter(Boolean));
+}
+function generateClaimCode(){
+  const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const existing=getExistingClaimCodes();
+  let code='';
+  do{
+    let body='';
+    for(let i=0;i<8;i++){
+      if(window.crypto&&crypto.getRandomValues){
+        const arr=new Uint32Array(1);
+        crypto.getRandomValues(arr);
+        body+=alphabet[arr[0]%alphabet.length];
+      }else{
+        body+=alphabet[Math.floor(Math.random()*alphabet.length)];
+      }
+    }
+    code='CT520-'+body.slice(0,4)+'-'+body.slice(4);
+  }while(existing.has(code));
+  return code;
+}
+
+
 // --- render: prize grid ---
 function renderPrizes(){
   document.getElementById('prizeList').innerHTML=prizes.map((p)=>`
@@ -448,142 +611,6 @@ function renderStats(){
   }
 }
 
-// --- fixed redeem code pool: private staff whitelist, 100 codes total ---
-const CODE_POOL = [
-  [
-    "CT520-A1-DXVJDB",
-    "CT520-A1-YFZYT7",
-    "CT520-A1-UYWRW2",
-    "CT520-A1-XTB5JB",
-    "CT520-A1-J4W33L",
-    "CT520-A1-QQD3HN",
-    "CT520-A1-4E48EF",
-    "CT520-A1-5TN3FE",
-    "CT520-A1-L4SR2B",
-    "CT520-A1-BWS5YM"
-  ],
-  [
-    "CT520-B2-AA5WUB",
-    "CT520-B2-3D2AAX",
-    "CT520-B2-2RWVHW",
-    "CT520-B2-TEM297",
-    "CT520-B2-798M4W",
-    "CT520-B2-6Q9KFQ",
-    "CT520-B2-Q4F2X3",
-    "CT520-B2-A94BHW",
-    "CT520-B2-U36G6K",
-    "CT520-B2-2V6GYH",
-    "CT520-B2-Z648N8",
-    "CT520-B2-2WZ7EJ",
-    "CT520-B2-629G9U",
-    "CT520-B2-AQFC9X",
-    "CT520-B2-E9ASFB"
-  ],
-  [
-    "CT520-C3-ASTMDG",
-    "CT520-C3-B85XME",
-    "CT520-C3-RLA6SF",
-    "CT520-C3-5VNMAT",
-    "CT520-C3-DDS8CA",
-    "CT520-C3-JNH4F5",
-    "CT520-C3-L9MMEC",
-    "CT520-C3-QUTR9C",
-    "CT520-C3-EPC8PB",
-    "CT520-C3-2MDY37",
-    "CT520-C3-6WNNCW",
-    "CT520-C3-KLGAHD",
-    "CT520-C3-MWJUSN",
-    "CT520-C3-38PB84",
-    "CT520-C3-YYJ639",
-    "CT520-C3-P3TZFE",
-    "CT520-C3-VG4FXW",
-    "CT520-C3-L59CNY",
-    "CT520-C3-JZUQQD",
-    "CT520-C3-H9P7FU",
-    "CT520-C3-K24VF6",
-    "CT520-C3-RCZGZH",
-    "CT520-C3-K8P2CH",
-    "CT520-C3-AL6ABD",
-    "CT520-C3-T6TWVA",
-    "CT520-C3-PH7YB6",
-    "CT520-C3-JWLPRX",
-    "CT520-C3-JE3MGZ",
-    "CT520-C3-9UJL5E",
-    "CT520-C3-ULVMKC",
-    "CT520-C3-4VPEP9",
-    "CT520-C3-CCYPYX",
-    "CT520-C3-CDW9NX",
-    "CT520-C3-VWSAJU",
-    "CT520-C3-FFK47F"
-  ],
-  [
-    "CT520-D4-D96TNE",
-    "CT520-D4-8EVJP6",
-    "CT520-D4-T44DC2",
-    "CT520-D4-3JBL9P",
-    "CT520-D4-DV6QM2",
-    "CT520-D4-3R9BCH",
-    "CT520-D4-J4TR89",
-    "CT520-D4-RM22WS",
-    "CT520-D4-9HJ6NA",
-    "CT520-D4-S5KXM7",
-    "CT520-D4-P8U4TG",
-    "CT520-D4-JH6ZQ3",
-    "CT520-D4-EQGJMH",
-    "CT520-D4-CMQZHY",
-    "CT520-D4-8DAD37",
-    "CT520-D4-BS8M4P",
-    "CT520-D4-U7NKRA",
-    "CT520-D4-QCNWJM",
-    "CT520-D4-YQSXXC",
-    "CT520-D4-DKBCMX"
-  ],
-  [
-    "CT520-E5-VXX7DQ",
-    "CT520-E5-PHG2H2",
-    "CT520-E5-DUE96P",
-    "CT520-E5-CGKZU6",
-    "CT520-E5-X43CS7",
-    "CT520-E5-RFGVUM",
-    "CT520-E5-W44RBC",
-    "CT520-E5-QJYX3D",
-    "CT520-E5-HF9EBL",
-    "CT520-E5-ATN79X",
-    "CT520-E5-BRFDB9",
-    "CT520-E5-2U8B9Q",
-    "CT520-E5-ACMPNP",
-    "CT520-E5-SNRDYL",
-    "CT520-E5-PV6HS4"
-  ],
-  [
-    "CT520-F6-TBWU6A",
-    "CT520-F6-M2NMJS",
-    "CT520-F6-PHNK87",
-    "CT520-F6-TMZJ66",
-    "CT520-F6-YGTRTJ"
-  ]
-];
-
-function getUsedCodes(){
-  return new Set(hist.map(h=>h.code).filter(Boolean));
-}
-function drawPrizeWithCode(){
-  const used=getUsedCodes();
-  const available=[];
-  CODE_POOL.forEach((list,idx)=>{
-    list.forEach(code=>{
-      if(!used.has(code)) available.push({idx,code});
-    });
-  });
-  if(!available.length){
-    const idx=roll();
-    return {idx,code:'CODE-POOL-END'};
-  }
-  const pick=available[Math.floor(rng()*available.length)];
-  return pick;
-}
-
-
 // --- render: history ---
 function fmtTime(ts){
   if(!ts)return'';
@@ -604,7 +631,7 @@ function renderHist(){
   const items=[...hist].reverse().slice(0,50);
   el.innerHTML='<div class="hist-list">'+items.map((h,i)=>{
     const p=prizes[h.idx];
-    const rarity=p.prob<=5?'珍贵':p.prob<=15?'稀有':'普通';
+    const rarity=p.name==='388趣味单任选'?'传说':(p.name==='328保2188'?'珍贵':((p.name==='108机密保588'||p.name==='288趣味单任选')?'稀有':'普通'));
     return`<div class="hist-item${i===0?' slide-in':''}">
       <div class="hi-num">#${hist.length-i}</div>
       <div class="hi-icon">${p.icon}</div>
@@ -721,6 +748,13 @@ function spawnWowText(){
   document.body.appendChild(el);
   setTimeout(()=>el.remove(),1100);
 }
+function spawnYeahText(){
+  const el=document.createElement('div');
+  el.className='yeah-burst';
+  el.textContent='YEAH!';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),1100);
+}
 function playSound(kind){
   const c=getCtx();if(!c)return;
   if(kind==='normal'){
@@ -730,6 +764,12 @@ function playSound(kind){
     // rising fanfare: C E G C5
     [[523,.0],[659,.10],[784,.20],[1047,.32]].forEach(([f,t])=>beep(f,'sine',0.25,t,0.32,c));
     beep(1047,'triangle',0.15,0.32,0.45,c);
+  }else if(kind==='yeah'){
+    [[659,.0],[784,.08],[988,.16],[1319,.28]].forEach(([f,t])=>beep(f,'triangle',0.24,t,0.28,c));
+    sweep(520,1180,'sine',0.09,0.18,0.34,c);
+    setTimeout(()=>{
+      [[1319,.0],[988,.12],[784,.24]].forEach(([f,t])=>beep(f,'sine',0.13,t,0.20,c));
+    },260);
   }else if(kind==='super'){
     // full sparkle arpeggio + WOW wah sound
     [[523,.0],[659,.09],[784,.18],[1047,.27],[1319,.36],[1568,.45]].forEach(([f,t])=>beep(f,'sine',0.26,t,0.35,c));
@@ -760,20 +800,24 @@ function openBox(){
     playOpen();
     spawnSp();
     setTimeout(()=>{
-      const draw=drawPrizeWithCode();const idx=draw.idx;const p=prizes[idx];
+      const idx=roll();const p=prizes[idx];
+      const claimCode=generateClaimCode();
       pcounts[idx]++;
-      const claimCode=draw.code;
       hist.push({idx,ts:Date.now(),code:claimCode});
       count++;spend+=188;
       saveState();
       bicon.textContent=p.icon;bicon.classList.add('show');
-      const isSuper=p.prob<=5, isRare=p.prob<=15&&p.prob>5;
-      const isPurpleRare=p.prob<=10&&p.prob>5;
-      const rarity=isSuper?'珍贵奖项 💎':isRare?'稀有奖项 ⭐':'普通奖项';
-      const fxClass=isSuper?' result-super-diamond':(isPurpleRare?' result-rare-purple':(isRare?' result-rare-gold':''));
+      const isLegend=p.name==='388趣味单任选';
+      const isPrecious=p.name==='328保2188';
+      const isPurpleRare=p.name==='108机密保588';
+      const isGoldRare=p.name==='288趣味单任选';
+      const isRare=isPurpleRare||isGoldRare;
+      const rarity=isLegend?'传说奖项 👑':(isPrecious?'珍贵奖项 🌷':(isRare?'稀有奖项 ⭐':'普通奖项'));
+      const fxClass=isLegend?' result-super-diamond':(isPrecious?' result-super-pinkmint':(isPurpleRare?' result-rare-purple':(isGoldRare?' result-rare-gold':'')));
       rbox.className='result-box res-pop'+fxClass;
-      rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">${rarity}</span><br><span class="result-congrats">恭喜抽中：</span><br><span class="result-name">${p.name}!</span><br><span class="result-note">请截图联系客服兑奖 Thanks♪(･ω･)ﾉ</span><br><span class="claim-code">兑奖码 ${claimCode}</span>`;
-      if(isSuper){spawnConf(28);spawnWowText();playSound('super');}
+      rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">${rarity}</span><br><span class="result-congrats">恭喜抽中：</span><br><span class="result-name">${p.name}!</span><br><span class="result-note">请截图联系客服兑奖 Thanks♪(･ω･)ﾉ</span><br><span class="claim-code">兑换口令 ${claimCode}</span>`;
+      if(isLegend){spawnConf(28);spawnWowText();playSound('super');}
+      else if(isPrecious){spawnConf(22);spawnYeahText();playSound('yeah');}
       else if(isRare){spawnConf(isPurpleRare?18:16);playSound('rare');}
       else{spawnConf(6);playSound('normal');}
       renderAll();
@@ -795,10 +839,418 @@ document.getElementById('prizeToggle').addEventListener('click',()=>{
   document.getElementById('prizeToggle').textContent=prizeOpen?'收起 ▲':'展开 ▼';
 });
 
+
+function updateDynamicTime(){
+  const el=document.getElementById('dynamicTime');
+  if(!el)return;
+  const now=new Date();
+  const y=now.getFullYear();
+  const m=String(now.getMonth()+1).padStart(2,'0');
+  const d=String(now.getDate()).padStart(2,'0');
+  const h=String(now.getHours()).padStart(2,'0');
+  const min=String(now.getMinutes()).padStart(2,'0');
+  const s=String(now.getSeconds()).padStart(2,'0');
+  const weekdays=['周日','周一','周二','周三','周四','周五','周六'];
+  el.textContent=`📅 ${y}.${m}.${d} ${weekdays[now.getDay()]} · ${h}:${min}:${s}`;
+}
+
 // --- init ---
 renderPrizes();
 renderAll();
+updateDynamicTime();
+setInterval(updateDynamicTime,1000);
 document.getElementById('btnOpen').addEventListener('click',openBox);
+
+// ============================================================
+// 🔐 前端入场码门禁：150 个独立入场码
+// 说明：纯前端版本不接后端，不会跨设备同步“已使用”状态。
+// ============================================================
+const ENTRY_CODES = [
+  'PAY-5520-KSV54B',
+  'PAY-5520-7X8E76',
+  'PAY-5520-4XE5GV',
+  'PAY-5520-FV2TPG',
+  'PAY-5520-3ZDTWA',
+  'PAY-5520-9L4X5P',
+  'PAY-5520-RSMLJT',
+  'PAY-5520-ZLNEAM',
+  'PAY-5520-DDR76E',
+  'PAY-5520-FCEX29',
+  'PAY-5520-T7PZFZ',
+  'PAY-5520-KCQBJ8',
+  'PAY-5520-7BFHLT',
+  'PAY-5520-P5CZS8',
+  'PAY-5520-AET2EQ',
+  'PAY-5520-Y3NX4H',
+  'PAY-5520-FG42CH',
+  'PAY-5520-ZTCSLV',
+  'PAY-5520-X9YH76',
+  'PAY-5520-593VUF',
+  'PAY-5520-BRNXX8',
+  'PAY-5520-KZX3RQ',
+  'PAY-5520-C2TQWN',
+  'PAY-5520-UTPNXX',
+  'PAY-5520-7N7QAS',
+  'PAY-5520-4DAJTM',
+  'PAY-5520-BCZJLN',
+  'PAY-5520-CTWQLF',
+  'PAY-5520-F62EKD',
+  'PAY-5520-UJNW4S',
+  'PAY-5520-TG8GJ6',
+  'PAY-5520-Y49VYL',
+  'PAY-5520-K8E7NZ',
+  'PAY-5520-UEYZ75',
+  'PAY-5520-GD9AFS',
+  'PAY-5520-MMMYJZ',
+  'PAY-5520-DVSLRR',
+  'PAY-5520-F8BLV5',
+  'PAY-5520-NDCEH5',
+  'PAY-5520-FSVBG4',
+  'PAY-5520-WMPPTZ',
+  'PAY-5520-GAB994',
+  'PAY-5520-GLXYU4',
+  'PAY-5520-VX37T8',
+  'PAY-5520-YJV4W8',
+  'PAY-5520-7BHUML',
+  'PAY-5520-68X53T',
+  'PAY-5520-SUW72B',
+  'PAY-5520-WS9TA9',
+  'PAY-5520-CUZ4DM',
+  'PAY-5520-Y32R5A',
+  'PAY-5520-4QG4JC',
+  'PAY-5520-G349DN',
+  'PAY-5520-SNLYN7',
+  'PAY-5520-SUCHW9',
+  'PAY-5520-F6T3YP',
+  'PAY-5520-NXZZA7',
+  'PAY-5520-7PLGV8',
+  'PAY-5520-L7DRTM',
+  'PAY-5520-WPERCJ',
+  'PAY-5520-DXH2GD',
+  'PAY-5520-V3RJRQ',
+  'PAY-5520-7M89G5',
+  'PAY-5520-NSPBP8',
+  'PAY-5520-9EZAHU',
+  'PAY-5520-U7RF4J',
+  'PAY-5520-VP3FQW',
+  'PAY-5520-HUFTAC',
+  'PAY-5520-2U5MGL',
+  'PAY-5520-YS7KH9',
+  'PAY-5520-G563C8',
+  'PAY-5520-XZKNEK',
+  'PAY-5520-VPA3SA',
+  'PAY-5520-32RZQL',
+  'PAY-5520-V47TH8',
+  'PAY-5520-AUNU2F',
+  'PAY-5520-ELS8WE',
+  'PAY-5520-SCPNU4',
+  'PAY-5520-9VKJSN',
+  'PAY-5520-GLQ62U',
+  'PAY-5520-KFLEM6',
+  'PAY-5520-UWH7G6',
+  'PAY-5520-QHUFG3',
+  'PAY-5520-J7PDKU',
+  'PAY-5520-UNXJUG',
+  'PAY-5520-6U7WHY',
+  'PAY-5520-XMCSVW',
+  'PAY-5520-KGCS7Z',
+  'PAY-5520-RGVEHN',
+  'PAY-5520-NU834J',
+  'PAY-5520-63NDSN',
+  'PAY-5520-HAYB43',
+  'PAY-5520-HSTGZY',
+  'PAY-5520-X78S8K',
+  'PAY-5520-J9QFRY',
+  'PAY-5520-E25FC3',
+  'PAY-5520-VFKP9N',
+  'PAY-5520-4FKSQW',
+  'PAY-5520-L9QL96',
+  'PAY-5520-UMZPRH',
+  'PAY-5520-CQRUFP',
+  'PAY-5520-ND5XGT',
+  'PAY-5520-8GED7S',
+  'PAY-5520-ZFN8Z5',
+  'PAY-5520-VTGGV3',
+  'PAY-5520-PHCYUE',
+  'PAY-5520-6GCMRX',
+  'PAY-5520-G9YMYX',
+  'PAY-5520-7BRW4N',
+  'PAY-5520-STYCLX',
+  'PAY-5520-T9HQ6C',
+  'PAY-5520-W7AJHN',
+  'PAY-5520-CKM3WF',
+  'PAY-5520-3YZGEK',
+  'PAY-5520-2C39X2',
+  'PAY-5520-JGR69H',
+  'PAY-5520-A9W8GT',
+  'PAY-5520-46WW22',
+  'PAY-5520-ZH7P35',
+  'PAY-5520-U4AN98',
+  'PAY-5520-LKUBHA',
+  'PAY-5520-DLYUDQ',
+  'PAY-5520-A2VYZX',
+  'PAY-5520-5SY58N',
+  'PAY-5520-NTXRFK',
+  'PAY-5520-CGZ4FX',
+  'PAY-5520-RW5W9D',
+  'PAY-5520-DEJCQY',
+  'PAY-5520-H2W8YT',
+  'PAY-5520-JS89FU',
+  'PAY-5520-33CFAE',
+  'PAY-5520-W88LKL',
+  'PAY-5520-CQ3UNX',
+  'PAY-5520-QXQ4Y5',
+  'PAY-5520-HYAK9P',
+  'PAY-5520-C7GGWB',
+  'PAY-5520-H3PF8M',
+  'PAY-5520-LJV8G6',
+  'PAY-5520-55AQJ9',
+  'PAY-5520-2NPFR9',
+  'PAY-5520-F8QW7L',
+  'PAY-5520-SK7J4M',
+  'PAY-5520-94GDNC',
+  'PAY-5520-DM63VY',
+  'PAY-5520-K3ZDV5',
+  'PAY-5520-2YYSEK',
+  'PAY-5520-SLYJ23',
+  'PAY-5520-P8MMUU',
+  'PAY-5520-4QHPPL',
+  'PAY-5520-L6KFMD',
+  'PAY-5520-NJZGWA',
+  'PAY-5520-TQYMLB',
+  'PAY-5520-NUXS3N',
+  'PAY-5520-Q2J5WX',
+  'PAY-5520-EXUKEZ',
+  'PAY-5520-RFF7ZY',
+  'PAY-5520-V3FC5H',
+  'PAY-5520-QDUJ75',
+  'PAY-5520-7J7HNU',
+  'PAY-5520-ASVHAL',
+  'PAY-5520-US4Y5E',
+  'PAY-5520-BW35KL',
+  'PAY-5520-H6WT7S',
+  'PAY-5520-QTSTWS',
+  'PAY-5520-MDNUEW',
+  'PAY-5520-KHWWZ7',
+  'PAY-5520-H3UEZZ',
+  'PAY-5520-4KK2GJ',
+  'PAY-5520-45YBZ7',
+  'PAY-5520-VXVSWD',
+  'PAY-5520-UL7MST',
+  'PAY-5520-WBJ4EW',
+  'PAY-5520-N3DW9L',
+  'PAY-5520-YVS728',
+  'PAY-5520-N63CVA',
+  'PAY-5520-4DQCWB',
+  'PAY-5520-SG8YFF',
+  'PAY-5520-AJW7QV',
+  'PAY-5520-X4ZT77',
+  'PAY-5520-P33EL4',
+  'PAY-5520-MQ58TF',
+  'PAY-5520-4CBBNU',
+  'PAY-5520-LRXY38',
+  'PAY-5520-L6458M',
+  'PAY-5520-KRDYWK',
+  'PAY-5520-UFZ345',
+  'PAY-5520-H9K7LV',
+  'PAY-5520-K2ZPTT',
+  'PAY-5520-NQYXES',
+  'PAY-5520-SZRAP8',
+  'PAY-5520-EVT55C',
+  'PAY-5520-3FFGE4',
+  'PAY-5520-P2FSU4',
+  'PAY-5520-RQ9Z3D',
+  'PAY-5520-HCBXCB',
+  'PAY-5520-ASLD4G',
+  'PAY-5520-EAT9GZ',
+  'PAY-5520-JN8SP7',
+  'PAY-5520-VXYAUA',
+  'PAY-5520-5C9N7H',
+  'PAY-5520-WESBPX',
+  'PAY-5520-6CKDB9',
+  'PAY-5520-ZE79DC',
+  'PAY-5520-DX6FVV',
+  'PAY-5520-ZZBZ52',
+  'PAY-5520-LSBQQ7',
+  'PAY-5520-Y87MEA',
+  'PAY-5520-KZ9K3W',
+  'PAY-5520-VCXN5J',
+  'PAY-5520-AB6PME',
+  'PAY-5520-5U9DVU',
+  'PAY-5520-S6STY3',
+  'PAY-5520-M82C5F',
+  'PAY-5520-GS55FB',
+  'PAY-5520-SH3DMB',
+  'PAY-5520-H79MHD',
+  'PAY-5520-ZC5H9X',
+  'PAY-5520-T2VSZ7',
+  'PAY-5520-SXP9K2',
+  'PAY-5520-JDYF3H',
+  'PAY-5520-CJGCZP',
+  'PAY-5520-LB8YSF',
+  'PAY-5520-W44BMF',
+  'PAY-5520-H45CHA',
+  'PAY-5520-MVVYLE',
+  'PAY-5520-AAZU4Q',
+  'PAY-5520-7F9NJ6',
+  'PAY-5520-CVZ8SE',
+  'PAY-5520-EFVE5V',
+  'PAY-5520-4EABES',
+  'PAY-5520-CK8W9N',
+  'PAY-5520-YERZSV',
+  'PAY-5520-SU5PYG',
+  'PAY-5520-L5MJC2',
+  'PAY-5520-2KLCHJ',
+  'PAY-5520-2JTCB7',
+  'PAY-5520-TV3TRX',
+  'PAY-5520-4AMZGT',
+  'PAY-5520-M3PYLE',
+  'PAY-5520-YU6L73',
+  'PAY-5520-NTAYDR',
+  'PAY-5520-VPKRSL',
+  'PAY-5520-U8QWES',
+  'PAY-5520-3HAJJR',
+  'PAY-5520-S26WEZ',
+  'PAY-5520-QUFPDE',
+  'PAY-5520-DN3AMP',
+  'PAY-5520-6SJY27',
+  'PAY-5520-WK3E2C',
+  'PAY-5520-V98FDX',
+  'PAY-5520-N6NEEV',
+  'PAY-5520-7SKUQA',
+  'PAY-5520-A8Q6EK',
+  'PAY-5520-EY8NYK',
+  'PAY-5520-AG7KQJ',
+  'PAY-5520-RTV368',
+  'PAY-5520-23WC3A',
+  'PAY-5520-TPKT5V',
+  'PAY-5520-B9HKAJ',
+  'PAY-5520-FQUVAK',
+  'PAY-5520-GUXPCE',
+  'PAY-5520-2EHAHC',
+  'PAY-5520-FV57SQ',
+  'PAY-5520-KCGN5Y',
+  'PAY-5520-M83YMJ',
+  'PAY-5520-RQ4FA2',
+  'PAY-5520-WM3M4H',
+  'PAY-5520-EPEJYF',
+  'PAY-5520-CW4HY9',
+  'PAY-5520-EFPD26',
+  'PAY-5520-HMAQMY',
+  'PAY-5520-U7CPX8',
+  'PAY-5520-JBPX72',
+  'PAY-5520-7HLPDF',
+  'PAY-5520-9K6CRW',
+  'PAY-5520-9A6EYS',
+  'PAY-5520-XJT8UR',
+  'PAY-5520-B6EEAR',
+  'PAY-5520-ZGP3AM',
+  'PAY-5520-N3X3KA',
+  'PAY-5520-8F5PX7',
+  'PAY-5520-TJKXB9',
+  'PAY-5520-PA567D',
+  'PAY-5520-UZ8E9W',
+  'PAY-5520-4TCEYY',
+  'PAY-5520-8QPA83',
+  'PAY-5520-VJM85P',
+  'PAY-5520-QNG2RP',
+  'PAY-5520-8TXURF',
+  'PAY-5520-3FWDMB',
+  'PAY-5520-AQU7GZ',
+  'PAY-5520-9GRRLN',
+  'PAY-5520-5P77DZ',
+  'PAY-5520-YVC2GF',
+  'PAY-5520-RDRG36',
+  'PAY-5520-KFTGK8',
+  'PAY-5520-L63FAV',
+  'PAY-5520-UFUCYF',
+  'PAY-5520-36MW2F',
+  'PAY-5520-VD5JSS'
+];
+
+const GATE_KEY = 'chuiertu_gate_v2';
+
+(function checkGate() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(GATE_KEY) || 'null');
+    if (saved && saved.code && ENTRY_CODES.includes(saved.code.toUpperCase())) {
+      unlockGate(saved.code, false);
+      return;
+    }
+  } catch(e) {}
+
+  const input = document.getElementById('gateInput');
+  if (input) {
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') verifyCode();
+    });
+    input.addEventListener('input', () => {
+      const pos = input.selectionStart;
+      input.value = input.value.toUpperCase().replace(/[^A-Z0-9\-]/g, '');
+      try { input.setSelectionRange(pos, pos); } catch(e) {}
+    });
+  }
+})();
+
+function verifyCode() {
+  const input = document.getElementById('gateInput');
+  const errEl = document.getElementById('gateError');
+  const btn = document.getElementById('gateBtn');
+  const raw = (input.value || '').trim().toUpperCase();
+
+  errEl.textContent = '❌ 入场码无效，请联系客服';
+  errEl.classList.remove('show');
+
+  if (!raw) {
+    input.focus();
+    return;
+  }
+
+  if (!ENTRY_CODES.includes(raw)) {
+    errEl.classList.add('show');
+    input.style.borderColor = '#ff4d9d';
+    setTimeout(() => { input.style.borderColor = ''; }, 1200);
+    return;
+  }
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(GATE_KEY) || 'null');
+    if (saved && saved.code && saved.code !== raw) {
+      errEl.textContent = '❌ 此设备已绑定入场码 ' + saved.code;
+      errEl.classList.add('show');
+      return;
+    }
+  } catch(e) {}
+
+  btn.disabled = true;
+  btn.textContent = '✅ 验证成功，进入中…';
+  setTimeout(() => unlockGate(raw, true), 500);
+}
+
+function unlockGate(code, isNew) {
+  try {
+    localStorage.setItem(GATE_KEY, JSON.stringify({ code, ts: Date.now() }));
+  } catch(e) {}
+
+  const overlay = document.getElementById('gateOverlay');
+  if (overlay) {
+    if (isNew) {
+      overlay.style.transition = 'opacity .45s';
+      overlay.style.opacity = '0';
+      setTimeout(() => overlay.classList.add('hidden'), 450);
+    } else {
+      overlay.classList.add('hidden');
+    }
+  }
+
+  const badge = document.getElementById('unlockedBadge');
+  const codeSpan = document.getElementById('unlockedCode');
+  if (badge && codeSpan) {
+    codeSpan.textContent = code;
+    badge.style.display = 'inline-flex';
+  }
+}
+
 </script>
 </body>
 </html>
