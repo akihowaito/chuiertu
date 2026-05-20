@@ -390,6 +390,35 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 @keyframes gateIn{from{opacity:0;transform:scale(.92) translateY(12px);}to{opacity:1;transform:scale(1) translateY(0);}}
 .gate-card{animation:gateIn .4s cubic-bezier(.34,1.56,.64,1);}
 
+
+/* ===== DRAW LIMIT + EXTRA DRAW CODE ===== */
+
+.hidden-code-toast{
+  position:fixed;
+  left:50%;
+  bottom:28px;
+  transform:translateX(-50%) translateY(20px);
+  z-index:10000;
+  opacity:0;
+  pointer-events:none;
+  background:linear-gradient(135deg,#fff,#fff0f7);
+  border:2px solid #ffc0dc;
+  color:#e91e8c;
+  font-size:12px;
+  font-weight:900;
+  padding:10px 16px;
+  border-radius:999px;
+  box-shadow:0 8px 24px rgba(233,30,140,.2);
+  transition:opacity .25s,transform .25s;
+}
+.hidden-code-toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+.device-info{display:inline-block;margin-top:7px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.75);border:1.5px solid rgba(125,211,252,.38);color:#5b7890;font-size:10px;font-weight:900;}
+.result-time{display:inline-block;margin-top:7px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.75);border:1.5px solid rgba(255,126,183,.28);color:#9b5f78;font-size:10px;font-weight:900;}
+
 </style>
 </head>
 <body>
@@ -447,8 +476,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
     <div class="btns">
       <button class="btn-open" id="btnOpen">💝 开一盒</button>
     </div>
-
-    <div class="result-box" id="rbox">点击「开一盒」，开启垂耳兔电竞 5.20 专属好运 ovo</div>
+<div class="result-box" id="rbox">每位板板仅有一次开盒机会，点击「开一盒」开启专属好运 ovo</div>
 
     <!-- ===== BOTTOM (redesigned) ===== -->
     <div class="bottom">
@@ -519,30 +547,126 @@ const prizes=[
   {name:'388趣味单任选',   short:'趣味388', prob:5, icon:'💎',bg:'#f0fbff',tc:'#0284c7',bc:'#bae6fd'},
 ];
 const barColors=['#c084fc','#f59e0b','#ff6b9d','#34d399','#f97316','#e91e8c'];
-const STORAGE_KEY='chuiertu_blindbox_v1';
+const STORAGE_KEY='chuiertu_blindbox_v3';
 const totalProb=prizes.reduce((s,p)=>s+p.prob,0);
 let opening=false;
 
-// --- persistence ---
-function loadState(){
+// --- persistence: localStorage + sessionStorage + cookie + IndexedDB mirror ---
+const COOKIE_STATE_KEY='chuiertu_blindbox_cookie_v3';
+const IDB_NAME='chuiertu_blindbox_db_v3';
+const IDB_STORE='state';
+let currentEntryCode='';
+
+function getCookie(name){
   try{
-    const raw=localStorage.getItem(STORAGE_KEY);
-    if(raw){
-      const d=JSON.parse(raw);
-      return{
-        count:d.count||0,
-        spend:d.spend||0,
-        pcounts:d.pcounts&&d.pcounts.length===prizes.length?d.pcounts:prizes.map(()=>0),
-        hist:Array.isArray(d.hist)?d.hist:[],
-      };
+    const parts=document.cookie ? document.cookie.split('; ') : [];
+    for(const part of parts){
+      const eq=part.indexOf('=');
+      const k=eq>=0 ? part.slice(0,eq) : part;
+      const v=eq>=0 ? part.slice(eq+1) : '';
+      if(k===name) return decodeURIComponent(v);
     }
   }catch(e){}
-  return{count:0,spend:0,pcounts:prizes.map(()=>0),hist:[]};
+  return '';
+}
+function setCookie(name,value,days=30){
+  const maxAge=days*24*60*60;
+  document.cookie=`${name}=${encodeURIComponent(value)}; max-age=${maxAge}; path=/; SameSite=Lax`;
+}
+function safeParse(raw){
+  try{return raw?JSON.parse(raw):null;}catch(e){return null;}
+}
+function blankState(){
+  return{count:0,spend:0,pcounts:prizes.map(()=>0),hist:[],drawCredits:1,usedExtraCodes:[],entryRecords:{},boundEntryCode:''};
+}
+function normaliseState(d){
+  const s=blankState();
+  if(!d||typeof d!=='object') return s;
+  s.count=d.count||0;
+  s.spend=d.spend||0;
+  s.pcounts=d.pcounts&&d.pcounts.length===prizes.length?d.pcounts:prizes.map(()=>0);
+  s.hist=Array.isArray(d.hist)?d.hist:[];
+  s.drawCredits=typeof d.drawCredits==='number'?d.drawCredits:(s.count>0?0:1);
+  s.usedExtraCodes=Array.isArray(d.usedExtraCodes)?d.usedExtraCodes:[];
+  s.entryRecords=d.entryRecords&&typeof d.entryRecords==='object'?d.entryRecords:{};
+  s.boundEntryCode=d.boundEntryCode||'';
+  return s;
+}
+function chooseBestState(states){
+  const valid=states.filter(Boolean).map(normaliseState);
+  if(!valid.length) return blankState();
+  return valid.sort((a,b)=>(b.hist.length-a.hist.length)||(b.count-a.count))[0];
+}
+function loadState(){
+  const local=safeParse(localStorage.getItem(STORAGE_KEY));
+  const session=safeParse(sessionStorage.getItem(STORAGE_KEY));
+  const cookie=safeParse(getCookie(COOKIE_STATE_KEY));
+  const best=chooseBestState([local,session,cookie]);
+  // Backward compatibility for old browser state
+  if(best.count>0 && typeof best.drawCredits!=='number') best.drawCredits=0;
+  return best;
+}
+function snapshotState(){
+  return{count,spend,pcounts,hist,drawCredits,usedExtraCodes,entryRecords,boundEntryCode};
 }
 function saveState(){
-  try{localStorage.setItem(STORAGE_KEY,JSON.stringify({count,spend,pcounts,hist}));}catch(e){}
+  const raw=JSON.stringify(snapshotState());
+  try{localStorage.setItem(STORAGE_KEY,raw);}catch(e){}
+  try{sessionStorage.setItem(STORAGE_KEY,raw);}catch(e){}
+  try{setCookie(COOKIE_STATE_KEY,raw,30);}catch(e){}
+  try{idbSaveState(snapshotState());}catch(e){}
 }
-let {count,spend,pcounts,hist}=loadState();
+function idbOpen(){
+  return new Promise((resolve,reject)=>{
+    if(!('indexedDB' in window)){resolve(null);return;}
+    const req=indexedDB.open(IDB_NAME,1);
+    req.onupgradeneeded=()=>{req.result.createObjectStore(IDB_STORE);};
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error);
+  });
+}
+async function idbSaveState(state){
+  const db=await idbOpen(); if(!db)return;
+  await new Promise((resolve,reject)=>{
+    const tx=db.transaction(IDB_STORE,'readwrite');
+    tx.objectStore(IDB_STORE).put(state,'main');
+    tx.oncomplete=resolve; tx.onerror=()=>reject(tx.error);
+  });
+}
+async function idbLoadState(){
+  const db=await idbOpen(); if(!db)return null;
+  return await new Promise((resolve,reject)=>{
+    const tx=db.transaction(IDB_STORE,'readonly');
+    const req=tx.objectStore(IDB_STORE).get('main');
+    req.onsuccess=()=>resolve(req.result||null);
+    req.onerror=()=>reject(req.error);
+  });
+}
+async function restoreFromIndexedDB(){
+  try{
+    const idbState=await idbLoadState();
+    if(!idbState)return;
+    const current=snapshotState();
+    const best=chooseBestState([current,idbState]);
+    if((best.hist.length>hist.length)||(best.count>count)){
+      count=best.count;spend=best.spend;pcounts=best.pcounts;hist=best.hist;
+      drawCredits=best.drawCredits;usedExtraCodes=best.usedExtraCodes;
+      entryRecords=best.entryRecords||{};boundEntryCode=best.boundEntryCode||boundEntryCode||'';
+      renderAll();
+      saveState();
+    }
+  }catch(e){}
+}
+function markEntryOpened(code,record){
+  if(!code)return;
+  entryRecords[code]=Object.assign({opened:true,openCount:1},entryRecords[code]||{},record||{});
+}
+function hasEntryOpened(code){
+  return !!(code&&entryRecords&&entryRecords[code]&&entryRecords[code].opened);
+}
+
+let {count,spend,pcounts,hist,drawCredits,usedExtraCodes,entryRecords,boundEntryCode}=loadState();
+
 
 // --- rng ---
 function rng(){if(window.crypto&&crypto.getRandomValues){const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]/4294967296;}return Math.random();}
@@ -551,6 +675,22 @@ function roll(){let r=rng()*totalProb,acc=0;for(let i=0;i<prizes.length;i++){acc
 function getExistingClaimCodes(){
   return new Set((hist||[]).map(h=>h.code).filter(Boolean));
 }
+
+function getDeviceFingerprint(){
+  const raw=[
+    navigator.userAgent||'',
+    (window.screen&&window.screen.width)||'',
+    (window.screen&&window.screen.height)||'',
+    (window.screen&&window.screen.colorDepth)||'',
+    Intl.DateTimeFormat().resolvedOptions().timeZone||'',
+    navigator.language||'',
+    navigator.hardwareConcurrency||''
+  ].join('|');
+  let h=0x9A7B3C;
+  for(let i=0;i<raw.length;i++){h=Math.imul(h^raw.charCodeAt(i),0x5BD1E995);h^=h>>>15;}
+  return (h>>>0).toString(36).toUpperCase().padStart(6,'0').slice(0,6);
+}
+
 function generateClaimCode(){
   const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   const existing=getExistingClaimCodes();
@@ -571,6 +711,103 @@ function generateClaimCode(){
   return code;
 }
 
+
+// 加抽口令（XOR混淆，防源码直读）
+const EXTRA_DRAW_CODES=(function(){
+  const _k=0x5A;
+  const _e="GRIPEx8IDg9raWtuJmlpbm4ZEg8THwgODyYDHx0VD2lpbm4ma2lrbgMfHRUPJgITGxQXD2hvaGomFw8XFwJraCYDDxQLHg8VF2smaGpiaxAUFBULFyZtHmIZEhRra2gmFhsbFGhjaWtrAw==";
+  const _b=atob(_e);
+  let _s='';for(let i=0;i<_b.length;i++)_s+=String.fromCharCode(_b.charCodeAt(i)^_k);
+  return _s.split('|');
+})();
+
+function normaliseExtraCode(v){return (v||'').trim().toUpperCase();}
+function formatFullTime(ts){
+  const d=new Date(ts||Date.now());
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  const h=String(d.getHours()).padStart(2,'0');
+  const min=String(d.getMinutes()).padStart(2,'0');
+  const s=String(d.getSeconds()).padStart(2,'0');
+  return `${y}.${m}.${day} ${h}:${min}:${s}`;
+}
+
+function updateIdleResultForDrawState(){
+  const rbox=document.getElementById('rbox');
+  if(!rbox)return;
+  const hasPrize=/result-name|claim-code|开奖时间/.test(rbox.innerHTML);
+  if(hasPrize)return;
+  if(drawCredits<=0){
+    rbox.innerHTML='本次开盒机会已使用，如需再次开盒请联系垂耳兔客服 ovo';
+  }else{
+    rbox.innerHTML='每位板板仅有一次开盒机会，点击「开一盒」开启专属好运 ovo';
+  }
+}
+
+function updateDrawStatus(){
+  const btn=document.getElementById('btnOpen');
+  if(btn&&!opening){
+    btn.disabled=drawCredits<=0;
+    btn.textContent=drawCredits>0?'💝 开一盒':'已开盒';
+  }
+  updateIdleResultForDrawState();
+}
+function showExtraMsg(msg, ok=false){
+  let el=document.getElementById('hiddenCodeToast');
+  if(!el){
+    el=document.createElement('div');
+    el.id='hiddenCodeToast';
+    el.className='hidden-code-toast';
+    document.body.appendChild(el);
+  }
+  el.textContent=msg;
+  el.classList.add('show');
+  clearTimeout(window.__hiddenCodeToastTimer);
+  window.__hiddenCodeToastTimer=setTimeout(()=>el.classList.remove('show'),1800);
+}
+function applyHiddenExtraDrawCode(raw){
+  const code=normaliseExtraCode(raw);
+  if(!EXTRA_DRAW_CODES.includes(code)) return false;
+  if(usedExtraCodes.includes(code)){
+    playExtraCodeSound('repeat');
+    showExtraMsg('这个加抽口令已经使用过了');
+    return true;
+  }
+  usedExtraCodes.push(code);
+  drawCredits+=1;
+  saveState();
+  updateDrawStatus();
+  playExtraCodeSound('success');
+  showExtraMsg('已增加 1 次开盒机会', true);
+  return true;
+}
+
+
+function getDeviceLabel(){
+  const ua=navigator.userAgent||'';
+  const platform=(navigator.userAgentData&&navigator.userAgentData.platform)||navigator.platform||'';
+  let os='设备';
+  if(/Windows/i.test(ua)||/Win/i.test(platform)) os='Windows电脑';
+  else if(/Macintosh|Mac OS/i.test(ua)||/Mac/i.test(platform)) os='Mac电脑';
+  else if(/iPhone/i.test(ua)) os='iPhone';
+  else if(/iPad/i.test(ua)) os='iPad';
+  else if(/Android/i.test(ua)){
+    const m=ua.match(/Android\s[\d.]+;\s*([^;)\]]+)/i);
+    os=m&&m[1]?m[1].trim():'Android设备';
+  }else if(/Linux/i.test(ua)||/Linux/i.test(platform)) os='Linux设备';
+
+  let browser='浏览器';
+  if(/Edg\//.test(ua)) browser='Edge';
+  else if(/Chrome\//.test(ua)&&!/Edg\//.test(ua)) browser='Chrome';
+  else if(/Safari\//.test(ua)&&!/Chrome\//.test(ua)) browser='Safari';
+  else if(/Firefox\//.test(ua)) browser='Firefox';
+
+  const w=window.screen&&window.screen.width?window.screen.width:'';
+  const h=window.screen&&window.screen.height?window.screen.height:'';
+  const screenInfo=(w&&h)?` · ${w}×${h}`:'';
+  return `${os} · ${browser}${screenInfo}`;
+}
 
 // --- render: prize grid ---
 function renderPrizes(){
@@ -644,7 +881,7 @@ function renderHist(){
   }).join('')+'</div>';
 }
 
-function renderAll(){renderBars();renderStats();renderHist();}
+function renderAll(){renderBars();renderStats();renderHist();updateDrawStatus();}
 
 // --- sparkles & confetti ---
 function spawnSp(){
@@ -755,6 +992,22 @@ function spawnYeahText(){
   document.body.appendChild(el);
   setTimeout(()=>el.remove(),1100);
 }
+
+function playExtraCodeSound(kind){
+  const c=getCtx(); if(!c)return;
+  if(kind==='success'){
+    [[660,0],[880,.08],[1175,.16],[1568,.26]].forEach(([f,t])=>beep(f,'sine',0.16,t,0.22,c));
+    sweep(700,1400,'triangle',0.08,0.18,0.32,c);
+  }else if(kind==='repeat'){
+    beep(420,'triangle',0.16,0,0.2,c);
+    beep(320,'triangle',0.14,.14,0.18,c);
+    beep(420,'triangle',0.10,.28,0.16,c);
+  }else if(kind==='invalid'){
+    beep(260,'sine',0.10,0,0.14,c);
+    beep(220,'sine',0.08,.12,0.12,c);
+  }
+}
+
 function playSound(kind){
   const c=getCtx();if(!c)return;
   if(kind==='normal'){
@@ -783,7 +1036,11 @@ function playSound(kind){
 
 // --- open box ---
 function openBox(){
-  if(opening)return;opening=true;
+  if(opening)return;
+  if(window.__activityExpired){showExtraMsg('活动已结束，无法开盒');return;}
+  if((boundEntryCode||currentEntryCode) && hasEntryOpened(boundEntryCode||currentEntryCode) && drawCredits<=0){updateDrawStatus();showExtraMsg('此入场码已完成开盒，请联系客服');return;}
+  if(drawCredits<=0){updateDrawStatus();showExtraMsg('本次开盒机会已用完，请联系垂耳兔客服');return;}
+  opening=true;
   document.getElementById('btnOpen').disabled=true;
   const wrap=document.getElementById('boxWrap');
   const lid=document.getElementById('lid');
@@ -801,9 +1058,12 @@ function openBox(){
     spawnSp();
     setTimeout(()=>{
       const idx=roll();const p=prizes[idx];
+      const resultTs=Date.now();
       const claimCode=generateClaimCode();
+      drawCredits=Math.max(0,drawCredits-1);
       pcounts[idx]++;
-      hist.push({idx,ts:Date.now(),code:claimCode});
+      hist.push({idx,ts:resultTs,code:claimCode,entryCode:boundEntryCode||currentEntryCode||''});
+      markEntryOpened(boundEntryCode||currentEntryCode||'',{opened:true,openCount:(entryRecords[boundEntryCode||currentEntryCode||'']?.openCount||0)+1,lastTs:resultTs,lastPrize:p.name,lastClaimCode:claimCode});
       count++;spend+=188;
       saveState();
       bicon.textContent=p.icon;bicon.classList.add('show');
@@ -815,7 +1075,7 @@ function openBox(){
       const rarity=isLegend?'传说奖项 👑':(isPrecious?'珍贵奖项 🌷':(isRare?'稀有奖项 ⭐':'普通奖项'));
       const fxClass=isLegend?' result-super-diamond':(isPrecious?' result-super-pinkmint':(isPurpleRare?' result-rare-purple':(isGoldRare?' result-rare-gold':'')));
       rbox.className='result-box res-pop'+fxClass;
-      rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">${rarity}</span><br><span class="result-congrats">恭喜抽中：</span><br><span class="result-name">${p.name}!</span><br><span class="result-note">请截图联系客服兑奖 Thanks♪(･ω･)ﾉ</span><br><span class="claim-code">兑换口令 ${claimCode}</span>`;
+      rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">${rarity}</span><br><span class="result-congrats">恭喜抽中：</span><br><span class="result-name">${p.name}!</span><br><span class="result-note">请截图联系客服兑奖 Thanks♪(･ω･)ﾉ</span><br><span class="result-time">开奖时间 ${formatFullTime(resultTs)}</span><br><span class="device-info">设备 ${getDeviceLabel()} · FP:${getDeviceFingerprint()}</span><br><span class="claim-code">兑换口令 ${claimCode}</span>`;
       if(isLegend){spawnConf(28);spawnWowText();playSound('super');}
       else if(isPrecious){spawnConf(22);spawnYeahText();playSound('yeah');}
       else if(isRare){spawnConf(isPurpleRare?18:16);playSound('rare');}
@@ -825,7 +1085,7 @@ function openBox(){
         lid.classList.remove('open');bow.classList.remove('open');
         bicon.className='box-icon';
         opening=false;
-        document.getElementById('btnOpen').disabled=false;
+        updateDrawStatus();
       },1800);
     },480);
   },550);
@@ -857,322 +1117,69 @@ function updateDynamicTime(){
 // --- init ---
 renderPrizes();
 renderAll();
+updateDrawStatus();
 updateDynamicTime();
 setInterval(updateDynamicTime,1000);
 document.getElementById('btnOpen').addEventListener('click',openBox);
+restoreFromIndexedDB();
+
+let hiddenCodeBuffer='';
+document.addEventListener('keydown',e=>{
+  const tag=(e.target&&e.target.tagName||'').toLowerCase();
+  if(tag==='input'||tag==='textarea') return;
+  if(e.key.length!==1) return;
+  hiddenCodeBuffer=(hiddenCodeBuffer+e.key).replace(/\s/g,'').slice(-32);
+  const up=hiddenCodeBuffer.toUpperCase();
+  for(const code of EXTRA_DRAW_CODES){
+    if(up.endsWith(code)){
+      applyHiddenExtraDrawCode(code);
+      hiddenCodeBuffer='';
+      break;
+    }
+  }
+});
+
 
 // ============================================================
-// 🔐 前端入场码门禁：150 个独立入场码
-// 说明：纯前端版本不接后端，不会跨设备同步“已使用”状态。
+// 🔐 前端入场码门禁（XOR混淆 + 活动时间窗口）
 // ============================================================
-const ENTRY_CODES = [
-  'PAY-5520-KSV54B',
-  'PAY-5520-7X8E76',
-  'PAY-5520-4XE5GV',
-  'PAY-5520-FV2TPG',
-  'PAY-5520-3ZDTWA',
-  'PAY-5520-9L4X5P',
-  'PAY-5520-RSMLJT',
-  'PAY-5520-ZLNEAM',
-  'PAY-5520-DDR76E',
-  'PAY-5520-FCEX29',
-  'PAY-5520-T7PZFZ',
-  'PAY-5520-KCQBJ8',
-  'PAY-5520-7BFHLT',
-  'PAY-5520-P5CZS8',
-  'PAY-5520-AET2EQ',
-  'PAY-5520-Y3NX4H',
-  'PAY-5520-FG42CH',
-  'PAY-5520-ZTCSLV',
-  'PAY-5520-X9YH76',
-  'PAY-5520-593VUF',
-  'PAY-5520-BRNXX8',
-  'PAY-5520-KZX3RQ',
-  'PAY-5520-C2TQWN',
-  'PAY-5520-UTPNXX',
-  'PAY-5520-7N7QAS',
-  'PAY-5520-4DAJTM',
-  'PAY-5520-BCZJLN',
-  'PAY-5520-CTWQLF',
-  'PAY-5520-F62EKD',
-  'PAY-5520-UJNW4S',
-  'PAY-5520-TG8GJ6',
-  'PAY-5520-Y49VYL',
-  'PAY-5520-K8E7NZ',
-  'PAY-5520-UEYZ75',
-  'PAY-5520-GD9AFS',
-  'PAY-5520-MMMYJZ',
-  'PAY-5520-DVSLRR',
-  'PAY-5520-F8BLV5',
-  'PAY-5520-NDCEH5',
-  'PAY-5520-FSVBG4',
-  'PAY-5520-WMPPTZ',
-  'PAY-5520-GAB994',
-  'PAY-5520-GLXYU4',
-  'PAY-5520-VX37T8',
-  'PAY-5520-YJV4W8',
-  'PAY-5520-7BHUML',
-  'PAY-5520-68X53T',
-  'PAY-5520-SUW72B',
-  'PAY-5520-WS9TA9',
-  'PAY-5520-CUZ4DM',
-  'PAY-5520-Y32R5A',
-  'PAY-5520-4QG4JC',
-  'PAY-5520-G349DN',
-  'PAY-5520-SNLYN7',
-  'PAY-5520-SUCHW9',
-  'PAY-5520-F6T3YP',
-  'PAY-5520-NXZZA7',
-  'PAY-5520-7PLGV8',
-  'PAY-5520-L7DRTM',
-  'PAY-5520-WPERCJ',
-  'PAY-5520-DXH2GD',
-  'PAY-5520-V3RJRQ',
-  'PAY-5520-7M89G5',
-  'PAY-5520-NSPBP8',
-  'PAY-5520-9EZAHU',
-  'PAY-5520-U7RF4J',
-  'PAY-5520-VP3FQW',
-  'PAY-5520-HUFTAC',
-  'PAY-5520-2U5MGL',
-  'PAY-5520-YS7KH9',
-  'PAY-5520-G563C8',
-  'PAY-5520-XZKNEK',
-  'PAY-5520-VPA3SA',
-  'PAY-5520-32RZQL',
-  'PAY-5520-V47TH8',
-  'PAY-5520-AUNU2F',
-  'PAY-5520-ELS8WE',
-  'PAY-5520-SCPNU4',
-  'PAY-5520-9VKJSN',
-  'PAY-5520-GLQ62U',
-  'PAY-5520-KFLEM6',
-  'PAY-5520-UWH7G6',
-  'PAY-5520-QHUFG3',
-  'PAY-5520-J7PDKU',
-  'PAY-5520-UNXJUG',
-  'PAY-5520-6U7WHY',
-  'PAY-5520-XMCSVW',
-  'PAY-5520-KGCS7Z',
-  'PAY-5520-RGVEHN',
-  'PAY-5520-NU834J',
-  'PAY-5520-63NDSN',
-  'PAY-5520-HAYB43',
-  'PAY-5520-HSTGZY',
-  'PAY-5520-X78S8K',
-  'PAY-5520-J9QFRY',
-  'PAY-5520-E25FC3',
-  'PAY-5520-VFKP9N',
-  'PAY-5520-4FKSQW',
-  'PAY-5520-L9QL96',
-  'PAY-5520-UMZPRH',
-  'PAY-5520-CQRUFP',
-  'PAY-5520-ND5XGT',
-  'PAY-5520-8GED7S',
-  'PAY-5520-ZFN8Z5',
-  'PAY-5520-VTGGV3',
-  'PAY-5520-PHCYUE',
-  'PAY-5520-6GCMRX',
-  'PAY-5520-G9YMYX',
-  'PAY-5520-7BRW4N',
-  'PAY-5520-STYCLX',
-  'PAY-5520-T9HQ6C',
-  'PAY-5520-W7AJHN',
-  'PAY-5520-CKM3WF',
-  'PAY-5520-3YZGEK',
-  'PAY-5520-2C39X2',
-  'PAY-5520-JGR69H',
-  'PAY-5520-A9W8GT',
-  'PAY-5520-46WW22',
-  'PAY-5520-ZH7P35',
-  'PAY-5520-U4AN98',
-  'PAY-5520-LKUBHA',
-  'PAY-5520-DLYUDQ',
-  'PAY-5520-A2VYZX',
-  'PAY-5520-5SY58N',
-  'PAY-5520-NTXRFK',
-  'PAY-5520-CGZ4FX',
-  'PAY-5520-RW5W9D',
-  'PAY-5520-DEJCQY',
-  'PAY-5520-H2W8YT',
-  'PAY-5520-JS89FU',
-  'PAY-5520-33CFAE',
-  'PAY-5520-W88LKL',
-  'PAY-5520-CQ3UNX',
-  'PAY-5520-QXQ4Y5',
-  'PAY-5520-HYAK9P',
-  'PAY-5520-C7GGWB',
-  'PAY-5520-H3PF8M',
-  'PAY-5520-LJV8G6',
-  'PAY-5520-55AQJ9',
-  'PAY-5520-2NPFR9',
-  'PAY-5520-F8QW7L',
-  'PAY-5520-SK7J4M',
-  'PAY-5520-94GDNC',
-  'PAY-5520-DM63VY',
-  'PAY-5520-K3ZDV5',
-  'PAY-5520-2YYSEK',
-  'PAY-5520-SLYJ23',
-  'PAY-5520-P8MMUU',
-  'PAY-5520-4QHPPL',
-  'PAY-5520-L6KFMD',
-  'PAY-5520-NJZGWA',
-  'PAY-5520-TQYMLB',
-  'PAY-5520-NUXS3N',
-  'PAY-5520-Q2J5WX',
-  'PAY-5520-EXUKEZ',
-  'PAY-5520-RFF7ZY',
-  'PAY-5520-V3FC5H',
-  'PAY-5520-QDUJ75',
-  'PAY-5520-7J7HNU',
-  'PAY-5520-ASVHAL',
-  'PAY-5520-US4Y5E',
-  'PAY-5520-BW35KL',
-  'PAY-5520-H6WT7S',
-  'PAY-5520-QTSTWS',
-  'PAY-5520-MDNUEW',
-  'PAY-5520-KHWWZ7',
-  'PAY-5520-H3UEZZ',
-  'PAY-5520-4KK2GJ',
-  'PAY-5520-45YBZ7',
-  'PAY-5520-VXVSWD',
-  'PAY-5520-UL7MST',
-  'PAY-5520-WBJ4EW',
-  'PAY-5520-N3DW9L',
-  'PAY-5520-YVS728',
-  'PAY-5520-N63CVA',
-  'PAY-5520-4DQCWB',
-  'PAY-5520-SG8YFF',
-  'PAY-5520-AJW7QV',
-  'PAY-5520-X4ZT77',
-  'PAY-5520-P33EL4',
-  'PAY-5520-MQ58TF',
-  'PAY-5520-4CBBNU',
-  'PAY-5520-LRXY38',
-  'PAY-5520-L6458M',
-  'PAY-5520-KRDYWK',
-  'PAY-5520-UFZ345',
-  'PAY-5520-H9K7LV',
-  'PAY-5520-K2ZPTT',
-  'PAY-5520-NQYXES',
-  'PAY-5520-SZRAP8',
-  'PAY-5520-EVT55C',
-  'PAY-5520-3FFGE4',
-  'PAY-5520-P2FSU4',
-  'PAY-5520-RQ9Z3D',
-  'PAY-5520-HCBXCB',
-  'PAY-5520-ASLD4G',
-  'PAY-5520-EAT9GZ',
-  'PAY-5520-JN8SP7',
-  'PAY-5520-VXYAUA',
-  'PAY-5520-5C9N7H',
-  'PAY-5520-WESBPX',
-  'PAY-5520-6CKDB9',
-  'PAY-5520-ZE79DC',
-  'PAY-5520-DX6FVV',
-  'PAY-5520-ZZBZ52',
-  'PAY-5520-LSBQQ7',
-  'PAY-5520-Y87MEA',
-  'PAY-5520-KZ9K3W',
-  'PAY-5520-VCXN5J',
-  'PAY-5520-AB6PME',
-  'PAY-5520-5U9DVU',
-  'PAY-5520-S6STY3',
-  'PAY-5520-M82C5F',
-  'PAY-5520-GS55FB',
-  'PAY-5520-SH3DMB',
-  'PAY-5520-H79MHD',
-  'PAY-5520-ZC5H9X',
-  'PAY-5520-T2VSZ7',
-  'PAY-5520-SXP9K2',
-  'PAY-5520-JDYF3H',
-  'PAY-5520-CJGCZP',
-  'PAY-5520-LB8YSF',
-  'PAY-5520-W44BMF',
-  'PAY-5520-H45CHA',
-  'PAY-5520-MVVYLE',
-  'PAY-5520-AAZU4Q',
-  'PAY-5520-7F9NJ6',
-  'PAY-5520-CVZ8SE',
-  'PAY-5520-EFVE5V',
-  'PAY-5520-4EABES',
-  'PAY-5520-CK8W9N',
-  'PAY-5520-YERZSV',
-  'PAY-5520-SU5PYG',
-  'PAY-5520-L5MJC2',
-  'PAY-5520-2KLCHJ',
-  'PAY-5520-2JTCB7',
-  'PAY-5520-TV3TRX',
-  'PAY-5520-4AMZGT',
-  'PAY-5520-M3PYLE',
-  'PAY-5520-YU6L73',
-  'PAY-5520-NTAYDR',
-  'PAY-5520-VPKRSL',
-  'PAY-5520-U8QWES',
-  'PAY-5520-3HAJJR',
-  'PAY-5520-S26WEZ',
-  'PAY-5520-QUFPDE',
-  'PAY-5520-DN3AMP',
-  'PAY-5520-6SJY27',
-  'PAY-5520-WK3E2C',
-  'PAY-5520-V98FDX',
-  'PAY-5520-N6NEEV',
-  'PAY-5520-7SKUQA',
-  'PAY-5520-A8Q6EK',
-  'PAY-5520-EY8NYK',
-  'PAY-5520-AG7KQJ',
-  'PAY-5520-RTV368',
-  'PAY-5520-23WC3A',
-  'PAY-5520-TPKT5V',
-  'PAY-5520-B9HKAJ',
-  'PAY-5520-FQUVAK',
-  'PAY-5520-GUXPCE',
-  'PAY-5520-2EHAHC',
-  'PAY-5520-FV57SQ',
-  'PAY-5520-KCGN5Y',
-  'PAY-5520-M83YMJ',
-  'PAY-5520-RQ4FA2',
-  'PAY-5520-WM3M4H',
-  'PAY-5520-EPEJYF',
-  'PAY-5520-CW4HY9',
-  'PAY-5520-EFPD26',
-  'PAY-5520-HMAQMY',
-  'PAY-5520-U7CPX8',
-  'PAY-5520-JBPX72',
-  'PAY-5520-7HLPDF',
-  'PAY-5520-9K6CRW',
-  'PAY-5520-9A6EYS',
-  'PAY-5520-XJT8UR',
-  'PAY-5520-B6EEAR',
-  'PAY-5520-ZGP3AM',
-  'PAY-5520-N3X3KA',
-  'PAY-5520-8F5PX7',
-  'PAY-5520-TJKXB9',
-  'PAY-5520-PA567D',
-  'PAY-5520-UZ8E9W',
-  'PAY-5520-4TCEYY',
-  'PAY-5520-8QPA83',
-  'PAY-5520-VJM85P',
-  'PAY-5520-QNG2RP',
-  'PAY-5520-8TXURF',
-  'PAY-5520-3FWDMB',
-  'PAY-5520-AQU7GZ',
-  'PAY-5520-9GRRLN',
-  'PAY-5520-5P77DZ',
-  'PAY-5520-YVC2GF',
-  'PAY-5520-RDRG36',
-  'PAY-5520-KFTGK8',
-  'PAY-5520-L63FAV',
-  'PAY-5520-UFUCYF',
-  'PAY-5520-36MW2F',
-  'PAY-5520-VD5JSS'
-];
 
-const GATE_KEY = 'chuiertu_gate_v2';
+// 活动时间窗口（本地时间）— 可按需修改日期
+const ACTIVITY_START = new Date('2026-05-20T00:00:00');
+const ACTIVITY_END   = new Date('2026-05-20T23:59:59');
+(function checkTimeWindow(){
+  const now = new Date();
+  if(now < ACTIVITY_START || now > ACTIVITY_END){
+    const overlay = document.getElementById('gateOverlay');
+    const card = overlay && overlay.querySelector('.gate-card');
+    if(card){
+      card.innerHTML = `
+        <div style="font-size:48px;margin-bottom:10px;">🌸</div>
+        <div style="font-size:20px;font-weight:900;color:#ff70aa;margin-bottom:8px;">活动已结束</div>
+        <div style="font-size:13px;font-weight:700;color:#b06080;line-height:1.6;">
+          垂耳兔CLUB · 心动盲盒<br>5.20 限定活动已结束<br>感谢每一位板板的参与 💝
+        </div>`;
+    }
+    if(overlay) overlay.classList.remove('hidden');
+    window.__activityExpired = true;
+  }
+})();
+
+// 入场码（XOR混淆，防F12直读）
+const ENTRY_CODES=(function(){
+  const _k=0x5A;
+  const _e="ChsDd29vaGp3aW8WER0dJgobA3dvb2hqdxljHBIIDSYKGwN3b29oancfYx4MaAAmChsDd29vaGp3AgAMbxxtJgobA3dvb2hqdxEOCRhtDCYKGwN3b29oancACxEDFB0mChsDd29vaGp3YhIUbQ4KJgobA3dvb2hqd24NEhgOCCYKGwN3b29oandsCR5vERkmChsDd29vaGp3DA0fDRhtJgobA3dvb2hqdxIIHxQPCSYKGwN3b29oancbCA4JHh8mChsDd29vaGp3HRIIG2gMJgobA3dvb2hqdwMbbRJpCiYKGwN3b29oancZCRgAERsmChsDd29vaGp3HmxsFxZpJgobA3dvb2hqdx4IGAoJDSYKGwN3b29oancPHRlpCB8mChsDd29vaGp3AmxuA2IcJgobA3dvb2hqdxwCaBAdFCYKGwN3b29oancXaGgLHBYmChsDd29vaGp3Yg0WFBgQJgobA3dvb2hqd29jaQIRDiYKGwN3b29oandoCwkbGR8mChsDd29vaGp3GxtjYhQJJgobA3dvb2hqdx4OEmwWaCYKGwN3b29oancAHxsSYwgmChsDd29vaGp3ABkXDRlpJgobA3dvb2hqdwsIAxcebyYKGwN3b29oancOHGMfYwsmChsDd29vaGp3CQoXDwMDJgobA3dvb2hqdwMLGWISYiYKGwN3b29oancAGAAPCwMmChsDd29vaGp3bh4QGAkcJgobA3dvb2hqdwsKHRcbaSYKGwN3b29oancNABkLCmkmChsDd29vaGp3HQIeYmgUJgobA3dvb2hqdwwZCxkOCiYKGwN3b29oancRDBsWCxAmChsDd29vaGp3HxEAGBQCJgobA3dvb2hqd2hoCxAcYyYKGwN3b29oancIFwALbBwmChsDd29vaGp3HQppHRgeJgobA3dvb2hqdxsCEgkDACYKGwN3b29oancdCAljaRAmChsDd29vaGp3AxYNbxYYJgobA3dvb2hqdxcYaG1uHCYKGwN3b29oancdC2gIFhQmChsDd29vaGp3GRsCAxgLJgobA3dvb2hqd24bbwsXCiYKGwN3b29oancCFh5sDhkmChsDd29vaGp3YgtvAA9pJgobA3dvb2hqdxwOHQsYFiYKGwN3b29oancRFBgXEg0mChsDd29vaGp3GwsYAxZpJgobA3dvb2hqdxEKGQ8NFCYKGwN3b29oancIFm4KaBQmChsDd29vaGp3Ym0RCgARJgobA3dvb2hqdx8XCxsDbiYKGwN3b29oancLDBESbR4mChsDd29vaGp3FmloFhEXJgobA3dvb2hqdxcfGW8DDCYKGwN3b29oancRY24IYhEmChsDd29vaGp3DWMeHhgUJgobA3dvb2hqdxQKYxBoaCYKGwN3b29oandiFA0ADWMmChsDd29vaGp3EBESAwgfJgobA3dvb2hqdwgcEQgRbyYKGwN3b29oancKCmJsbA4mChsDd29vaGp3aRsQYg5iJgobA3dvb2hqdx8IFG4MbCYKGwN3b29oancMbBEKaBkmChsDd29vaGp3C24AHAltJgobA3dvb2hqdxgKFxIeAyYKGwN3b29oancKYx9uDQ0mChsDd29vaGp3AA8cDG0UJgobA3dvb2hqdxAQEg5pHyYKGwN3b29oancKGwltYg8mChsDd29vaGp3aAsUaBFpJgobA3dvb2hqdwgAbWxjEiYKGwN3b29oancJCB4AGAwmChsDd29vaGp3EA0cD29tJgobA3dvb2hqdx8bFBEfGyYKGwN3b29oancIHWIJHQomChsDd29vaGp3HxcRAGwIJgobA3dvb2hqdxtsA2kCGyYKGwN3b29oancXDWJtYggmChsDd29vaGp3EAsSG2wAJgobA3dvb2hqdwsYFg0UHyYKGwN3b29oandub2gZbB8mChsDd29vaGp3AxAObB1sJgobA3dvb2hqdxAKDAkCECYKGwN3b29oanceAxwPHRgmChsDd29vaGp3EBFjFhcUJgobA3dvb2hqdxhiGAoAaCYKGwN3b29oancLHxRuDxgmChsDd29vaGp3AgoQbh8LJgobA3dvb2hqdw8UCA8IYiYKGwN3b29oancIGxcZFw4mChsDd29vaGp3bwBpDhRpJgobA3dvb2hqdxkMHw5taCYKGwN3b29oancMYw8ZGR4mChsDd29vaGp3DBYMEggcJgobA3dvb2hqdw9pDRcAHyYKGwN3b29oancYCQtsEg0mChsDd29vaGp3ChAOC2kIJgobA3dvb2hqdxkUaAgRAiYKGwN3b29oancLCwppDB8mChsDd29vaGp3GQoMDgwYJgobA3dvb2hqdxltAxIAaCYKGwN3b29oanduGQsUCggmChsDd29vaGp3HgsYDh4RJgobA3dvb2hqdwJsER0LGCYKGwN3b29oancMbW8NDxkmChsDd29vaGp3aAkOHxhuJgobA3dvb2hqdwsQH20JCiYKGwN3b29oandpCWIOYm8mChsDd29vaGp3HQgCHgppJgobA3dvb2hqdxsAbAJuaCYKGwN3b29oancKbWxibgImChsDd29vaGp3HWltA21tJgobA3dvb2hqdxkLDAMAaCYKGwN3b29oancSAhIUCxQmChsDd29vaGp3DwofaRwdJgobA3dvb2hqdw8UCAMfDCYKGwN3b29oancYGxsZGw8mChsDd29vaGp3CGhvFAAUJgobA3dvb2hqdwoAHmwICyYKGwN3b29oancNFAIfCW4mChsDd29vaGp3ABYAHhEMJgobA3dvb2hqdw4PHg9sECYKGwN3b29oancLEBkQH2gmChsDd29vaGp3EgxsaREZJgobA3dvb2hqdwwDYhgfCSYKGwN3b29oancRFAIWaAMmChsDd29vaGp3GBwCAwADJgobA3dvb2hqd25vHx4eAiYKGwN3b29oancNDgoXDQ4mChsDd29vaGp3Dx8PAA0OJgobA3dvb2hqdwIMaBYXCSYKGwN3b29oancbABsQGw4mChsDd29vaGp3Eh4CHhkIJgobA3dvb2hqdwIXbBkbEiYKGwN3b29oanccbgMUHgImChsDd29vaGp3DG1tEh8dJgobA3dvb2hqd24Ubx9iCyYKGwN3b29oancJEQkJFmwmChsDd29vaGp3Eh0LCxkYJgobA3dvb2hqdw4UHQ9sbyYKGwN3b29oandjaGIcbAkmChsDd29vaGp3bQgWFhEOJgobA3dvb2hqdwkcG2MKHCYKGwN3b29oancMGRARDmMmChsDd29vaGp3Yhkfb20AJgobA3dvb2hqdw4CHBJvHSYKGwN3b29oancJHBQdAg0mChsDd29vaGp3Y2IJAhgWJgobA3dvb2hqdxgWDxRjaSYKGwN3b29oandoDRkUDxwmChsDd29vaGp3Fw4DHGliJgobA3dvb2hqd2wWEg4DHSYKGwN3b29oancZDhxjEQMmChsDd29vaGp3DGgQHmIAJgobA3dvb2hqdwBpDAARHiYKGwN3b29oandiAw4PEhsmChsDd29vaGp3bwIUFAgLJgobA3dvb2hqdxcJHA8NbyYKGwN3b29oancKbhkLAG4mChsDd29vaGp3Ag8QCR4PJgobA3dvb2hqdxARDm8eESYKGwN3b29oancRAhloCBQmChsDd29vaGp3FBAbFG5oJgobA3dvb2hqdwseHhIRCCYKGwN3b29oandpYhIQCw8mChsDd29vaGp3bA1iDmwUJgobA3dvb2hqdxkZABRuaSYKGwN3b29oanduYhkAHQgmChsDd29vaGp3GwwLaANtJgobA3dvb2hqdwoIDW4ADyYKGwN3b29oancbbm9vEhsmChsDd29vaGp3HxADEg9oJgobA3dvb2hqdxdvGwtjbSYKGwN3b29oancDCh4Xbh8mChsDd29vaGp3HQkNbgliJgobA3dvb2hqdxRtEhgXCSYKGwN3b29oandpDxEDbx0mChsDd29vaGp3EGkCYw0DJgobA3dvb2hqdwMObB1iGSYKGwN3b29oandsDGMMaG0mChsDd29vaGp3CRYJbREKJgobA3dvb2hqdxcCHwkcDSYKGwN3b29oanduHAIQAgAmChsDd29vaGp3GBkMF2wJJgobA3dvb2hqd29jbQ0bGyYKGwN3b29oancLDGliDR8mChsDd29vaGp3EApsChAIJgobA3dvb2hqdxYcbmMbHyYKGwN3b29oancdHRIJDAMmChsDd29vaGp3EA9jaAoWJgobA3dvb2hqdxwOGBQYFg==";
+  const _b=atob(_e);
+  let _s='';for(let i=0;i<_b.length;i++)_s+=String.fromCharCode(_b.charCodeAt(i)^_k);
+  return _s.split('|');
+})();
+
+
+const GATE_KEY = 'chuiertu_gate_v3';
 
 (function checkGate() {
   try {
-    const saved = JSON.parse(localStorage.getItem(GATE_KEY) || 'null');
+    const saved = JSON.parse(localStorage.getItem(GATE_KEY) || sessionStorage.getItem(GATE_KEY) || getCookie('chuiertu_gate_cookie_v3') || 'null');
     if (saved && saved.code && ENTRY_CODES.includes(saved.code.toUpperCase())) {
       unlockGate(saved.code, false);
       return;
@@ -1215,8 +1222,8 @@ function verifyCode() {
 
   try {
     const saved = JSON.parse(localStorage.getItem(GATE_KEY) || 'null');
-    if (saved && saved.code && saved.code !== raw) {
-      errEl.textContent = '❌ 此设备已绑定入场码 ' + saved.code;
+    if ((saved && saved.code && saved.code !== raw) || (boundEntryCode && boundEntryCode !== raw)) {
+      errEl.textContent = '❌ 此设备已绑定入场码 ' + ((saved&&saved.code)||boundEntryCode||'');
       errEl.classList.add('show');
       return;
     }
@@ -1228,9 +1235,14 @@ function verifyCode() {
 }
 
 function unlockGate(code, isNew) {
+  currentEntryCode=code;
+  if(!boundEntryCode) boundEntryCode=code;
   try {
     localStorage.setItem(GATE_KEY, JSON.stringify({ code, ts: Date.now() }));
+    sessionStorage.setItem(GATE_KEY, JSON.stringify({ code, ts: Date.now() }));
+    setCookie('chuiertu_gate_cookie_v3', JSON.stringify({ code, ts: Date.now() }), 30);
   } catch(e) {}
+  saveState();
 
   const overlay = document.getElementById('gateOverlay');
   if (overlay) {
