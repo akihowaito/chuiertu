@@ -448,17 +448,141 @@ function renderStats(){
   }
 }
 
-// --- claim code: helps manual checking, but true anti-cheat still needs server logging ---
-function makeClaimCode(idx){
-  const d=new Date();
-  const y=d.getFullYear().toString().slice(2);
-  const m=String(d.getMonth()+1).padStart(2,'0');
-  const day=String(d.getDate()).padStart(2,'0');
-  const a=new Uint32Array(1);
-  if(window.crypto&&crypto.getRandomValues){crypto.getRandomValues(a);}else{a[0]=Math.floor(Math.random()*0xffffffff);}
-  const rand=a[0].toString(36).toUpperCase().slice(0,5).padStart(5,'0');
-  return `CT${y}${m}${day}-${String(idx+1).padStart(2,'0')}-${rand}`;
+// --- fixed redeem code pool: private staff whitelist, 100 codes total ---
+const CODE_POOL = [
+  [
+    "CT520-A1-7WCTRE",
+    "CT520-A1-RE26QJ",
+    "CT520-A1-CHESWN",
+    "CT520-A1-VX27AU",
+    "CT520-A1-GBYRB8",
+    "CT520-A1-NTWH6M",
+    "CT520-A1-P4MBM9",
+    "CT520-A1-PNK2HT",
+    "CT520-A1-ZAAWP4",
+    "CT520-A1-UYTD3Z",
+    "CT520-A1-LT3BNY",
+    "CT520-A1-WH6PSW",
+    "CT520-A1-XFX8TH",
+    "CT520-A1-KB4H8S",
+    "CT520-A1-VANJZR",
+    "CT520-A1-RZDBWM",
+    "CT520-A1-ZY5D6Q",
+    "CT520-A1-C37YF9",
+    "CT520-A1-D79M8Y",
+    "CT520-A1-U5BPC2",
+    "CT520-A1-6ZXZCE",
+    "CT520-A1-WQECQG",
+    "CT520-A1-8F2NQW",
+    "CT520-A1-WPYN84",
+    "CT520-A1-X26GNF"
+  ],
+  [
+    "CT520-B2-D379CN",
+    "CT520-B2-JE4LAS",
+    "CT520-B2-W3PYGT",
+    "CT520-B2-RD7UMJ",
+    "CT520-B2-E4EVBM",
+    "CT520-B2-3M5GPX",
+    "CT520-B2-F3FEFD",
+    "CT520-B2-X37LNH",
+    "CT520-B2-7XHC2A",
+    "CT520-B2-CJ2TZB",
+    "CT520-B2-RCP686",
+    "CT520-B2-WJAL5B"
+  ],
+  [
+    "CT520-C3-YFJGSP",
+    "CT520-C3-DYLAKC",
+    "CT520-C3-LVCWPE",
+    "CT520-C3-82ZPKZ",
+    "CT520-C3-PSDP6Z",
+    "CT520-C3-A9AY3D",
+    "CT520-C3-X7ZWHE",
+    "CT520-C3-UYWVUC",
+    "CT520-C3-F4JGHZ",
+    "CT520-C3-KE3BAP",
+    "CT520-C3-PWJHKV",
+    "CT520-C3-KZ4PRA",
+    "CT520-C3-GXWYUW",
+    "CT520-C3-DVMYSP",
+    "CT520-C3-AVDKL5",
+    "CT520-C3-N95YNS",
+    "CT520-C3-4WD2QX",
+    "CT520-C3-LCN3LJ",
+    "CT520-C3-2P3AKQ",
+    "CT520-C3-JR3QRS",
+    "CT520-C3-3STUEY",
+    "CT520-C3-ZM6K63",
+    "CT520-C3-2WHUSU",
+    "CT520-C3-RLJJZS",
+    "CT520-C3-QYCC45",
+    "CT520-C3-PTR9RL",
+    "CT520-C3-5SVS7L",
+    "CT520-C3-E3EZCP",
+    "CT520-C3-XM5S6G",
+    "CT520-C3-EW9U36"
+  ],
+  [
+    "CT520-D4-N9B4QP",
+    "CT520-D4-EX5A9X",
+    "CT520-D4-ZKGJ9J",
+    "CT520-D4-JLQLP9",
+    "CT520-D4-L4WHE7",
+    "CT520-D4-GYYJP3",
+    "CT520-D4-K3TCWC",
+    "CT520-D4-62NZ9U",
+    "CT520-D4-2PKJMB",
+    "CT520-D4-532EXB",
+    "CT520-D4-86XVBM",
+    "CT520-D4-63PX6W",
+    "CT520-D4-2DYZ4N",
+    "CT520-D4-FL5AT8",
+    "CT520-D4-2G69L9",
+    "CT520-D4-W7JZSQ",
+    "CT520-D4-JVH3WD",
+    "CT520-D4-W2UGDD",
+    "CT520-D4-QE52JJ",
+    "CT520-D4-HLAA23"
+  ],
+  [
+    "CT520-E5-AAW3KZ",
+    "CT520-E5-P4T6TG",
+    "CT520-E5-4XALXQ",
+    "CT520-E5-FZQNQ3",
+    "CT520-E5-JKMRCF",
+    "CT520-E5-QDDCE4",
+    "CT520-E5-46YZLK",
+    "CT520-E5-L3TNA4"
+  ],
+  [
+    "CT520-F6-N5B2XX",
+    "CT520-F6-6WZ3YQ",
+    "CT520-F6-LJMHK6",
+    "CT520-F6-W6Y99Q",
+    "CT520-F6-S5565P"
+  ]
+];
+
+function getUsedCodes(){
+  return new Set(hist.map(h=>h.code).filter(Boolean));
 }
+function drawPrizeWithCode(){
+  const used=getUsedCodes();
+  const available=[];
+  CODE_POOL.forEach((list,idx)=>{
+    list.forEach(code=>{
+      if(!used.has(code)) available.push({idx,code});
+    });
+  });
+  if(!available.length){
+    const idx=roll();
+    return {idx,code:'CODE-POOL-END'};
+  }
+  const pick=available[Math.floor(rng()*available.length)];
+  return pick;
+}
+
 
 // --- render: history ---
 function fmtTime(ts){
@@ -636,9 +760,9 @@ function openBox(){
     playOpen();
     spawnSp();
     setTimeout(()=>{
-      const idx=roll();const p=prizes[idx];
+      const draw=drawPrizeWithCode();const idx=draw.idx;const p=prizes[idx];
       pcounts[idx]++;
-      const claimCode=makeClaimCode(idx);
+      const claimCode=draw.code;
       hist.push({idx,ts:Date.now(),code:claimCode});
       count++;spend+=188;
       saveState();
