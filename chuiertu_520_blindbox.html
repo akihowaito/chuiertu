@@ -1,9 +1,9 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>垂耳兔电竞 5.20 心动盲盒</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>垂耳兔电竞 5.20 心动盲盒</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -15,7 +15,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 .d2{right:20px;top:80px;transform:rotate(10deg);}
 .d3{left:28px;bottom:160px;transform:rotate(-8deg);}
 .d4{right:22px;bottom:200px;transform:rotate(8deg);}
-.inner{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:28px 16px 32px;}
+.inner{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:28px 16px 40px;}
 
 /* header */
 .header{text-align:center;margin-bottom:18px;}
@@ -27,7 +27,7 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 .price-pill .n{font-size:22px;}
 .price-pill .u{font-size:12px;opacity:.85;}
 
-/* === BOX (first version) === */
+/* === BOX === */
 .box-area{display:flex;justify-content:center;align-items:center;padding:1.2rem 1rem 0.4rem;position:relative;}
 .box-container{position:relative;cursor:pointer;}
 .box-wrap{position:relative;width:160px;height:160px;}
@@ -47,51 +47,234 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 @keyframes shake{0%,100%{transform:rotate(0);}20%{transform:rotate(-5deg);}40%{transform:rotate(5deg);}60%{transform:rotate(-4deg);}80%{transform:rotate(4deg);}}
 .shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97);}
 
-/* === BUTTONS (first version) === */
-.btns{display:flex;gap:12px;justify-content:center;margin-top:6px;flex-wrap:wrap;}
-.btn-open{background:linear-gradient(135deg,#FF6B9D,#E91E8C);color:white;border:none;font-family:inherit;font-size:16px;font-weight:800;padding:14px 36px;border-radius:50px;cursor:pointer;box-shadow:0 6px 20px rgba(233,30,140,.4);transition:all .2s;letter-spacing:.3px;}
+/* === BUTTON === */
+.btns{display:flex;gap:12px;justify-content:center;margin-top:6px;}
+.btn-open{background:linear-gradient(135deg,#FF6B9D,#E91E8C);color:white;border:none;font-family:inherit;font-size:16px;font-weight:800;padding:14px 48px;border-radius:50px;cursor:pointer;box-shadow:0 6px 20px rgba(233,30,140,.4);transition:all .2s;letter-spacing:.3px;}
 .btn-open:hover{filter:brightness(1.05);}
 .btn-open:active:not(:disabled){transform:scale(.96);}
 .btn-open:disabled{opacity:.7;cursor:not-allowed;transform:none;}
-.btn-sub{background:white;color:#E91E8C;border:2px solid #FF6B9D;font-family:inherit;font-size:14px;font-weight:800;padding:12px 20px;border-radius:50px;cursor:pointer;transition:all .2s;}
-.btn-sub:hover{background:#FFF0F7;}
-.btn-sub:active{transform:scale(.96);}
 
 /* result */
-.result-box{margin:14px 0 0;border:3px solid #ffc0dc;background:rgba(255,255,255,.9);border-radius:20px;padding:13px 16px;text-align:center;font-weight:900;color:#70445d;box-shadow:0 8px 0 rgba(255,157,201,.2);font-size:14px;line-height:1.65;min-height:58px;}
-.result-box strong{color:#ff5fa3;font-size:20px;text-shadow:1px 1px 0 #fff;}
-.rtag{display:inline-block;border-radius:999px;padding:2px 10px;font-size:11px;font-weight:900;margin-bottom:4px;}
-@keyframes resPop{from{transform:scale(.75);opacity:0;}to{transform:scale(1);opacity:1;}}
-.res-pop{animation:resPop .4s cubic-bezier(.4,2,.5,1);}
+.result-box{
+  margin:14px 0 0;
+  position:relative;
+  overflow:hidden;
+  border:3px solid #ffc0dc;
+  background:rgba(255,255,255,.92);
+  border-radius:22px;
+  padding:15px 16px 14px;
+  text-align:center;
+  font-weight:900;
+  color:#70445d;
+  box-shadow:0 8px 0 rgba(255,157,201,.2);
+  font-size:14px;
+  line-height:1.65;
+  min-height:64px;
+}
+.result-box::before{
+  content:'';
+  position:absolute;
+  inset:-45%;
+  opacity:0;
+  pointer-events:none;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.95),transparent 18%),radial-gradient(circle at 70% 55%,rgba(255,255,255,.7),transparent 16%);
+  animation:none;
+}
+.result-box::after{
+  content:'';
+  position:absolute;
+  inset:8px;
+  border-radius:18px;
+  pointer-events:none;
+  opacity:0;
+  border:1.5px dashed rgba(255,255,255,.75);
+}
+.result-box > *{position:relative;z-index:1;}
+.result-box.result-rare-gold{
+  border-color:#f7b733;
+  background:linear-gradient(180deg,#fffdf6 0%,#fff7df 100%);
+  box-shadow:0 8px 0 rgba(247,183,51,.28),0 0 0 3px rgba(255,215,110,.7),0 0 26px rgba(247,183,51,.32);
+}
+.result-box.result-rare-gold::before{
+  opacity:.55;
+  background:conic-gradient(from 90deg,transparent 0deg,rgba(255,216,98,.75) 45deg,transparent 95deg,rgba(255,151,181,.42) 145deg,transparent 220deg,rgba(255,216,98,.62) 290deg,transparent 360deg);
+  animation:rareSweep 3.2s linear infinite;
+}
+.result-box.result-rare-purple{
+  border-color:#a855f7;
+  background:linear-gradient(180deg,#fffaff 0%,#f7ecff 100%);
+  box-shadow:0 8px 0 rgba(168,85,247,.22),0 0 0 3px rgba(192,132,252,.65),0 0 28px rgba(168,85,247,.34);
+}
+.result-box.result-rare-purple::before{
+  opacity:.5;
+  background:conic-gradient(from 20deg,transparent 0deg,rgba(168,85,247,.62) 55deg,transparent 115deg,rgba(255,107,157,.38) 170deg,transparent 245deg,rgba(196,181,253,.6) 305deg,transparent 360deg);
+  animation:rareSweep 3.5s linear infinite reverse;
+}
+.result-box.result-super-diamond{
+  border-color:#7dd3fc;
+  background:linear-gradient(135deg,#ffffff 0%,#f0fbff 44%,#f8fdff 72%,#fff7fb 100%);
+  box-shadow:0 8px 0 rgba(125,211,252,.24),0 0 0 3px rgba(186,230,253,.95),0 0 26px rgba(56,189,248,.28),0 0 48px rgba(147,197,253,.18);
+}
+.result-box.result-super-diamond::before{
+  opacity:.42;
+  background:conic-gradient(from 0deg,rgba(186,230,253,.55),rgba(255,182,213,.32),rgba(125,211,252,.42),rgba(255,255,255,.62),rgba(186,230,253,.55));
+  animation:diamondSpin 3.6s linear infinite;
+}
+.result-box.result-super-diamond::after,
+.result-box.result-rare-gold::after,
+.result-box.result-rare-purple::after{opacity:.9;}
+.result-congrats{
+  color:#70445d;
+  font-size:14px;
+  font-weight:900;
+  text-shadow:none;
+}
+.result-name{
+  display:inline-block;
+  margin-top:2px;
+  font-size:24px;
+  font-weight:900;
+  color:#e91e8c;
+  text-shadow:1px 1px 0 #fff,2px 2px 0 #ffd1e6,0 0 12px rgba(233,30,140,.18);
+  line-height:1.25;
+  letter-spacing:.2px;
+}
+.result-rare-gold .result-name{
+  color:#e58a00;
+  text-shadow:1px 1px 0 #fff,2px 2px 0 #ffe2a4,0 0 16px rgba(247,183,51,.42);
+}
+.result-rare-purple .result-name{
+  color:#9b4dff;
+  text-shadow:1px 1px 0 #fff,2px 2px 0 #e9d5ff,0 0 16px rgba(168,85,247,.38);
+}
+.result-super-diamond .result-name{
+  color:#0ea5e9;
+  background:linear-gradient(90deg,#38bdf8,#0ea5e9,#f9a8d4,#38bdf8);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:none;
+  filter:drop-shadow(0 0 6px rgba(56,189,248,.28));
+  animation:nameShine 2.4s ease-in-out infinite;
+}
+.result-note{
+  display:inline-block;
+  margin-top:5px;
+  font-size:12px;
+  font-weight:800;
+  color:#b06080;
+}
+.claim-code{
+  display:inline-block;
+  margin-top:4px;
+  padding:2px 9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  border:1.5px dashed rgba(255,126,183,.38);
+  color:#9b5f78;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+.wow-burst{
+  position:fixed;
+  left:50%;
+  top:22%;
+  transform:translate(-50%,-50%) scale(.5);
+  z-index:1000;
+  pointer-events:none;
+  padding:6px 18px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#e0f7ff,#fff,#ffeaf6);
+  border:3px solid #9be7ff;
+  color:#20aeea;
+  font-size:28px;
+  font-weight:900;
+  text-shadow:1px 1px 0 #fff,0 0 12px rgba(56,189,248,.45);
+  box-shadow:0 0 28px rgba(125,211,252,.45),0 8px 0 rgba(125,211,252,.18);
+  animation:wowPop 1s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes wowPop{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.35) rotate(-9deg);}
+  18%{opacity:1;transform:translate(-50%,-50%) scale(1.08) rotate(5deg);}
+  42%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-2deg);}
+  100%{opacity:0;transform:translate(-50%,-92%) scale(.86) rotate(0);}
+}
+.rtag{display:inline-block;border-radius:999px;padding:3px 12px;font-size:11px;font-weight:900;margin-bottom:4px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+@keyframes resPop{from{transform:scale(.8) translateY(6px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
+@keyframes rareSweep{to{transform:rotate(360deg);}}
+@keyframes diamondSpin{to{transform:rotate(360deg) scale(1.04);}}
+@keyframes nameShine{0%,100%{filter:drop-shadow(0 0 6px rgba(56,189,248,.24));transform:scale(1);}50%{filter:drop-shadow(0 0 12px rgba(14,165,233,.32));transform:scale(1.022);}}
+@keyframes goldPulse{0%,100%{box-shadow:0 8px 0 rgba(247,183,51,.28),0 0 0 3px rgba(255,215,110,.7),0 0 26px rgba(247,183,51,.32);}50%{box-shadow:0 8px 0 rgba(247,183,51,.34),0 0 0 3px rgba(255,215,110,.9),0 0 38px rgba(247,183,51,.45);}}
+@keyframes purplePulse{0%,100%{box-shadow:0 8px 0 rgba(168,85,247,.22),0 0 0 3px rgba(192,132,252,.65),0 0 28px rgba(168,85,247,.34);}50%{box-shadow:0 8px 0 rgba(168,85,247,.3),0 0 0 3px rgba(192,132,252,.9),0 0 42px rgba(168,85,247,.48);}}
+@keyframes diamondPulse{0%,100%{box-shadow:0 8px 0 rgba(125,211,252,.24),0 0 0 3px rgba(186,230,253,.95),0 0 26px rgba(56,189,248,.28),0 0 48px rgba(147,197,253,.18);}50%{box-shadow:0 8px 0 rgba(125,211,252,.28),0 0 0 3px rgba(125,211,252,.95),0 0 38px rgba(56,189,248,.36),0 0 62px rgba(147,197,253,.24);}}
+.res-pop{animation:resPop .45s cubic-bezier(.34,1.56,.64,1);}
+.result-rare-gold{animation:resPop .45s cubic-bezier(.34,1.56,.64,1),goldPulse 2.2s ease-in-out .5s infinite!important;}
+.result-rare-purple{animation:resPop .45s cubic-bezier(.34,1.56,.64,1),purplePulse 2.2s ease-in-out .5s infinite!important;}
+.result-super-diamond{animation:resPop .45s cubic-bezier(.34,1.56,.64,1),diamondPulse 2s ease-in-out .5s infinite!important;}
 
-/* cards */
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
-.card{border:3px solid #ffc0dc;background:rgba(255,255,255,.88);border-radius:22px;padding:13px;box-shadow:0 8px 0 rgba(255,157,201,.18);}
-.card-title{display:inline-block;border:2px solid #ffc6df;background:#fff;border-radius:14px;padding:5px 12px;color:#ff70aa;font-weight:900;font-size:14px;box-shadow:3px 3px 0 #ffe5f0;margin-bottom:10px;}
-.prow{display:flex;align-items:center;gap:8px;border:2px solid #ffd0e4;background:linear-gradient(180deg,#fff,#fff5fa);border-radius:13px;padding:7px 9px;margin-bottom:7px;font-weight:900;font-size:13px;}
-.prow:last-child{margin-bottom:0;}
-.pbadge{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#fff0f7;border:2px solid #fff;box-shadow:2px 2px 0 #ffd3e7;font-size:15px;flex-shrink:0;}
-.pname{flex:1;font-size:12px;}
-.pprob{color:#ff7fb7;background:#fff2f8;border:2px solid #ffd2e6;border-radius:999px;padding:3px 8px;font-size:12px;}
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;}
-.snum{border:2px solid #ffc8df;background:linear-gradient(180deg,#fff,#fff5fa);border-radius:13px;padding:8px 6px;text-align:center;box-shadow:0 4px 0 rgba(255,157,201,.16);}
-.snum .sl{font-size:10px;font-weight:800;color:#ffaaca;margin-bottom:2px;}
-.snum .sv{font-size:20px;font-weight:900;color:#e91e8c;line-height:1.1;}
-.snum .su{font-size:10px;color:#ffb8d6;font-weight:800;}
-.brow{display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:11px;}
-.bname{font-weight:800;color:#8b536d;flex:0 0 52px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.btrack{flex:1;height:8px;background:#ffe0ef;border-radius:4px;overflow:hidden;}
-.bfill{height:100%;border-radius:4px;transition:width .7s cubic-bezier(.4,0,.2,1);}
-.bcnt{font-weight:900;color:#e91e8c;min-width:20px;text-align:right;}
-.hchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
-.hc{font-size:11px;font-weight:800;padding:3px 9px;border-radius:9px;border:2px solid transparent;}
-.hdr{font-size:11px;font-weight:800;color:#ffaaca;margin-top:8px;margin-bottom:4px;}
+/* ===== BOTTOM SECTION (REDESIGNED) ===== */
+.bottom{margin-top:18px;display:flex;flex-direction:column;gap:14px;}
+
+/* 奖项说明卡 */
+.prize-card{border:3px solid #ffc0dc;background:rgba(255,255,255,.92);border-radius:24px;overflow:hidden;box-shadow:0 8px 0 rgba(255,157,201,.18);}
+.pc-header{background:linear-gradient(135deg,#FF6B9D,#E91E8C);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;}
+.pc-header-title{color:#fff;font-size:14px;font-weight:900;letter-spacing:.5px;}
+.pc-toggle{background:rgba(255,255,255,.25);border:none;color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;cursor:pointer;font-family:inherit;}
+.prize-grid{padding:12px;display:flex;flex-direction:column;gap:8px;}
+.prize-item{background:linear-gradient(180deg,#fff,#fff5fa);border:2px solid #ffd0e4;border-radius:14px;padding:10px 12px;display:flex;align-items:center;gap:10px;}
+.pi-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:2px 2px 0 #ffd3e7;}
+.pi-info{flex:1;min-width:0;}
+.pi-name{font-size:12px;font-weight:900;color:#70445d;line-height:1.35;white-space:normal;overflow:visible;text-overflow:clip;}
+.pi-pct{font-size:11px;font-weight:900;color:#ff5fa3;background:#fff0f7;border:1.5px solid #ffd0e4;border-radius:999px;padding:3px 9px;white-space:nowrap;flex-shrink:0;}
+
+/* 统计卡 */
+.stats-card{border:3px solid #ffc0dc;background:rgba(255,255,255,.92);border-radius:24px;overflow:hidden;box-shadow:0 8px 0 rgba(255,157,201,.18);}
+.sc-header{background:linear-gradient(135deg,#FF6B9D,#E91E8C);padding:10px 16px;}
+.sc-header-title{color:#fff;font-size:14px;font-weight:900;letter-spacing:.5px;}
+.sc-body{padding:12px;}
+.stat-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+.stat-num{background:linear-gradient(180deg,#fff,#fff5fa);border:2px solid #ffd0e4;border-radius:14px;padding:10px 6px;text-align:center;}
+.sn-label{font-size:10px;font-weight:800;color:#ffaaca;margin-bottom:3px;}
+.sn-val{font-size:22px;font-weight:900;color:#e91e8c;line-height:1;}
+.sn-unit{font-size:10px;font-weight:800;color:#ffb8d6;margin-top:1px;}
+
+/* 开箱分布 */
+.dist-title{font-size:11px;font-weight:800;color:#ffaaca;margin-bottom:8px;}
+.dist-row{display:grid;grid-template-columns:minmax(150px,1.35fr) minmax(90px,1fr) 24px;align-items:center;gap:8px;margin-bottom:8px;}
+.dr-label{font-size:11px;font-weight:900;color:#8b536d;line-height:1.25;white-space:normal;overflow:visible;text-overflow:clip;}
+.dr-bar-bg{width:100%;height:11px;background:#ffe0ef;border-radius:999px;overflow:hidden;}
+.dr-bar-fill{height:100%;border-radius:999px;transition:width .7s cubic-bezier(.4,0,.2,1);min-width:0;}
+.dr-count{font-size:11px;font-weight:900;color:#e91e8c;min-width:20px;text-align:right;}
+@media(max-width:420px){.dist-row{grid-template-columns:1fr 70px 22px;gap:6px}.dr-label{font-size:10.5px}}
+.footer{margin:18px auto 0;text-align:center;font-size:11px;line-height:1.55;font-weight:800;color:#ff8dbd;text-shadow:1px 1px 0 #fff;padding:0 6px;}
+
+/* 历史记录卡 */
+.hist-card{border:3px solid #ffc0dc;background:rgba(255,255,255,.92);border-radius:24px;overflow:hidden;box-shadow:0 8px 0 rgba(255,157,201,.18);}
+.hc-header{background:linear-gradient(135deg,#FF6B9D,#E91E8C);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;}
+.hc-header-title{color:#fff;font-size:14px;font-weight:900;letter-spacing:.5px;}
+.hc-count{background:rgba(255,255,255,.28);color:#fff;font-size:11px;font-weight:900;padding:3px 10px;border-radius:999px;}
+.hc-body{padding:12px;}
+.hist-empty{text-align:center;padding:20px 0;font-size:12px;font-weight:700;color:#ffb8d0;}
+.hist-list{display:flex;flex-direction:column;gap:7px;max-height:320px;overflow-y:auto;}
+.hist-list::-webkit-scrollbar{width:4px;}
+.hist-list::-webkit-scrollbar-track{background:#fff0f7;border-radius:2px;}
+.hist-list::-webkit-scrollbar-thumb{background:#ffb8d8;border-radius:2px;}
+.hist-item{display:flex;align-items:center;gap:9px;background:linear-gradient(180deg,#fff,#fff5fa);border:2px solid #ffd0e4;border-radius:14px;padding:8px 11px;}
+.hi-num{font-size:10px;font-weight:900;color:#ffb8d6;min-width:22px;}
+.hi-icon{font-size:18px;}
+.hi-info{flex:1;min-width:0;}
+.hi-name{font-size:12px;font-weight:800;color:#70445d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hi-time{font-size:10px;font-weight:700;color:#ffb8d6;margin-top:1px;}
+.hi-badge{font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px;white-space:nowrap;}
+
 @keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0);}100%{opacity:0;transform:translateY(180px) rotate(360deg);}}
 .conf{position:fixed;pointer-events:none;z-index:999;font-size:16px;animation:confettiFall 1.6s ease-out forwards;}
+@keyframes slideIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+.slide-in{animation:slideIn .35s ease-out;}
 </style>
 </head>
 <body>
-
 <div class="root">
   <div class="scanlines"></div>
   <div class="deco d1">🌹</div><div class="deco d2">💝</div>
@@ -122,67 +305,164 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 
     <div class="btns">
       <button class="btn-open" id="btnOpen">💝 开一盒</button>
-      <button class="btn-sub" id="btnReset">🔄 重置</button>
     </div>
 
     <div class="result-box" id="rbox">点击「开一盒」，开启垂耳兔电竞 5.20 专属好运 ovo</div>
 
-    <div class="cards">
-      <div class="card">
-        <div class="card-title">🎁 稀有奖项</div>
-        <div id="prizeList"></div>
-      </div>
-      <div class="card">
-        <div class="card-title">📊 开箱统计</div>
-        <div class="sgrid">
-          <div class="snum"><div class="sl">开箱次数</div><div class="sv" id="scount">0</div><div class="su">次</div></div>
-          <div class="snum"><div class="sl">总花费</div><div class="sv" id="sspend">0</div><div class="su">元</div></div>
+    <div class="bottom">
+
+      <div class="prize-card">
+        <div class="pc-header">
+          <div class="pc-header-title">🎁 奖项一览</div>
+          <button class="pc-toggle" id="prizeToggle">收起 ▲</button>
         </div>
-        <div id="barList"></div>
-        <div class="hdr">📜 最近记录</div>
-        <div class="hchips" id="hchips"><span style="font-size:11px;font-weight:700;color:#ffb8d0;">暂无记录</span></div>
+        <div id="prizeGridWrap">
+          <div class="prize-grid" id="prizeList"></div>
+        </div>
       </div>
+
+      <div class="stats-card">
+        <div class="sc-header">
+          <div class="sc-header-title">📊 我的战绩</div>
+        </div>
+        <div class="sc-body">
+          <div class="stat-nums">
+            <div class="stat-num">
+              <div class="sn-label">开箱次数</div>
+              <div class="sn-val" id="scount">0</div>
+              <div class="sn-unit">次</div>
+            </div>
+            <div class="stat-num">
+              <div class="sn-label">总花费</div>
+              <div class="sn-val" id="sspend">0</div>
+              <div class="sn-unit">元</div>
+            </div>
+            <div class="stat-num">
+              <div class="sn-label">最佳奖项</div>
+              <div class="sn-val" id="sbest" style="font-size:20px;">—</div>
+              <div class="sn-unit" id="sbestlabel">暂无</div>
+            </div>
+          </div>
+          <div class="dist-title">🎯 奖项分布</div>
+          <div id="barList"></div>
+        </div>
+      </div>
+
+      <div class="hist-card">
+        <div class="hc-header">
+          <div class="hc-header-title">📜 开箱记录</div>
+          <div class="hc-count" id="histCount">共 0 次</div>
+        </div>
+        <div class="hc-body">
+          <div id="histBody"><div class="hist-empty">🎀 还没有开箱记录哦～</div></div>
+        </div>
+      </div>
+
     </div>
+
+    <div class="footer">© 2026 垂耳兔电竞 · 最终解释权归垂耳兔电竞所有 · akihowaito</div>
   </div>
 </div>
 
 <script>
 const prizes=[
-  {name:'108机密保588',   short:'机密588', prob:10,icon:'💜',bg:'#f5e6ff',tc:'#7c3aed',bc:'#e9d5ff'},
-  {name:'158保1088限时复刻版',short:'1088复刻',prob:15,icon:'⭐',bg:'#fef3c7',tc:'#b45309',bc:'#fde68a'},
-  {name:'158保888',       short:'保888',   prob:35,icon:'💗',bg:'#ffe4ef',tc:'#be185d',bc:'#ffc0d8'},
+  {name:'108机密保588',   short:'机密588', prob:25,icon:'💜',bg:'#f5e6ff',tc:'#7c3aed',bc:'#e9d5ff'},
+  {name:'158保1088限时复刻版',short:'1088复刻',prob:12,icon:'⭐',bg:'#fef3c7',tc:'#b45309',bc:'#fde68a'},
+  {name:'158保888',       short:'保888',   prob:30,icon:'💗',bg:'#ffe4ef',tc:'#be185d',bc:'#ffc0d8'},
   {name:'288趣味单任选',   short:'趣味288', prob:20,icon:'✨',bg:'#d1fae5',tc:'#059669',bc:'#a7f3d0'},
-  {name:'328保2188',      short:'保2188',  prob:15,icon:'🔥',bg:'#ffedd5',tc:'#c2410c',bc:'#fed7aa'},
-  {name:'388趣味单任选',   short:'趣味388', prob:5, icon:'💎',bg:'#fff0f7',tc:'#9d174d',bc:'#fce7f3'},
+  {name:'328保2188',      short:'保2188',  prob:8, icon:'🔥',bg:'#ffedd5',tc:'#c2410c',bc:'#fed7aa'},
+  {name:'388趣味单任选',   short:'趣味388', prob:5, icon:'💎',bg:'#f0fbff',tc:'#0284c7',bc:'#bae6fd'},
 ];
 const barColors=['#c084fc','#f59e0b','#ff6b9d','#34d399','#f97316','#e91e8c'];
+const STORAGE_KEY='chuiertu_blindbox_v1';
 const totalProb=prizes.reduce((s,p)=>s+p.prob,0);
-let count=0,spend=0,pcounts=prizes.map(()=>0),hist=[];
 let opening=false;
+
+function loadState(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const d=JSON.parse(raw);
+      return{
+        count:d.count||0,
+        spend:d.spend||0,
+        pcounts:d.pcounts&&d.pcounts.length===prizes.length?d.pcounts:prizes.map(()=>0),
+        hist:Array.isArray(d.hist)?d.hist:[],
+      };
+    }
+  }catch(e){}
+  return{count:0,spend:0,pcounts:prizes.map(()=>0),hist:[]};
+}
+function saveState(){
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify({count,spend,pcounts,hist}));}catch(e){}
+}
+let {count,spend,pcounts,hist}=loadState();
 
 function rng(){if(window.crypto&&crypto.getRandomValues){const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]/4294967296;}return Math.random();}
 function roll(){let r=rng()*totalProb,acc=0;for(let i=0;i<prizes.length;i++){acc+=prizes[i].prob;if(r<acc)return i;}return prizes.length-1;}
 
 function renderPrizes(){
-  document.getElementById('prizeList').innerHTML=prizes.map(p=>`
-    <div class="prow"><div class="pbadge">${p.icon}</div><div class="pname">${p.name}</div><div class="pprob">${p.prob}%</div></div>`).join('');
+  document.getElementById('prizeList').innerHTML=prizes.map((p)=>`
+    <div class="prize-item">
+      <div class="pi-icon" style="background:${p.bg};">${p.icon}</div>
+      <div class="pi-info">
+        <div class="pi-name" title="${p.name}">${p.name}</div>
+      </div>
+      <div class="pi-pct">概率 ${p.prob}%</div>
+    </div>`).join('');
 }
+
 function renderBars(){
   const max=Math.max(...pcounts,1);
   document.getElementById('barList').innerHTML=prizes.map((p,i)=>`
-    <div class="brow"><div class="bname">${p.icon}${p.short}</div>
-    <div class="btrack"><div class="bfill" style="width:${count?pcounts[i]/max*100:0}%;background:${barColors[i]};"></div></div>
-    <div class="bcnt">${pcounts[i]}</div></div>`).join('');
+    <div class="dist-row">
+      <div class="dr-label">${p.icon} ${p.name}</div>
+      <div class="dr-bar-bg"><div class="dr-bar-fill" style="width:${count?pcounts[i]/max*100:0}%;background:${barColors[i]};"></div></div>
+      <div class="dr-count">${pcounts[i]}</div>
+    </div>`).join('');
 }
-function renderHist(){
-  const el=document.getElementById('hchips');
-  if(!hist.length){el.innerHTML='<span style="font-size:11px;font-weight:700;color:#ffb8d0;">暂无记录</span>';return;}
-  el.innerHTML=hist.slice(-20).reverse().map(i=>{const p=prizes[i];return`<span class="hc" style="background:${p.bg};color:${p.tc};border-color:${p.bc};">${p.icon}${p.short}</span>`;}).join('');
-}
-function updateStats(){
+
+function renderStats(){
   document.getElementById('scount').textContent=count;
   document.getElementById('sspend').textContent=spend;
+  const drawn=pcounts.map((c,i)=>({c,i})).filter(x=>x.c>0);
+  if(drawn.length){
+    const best=drawn.reduce((a,b)=>prizes[a.i].prob<prizes[b.i].prob?a:b);
+    document.getElementById('sbest').textContent=prizes[best.i].icon;
+    document.getElementById('sbestlabel').textContent=prizes[best.i].short;
+  }else{
+    document.getElementById('sbest').textContent='—';
+    document.getElementById('sbestlabel').textContent='暂无';
+  }
 }
+
+function fmtTime(ts){
+  if(!ts)return'';
+  const d=new Date(ts);
+  const now=new Date();
+  const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const day=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  const diff=(today-day)/86400000;
+  const hm=d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
+  if(diff===0)return'今天 '+hm;
+  if(diff===1)return'昨天 '+hm;
+  return(d.getMonth()+1)+'/'+d.getDate()+' '+hm;
+}
+
+function renderHist(){
+  document.getElementById('histCount').textContent='共 '+hist.length+' 次';
+  if(!hist.length){
+    document.getElementById('histBody').innerHTML='<div class="hist-empty">🎀 还没有开箱记录哦～</div>';
+    return;
+  }
+  const items=hist.slice(-20).reverse().map((item,i)=>{
+    const p=prizes[item.idx];
+    const rarity=p.prob<=5?'珍贵':p.prob<=15?'稀有':'普通';
+    return`<div class="hist-item"><div class="hi-num">#${hist.length-i}</div><div class="hi-icon">${p.icon}</div><div class="hi-info"><div class="hi-name">${p.short}</div><div class="hi-time">${fmtTime(item.ts)}</div></div><div class="hi-badge" style="background:${p.bg};color:${p.tc};">${rarity}</div></div>`;
+  }).join('');
+  document.getElementById('histBody').innerHTML='<div class="hist-list slide-in">'+items+'</div>';
+}
+
 function spawnSp(){
   const w=document.getElementById('sparkles');
   const icons=['💖','✨','🌸','💫','⭐','🎀','💕','🌷'];
@@ -194,6 +474,7 @@ function spawnSp(){
     w.appendChild(el);setTimeout(()=>el.remove(),1400);
   }
 }
+
 function spawnConf(n){
   const em=['💖','✨','🌸','💝','⭐','🎊','💕','🎀','💫'];
   for(let i=0;i<n;i++){
@@ -204,43 +485,80 @@ function spawnConf(n){
   }
 }
 
+function spawnWowBurst(idx){
+  const el=document.createElement('div');
+  el.className='wow-burst';
+  el.textContent=prizes[idx].icon;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),1400);
+}
+
 function openBox(){
-  if(opening)return;opening=true;
+  if(opening)return;
+  opening=true;
   document.getElementById('btnOpen').disabled=true;
   const wrap=document.getElementById('boxWrap');
   const lid=document.getElementById('lid');
   const bow=document.getElementById('bow');
   const bicon=document.getElementById('boxIcon');
   const rbox=document.getElementById('rbox');
-  bicon.className='box-icon';bicon.textContent='';
+  bicon.className='box-icon';
+  bicon.textContent='';
   wrap.classList.add('shake');
   setTimeout(()=>{
     wrap.classList.remove('shake');
-    lid.classList.add('open');bow.classList.add('open');
+    lid.classList.add('open');
+    bow.classList.add('open');
     spawnSp();
     setTimeout(()=>{
-      const idx=roll();const p=prizes[idx];
-      pcounts[idx]++;hist.push(idx);count++;spend+=188;
-      bicon.textContent=p.icon;bicon.classList.add('show');
+      const idx=roll();
+      const p=prizes[idx];
+      pcounts[idx]++;
+      hist.push({idx,ts:Date.now()});
+      count++;
+      spend+=188;
+      saveState();
+      bicon.textContent=p.icon;
+      bicon.classList.add('show');
       rbox.className='result-box res-pop';
-      rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};">${p.prob<=5?'珍贵':p.prob<=15?'稀有':'普通'}奖项</span><br>恭喜抽中：<strong>${p.name}</strong><br><span style="font-size:12px;font-weight:800;color:#b16b88;">概率 ${p.prob}% · 请截图联系客服兑奖</span>`;
+      let rarityClass='';
+      if(p.prob<=5)rarityClass='result-super-diamond';
+      else if(p.prob<=15)rarityClass='result-rare-purple';
+      rbox.classList.add(rarityClass);
+      rbox.innerHTML=`<div><div class="result-congrats">恭喜抽中</div><div class="result-name">${p.name}</div><div class="result-note">概率 ${p.prob}% · 请截图兑奖</div></div>`;
+      if(p.prob<=5)spawnWowBurst(idx);
       if(p.prob<=15)spawnConf(16);else spawnConf(6);
-      renderBars();renderHist();updateStats();
-      setTimeout(()=>{lid.classList.remove('open');bow.classList.remove('open');bicon.className='box-icon';opening=false;document.getElementById('btnOpen').disabled=false;},1800);
+      renderBars();
+      renderHist();
+      renderStats();
+      setTimeout(()=>{
+        lid.classList.remove('open');
+        bow.classList.remove('open');
+        bicon.className='box-icon';
+        opening=false;
+        document.getElementById('btnOpen').disabled=false;
+      },1800);
     },480);
   },550);
 }
 
-function resetAll(){
-  count=0;spend=0;pcounts=prizes.map(()=>0);hist=[];
-  document.getElementById('rbox').className='result-box';
-  document.getElementById('rbox').innerHTML='点击「开一盒」，开启垂耳兔电竞 5.20 专属好运 ovo';
-  renderBars();renderHist();updateStats();
-}
+document.getElementById('prizeToggle').addEventListener('click',()=>{
+  const wrap=document.getElementById('prizeGridWrap');
+  const btn=document.getElementById('prizeToggle');
+  if(wrap.style.display==='none'){
+    wrap.style.display='block';
+    btn.textContent='收起 ▲';
+  }else{
+    wrap.style.display='none';
+    btn.textContent='展开 ▼';
+  }
+});
 
-renderPrizes();renderBars();updateStats();
+renderPrizes();
+renderBars();
+renderStats();
+renderHist();
 document.getElementById('btnOpen').addEventListener('click',openBox);
-document.getElementById('btnReset').addEventListener('click',resetAll);
 </script>
 
 </body>
