@@ -469,6 +469,94 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
 .device-info{display:inline-block;margin-top:7px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.75);border:1.5px solid rgba(125,211,252,.38);color:#5b7890;font-size:10px;font-weight:900;}
 .result-time{display:inline-block;margin-top:7px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.75);border:1.5px solid rgba(255,126,183,.28);color:#9b5f78;font-size:10px;font-weight:900;}
 
+
+/* ===== NEW: Floating background particles ===== */
+.fp{position:fixed;pointer-events:none;z-index:0;opacity:0;
+  animation:fpRise var(--dur,9s) ease-in var(--delay,0s) forwards;}
+@keyframes fpRise{
+  0%{opacity:0;transform:translateY(0) rotate(0deg) scale(1);}
+  8%{opacity:var(--maxop,.28);}85%{opacity:var(--maxop,.28);}
+  100%{opacity:0;transform:translateY(-115vh) rotate(var(--rot,25deg)) scale(.6);}
+}
+
+/* ===== NEW: Screen flash on open ===== */
+#screenFlash{position:fixed;inset:0;z-index:4500;pointer-events:none;opacity:0;}
+@keyframes flashFade{0%{opacity:.82;}100%{opacity:0;}}
+#screenFlash.flash{animation:flashFade .6s ease-out forwards;}
+
+/* ===== NEW: Box hover glow ===== */
+.box-body{transition:box-shadow .35s!important;}
+.box-container:hover:not(.busy) .box-body{
+  box-shadow:0 8px 24px rgba(233,30,140,.35),inset 0 1px 0 rgba(255,255,255,.3),
+             0 0 38px rgba(255,107,157,.55),0 0 72px rgba(233,30,140,.28)!important;
+}
+.box-container:hover:not(.busy) .bow{
+  filter:drop-shadow(0 0 10px rgba(255,126,183,.7))!important;
+  transition:filter .3s!important;
+}
+
+/* ===== NEW: Full-screen Prize Reveal Overlay ===== */
+#prizeReveal{
+  position:fixed;inset:0;z-index:8000;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  background:rgba(0,0,0,0);backdrop-filter:blur(0px);
+  pointer-events:none;transition:background .4s,backdrop-filter .45s;
+}
+#prizeReveal.pra{
+  pointer-events:all;
+  background:rgba(10,0,18,.62);
+  backdrop-filter:blur(14px);
+}
+.prc{
+  position:relative;overflow:hidden;
+  text-align:center;padding:38px 32px 30px;
+  border-radius:32px;max-width:340px;width:100%;
+  transform:scale(.3) rotate(-14deg);opacity:0;
+  transition:transform .65s cubic-bezier(.34,1.56,.64,1),opacity .4s;
+}
+#prizeReveal.pra .prc{transform:scale(1) rotate(0deg);opacity:1;}
+
+/* Light rays inside reveal card */
+.prc-rays{position:absolute;inset:-80%;pointer-events:none;border-radius:50%;
+  animation:raySpin 8s linear infinite;opacity:.55;}
+@keyframes raySpin{to{transform:rotate(360deg);}}
+
+.prc-em{font-size:76px;display:block;margin-bottom:12px;position:relative;z-index:1;
+  animation:prcBounce 1.4s ease-in-out .15s infinite alternate;}
+@keyframes prcBounce{from{transform:scale(1) rotate(-5deg);}to{transform:scale(1.12) rotate(5deg);}}
+.prc-badge2{display:inline-block;padding:4px 16px;border-radius:999px;
+  font-size:12px;font-weight:900;margin-bottom:10px;position:relative;z-index:1;}
+.prc-got{font-size:13px;font-weight:800;margin-bottom:5px;position:relative;z-index:1;}
+.prc-nam{font-size:25px;font-weight:900;line-height:1.3;margin-bottom:14px;position:relative;z-index:1;}
+.prc-code2{font-size:10px;font-weight:900;padding:4px 12px;border-radius:999px;
+  background:rgba(255,255,255,.62);display:inline-block;margin-bottom:14px;
+  position:relative;z-index:1;letter-spacing:.4px;}
+.prc-dismiss{padding:11px 32px;border-radius:999px;border:none;font-family:inherit;
+  font-size:14px;font-weight:900;cursor:pointer;letter-spacing:.3px;
+  position:relative;z-index:1;transition:transform .18s,filter .2s;}
+.prc-dismiss:hover{filter:brightness(1.08);}
+.prc-dismiss:active{transform:scale(.96);}
+.prc-tap-hint{font-size:10px;font-weight:800;margin-top:10px;opacity:.5;
+  position:relative;z-index:1;animation:hintPulse 2s ease-in-out infinite;}
+@keyframes hintPulse{0%,100%{opacity:.35;}50%{opacity:.65;}}
+
+/* ===== NEW: Share/Copy Button ===== */
+.share-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:7px;padding:7px 16px;border-radius:999px;
+  border:2px solid #ffc0dc;background:rgba(255,255,255,.9);
+  color:#e91e8c;font-size:11px;font-weight:900;
+  cursor:pointer;font-family:inherit;transition:all .18s;letter-spacing:.2px;
+}
+.share-btn:hover{background:#ffe0ef;transform:scale(1.04);}
+.share-btn:active{transform:scale(.96);}
+.share-btn.ok{background:#d1fae5!important;border-color:#6ee7b7!important;color:#059669!important;}
+
+/* ===== ENHANCED: Confetti with sideways drift ===== */
+@keyframes confettiFall{
+  0%{opacity:1;transform:translateY(0) rotate(0deg) translateX(0);}
+  100%{opacity:0;transform:translateY(200px) rotate(360deg) translateX(var(--sw,0px));}
+}
 </style>
 </head>
 <body>
@@ -496,6 +584,21 @@ body,div{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;}
   </div>
 
   <div class="scanlines"></div>
+  <!-- NEW: Screen flash -->
+  <div id="screenFlash"></div>
+  <!-- NEW: Prize reveal overlay -->
+  <div id="prizeReveal">
+    <div class="prc" id="prcCard">
+      <div class="prc-rays" id="prcRays"></div>
+      <span class="prc-em" id="prcEm">🎀</span>
+      <div class="prc-badge2" id="prcBadge">普通奖项</div>
+      <div class="prc-got" id="prcGot">恭喜抽中</div>
+      <div class="prc-nam" id="prcNam"></div>
+      <div class="prc-code2" id="prcCode2" style="display:none;"></div>
+      <button class="prc-dismiss" id="prcDismiss" onclick="closePrizeReveal()">✨ 太棒了！</button>
+      <div class="prc-tap-hint">点击任意处关闭</div>
+    </div>
+  </div>
   <div class="deco d1">🌹</div><div class="deco d2">💝</div>
   <div class="deco d3">🌸</div><div class="deco d4">💗</div>
 
@@ -971,12 +1074,16 @@ function spawnSp(){
   }
 }
 function spawnConf(n){
-  const em=['💖','✨','🌸','💝','⭐','🎊','💕','🎀','💫'];
+  const em=['💖','✨','🌸','💝','⭐','🎊','💕','🎀','💫','🌷','🎉','💗'];
+  const sizes=[13,15,17,19,21];
   for(let i=0;i<n;i++){
     const el=document.createElement('div');el.className='conf';
     el.textContent=em[Math.floor(rng()*em.length)];
-    el.style.cssText=`left:${rng()*100}vw;top:-20px;animation-delay:${rng()*.9}s;`;
-    document.body.appendChild(el);setTimeout(()=>el.remove(),2800);
+    const size=sizes[Math.floor(rng()*sizes.length)];
+    const sw=(rng()-.5)*80;
+    const dur=1.2+rng()*.9;
+    el.style.cssText=`left:${rng()*100}vw;top:-20px;font-size:${size}px;animation-delay:${rng()*.9}s;animation-duration:${dur}s;--sw:${sw}px;`;
+    document.body.appendChild(el);setTimeout(()=>el.remove(),(dur+1.5)*1000);
   }
 }
 
@@ -1116,6 +1223,8 @@ function openBox(){
   if(!guestMode && (boundEntryCode||currentEntryCode) && hasEntryOpened(boundEntryCode||currentEntryCode) && drawCredits<=0){updateDrawStatus();showExtraMsg('此入场码已完成开盒，请联系客服');return;}
   if(!guestMode && drawCredits<=0){updateDrawStatus();showExtraMsg('本次开盒机会已用完，请联系垂耳兔客服');return;}
   opening=true;
+  const container=document.querySelector('.box-container');
+  if(container)container.classList.add('busy');
   document.getElementById('btnOpen').disabled=true;
   const wrap=document.getElementById('boxWrap');
   const lid=document.getElementById('lid');
@@ -1124,7 +1233,10 @@ function openBox(){
   const rbox=document.getElementById('rbox');
   bicon.className='box-icon';bicon.textContent='';
   resumeCtx();
+  // Haptic + sound
+  haptic([40,30,40]);
   playShake();
+  playBuildUp();
   wrap.classList.add('shake');
   setTimeout(()=>{
     wrap.classList.remove('shake');
@@ -1152,20 +1264,43 @@ function openBox(){
       const isRare=isPurpleRare||isGoldRare;
       const rarity=isLegend?'传说奖项 👑':(isPrecious?'珍贵奖项 🌷':(isRare?'稀有奖项 ⭐':'普通奖项'));
       const fxClass=isLegend?' result-super-diamond':(isPrecious?' result-super-pinkmint':(isPurpleRare?' result-rare-purple':(isGoldRare?' result-rare-gold':'')));
+
+      // Screen flash color by rarity
+      const flashColor=isLegend?'rgba(186,230,253,.55)':(isPrecious?'rgba(167,243,208,.45)':(isPurpleRare?'rgba(192,132,252,.4)':(isGoldRare?'rgba(253,230,138,.45)':'rgba(255,255,255,.55)')));
+      setTimeout(()=>screenFlash(flashColor),60);
+
       rbox.className='result-box res-pop'+fxClass;
       if(guestMode){
         rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">游客试玩结果</span><br><span class="result-congrats">试玩抽中：</span><br><span class="result-name">${p.name}!</span><br><span class="result-note">此结果仅供预览体验，不可兑奖，不记录正式口令</span><br><span class="result-time">试玩时间 ${formatFullTime(resultTs)}</span><br><span class="guest-demo-tag">DEMO MODE</span>`;
       }else{
         rbox.innerHTML=`<span class="rtag" style="background:${p.bg};color:${p.tc};border:1.5px solid ${p.bc};">${rarity}</span><br><span class="result-congrats">恭喜抽中：</span><br><span class="result-name">${p.name}!</span><br><span class="result-note">请截图联系客服兑奖 Thanks♪(･ω･)ﾉ</span><br><span class="result-time">开奖时间 ${formatFullTime(resultTs)}</span><br><span class="device-info">设备 ${getDeviceLabel()} · FP:${getDeviceFingerprint()}</span><br><span class="claim-code">兑换口令 ${claimCode}</span>`;
       }
-      if(isLegend){spawnConf(28);spawnWowText();playSound('super');}
-      else if(isPrecious){spawnConf(22);spawnYeahText();playSound('yeah');}
-      else if(isRare){spawnConf(isPurpleRare?18:16);playSound('rare');}
-      else{spawnConf(6);playSound('normal');}
+
+      // Haptic for rarity
+      if(isLegend)haptic([80,40,80,40,120]);
+      else if(isPrecious)haptic([60,30,80]);
+      else if(isRare)haptic([50,30,50]);
+      else haptic([40]);
+
+      if(isLegend){spawnConf(34);spawnWowText();playSound('super');}
+      else if(isPrecious){spawnConf(26);spawnYeahText();playSound('yeah');}
+      else if(isRare){spawnConf(isPurpleRare?20:18);playSound('rare');}
+      else{spawnConf(8);playSound('normal');}
+
+      // Show prize reveal overlay (skip for guest mode on normal prizes to avoid fatigue)
+      const showReveal = !guestMode || isLegend || isPrecious || isRare;
+      if(showReveal){
+        setTimeout(()=>showPrizeReveal(p,idx,claimCode,fxClass,rarity,guestMode),350);
+      }
+
+      // Auto-scroll to result
+      setTimeout(()=>rbox.scrollIntoView({behavior:'smooth',block:'center'}),250);
+
       renderAll();
       setTimeout(()=>{
         lid.classList.remove('open');bow.classList.remove('open');
         bicon.className='box-icon';
+        if(container)container.classList.remove('busy');
         opening=false;
         updateDrawStatus();
       },1800);
@@ -1448,6 +1583,164 @@ function unlockGate(code, isNew) {
   renderAll();
 }
 
+// ============================================================
+// ✨ NEW FEATURES: Particles, Flash, Prize Reveal, Haptic, Share
+// ============================================================
+
+// --- Floating background particles ---
+(function spawnBgParticles(){
+  const icons=['💕','🌸','✨','💗','🌷','💝','⭐','🎀','💖','🌺','💫','🎐'];
+  function spawn(){
+    const el=document.createElement('div');
+    el.className='fp';
+    const x=Math.random()*100;
+    const size=10+Math.random()*14;
+    const dur=8+Math.random()*8;
+    const delay=Math.random()*2;
+    const rot=(Math.random()-.5)*65;
+    const maxop=0.10+Math.random()*0.18;
+    el.textContent=icons[Math.floor(Math.random()*icons.length)];
+    el.style.cssText=`left:${x}vw;bottom:-50px;font-size:${size}px;`+
+      `--dur:${dur}s;--delay:${delay}s;--rot:${rot}deg;--maxop:${maxop};`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),(dur+delay)*1000+300);
+  }
+  // Initial burst
+  for(let i=0;i<5;i++) setTimeout(spawn,i*350);
+  // Continuous loop
+  setInterval(spawn,1100);
+})();
+
+// --- Screen flash ---
+function screenFlash(color){
+  const el=document.getElementById('screenFlash');if(!el)return;
+  el.style.background=color||'#fff';
+  el.classList.remove('flash');
+  void el.offsetWidth;
+  el.classList.add('flash');
+}
+
+// --- Mobile haptic ---
+function haptic(pattern){
+  try{if(navigator.vibrate)navigator.vibrate(pattern);}catch(e){}
+}
+
+// --- Copy/share claim code ---
+function copyShareCode(btn,code){
+  const txt='垂耳兔CLUB·心动盲盒 兑换口令：'+code;
+  const doOk=()=>{btn.textContent='✅ 已复制！';btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 复制兑换口令';btn.classList.remove('ok');},2000);};
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(doOk).catch(()=>_fallbackCopy(btn,txt,doOk));
+  }else{_fallbackCopy(btn,txt,doOk);}
+}
+function _fallbackCopy(btn,txt,cb){
+  const t=document.createElement('textarea');
+  t.value=txt;t.style.cssText='position:fixed;opacity:0;top:0;left:0;';
+  document.body.appendChild(t);t.focus();t.select();
+  try{document.execCommand('copy');cb();}catch(e){}
+  document.body.removeChild(t);
+}
+
+// --- Build-up tick sound during shake ---
+function playBuildUp(){
+  const c=getCtx();if(!c)return;
+  [[280,.0],[340,.075],[400,.15],[470,.22],[540,.29]].forEach(([f,t])=>{
+    beep(f,'square',0.055,t,0.07,c);
+  });
+}
+
+// --- Full-screen Prize Reveal Overlay ---
+function showPrizeReveal(p,idx,claimCode,fxClass,rarity,isGuest){
+  const overlay=document.getElementById('prizeReveal');
+  const card=document.getElementById('prcCard');
+  const rays=document.getElementById('prcRays');
+  const em=document.getElementById('prcEm');
+  const badge=document.getElementById('prcBadge');
+  const got=document.getElementById('prcGot');
+  const nam=document.getElementById('prcNam');
+  const codeEl=document.getElementById('prcCode2');
+  const btn=document.getElementById('prcDismiss');
+  if(!overlay)return;
+
+  em.textContent=p.icon;
+  badge.textContent=rarity;
+  nam.textContent=p.name+'！';
+  got.textContent=isGuest?'试玩抽中':'恭喜抽中';
+
+  if(claimCode&&!isGuest){
+    codeEl.textContent='兑换口令：'+claimCode;
+    codeEl.style.display='inline-block';
+  }else{
+    codeEl.style.display='none';
+  }
+
+  const isLegend=(idx===5);
+  const isPrecious=(idx===4);
+  const isPurple=(idx===0);
+  const isGold=(idx===3);
+
+  // Reset inline styles
+  card.removeAttribute('style');
+  nam.removeAttribute('style');
+  rays.removeAttribute('style');
+
+  if(isLegend){
+    card.style.cssText='background:linear-gradient(135deg,#f0fbff,#fff,#f8fdff,#fff7fb);border:3px solid #7dd3fc;box-shadow:0 0 70px rgba(56,189,248,.4),0 12px 48px rgba(147,197,253,.35);';
+    rays.style.cssText='background:conic-gradient(from 0deg,rgba(186,230,253,.5),rgba(255,182,213,.3),rgba(125,211,252,.4),rgba(255,255,255,.6),rgba(186,230,253,.5));';
+    badge.style.cssText='background:#f0fbff;color:#0284c7;border:1.5px solid #7dd3fc;';
+    nam.style.cssText='background:linear-gradient(90deg,#38bdf8,#0ea5e9,#f9a8d4,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:24px;font-weight:900;line-height:1.3;margin-bottom:14px;';
+    btn.style.cssText='background:linear-gradient(135deg,#0ea5e9,#38bdf8);color:#fff;box-shadow:0 6px 20px rgba(14,165,233,.45);';
+    got.style.color='#0ea5e9';
+  }else if(isPrecious){
+    card.style.cssText='background:linear-gradient(135deg,#fffafc,#fff0f7,#f2fff8,#f8fff9);border:3px solid #9de7cf;box-shadow:0 0 60px rgba(133,231,190,.35),0 12px 40px rgba(255,171,212,.3);';
+    rays.style.cssText='background:conic-gradient(from 0deg,rgba(255,205,226,.5),rgba(201,255,230,.45),rgba(255,244,248,.7),rgba(169,244,214,.42),rgba(255,205,226,.5));';
+    badge.style.cssText='background:#f0fdf9;color:#059669;border:1.5px solid #a7f3d0;';
+    nam.style.cssText='background:linear-gradient(90deg,#fb7185,#f9a8d4,#6ee7b7,#34d399);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:24px;font-weight:900;line-height:1.3;margin-bottom:14px;';
+    btn.style.cssText='background:linear-gradient(135deg,#34d399,#6ee7b7);color:#fff;box-shadow:0 6px 20px rgba(52,211,153,.45);';
+    got.style.color='#059669';
+  }else if(isPurple){
+    card.style.cssText='background:linear-gradient(180deg,#fffaff,#f7ecff);border:3px solid #a855f7;box-shadow:0 0 50px rgba(168,85,247,.3),0 12px 36px rgba(192,132,252,.25);';
+    rays.style.cssText='background:conic-gradient(from 20deg,rgba(168,85,247,.45),rgba(255,107,157,.3),rgba(196,181,253,.5),rgba(168,85,247,.45));';
+    badge.style.cssText='background:'+p.bg+';color:'+p.tc+';border:1.5px solid '+p.bc+';';
+    nam.style.cssText='color:#9b4dff;font-size:24px;font-weight:900;line-height:1.3;margin-bottom:14px;text-shadow:1px 1px 0 #fff,2px 2px 0 #e9d5ff;';
+    btn.style.cssText='background:linear-gradient(135deg,#a855f7,#9333ea);color:#fff;box-shadow:0 6px 20px rgba(168,85,247,.45);';
+    got.style.color='#9b4dff';
+  }else if(isGold){
+    card.style.cssText='background:linear-gradient(180deg,#fffdf6,#fff7df);border:3px solid #f7b733;box-shadow:0 0 50px rgba(247,183,51,.35),0 12px 36px rgba(255,215,110,.3);';
+    rays.style.cssText='background:conic-gradient(from 90deg,rgba(255,216,98,.6),rgba(255,151,181,.35),rgba(255,216,98,.5),rgba(255,216,98,.6));';
+    badge.style.cssText='background:'+p.bg+';color:'+p.tc+';border:1.5px solid '+p.bc+';';
+    nam.style.cssText='color:#e58a00;font-size:24px;font-weight:900;line-height:1.3;margin-bottom:14px;text-shadow:1px 1px 0 #fff,2px 2px 0 #ffe2a4;';
+    btn.style.cssText='background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;box-shadow:0 6px 20px rgba(245,158,11,.45);';
+    got.style.color='#d97706';
+  }else{
+    card.style.cssText='background:rgba(255,255,255,.96);border:3px solid #ffc0dc;box-shadow:0 0 40px rgba(233,30,140,.2),0 12px 32px rgba(255,157,201,.2);';
+    rays.style.cssText='background:conic-gradient(from 0deg,rgba(255,182,193,.4),rgba(255,218,185,.3),rgba(255,182,193,.4));';
+    badge.style.cssText='background:'+p.bg+';color:'+p.tc+';border:1.5px solid '+p.bc+';';
+    nam.style.cssText='color:#e91e8c;font-size:24px;font-weight:900;line-height:1.3;margin-bottom:14px;text-shadow:1px 1px 0 #fff,2px 2px 0 #ffd1e6;';
+    btn.style.cssText='background:linear-gradient(135deg,#FF6B9D,#E91E8C);color:#fff;box-shadow:0 6px 20px rgba(233,30,140,.42);';
+    got.style.color='#e91e8c';
+  }
+
+  overlay.classList.add('pra');
+  // Auto dismiss: rare longer
+  const delay=isLegend?7000:(isPrecious?5500:(isPurple||isGold?4500:3800));
+  window._prizeRevealTimer=setTimeout(closePrizeReveal,delay);
+}
+
+function closePrizeReveal(){
+  clearTimeout(window._prizeRevealTimer);
+  const overlay=document.getElementById('prizeReveal');
+  if(overlay)overlay.classList.remove('pra');
+}
+
+// Click overlay background to dismiss
+document.getElementById('prizeReveal').addEventListener('click',function(e){
+  if(e.target===this)closePrizeReveal();
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape')closePrizeReveal();
+});
 </script>
 </body>
 </html>
