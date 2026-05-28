@@ -1364,8 +1364,8 @@ document.addEventListener('keydown',e=>{
 // ============================================================
 
 // 活动时间窗口（本地时间）— 可按需修改日期
-const ACTIVITY_START = new Date('2026-05-20T00:00:00');
-const ACTIVITY_END   = new Date('2026-05-31T23:59:59');
+const ACTIVITY_START = new Date('2026, 4, 20, 0, 0, 0');
+const ACTIVITY_END   = new Date('2026, 4, 31, 23, 59, 59');
 (function checkTimeWindow(){
   const now = new Date();
   if(now < ACTIVITY_START || now > ACTIVITY_END){
@@ -1376,7 +1376,7 @@ const ACTIVITY_END   = new Date('2026-05-31T23:59:59');
         <div style="font-size:48px;margin-bottom:10px;">🌸</div>
         <div style="font-size:20px;font-weight:900;color:#ff70aa;margin-bottom:8px;">活动已结束</div>
         <div style="font-size:13px;font-weight:700;color:#b06080;line-height:1.6;">
-          垂耳兔CLUB · 心动盲盒<br>活动时间：5.20 ~ 5.26<br>感谢每一位板板的参与 💝
+          垂耳兔CLUB · 心动盲盒<br>活动时间：5.20 ~ 5.31<br>感谢每一位板板的参与 💝
         </div>`;
     }
     if(overlay) overlay.classList.remove('hidden');
