@@ -82,27 +82,6 @@ body{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;background:
 .event-text{font-size:13px;line-height:1.65;font-weight:800;color:var(--muted);margin-top:8px;flex:1}
 .event-link{position:relative;overflow:hidden;z-index:1;margin-top:14px;display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;min-height:40px;padding:10px 16px;border-radius:999px;background:linear-gradient(135deg,#ff6fb5,#ff9fd0 48%,#85ceff);color:#fff;text-decoration:none;font-weight:900;font-size:13px;box-shadow:0 5px 0 rgba(104,189,248,.24);transition:transform .22s,box-shadow .22s,filter .18s}
 .event-link:hover{filter:brightness(1.05);box-shadow:0 8px 0 rgba(104,189,248,.22),0 12px 24px rgba(255,79,163,.18)}
-.permanent-feature{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(260px,.82fr);gap:18px;align-items:center;border:3px solid transparent;border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(239,249,255,.9)) padding-box,linear-gradient(120deg,#ff70b5,#fff,#65bff5) border-box;box-shadow:0 10px 0 rgba(104,189,248,.2),0 22px 42px rgba(255,79,163,.12);padding:20px}
-.permanent-feature::before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,rgba(255,112,181,.13),transparent 36%,rgba(101,191,245,.16))}
-.permanent-copy,.permanent-visual{position:relative;z-index:1}
-.permanent-kicker{display:inline-flex;align-items:center;gap:6px;color:#e9429c;font-size:11px;font-weight:900}
-.permanent-kicker::before{content:'';width:7px;height:7px;border-radius:50%;background:#4bd49b;box-shadow:0 0 0 4px rgba(75,212,155,.15)}
-.permanent-name{margin-top:6px;font-size:25px;line-height:1.2;font-weight:900;color:var(--ink)}
-.permanent-text{max-width:560px;margin-top:8px;font-size:13px;line-height:1.7;font-weight:800;color:var(--muted)}
-.permanent-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
-.permanent-tag{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.8);border:1.5px solid #d5edfc;color:#6f7085;font-size:10px;font-weight:900}
-.permanent-link{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;margin-top:14px;padding:10px 15px;border-radius:999px;background:linear-gradient(135deg,#ff62ad,#ff9bce 46%,#70c5f8);color:#fff;text-decoration:none;font-size:12px;font-weight:900;box-shadow:0 6px 0 rgba(104,189,248,.22);transition:transform .22s,box-shadow .22s,filter .18s}
-.permanent-link:hover{transform:translateY(-3px);filter:brightness(1.04);box-shadow:0 9px 0 rgba(104,189,248,.2),0 16px 28px rgba(255,79,163,.17)}
-.permanent-visual{min-height:190px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border-left:1.5px solid rgba(169,221,255,.6)}
-.permanent-gift{font-size:70px;line-height:1;filter:drop-shadow(0 12px 8px rgba(104,189,248,.22));animation:floaty 3.2s ease-in-out infinite}
-.permanent-price{margin-top:9px;font-size:11px;font-weight:900;color:#4da8df}
-.permanent-price strong{font-size:27px;color:#ee489f;margin-right:3px}
-.permanent-odds{margin-top:4px;font-size:10px;line-height:1.5;font-weight:800;color:#927c91}
-.permanent-wheel{margin-top:14px;background:linear-gradient(135deg,rgba(245,251,255,.95),rgba(255,247,252,.92)) padding-box,linear-gradient(120deg,#62c1f7,#fff,#ff70b5) border-box}
-.permanent-wheel .permanent-kicker{color:#389ed9}
-.permanent-wheel .permanent-link{background:linear-gradient(135deg,#53b4ed,#8ed6ff 42%,#f36aad)}
-.permanent-wheel .permanent-visual{border-left-color:rgba(255,164,207,.58)}
-.permanent-wheel .permanent-gift{animation-direction:alternate-reverse}
 .service-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
 .service{border:2px solid transparent;border-radius:18px;background:linear-gradient(rgba(255,255,255,.84),rgba(255,255,255,.84)) padding-box,linear-gradient(135deg,rgba(255,122,187,.65),rgba(169,221,255,.82)) border-box;padding:12px;min-height:96px;transition:transform .24s,box-shadow .24s,border-color .24s,background .24s}
 .service:hover{transform:translateY(-4px);background:linear-gradient(rgba(255,255,255,.94),rgba(255,255,255,.94)) padding-box,linear-gradient(135deg,var(--pink),var(--baby-deep)) border-box;box-shadow:0 10px 24px rgba(104,189,248,.14),0 12px 26px rgba(255,79,163,.1)}
@@ -115,12 +94,10 @@ body{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;background:
 @media(max-width:720px){
   .inner{padding:22px 14px 30px}
   .mascot{border-radius:22px}
-  .event-grid,.service-strip,.permanent-feature{grid-template-columns:1fr}
+  .event-grid,.service-strip{grid-template-columns:1fr}
   .section-head{display:block}
   .section-note{margin-top:4px}
   .event-card{min-height:198px}
-  .permanent-feature{padding:17px}
-  .permanent-visual{min-height:150px;border-left:0;border-top:1.5px solid rgba(169,221,255,.6);padding-top:14px}
 }
   </style>
 </head>
@@ -139,8 +116,7 @@ body{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;background:
       <div class="quick-chips" aria-label="垂耳兔电竞服务标签">
         <span class="chip">🎮 三角洲陪玩护航</span>
         <span class="chip">✨ 趣味单</span>
-        <span class="chip">🎁 心动常驻盲盒</span>
-        <span class="chip">🎡 幸运常驻转盘</span>
+        <span class="chip">🎁 常驻活动</span>
         <span class="chip">💝 520 限定活动</span>
       </div>
 
@@ -149,8 +125,7 @@ body{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;background:
       </div>
 
       <div class="actions">
-        <a class="btn btn-main" href="#permanent">🎁 开启心动盲盒</a>
-        <a class="btn btn-light" href="./chuiertu_188_luckywheel.html">🎡 转动常驻转盘</a>
+        <a class="btn btn-main" href="#permanent">🎁 查看常驻活动</a>
         <a class="btn btn-light" href="#events">💝 查看 520 活动</a>
         <a class="btn btn-light" href="https://kook.vip/HRXPjp" target="_blank" rel="noopener">🎧 加入 KOOK 7686</a>
       </div>
@@ -162,43 +137,23 @@ body{font-family:"Microsoft YaHei","PingFang SC","Nunito",sans-serif;background:
         <div class="section-note">随时开放 · 188R/1次</div>
       </div>
 
-      <article class="permanent-feature">
-        <div class="permanent-copy">
-          <div class="permanent-kicker">NOW OPEN · 长期开放</div>
-          <h3 class="permanent-name">心动常驻盲盒</h3>
-          <p class="permanent-text">188R/1次，从 8 项三角洲任务中随机解锁一项体验：保底、拼枪、房卡、单局挑战都有机会抽到。奖池概率完整公开，结果可复制保存。</p>
-          <div class="permanent-tags" aria-label="常驻盲盒特色">
-            <span class="permanent-tag">8 项任务</span>
-            <span class="permanent-tag">公开概率</span>
-            <span class="permanent-tag">记录可保存</span>
-          </div>
-          <a class="permanent-link" href="./chuiertu_188_blindbox.html">进入心动常驻盲盒 →</a>
-        </div>
-        <div class="permanent-visual" aria-hidden="true">
-          <div class="permanent-gift">🎁</div>
-          <div class="permanent-price"><strong>188R</strong>/1次</div>
-          <div class="permanent-odds">常驻开放 · 每次随机解锁 1 项任务</div>
-        </div>
-      </article>
+      <div class="event-grid">
+        <article class="event-card" style="--cardA:#ff7abb;--cardB:#9fdcff;" tabindex="0" data-href="./chuiertu_188_blindbox.html" aria-label="打开心动常驻盲盒">
+          <div class="event-icon">🎁</div>
+          <div class="event-kicker">长期开放 · 188R/1次</div>
+          <h3 class="event-name">心动常驻盲盒</h3>
+          <p class="event-text">从 8 项三角洲任务中随机解锁一项体验，奖池概率完整公开，开奖结果和核验记录均可保存。</p>
+          <a class="event-link" href="./chuiertu_188_blindbox.html">进入心动常驻盲盒</a>
+        </article>
 
-      <article class="permanent-feature permanent-wheel">
-        <div class="permanent-copy">
-          <div class="permanent-kicker">NOW SPINNING · 长期开放</div>
-          <h3 class="permanent-name">幸运常驻转盘</h3>
-          <p class="permanent-text">188R/1次，转动 8 格任务指针，从保底、拼枪、房卡和单局挑战中抽取本次幸运体验。沿用原 520 转盘概率结构，开奖过程与结果均可核验。</p>
-          <div class="permanent-tags" aria-label="常驻转盘特色">
-            <span class="permanent-tag">8 格转盘</span>
-            <span class="permanent-tag">减速落点</span>
-            <span class="permanent-tag">结果可保存</span>
-          </div>
-          <a class="permanent-link" href="./chuiertu_188_luckywheel.html">进入幸运常驻转盘 →</a>
-        </div>
-        <div class="permanent-visual" aria-hidden="true">
-          <div class="permanent-gift">🎡</div>
-          <div class="permanent-price"><strong>188R</strong>/1次</div>
-          <div class="permanent-odds">常驻开放 · 每次随机转出 1 项任务</div>
-        </div>
-      </article>
+        <article class="event-card" style="--cardA:#9fdcff;--cardB:#ff9fd0;" tabindex="0" data-href="./chuiertu_188_luckywheel.html" aria-label="打开幸运常驻转盘">
+          <div class="event-icon">🎡</div>
+          <div class="event-kicker">长期开放 · 188R/1次</div>
+          <h3 class="event-name">幸运常驻转盘</h3>
+          <p class="event-text">转动 8 格任务指针，从保底、拼枪、房卡和单局挑战中抽取本次幸运体验，指针落点与结果同步。</p>
+          <a class="event-link" href="./chuiertu_188_luckywheel.html">进入幸运常驻转盘</a>
+        </article>
+      </div>
     </section>
 
     <section class="section" id="events" aria-label="520 限定活动">
