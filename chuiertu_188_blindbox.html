@@ -452,7 +452,6 @@ async function fetchJson(url){
 }
 function cleanRegion(parts){return [...new Set(parts.map(value=>String(value||'').trim()).filter(value=>value&&value!=='0'))].join(' · ')}
 async function loadIpRegion(){
-  try{const data=await fetchJson('https://myip.ipip.net/json');if(data.ret==='ok'&&Array.isArray(data.data?.location)){const [country,region,city]=data.data.location;sessionMeta.region=cleanRegion([region,city])||cleanRegion([country])||'地区暂不可用';return sessionMeta.region}}catch{}
   try{const data=await fetchJson('https://ipwho.is/?fields=success,country,region,city');if(data.success){sessionMeta.region=cleanRegion([data.region,data.city])||cleanRegion([data.country])||'地区暂不可用';return sessionMeta.region}}catch{}
   sessionMeta.region='地区暂不可用';return sessionMeta.region;
 }
