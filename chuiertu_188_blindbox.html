@@ -268,6 +268,12 @@ button{border:0}
 @keyframes rewardRibbonWave{0%{opacity:0;transform:translate3d(-50%,0,0) scaleX(.08)}18%{opacity:.62}58%{opacity:.18;transform:translate3d(-50%,0,0) scaleX(1)}100%{opacity:0;transform:translate3d(-50%,0,0) scaleX(1.08)}}
 @keyframes rewardSidePreview{0%,8%,100%{opacity:0;transform:translate3d(var(--entry-x),-50%,0) scale(.35) rotate(-10deg)}15%{opacity:.92;transform:translate3d(-50%,-50%,0) scale(1.12) rotate(4deg)}24%,58%{opacity:.5;transform:translate3d(-50%,-50%,0) scale(.9) rotate(0)}67%{opacity:0;transform:translate3d(var(--entry-x),-50%,0) scale(.52) rotate(7deg)}}
 @media(prefers-reduced-motion:reduce){.gift-floaters::before,.gift-floaters::after{display:none}.gift-floaters span{animation:none!important;opacity:.38;transform:translate3d(-50%,-50%,0)}}
+/* Shared header sizing with the permanent wheel; only result time is dashed. */
+.shell{padding:18px 18px 42px}.topbar{min-height:48px}.intro{box-sizing:border-box;min-height:198px;padding:22px 0 16px}.intro h1{margin-top:10px;font-size:clamp(34px,6vw,52px);line-height:1.12}.intro p{margin-top:9px;font-size:12px;line-height:1.7}.intro-meta{margin-top:11px;gap:7px}.meta-pill{padding:5px 9px;border-style:solid}
+.records .history-list{min-height:185px;max-height:none;overflow-y:visible}.records .history{align-self:stretch}
+.result-time-chip{border-width:1.5px;border-style:dashed}
+@media(max-width:520px){.intro{min-height:184px;padding:18px 0 14px}.records .history-list{min-height:185px}}
+@media(min-width:521px){.intro{height:202px;min-height:202px}}
   </style>
 </head>
 <body>
