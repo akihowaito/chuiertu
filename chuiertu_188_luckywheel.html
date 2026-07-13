@@ -3,33 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <!-- SITE ICON -->
-  <link rel="icon" type="image/png" sizes="96x96" href="https://akihowaito.github.io/chuiertu/assets/favicon-96.png?v=5" />
-  <link rel="icon" type="image/png" sizes="48x48" href="https://akihowaito.github.io/chuiertu/assets/favicon-48.png?v=5" />
-  <link rel="shortcut icon" type="image/x-icon" href="https://akihowaito.github.io/chuiertu/favicon.ico?v=5" />
-  <link rel="apple-touch-icon" sizes="180x180" href="https://akihowaito.github.io/chuiertu/assets/apple-touch-icon.png?v=5" />
-
-
-
-
-  <title>幸运常驻转盘｜垂耳兔电竞</title>
-  <!-- SEO:START -->
-  <meta name="description" content="垂耳兔电竞幸运常驻转盘，188R/次，转动8格任务转盘随机抽取，概率完整公开，开奖结果可保存。" />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="canonical" href="https://akihowaito.github.io/chuiertu/chuiertu_188_luckywheel.html" />
-  <meta property="og:locale" content="zh_CN" />
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="垂耳兔电竞" />
-  <meta property="og:title" content="幸运常驻转盘｜垂耳兔电竞" />
-  <meta property="og:description" content="垂耳兔电竞幸运常驻转盘，188R/次，转动8格任务转盘随机抽取，概率完整公开，开奖结果可保存。" />
-  <meta property="og:url" content="https://akihowaito.github.io/chuiertu/chuiertu_188_luckywheel.html" />
-  <meta property="og:image" content="https://akihowaito.github.io/chuiertu/assets/bunny-club-kook-banner.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="幸运常驻转盘｜垂耳兔电竞" />
-  <meta name="twitter:description" content="垂耳兔电竞幸运常驻转盘，188R/次，转动8格任务转盘随机抽取，概率完整公开，开奖结果可保存。" />
-  <meta name="twitter:image" content="https://akihowaito.github.io/chuiertu/assets/bunny-club-kook-banner.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://akihowaito.github.io/chuiertu/chuiertu_188_luckywheel.html#webpage","url":"https://akihowaito.github.io/chuiertu/chuiertu_188_luckywheel.html","name":"幸运常驻转盘｜垂耳兔电竞","description":"垂耳兔电竞幸运常驻转盘，188R/次，转动8格任务转盘随机抽取，概率完整公开，开奖结果可保存。","inLanguage":"zh-CN","isPartOf":{"@type":"WebSite","@id":"https://akihowaito.github.io/chuiertu/#website","name":"垂耳兔电竞"}}</script>
-  <!-- SEO:END -->
+  <meta name="theme-color" content="#dff4ff">
+  <title>幸运常驻转盘 · 垂耳兔电竞</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
@@ -319,6 +294,10 @@ function drawCanvasHeart(ctx,x,y,size,color,alpha=.22){
 function drawCanvasSpark(ctx,x,y,size,color,alpha=.22){
   ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.translate(x,y);ctx.beginPath();ctx.moveTo(0,-size);ctx.quadraticCurveTo(2, -2, size,0);ctx.quadraticCurveTo(2,2,0,size);ctx.quadraticCurveTo(-2,2,-size,0);ctx.quadraticCurveTo(-2,-2,0,-size);ctx.fill();ctx.restore();
 }
+function drawSoftWatermark(ctx,width,height,text){
+  ctx.save();ctx.beginPath();ctx.rect(72,52,width-144,height-104);ctx.clip();ctx.translate(width/2,height/2);ctx.rotate(-.2);ctx.globalAlpha=.032;ctx.fillStyle='#70bde5';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 24px Microsoft YaHei';
+  for(let y=-height;y<=height;y+=112){for(let x=-width;x<=width;x+=360){ctx.fillText(text,x,y)}}ctx.restore();
+}
 function saveReceiptImage(){
   if(!currentResult)return;const {prize,audit}=currentResult,out=document.createElement('canvas');out.width=900;out.height=1240;const c=out.getContext('2d');
   const accent=prize.color,soft=prize.soft;
@@ -327,7 +306,7 @@ function saveReceiptImage(){
   [[80,260,12,'#f4b85e'],[826,330,10,'#87c8ea'],[92,745,12,'#e98bb8'],[812,820,13,'#f4b85e'],[774,1140,9,'#87c8ea']].forEach(([x,y,s,color])=>drawCanvasSpark(c,x,y,s,color));
   c.save();c.shadowColor='rgba(126,165,192,.2)';c.shadowBlur=32;c.shadowOffsetY=18;drawReceiptPaper(c,58,38,784,1160);c.fillStyle='#fffdfd';c.fill();c.restore();
   drawReceiptPaper(c,58,38,784,1160);c.strokeStyle='#ef9fc4';c.lineWidth=4;c.stroke();
-  c.save();c.globalAlpha=.035;c.fillStyle='#89c9ec';c.font='900 82px Microsoft YaHei';c.textAlign='center';c.translate(450,655);c.rotate(-.16);c.fillText('BUNNY CLUB',0,0);c.restore();
+  drawSoftWatermark(c,900,1240,'垂耳兔电竞 · BUNNY CLUB');
   c.fillStyle='#67b7e1';c.font='900 24px Microsoft YaHei';c.textAlign='left';c.fillText('BUNNY CLUB · LUCKY DRAW',96,104);c.textAlign='right';c.fillStyle='#9b8395';c.font='900 19px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,804,104);
   c.setLineDash([10,10]);c.strokeStyle='#e3c1d2';c.lineWidth=2;c.beginPath();c.moveTo(96,138);c.lineTo(804,138);c.stroke();c.setLineDash([]);
   const prizeBg=c.createLinearGradient(96,165,804,315);prizeBg.addColorStop(0,soft);prizeBg.addColorStop(1,'#f1f9ff');c.fillStyle=prizeBg;c.beginPath();c.roundRect(96,166,708,166,24);c.fill();
@@ -356,3 +335,4 @@ drawWheel();renderPrizes();renderHistory();updateSound();createAmbient();const t
 </script>
 </body>
 </html>
+
