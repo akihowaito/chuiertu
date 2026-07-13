@@ -93,18 +93,26 @@
 
   .scratch-card canvas{ position:absolute; inset:0; width:100%; height:100%; cursor:grab; touch-action:none; transition:opacity .45s ease; z-index:3;}
   .scratch-card canvas.fading{ opacity:0; }
-  .scratch-card.selectable{cursor:pointer}
-  .scratch-card.selectable:hover{filter:drop-shadow(0 15px 20px rgba(235,117,176,.3)) drop-shadow(0 3px 0 rgba(255,255,255,.8))}
-  .scratch-card.selected{z-index:8!important;background:linear-gradient(135deg,#ff78b7,#ffd4e7 48%,#88d4f7);filter:drop-shadow(0 17px 24px rgba(229,105,166,.34)) drop-shadow(0 0 12px rgba(126,205,244,.45))}
+  .scratch-card.selectable{cursor:pointer;transition:transform .42s cubic-bezier(.22,1.15,.4,1),translate .25s ease,scale .25s ease,filter .25s ease,opacity .3s ease}
+  @media(hover:hover){.scratch-card.selectable:hover{translate:0 -9px;scale:1.035;z-index:7!important;background:linear-gradient(135deg,#ff8fc1,#ffd9e9 48%,#9bdcf8);filter:drop-shadow(0 18px 22px rgba(235,117,176,.32)) drop-shadow(0 0 14px rgba(126,205,244,.42))}}
+  .scratch-card.selected{z-index:8!important;background:linear-gradient(135deg,#ff78b7,#ffd4e7 48%,#88d4f7);filter:drop-shadow(0 17px 24px rgba(229,105,166,.34)) drop-shadow(0 0 12px rgba(126,205,244,.45));animation:selectedGlow 1.8s ease-in-out infinite}
   .scratch-card .select-badge{display:none;position:absolute;left:50%;top:8px;z-index:8;transform:translateX(-50%);align-items:center;gap:3px;padding:3px 8px;border:1.5px solid rgba(255,255,255,.94);border-radius:999px;background:linear-gradient(110deg,#ee72ae,#75c7ef);box-shadow:0 4px 10px rgba(120,150,190,.2);color:#fff;font-size:9px;font-weight:900;white-space:nowrap;pointer-events:none}
   .scratch-card.selected .select-badge{display:flex;animation:selectedPop .28s cubic-bezier(.2,1.4,.4,1)}
   @keyframes selectedPop{from{opacity:0;transform:translateX(-50%) scale(.7)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+  @keyframes selectedGlow{50%{filter:drop-shadow(0 20px 26px rgba(229,105,166,.42)) drop-shadow(0 0 18px rgba(126,205,244,.58))}}
 
   /* pre-game start button（位于卡组下方，不再覆盖卡组） */
   .start-wrap{
     display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:16px;
   }
   .start-wrap.hidden{ display:none; }
+  .confirm-wrap{display:none;flex-direction:column;align-items:center;gap:7px;margin-top:18px}
+  .confirm-wrap.show{display:flex;animation:confirmIn .3s cubic-bezier(.2,1.3,.4,1)}
+  .confirm-btn{min-width:190px;min-height:46px;border:0;border-radius:15px;background:linear-gradient(110deg,#ef62a8,#f5a5c9 48%,#72c4ed);box-shadow:0 7px 0 #d94b94,0 14px 26px rgba(225,104,164,.18);color:#fff;font-size:14px;font-weight:900;cursor:pointer;transition:transform .18s,filter .18s,box-shadow .18s}
+  .confirm-btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
+  .confirm-btn:active{transform:translateY(4px);box-shadow:0 3px 0 #d94b94}
+  .confirm-tip{font-size:11px;color:var(--text-mute)}
+  @keyframes confirmIn{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}
   .start-btn{
     border:none; border-radius:30px; padding:13px 30px; font-size:15px; font-weight:800; color:#fff;
     background:linear-gradient(90deg,#FF8FB3,#C9A9FF); box-shadow:0 10px 22px rgba(255,130,180,.4);
@@ -274,6 +282,11 @@
 
     <div class="cards-stage" id="cardsStage"></div>
 
+    <div class="confirm-wrap" id="confirmWrap">
+      <button class="confirm-btn" id="confirmBtn">✓ 确认选择这张</button>
+      <div class="confirm-tip">还没确定？可以直接点击另外一张重新选择</div>
+    </div>
+
     <div class="start-wrap" id="startWrap">
       <button class="start-btn" id="startBtn">🎴 开始刮奖</button>
       <div class="deck-tip">每一局都有优惠券在等你哦</div>
@@ -348,7 +361,7 @@
   /* ---------------- 状态 ---------------- */
   let totalPlays = 0, bestRank = 0, bestName = '—';
   const history = [];
-  let phase = 'pregame'; // pregame | shuffling | idle | chosen | revealed
+  let phase = 'pregame'; // pregame | shuffling | idle | selected | chosen | revealed
   let chosenIndex = null, assignedPrize = null, lastResultCode = '';
   const cardCtx = []; // per card runtime data
 
@@ -521,8 +534,9 @@
     ctx.textAlign='center'; ctx.textBaseline='middle';
     ctx.fillStyle='rgba(110,90,105,0.9)';
     const isSelectable=label==='点击选择';
+    const isWaiting=label==='等待确认';
     ctx.font='bold '+Math.round(h*0.30)+'px sans-serif';
-    ctx.fillText(isSelectable?'👆':'🍈', w*0.28, h*0.5);
+    ctx.fillText(isSelectable?'👆':(isWaiting?'✓':'🍈'), w*0.28, h*0.5);
     ctx.font='bold '+Math.round(h*0.15)+'px sans-serif';
     ctx.fillStyle='#5C4152';
     ctx.fillText(label||'准备发牌', w*0.62, h*0.5);
@@ -578,7 +592,8 @@
         c.wrap.style.transition = 'none';
         c.wrap.style.transform = 'translate(calc(-50% + '+c.deckX+'px),0) rotate('+c.deckRot+'deg)';
       } else {
-        drawCover(c.ctx, INNER_W, INNER_H, phase==='chosen'&&i===chosenIndex?'刮开此涂层':'点击选择');
+        const coverLabel=phase==='chosen'&&i===chosenIndex?'刮开此涂层':(phase==='selected'&&i===chosenIndex?'等待确认':'点击选择');
+        drawCover(c.ctx, INNER_W, INNER_H, coverLabel);
         setFinalTransform(c, i, false);
       }
     });
@@ -586,7 +601,7 @@
 
   function setFinalTransform(c, i, animate){
     const x = (i-1)*(CARD_W+GAP);
-    const selected = phase==='chosen' && i===chosenIndex;
+    const selected = (phase==='selected'||phase==='chosen') && i===chosenIndex;
     c.wrap.style.transition = animate ? 'transform .55s cubic-bezier(.22,1.15,.4,1)' : 'none';
     c.wrap.style.transform = 'translate(calc(-50% + '+x+'px), '+(selected?-10:0)+'px) rotate(0deg) scale('+(selected?1.035:1)+')';
   }
@@ -640,18 +655,19 @@
       return total?cleared/total:0;
     }
     function onStart(evt){
-      if(phase!=='idle' && phase!=='chosen') return;
+      if(phase!=='idle' && phase!=='selected' && phase!=='chosen') return;
       if(phase==='chosen' && index!==chosenIndex) return;
       evt.preventDefault(); ensureAudio();
-      if(phase==='idle'){
-        chosenIndex=index; assignedPrize=weightedPick(); phase='chosen';
-        lockOtherCards(index); renderPrizeFace(index, assignedPrize);
-        cardCtx.forEach((c,i)=>c.wrap.classList.toggle('selected',i===index));
-        cardCtx.forEach(c=>c.wrap.classList.remove('selectable'));
-        drawCover(cardCtx[index].ctx,INNER_W,INNER_H,'刮开此涂层');
-        setFinalTransform(cardCtx[index],index,true);
+      if(phase==='idle'||phase==='selected'){
+        chosenIndex=index; assignedPrize=null; phase='selected';
+        cardCtx.forEach((c,i)=>{
+          c.wrap.classList.toggle('selected',i===index);
+          drawCover(c.ctx,INNER_W,INNER_H,i===index?'等待确认':'点击选择');
+          setFinalTransform(c,i,true);
+        });
+        document.getElementById('confirmWrap').classList.add('show');
         playClick();
-        document.getElementById('gameHint').textContent='已选中！现在滑动手指 / 鼠标刮开涂层 ✨';
+        document.getElementById('gameHint').textContent='已选中第 '+(index+1)+' 张，确认前还可以换一张 ✨';
         return;
       }
       cardCtx[index].drawing=true; scratchAt(getPos(evt));
@@ -771,6 +787,21 @@
     document.getElementById('gameHint').textContent='先点击选中一张卡片，再刮开涂层 ✨';
   }
 
+  document.getElementById('confirmBtn').addEventListener('click', function(){
+    if(phase!=='selected'||chosenIndex===null) return;
+    ensureAudio();
+    assignedPrize=weightedPick();
+    phase='chosen';
+    lockOtherCards(chosenIndex);
+    renderPrizeFace(chosenIndex,assignedPrize);
+    cardCtx.forEach(c=>c.wrap.classList.remove('selectable'));
+    drawCover(cardCtx[chosenIndex].ctx,INNER_W,INNER_H,'刮开此涂层');
+    cardCtx.forEach((c,i)=>setFinalTransform(c,i,true));
+    document.getElementById('confirmWrap').classList.remove('show');
+    document.getElementById('gameHint').textContent='选择已确认，现在刮开这张卡片吧 ✨';
+    playClick();
+  });
+
   document.getElementById('startBtn').addEventListener('click', function(){
     ensureAudio(); playClick();
     document.getElementById('startWrap').classList.add('hidden');
@@ -788,6 +819,7 @@
     ensureAudio(); playClick();
     phase='pregame'; chosenIndex=null; assignedPrize=null;
     document.getElementById('resetBtn').classList.add('hidden');
+    document.getElementById('confirmWrap').classList.remove('show');
     document.getElementById('startWrap').classList.remove('hidden');
     document.getElementById('gameHint').textContent='点击下方按钮，发牌后选一张刮开惊喜吧';
     cardCtx.forEach((c,i)=>{
