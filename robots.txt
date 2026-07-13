@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://akihowaito.github.io/chuiertu/sitemap.xml
+Sitemap: https://akihowaito.github.io/chuiertu/sitemap.txt
