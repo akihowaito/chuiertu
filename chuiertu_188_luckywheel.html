@@ -295,8 +295,8 @@ function drawCanvasSpark(ctx,x,y,size,color,alpha=.22){
   ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.translate(x,y);ctx.beginPath();ctx.moveTo(0,-size);ctx.quadraticCurveTo(2, -2, size,0);ctx.quadraticCurveTo(2,2,0,size);ctx.quadraticCurveTo(-2,2,-size,0);ctx.quadraticCurveTo(-2,-2,0,-size);ctx.fill();ctx.restore();
 }
 function drawSoftWatermark(ctx,width,height,text){
-  ctx.save();ctx.beginPath();ctx.rect(72,52,width-144,height-104);ctx.clip();ctx.translate(width/2,height/2);ctx.rotate(-.2);ctx.globalAlpha=.072;ctx.fillStyle='#5aaed9';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 26px Microsoft YaHei';
-  for(let y=-height;y<=height;y+=112){for(let x=-width;x<=width;x+=360){ctx.fillText(text,x,y)}}ctx.restore();
+  ctx.save();ctx.beginPath();ctx.rect(72,52,width-144,height-104);ctx.clip();ctx.translate(width/2,height/2);ctx.rotate(-.2);ctx.globalAlpha=.105;ctx.fillStyle='#77727a';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='500 18px Microsoft YaHei';
+  for(let y=-height;y<=height;y+=88){for(let x=-width;x<=width;x+=300){ctx.fillText(text,x,y)}}ctx.restore();
 }
 function saveReceiptImage(){
   if(!currentResult)return;const {prize,audit}=currentResult,out=document.createElement('canvas');out.width=900;out.height=1240;const c=out.getContext('2d');
