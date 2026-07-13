@@ -199,12 +199,13 @@
   .intro-meta{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:11px}
   .meta-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border:1.5px solid rgba(238,170,201,.58);border-radius:999px;background:rgba(255,255,255,.8);color:#6d6680;font-size:10px;font-weight:900}
   .scratch-content{display:grid;gap:18px}
-  .game-zone{position:relative;overflow:hidden;margin:0;padding:24px 22px 22px;border:3px solid transparent;border-radius:20px;background:linear-gradient(rgba(255,252,254,.95),rgba(238,249,255,.92)) padding-box,linear-gradient(135deg,#f5a7ca,#fff,#94d5f5) border-box;box-shadow:0 10px 0 rgba(116,190,231,.14),0 24px 48px rgba(235,151,190,.11)}
-  .game-zone::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(145deg,rgba(249,190,218,.17),transparent 48%,rgba(177,225,249,.22))}
+  .game-zone{position:relative;overflow:visible;margin:0;padding:16px 0 26px;border:0;border-radius:0;background:transparent;box-shadow:none}
+  .game-zone::before{content:"";position:absolute;left:50%;top:52%;width:min(92vw,900px);height:330px;transform:translate(-50%,-50%);pointer-events:none;background:radial-gradient(ellipse at center,rgba(255,255,255,.94) 0,rgba(255,228,241,.54) 40%,rgba(199,233,251,.32) 62%,transparent 76%);filter:blur(8px)}
   .game-zone>*{position:relative;z-index:1}
   .game-title{font-size:20px;color:var(--ink)}
   .game-hint{margin:5px 0 18px;font-size:13px;color:var(--muted)}
-  .cards-stage{width:min(100%,680px)}
+  .cards-stage{width:min(100%,760px)}
+  .scratch-card{filter:drop-shadow(0 12px 18px rgba(190,110,160,.24)) drop-shadow(0 3px 0 rgba(255,255,255,.72))}
   .start-btn{min-width:210px;min-height:48px;padding:12px 24px;border-radius:16px;background:#ff75b6;box-shadow:0 8px 0 #d94391,0 15px 28px rgba(235,151,190,.16);font-size:14px;animation:none}
   .start-btn:hover{transform:translateY(-2px);filter:brightness(1.02)}
   .start-btn:active{transform:translateY(4px);box-shadow:0 4px 0 #d94391}
@@ -228,7 +229,7 @@
   @media(max-width:820px){.info-grid{grid-template-columns:1fr}.history-list{min-height:190px;max-height:none}.history-empty{min-height:170px}}
   @media(max-width:520px){
     .wrap{padding:12px 10px 30px}.back,.contact{padding:7px 9px;font-size:10px}.sound-toggle{width:36px;height:36px}
-    .hero{height:auto;min-height:184px;padding:18px 0 14px}.hero h1{font-size:31px}.game-zone{padding:20px 12px;border-radius:16px}
+    .hero{height:auto;min-height:184px;padding:18px 0 14px}.hero h1{font-size:31px}.game-zone{padding:14px 0 22px}
     .game-title{font-size:18px}.game-hint{font-size:12px}.info-grid{padding:8px;gap:10px;border-radius:16px}.panel{padding:14px 12px}.panel-title{font-size:16px}
     .prize-row{gap:7px;padding:8px}.prize-row .ic{font-size:18px;width:22px}.prize-row .name{font-size:12px}.prize-row .tier-badge{padding:3px 6px}.prize-row .odds{width:34px}
   }
@@ -526,15 +527,16 @@
 
   function layoutStage(){
     const stageW = stage.clientWidth || (stage.parentElement.clientWidth - 4);
+    GAP = stageW >= 700 ? 20 : (stageW >= 520 ? 14 : 8);
 
     if(phase==='pregame'){
       // 预备阶段：卡组放大，居中单叠展示
-      CARD_W = Math.min(220, stageW * 0.62);
-      CARD_H = CARD_W * 0.8;
+      CARD_W = Math.min(260, stageW * 0.68);
+      CARD_H = CARD_W * 0.72;
     } else {
       // 发牌后：横排三张
-      CARD_W = Math.min(150, (stageW - GAP*2) / 3);
-      CARD_H = CARD_W * 0.8;
+      CARD_W = Math.min(220, (stageW - GAP*2) / 3);
+      CARD_H = CARD_W * 0.72;
     }
     BORDER = Math.max(6, Math.round(CARD_W*0.065));   // 粉色外边框厚度
     MAT = Math.max(3, Math.round(CARD_W*0.022));      // 白色内间隔厚度
