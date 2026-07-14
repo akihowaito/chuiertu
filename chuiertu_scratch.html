@@ -794,24 +794,39 @@
     ctx.save();ctx.beginPath();ctx.rect(65,45,width-130,height-90);ctx.clip();ctx.translate(width/2,height/2);ctx.rotate(-.18);ctx.globalAlpha=.07;ctx.fillStyle='#77727a';ctx.font='500 16px Huninn, Microsoft YaHei';ctx.textAlign='center';
     for(let y=-height;y<=height;y+=78){for(let x=-width;x<=width;x+=260){ctx.fillText('垂耳兔电竞 · BUNNY CLUB',x,y)}}ctx.restore();
   }
+  function softenColor(hex,amount=.82){
+    const raw=String(hex||'#ff9fc0').replace('#','');
+    const normalized=raw.length===3?raw.split('').map(value=>value+value).join(''):raw;
+    const value=Number.parseInt(normalized,16);if(!Number.isFinite(value))return '#fff3f8';
+    const mix=channel=>Math.round(channel+(255-channel)*amount);
+    return `rgb(${mix(value>>16)},${mix((value>>8)&255)},${mix(value&255)})`;
+  }
   async function saveScratchImage(result){
     if(!result)return;await document.fonts.ready;
     const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=760;const c=canvas.getContext('2d');
     const bg=c.createLinearGradient(0,0,1200,760);bg.addColorStop(0,'#fff1f8');bg.addColorStop(.5,'#fffafd');bg.addColorStop(1,'#e8f7ff');c.fillStyle=bg;c.fillRect(0,0,1200,760);
-    c.save();c.translate(620,382);c.rotate(-.045);drawScallopedPanel(c,-500,-285,1000,570,'#cceeff',9,25);c.restore();
-    c.save();c.translate(580,365);c.rotate(.035);drawScallopedPanel(c,-500,-285,1000,570,'#ffd7e8',9,25);c.restore();
+    c.save();c.translate(612,378);c.rotate(-.024);drawScallopedPanel(c,-500,-285,1000,570,'#d8f1ff',9,25);c.restore();
     c.save();c.shadowColor='rgba(104,162,198,.2)';c.shadowBlur=28;c.shadowOffsetY=18;drawScallopedPanel(c,90,70,1020,620,'#ffcfe3',9,25);c.restore();
     drawScallopedPanel(c,90,70,1020,620,'#ffcfe3',9,25);c.fillStyle='#fff';c.fillRect(122,102,956,556);c.strokeStyle='#fff';c.lineWidth=8;c.strokeRect(112,92,976,576);drawScratchWatermark(c,1200,760);
     c.textAlign='left';c.fillStyle='#59afe0';c.font='900 25px Huninn, Microsoft YaHei';c.fillText('BUNNY CLUB · SCRATCH RESULT',155,150);
     c.textAlign='right';c.fillStyle='#9a8293';c.font='900 18px Huninn, Microsoft YaHei';c.fillText('心动常驻刮刮乐',1045,148);
     c.strokeStyle='#ebbad1';c.lineWidth=2;c.setLineDash([10,9]);c.beginPath();c.moveTo(155,177);c.lineTo(1045,177);c.stroke();c.setLineDash([]);
-    const cardGradient=c.createLinearGradient(155,210,760,500);cardGradient.addColorStop(0,result.c1||'#ff9fc0');cardGradient.addColorStop(1,result.c2||'#79c8ef');c.fillStyle=cardGradient;c.beginPath();c.roundRect(155,215,610,300,22);c.fill();
-    c.strokeStyle='rgba(255,255,255,.92)';c.lineWidth=7;c.strokeRect(178,238,564,254);c.fillStyle='rgba(255,255,255,.16)';c.beginPath();c.arc(285,365,82,0,Math.PI*2);c.fill();
-    c.font='78px "Segoe UI Emoji"';c.textAlign='center';c.fillText(result.icon,285,393);
-    c.textAlign='left';c.fillStyle='#fff';c.font='900 17px Huninn, Microsoft YaHei';c.fillText(result.tierLabel||'心动奖励',395,293);c.font='900 32px Huninn, Microsoft YaHei';drawWrappedText(c,result.name,395,348,320,42,2);c.font='800 17px Huninn, Microsoft YaHei';c.fillText(result.desc||'',395,440);
-    c.fillStyle='#7dc4e9';c.beginPath();c.roundRect(830,225,150,42,21);c.fill();c.fillStyle='#fff';c.textAlign='center';c.font='900 17px Huninn, Microsoft YaHei';c.fillText('✓ 已选中',905,252);
-    c.font='64px "Segoe UI Emoji"';c.fillText(result.icon,905,355);c.fillStyle='#625267';c.font='900 23px Huninn, Microsoft YaHei';c.fillText('本次心动奖励',905,405);
-    const drawTime=new Date(result.time);const timeText=new Intl.DateTimeFormat('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(drawTime).replaceAll('/','.');c.fillStyle='#947f91';c.font='800 16px Huninn, Microsoft YaHei';c.fillText(timeText,905,445);c.fillStyle='#56addd';c.font='900 16px Huninn, Microsoft YaHei';c.fillText('截图保存 · 联系客服兑换',905,480);
+    const cardGradient=c.createLinearGradient(155,210,1045,500);cardGradient.addColorStop(0,softenColor(result.c1,.84));cardGradient.addColorStop(.52,'#fff9fc');cardGradient.addColorStop(1,softenColor(result.c2,.78));
+    c.save();c.shadowColor='rgba(99,161,203,.16)';c.shadowBlur=22;c.shadowOffsetY=10;c.fillStyle=cardGradient;c.beginPath();c.roundRect(155,210,890,305,24);c.fill();c.restore();
+    c.strokeStyle='rgba(255,255,255,.95)';c.lineWidth=5;c.beginPath();c.roundRect(164,219,872,287,19);c.stroke();
+    c.fillStyle=result.c1||'#ff9fc0';c.beginPath();c.roundRect(155,210,12,305,6);c.fill();
+
+    c.save();c.shadowColor='rgba(86,151,196,.2)';c.shadowBlur=18;c.shadowOffsetY=8;const orb=c.createRadialGradient(276,330,8,276,350,76);orb.addColorStop(0,'#ffffff');orb.addColorStop(1,'rgba(255,255,255,.72)');c.fillStyle=orb;c.beginPath();c.arc(276,350,76,0,Math.PI*2);c.fill();c.restore();
+    c.strokeStyle='rgba(255,255,255,.95)';c.lineWidth=3;c.beginPath();c.arc(276,350,76,0,Math.PI*2);c.stroke();
+    c.font='76px "Segoe UI Emoji"';c.textAlign='center';c.fillStyle='#645267';c.fillText(result.icon,276,377);
+
+    c.textAlign='left';c.font='900 17px Huninn, Microsoft YaHei';const tier=result.tierLabel||'心动奖励';const tierWidth=c.measureText(tier).width+30;c.fillStyle='rgba(255,255,255,.86)';c.beginPath();c.roundRect(384,260,tierWidth,36,18);c.fill();c.strokeStyle=result.c2||'#79c8ef';c.lineWidth=2;c.stroke();c.fillStyle=result.c2||'#54acd9';c.fillText(tier,399,284);
+    c.fillStyle='#675366';c.font='900 36px Huninn, Microsoft YaHei';drawWrappedText(c,result.name,384,350,385,46,2);c.fillStyle='#927f90';c.font='800 19px Huninn, Microsoft YaHei';c.fillText(result.desc||'',384,440);
+
+    c.strokeStyle='rgba(196,169,190,.42)';c.lineWidth=2;c.setLineDash([7,8]);c.beginPath();c.moveTo(795,250);c.lineTo(795,475);c.stroke();c.setLineDash([]);
+    c.fillStyle='#ffffff';c.beginPath();c.roundRect(840,255,154,42,21);c.fill();c.fillStyle='#58b0df';c.textAlign='center';c.font='900 17px Huninn, Microsoft YaHei';c.fillText('✓ 已选中',917,282);
+    c.fillStyle='#675366';c.font='900 22px Huninn, Microsoft YaHei';c.fillText('本次心动奖励',917,350);
+    const drawTime=new Date(result.time);const timeText=new Intl.DateTimeFormat('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(drawTime).replaceAll('/','.');c.fillStyle='#947f91';c.font='800 16px Huninn, Microsoft YaHei';c.fillText(timeText,917,390);c.fillStyle='#56addd';c.font='900 16px Huninn, Microsoft YaHei';c.fillText('截图保存',917,435);c.fillStyle='#dd5e9f';c.font='800 15px Huninn, Microsoft YaHei';c.fillText('联系客服兑换',917,465);
     c.strokeStyle='#ebbad1';c.lineWidth=2;c.setLineDash([9,9]);c.beginPath();c.moveTo(155,550);c.lineTo(1045,550);c.stroke();c.setLineDash([]);
     const lead='请保存本次抽奖凭证，并联系';c.textAlign='left';c.font='800 17px Huninn, Microsoft YaHei';c.fillStyle='#8f7b8d';c.fillText(lead,155,602);const pillX=155+c.measureText(lead).width,pill='垂耳兔客服';c.font='900 17px Huninn, Microsoft YaHei';const pillWidth=c.measureText(pill).width;c.fillStyle='#fff0f7';c.beginPath();c.roundRect(pillX-5,580,pillWidth+10,28,7);c.fill();c.fillStyle='#df4f9a';c.fillText(pill,pillX,602);c.fillStyle='#8f7b8d';c.font='800 17px Huninn, Microsoft YaHei';c.fillText('，实际服务以双方确认订单为准。',pillX+pillWidth+6,602);
     c.textAlign='center';c.fillStyle='#61b4e1';c.font='900 16px Huninn, Microsoft YaHei';c.fillText('垂耳兔电竞 · Kook 7686',600,640);
