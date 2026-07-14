@@ -62,8 +62,11 @@ button,a{font:inherit}
 .pool-title-row{display:flex;align-items:center;justify-content:space-between;gap:8px}.pool-head h2{font-size:17px;font-weight:900}.total{padding:4px 8px;border:1.5px solid var(--line);border-radius:999px;background:#fff;color:#359bd5;font-size:9px;font-weight:900}
 .pool-head p{margin-top:5px;font-size:10px;line-height:1.5;font-weight:800;color:#927f92}
 .prize-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:11px}.prize-list::-webkit-scrollbar{width:5px}.prize-list::-webkit-scrollbar-thumb{background:#b6def7;border-radius:99px}
-.prize{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:9px;padding:9px;border:1.5px dashed #cfe9f8;border-radius:12px;background:linear-gradient(100deg,#fff,#fafdff)}
-.prize-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--soft);font-size:18px}.prize-name{font-size:11px;line-height:1.45;font-weight:900}.prob{padding:4px 7px;border:1px solid color-mix(in srgb,var(--color) 25%,white);border-radius:999px;background:var(--soft);color:var(--color);font-size:10px;font-weight:900;white-space:nowrap}
+.prize{position:relative;overflow:hidden;display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:9px;padding:9px;border:1.5px dashed #cfe9f8;border-radius:12px;background:linear-gradient(100deg,#fff,#fafdff);outline:0;transition:transform .22s cubic-bezier(.2,.8,.2,1),border-color .22s,background .22s,box-shadow .22s}
+.prize::after{content:"";position:absolute;inset:-50% auto -50% -35%;width:24%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);transform:translateX(-180%) rotate(12deg);transition:transform .55s ease}
+.prize-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--soft);font-size:18px;transition:transform .25s cubic-bezier(.2,.9,.25,1.35),box-shadow .25s}.prize-name{font-size:11px;line-height:1.45;font-weight:900}.prob{padding:4px 7px;border:1px solid color-mix(in srgb,var(--color) 25%,white);border-radius:999px;background:var(--soft);color:var(--color);font-size:10px;font-weight:900;white-space:nowrap;transition:transform .22s,filter .22s}
+.prize:is(:hover,:focus-visible){transform:translateY(-3px);border-style:solid;border-color:color-mix(in srgb,var(--color) 52%,#b8dff5);background:linear-gradient(110deg,#fff,var(--soft));box-shadow:0 7px 0 color-mix(in srgb,var(--color) 10%,transparent),0 12px 24px rgba(112,177,214,.11)}
+.prize:is(:hover,:focus-visible)::after{transform:translateX(650%) rotate(12deg)}.prize:is(:hover,:focus-visible) .prize-icon{transform:rotate(-7deg) scale(1.12);box-shadow:0 5px 0 color-mix(in srgb,var(--color) 12%,transparent)}.prize:is(:hover,:focus-visible) .prob{transform:scale(1.06);filter:saturate(1.12)}.prize:active{transform:translateY(1px) scale(.99)}
 
 .support{margin-top:23px}.section-title-row{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:10px}.section-title{font-size:21px;font-weight:900}.section-note{font-size:10px;font-weight:900;color:#5baad5}
 .support-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:14px;padding:12px;border:2px solid transparent;border-radius:18px;background:linear-gradient(rgba(255,255,255,.58),rgba(249,253,255,.66)) padding-box,linear-gradient(135deg,#f5b2d0,#fff,#a9ddf7) border-box;box-shadow:0 8px 0 rgba(155,211,241,.16),0 18px 36px rgba(139,196,225,.08)}.history{overflow:hidden;border:2px dashed rgba(116,190,231,.38);border-radius:14px;background:rgba(255,255,255,.78);box-shadow:none}
@@ -116,7 +119,8 @@ button,a{font:inherit}
 .panel-label{font-size:11px}.price strong{font-size:22px}.price span{font-size:11px}.wheel-center strong{font-size:21px}.wheel-center span{font-size:10px}
 .result-head h2{font-size:21px}.result-head p{font-size:13px}.result-state{font-size:11px}.pool-head h2{font-size:19px}.pool-head p{font-size:13px}.total{font-size:11px}
 .prize-name{font-size:14px}.prob{font-size:12px}.section-title{font-size:23px}.section-note{font-size:11px}.subhead h3{font-size:19px}.subhead span{font-size:13px}
-.empty{font-size:14px}.history-row .num{font-size:11px}.history-row strong{font-size:14px}.history-row time{font-size:11px}.rule p{font-size:14px}.footer{font-size:10px}
+.empty{font-size:14px}.history-row .num{font-size:11px}.history-row strong{font-size:12px}.history-row time{font-size:11px}.rule p{font-size:14px}.footer{font-size:10px}
+.money-highlight,.chance-highlight{display:inline-block;padding:1px 6px;border-radius:7px;font-weight:900}.money-highlight{color:#df4f9a;background:#fff0f7}.chance-highlight{color:#278fc9;background:#eaf8ff}
 .ticket-topline{font-size:12px}.ticket-topline strong{font-size:13px}.result-badge,.result-got{font-size:12px}.inline-result h2{font-size:25px}.audit-row{font-size:12px}.result-note{font-size:13px}.ticket-footer{font-size:11px}
 @media(max-width:520px){.back,.contact{font-size:11px}.intro p{font-size:13px}.meta{font-size:10px}.prize-name{font-size:13px}.prob{font-size:11px}.section-title{font-size:21px}.section-note{font-size:10px}.rule p{font-size:13px}.inline-result h2{font-size:23px}.audit-row{font-size:11px}}
 </style>
@@ -136,7 +140,7 @@ button,a{font:inherit}
     <header class="intro">
       <div class="eyebrow"><span class="live-dot"></span>常驻开放 · 随时可转</div>
       <h1>幸运常驻转盘</h1>
-      <p>188R/1次，转动任务指针，从 8 项三角洲体验中解锁本次幸运任务。</p>
+      <p>188R/1次，转动任务指针，从8项三角洲体验中解锁本次幸运任务。</p>
       <div class="meta-row">
         <span class="meta">🐰 垂耳兔电竞 · KOOK 7686</span><span class="meta" id="dynamicTime">📅 正在同步时间…</span>
       </div>
@@ -196,10 +200,10 @@ button,a{font:inherit}
     </section>
 
     <section class="support" aria-label="公开概率与转动记录">
-      <div class="section-title-row"><h2 class="section-title">公开概率与记录</h2><span class="section-note">概率公开 · 记录仅保存在当前浏览器</span></div>
+      <div class="section-title-row"><h2 class="section-title">公开概率与记录</h2></div>
       <div class="support-grid">
         <div class="pool-panel" aria-label="任务奖池与概率">
-          <div class="pool-head"><div class="pool-title-row"><h2>🎡 常驻任务公开概率</h2><span class="total">总概率 100%</span></div><p>8 项任务独立抽取，沿用原 520 转盘权重结构。</p></div>
+          <div class="pool-head"><div class="pool-title-row"><h2>🎡 常驻任务公开概率</h2><span class="total">总概率 100%</span></div><p>8项任务独立抽取，沿用原520转盘权重结构。</p></div>
           <div class="prize-list" id="prizeList"></div>
         </div>
         <div class="history">
@@ -216,8 +220,8 @@ button,a{font:inherit}
           <div class="rule"><span class="rule-num">1</span><p><strong>奖品说明：</strong>奖励奖品均为虚拟物品，奖项内容以《三角洲行动》游戏内物品为准。</p></div>
           <div class="rule"><span class="rule-num">2</span><p><strong>专属链接：</strong>此转盘链接仅供已下单板板使用，请勿对外传播或分享。</p></div>
           <div class="rule"><span class="rule-num">3</span><p><strong>诚信参与：</strong>参与者需遵守活动规则，严禁任何作弊行为；一经发现将取消结果，本转盘按页面公开概率抽取。</p></div>
-          <div class="rule"><span class="rule-num">4</span><p><strong>抽奖次数：</strong>每支付 188R 可获得 1 次转动机会，额外次数请联系垂耳兔电竞客服确认。</p></div>
-          <div class="rule"><span class="rule-num">5</span><p><strong>获取与登记：</strong>成功下单后由客服或管理员发送转盘链接；中奖后请及时保存结果并联系垂耳兔电竞 KOOK 7686 登记，最终解释权归垂耳兔电竞所有。</p></div>
+          <div class="rule"><span class="rule-num">4</span><p><strong>抽奖次数：</strong>每支付<span class="money-highlight">188R</span>可获得<span class="chance-highlight">1次</span>转动机会，额外次数请联系垂耳兔电竞客服确认。</p></div>
+          <div class="rule"><span class="rule-num">5</span><p><strong>获取与登记：</strong>中奖后请及时保存结果并联系当前值班或对接的垂耳兔电竞客服登记，最终解释权归垂耳兔电竞所有。</p></div>
         </div>
         <div class="promo-art">
           <img src="./assets/bunny-club-kook-banner.png" alt="垂耳兔电竞 KOOK 7686 公粽号宣传图">
@@ -259,7 +263,7 @@ function drawWheel(){
     const mid=start+angle/2;ctx.save();ctx.translate(c,c);ctx.rotate(mid);ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=prize.color;ctx.shadowColor='#fff';ctx.shadowBlur=8;ctx.font='900 26px Microsoft YaHei,Arial';ctx.fillText(prize.icon,r*.56,-17);ctx.font=`900 ${prize.short.length>7?18:21}px Microsoft YaHei,Arial`;const words=prize.short.split(' ');if(words.length>2){ctx.fillText(words.slice(0,2).join(' '),r*.62,9);ctx.fillText(words.slice(2).join(' '),r*.62,32)}else ctx.fillText(prize.short,r*.62,19);ctx.restore()});
   ctx.beginPath();ctx.arc(c,c,r,0,Math.PI*2);ctx.lineWidth=11;ctx.strokeStyle='#fff';ctx.stroke();ctx.beginPath();ctx.arc(c,c,r-30,0,Math.PI*2);ctx.setLineDash([13,10]);ctx.lineWidth=3;ctx.strokeStyle='rgba(240,76,163,.32)';ctx.stroke();ctx.setLineDash([]);
 }
-function renderPrizes(){document.getElementById('prizeList').innerHTML=prizes.map(prize=>`<div class="prize" style="--color:${prize.color};--soft:${prize.soft}"><span class="prize-icon">${prize.icon}</span><span class="prize-name">${prize.name}</span><span class="prob">${prize.prob}%</span></div>`).join('')}
+function renderPrizes(){document.getElementById('prizeList').innerHTML=prizes.map(prize=>`<div class="prize" role="listitem" tabindex="0" aria-label="${prize.name}，概率 ${prize.prob}%" style="--color:${prize.color};--soft:${prize.soft}"><span class="prize-icon">${prize.icon}</span><span class="prize-name">${prize.name}</span><span class="prob">${prize.prob}%</span></div>`).join('')}
 function pickPrize(){let value=secureRandom()*100;for(let index=0;index<prizes.length;index++){value-=prizes[index].prob;if(value<0)return {prize:prizes[index],index}}return {prize:prizes.at(-1),index:prizes.length-1}}
 function getAudio(){if(!soundEnabled)return null;if(!audioContext){try{audioContext=new(window.AudioContext||window.webkitAudioContext)()}catch{return null}}if(audioContext.state==='suspended')audioContext.resume();return audioContext}
 function tone(freq,start,duration,type='sine',volume=.05){const ac=getAudio();if(!ac)return;const osc=ac.createOscillator(),gain=ac.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,ac.currentTime+start);gain.gain.setValueAtTime(.0001,ac.currentTime+start);gain.gain.exponentialRampToValueAtTime(volume,ac.currentTime+start+.025);gain.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+start+duration);osc.connect(gain);gain.connect(ac.destination);osc.start(ac.currentTime+start);osc.stop(ac.currentTime+start+duration+.04)}
