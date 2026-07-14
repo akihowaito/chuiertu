@@ -250,13 +250,29 @@
   .history-empty{display:grid;place-items:center;min-height:250px;font-size:13px;line-height:1.75;font-weight:800}
   .result-card{border:3px solid transparent;border-radius:18px;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#f5a7ca,#fff,#94d5f5) border-box;box-shadow:0 12px 0 rgba(116,190,231,.14),0 28px 70px rgba(99,84,103,.24)}
   footer{margin-top:24px;padding:22px 8px 3px;font-size:9px;line-height:1.6;font-weight:800;color:#52a8d7}
+
+  /* Match the permanent wheel's final typography and icon scale. */
+  .back,.contact,.sound-toggle{font-size:12px}
+  .hero .eyebrow{font-size:11px}
+  .hero .sub{font-size:14px}
+  .meta-pill{font-size:11px}
+  .game-title{font-size:23px}
+  .game-hint,.deck-tip{font-size:13px}
+  .panel-title{font-size:19px}
+  .panel-title .mini{font-size:13px}
+  .prize-row .ic{width:40px;font-size:20px}
+  .prize-row .name{font-size:14px}
+  .prize-row .desc{font-size:12px}
+  .prize-row .tier-badge{font-size:11px}
+  .prize-row .odds{font-size:12px}
+  .odds-note{font-size:12px}
   @keyframes livePulse{50%{transform:scale(.72);opacity:.65}}
   @media(max-width:820px){.info-grid{grid-template-columns:1fr}.history-list{min-height:190px;max-height:none}.history-empty{min-height:170px}}
   @media(max-width:520px){
-    .wrap{padding:12px 10px 30px}.back,.contact{padding:7px 9px;font-size:10px}.sound-toggle{width:36px;height:36px}
+    .wrap{padding:12px 10px 30px}.back,.contact{padding:7px 9px;font-size:11px}.sound-toggle{width:36px;height:36px;font-size:11px}
     .hero{height:auto;min-height:184px;padding:18px 0 14px}.hero h1{font-size:31px}.game-zone{padding:14px 0 22px}
-    .game-title{font-size:18px}.game-hint{font-size:12px}.info-grid{padding:8px;gap:10px;border-radius:16px}.panel{padding:14px 12px}.panel-title{font-size:16px}
-    .prize-row{gap:7px;padding:8px}.prize-row .ic{font-size:18px;width:22px}.prize-row .name{font-size:12px}.prize-row .tier-badge{padding:3px 6px}.prize-row .odds{width:34px}
+    .hero .sub{font-size:13px}.meta-pill{font-size:10px}.game-title{font-size:21px}.game-hint,.deck-tip{font-size:12px}.info-grid{padding:8px;gap:10px;border-radius:16px}.panel{padding:14px 12px}.panel-title{font-size:17px}.panel-title .mini{font-size:11px}
+    .prize-row{gap:8px;padding:9px}.prize-row .ic{font-size:20px;width:34px}.prize-row .name{font-size:13px}.prize-row .desc{font-size:11.5px}.prize-row .tier-badge{padding:3px 6px;font-size:10px}.prize-row .odds{width:34px;font-size:11px}
     .activity-notice{padding:14px 12px}.notice-title{font-size:16px}.notice-list{grid-template-columns:1fr}.notice-list li{font-size:12px}.history-item{grid-template-columns:auto minmax(0,1fr) auto}.history-item .hi-time{display:none}.history-save{padding:6px 8px}
   }
 </style>
