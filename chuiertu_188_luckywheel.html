@@ -121,7 +121,7 @@ button,a{font:inherit}
 .prize-name{font-size:14px}.prob{font-size:12px}.section-title{font-size:23px}.section-note{font-size:11px}.subhead h3{font-size:19px}.subhead span{font-size:13px}
 .empty{font-size:14px}.history-row .num{font-size:11px}.history-row strong{font-size:12px}.history-row time{font-size:11px}.rule p{font-size:14px}.footer{font-size:10px}
 .money-highlight,.chance-highlight{display:inline-block;padding:1px 6px;border-radius:7px;font-weight:900}.money-highlight{color:#df4f9a;background:#fff0f7}.chance-highlight{color:#278fc9;background:#eaf8ff}
-.ticket-topline{font-size:12px}.ticket-topline strong{font-size:13px}.result-badge,.result-got{font-size:12px}.inline-result h2{font-size:25px}.audit-row{font-size:12px}.result-note{font-size:13px}.result-note .support-emphasis{color:#e879ad;font-weight:900}.ticket-footer{font-size:11px}
+.ticket-topline{font-size:12px}.ticket-topline strong{font-size:13px}.result-badge,.result-got{font-size:12px}.inline-result h2{font-size:25px}.audit-row{font-size:12px}.result-note{font-size:13px}.result-note .support-emphasis{display:inline-block;padding:1px 6px;border-radius:7px;background:#fff0f7;color:#df4f9a;font-weight:900}.ticket-footer{font-size:11px}
 @media(max-width:520px){.back,.contact{font-size:11px}.intro p{font-size:13px}.meta{font-size:10px}.prize-name{font-size:13px}.prob{font-size:11px}.section-title{font-size:21px}.section-note{font-size:10px}.rule p{font-size:13px}.inline-result h2{font-size:23px}.audit-row{font-size:11px}}
 </style>
 </head>
@@ -189,7 +189,7 @@ button,a{font:inherit}
               <div class="audit-row"><strong>设备指纹</strong><span id="resultFingerprint">—</span></div>
               <div class="audit-row"><strong>核验码</strong><span id="resultToken">—</span></div>
             </div>
-            <p class="result-note">请保存本次抽奖凭证，<span class="support-emphasis">并联系垂耳兔客服</span> Kook 7686，实际服务以双方确认订单为准。</p>
+            <p class="result-note">请保存本次抽奖凭证，并联系<span class="support-emphasis">垂耳兔客服</span>，实际服务以双方确认订单为准。</p>
             <div class="result-actions">
               <button class="save-result" id="saveResult" type="button">保存截图</button>
             </div>
@@ -332,7 +332,7 @@ function saveReceiptImage(){
   c.save();c.translate(184,873);c.rotate(-.12);c.strokeStyle=accent;c.lineWidth=4;c.globalAlpha=.72;c.beginPath();c.arc(0,0,60,0,Math.PI*2);c.stroke();c.beginPath();c.arc(0,0,49,0,Math.PI*2);c.stroke();c.fillStyle=accent;c.textAlign='center';c.font='900 25px Microsoft YaHei';c.fillText('已核验',0,-2);c.font='900 12px Arial';c.fillText('VERIFIED',0,22);c.restore();
   c.fillStyle='#765f73';c.textAlign='left';c.font='900 21px Microsoft YaHei';c.fillText('好运已装进这张票据',286,844);c.fillStyle='#a18a9d';c.font='800 16px Microsoft YaHei';c.fillText('请截图保存，并以核验码确认本次结果',286,876);drawCanvasHeart(c,744,850,22,accent,.45);drawCanvasSpark(c,780,890,15,'#72bce3',.55);
   c.setLineDash([9,9]);c.strokeStyle='#e3c5d5';c.lineWidth=2;c.beginPath();c.moveTo(96,951);c.lineTo(804,951);c.stroke();c.setLineDash([]);c.fillStyle='#d3a5bd';c.font='17px Microsoft YaHei';c.fillText('✂',105,958);
-  c.font='800 17px Microsoft YaHei';c.textAlign='left';c.fillStyle='#927e91';const receiptLead='请保存本次抽奖凭证，';c.fillText(receiptLead,96,995);const supportX=96+c.measureText(receiptLead).width;c.fillStyle='#e879ad';c.font='900 17px Microsoft YaHei';c.fillText('并联系垂耳兔客服',supportX,995);c.fillStyle='#927e91';c.font='800 17px Microsoft YaHei';c.fillText('Kook 7686，实际服务以双方确认订单为准。',96,1023);
+  c.font='800 17px Microsoft YaHei';c.textAlign='left';c.fillStyle='#927e91';const receiptLead='请保存本次抽奖凭证，并联系';c.fillText(receiptLead,96,1005);const supportX=96+c.measureText(receiptLead).width,supportText='垂耳兔客服';c.font='900 17px Microsoft YaHei';const supportWidth=c.measureText(supportText).width;c.fillStyle='#fff0f7';c.beginPath();c.roundRect(supportX-5,983,supportWidth+10,28,7);c.fill();c.fillStyle='#df4f9a';c.fillText(supportText,supportX,1005);c.fillStyle='#927e91';c.font='800 17px Microsoft YaHei';c.fillText('，实际服务以双方确认订单为准。',supportX+supportWidth+6,1005);
   c.setLineDash([5,10]);c.strokeStyle='#d9c0cf';c.lineWidth=2;c.beginPath();c.moveTo(210,1080);c.lineTo(690,1080);c.stroke();c.setLineDash([]);drawCanvasHeart(c,394,1118,18,'#ef8db9',.55);drawCanvasSpark(c,450,1118,13,'#82c6e9',.6);drawCanvasHeart(c,506,1118,18,'#b89ae8',.5);c.textAlign='center';c.fillStyle='#67b7e1';c.font='900 17px Microsoft YaHei';c.fillText('THANK YOU · 垂耳兔电竞 Kook 7686',450,1166);
   out.toBlob(blob=>{if(!blob){toast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`幸运转盘-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);saveButton.textContent='已保存';saveButton.classList.add('is-saved');toast('结果图片已保存')},'image/png');
 }
