@@ -11,7 +11,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico?v=5">
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=5">
 <!-- SEO:START -->
-<meta name="description" content="垂耳兔电竞心动常驻刮刮乐，三选一刮开优惠券、预存赠送和现金返现，7档奖励概率完整公开。">
+<meta name="description" content="垂耳兔电竞心动常驻刮刮乐，三选一刮开优惠券、赠送余额和现金返现，7档奖励概率完整公开。">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://akihowaito.github.io/chuiertu/chuiertu_scratch.html">
 <meta property="og:locale" content="zh_CN">
@@ -161,6 +161,11 @@
   .history-item .hi-name{ flex:1; font-weight:700; color:var(--text-dark); }
   .history-item .hi-code{ color:var(--text-mute); font-family:monospace; font-size:10.5px; }
   .history-empty{ text-align:center; font-size:12px; color:var(--text-mute); padding:14px 0; }
+  .activity-notice{margin-top:14px;padding:17px 18px;border:2px solid rgba(245,164,200,.58);border-radius:14px;background:rgba(255,255,255,.84);box-shadow:0 7px 0 rgba(146,211,244,.12)}
+  .notice-title{display:flex;align-items:center;gap:8px;margin-bottom:10px;color:var(--text-dark);font-size:17px;line-height:1.4;font-weight:900}
+  .notice-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;list-style:none;counter-reset:notice}
+  .notice-list li{position:relative;min-height:46px;padding:10px 11px 10px 43px;border:1.5px solid #d7edf9;border-radius:11px;background:linear-gradient(120deg,rgba(255,248,252,.94),rgba(246,252,255,.94));color:var(--muted);font-size:12px;line-height:1.65;font-weight:800}
+  .notice-list li::before{counter-increment:notice;content:counter(notice);position:absolute;left:11px;top:10px;display:grid;place-items:center;width:22px;height:22px;border-radius:8px;background:linear-gradient(135deg,#f5a4c8,#92d3f4);color:#fff;font-size:11px;font-weight:900;box-shadow:0 3px 0 rgba(146,211,244,.17)}
 
   /* result overlay */
   .result-overlay{ position:fixed; inset:0; background:rgba(90,50,80,.45); backdrop-filter:blur(2px); display:none; align-items:center; justify-content:center; z-index:80; padding:20px; }
@@ -248,6 +253,7 @@
     .hero{height:auto;min-height:184px;padding:18px 0 14px}.hero h1{font-size:31px}.game-zone{padding:14px 0 22px}
     .game-title{font-size:18px}.game-hint{font-size:12px}.info-grid{padding:8px;gap:10px;border-radius:16px}.panel{padding:14px 12px}.panel-title{font-size:16px}
     .prize-row{gap:7px;padding:8px}.prize-row .ic{font-size:18px;width:22px}.prize-row .name{font-size:12px}.prize-row .tier-badge{padding:3px 6px}.prize-row .odds{width:34px}
+    .activity-notice{padding:14px 12px}.notice-title{font-size:16px}.notice-list{grid-template-columns:1fr}.notice-list li{font-size:12px}
   }
 </style>
 </head>
@@ -304,7 +310,7 @@
   <div class="panel lace-trim">
     <div class="panel-title">🎯 中奖概率<span class="mini">共 7 档奖励</span></div>
     <div class="prize-list" id="prizeList"></div>
-    <div class="odds-note">概率已按发放成本平衡：折扣券占比高，现金返现 / 大额预存赠送为稀有档，保证长期可持续发放～</div>
+    <div class="odds-note">7 档奖励按公开概率随机抽取，优惠券、赠送余额与现金返现均以实际开奖结果为准。</div>
   </div>
 
   <!-- 3. 历史记录 -->
@@ -315,6 +321,16 @@
     </div>
   </div>
   </div>
+
+  <section class="activity-notice" aria-labelledby="noticeTitle">
+    <h2 class="notice-title" id="noticeTitle">📌 参与注意事项</h2>
+    <ol class="notice-list">
+      <li>优惠券及赠送余额仅供下次点单使用，不可抵扣本次订单。</li>
+      <li>现金返现奖励核销后立即到账。</li>
+      <li>完成消费后才可参与刮奖，不支持先刮奖后消费。</li>
+      <li>参与门槛待定，最终以活动公告为准。</li>
+    </ol>
+  </section>
   </main>
 
   <footer>© 2026 垂耳兔电竞 · 最终解释权归垂耳兔电竞所有 · akihowaito</footer>
@@ -348,13 +364,13 @@
 
   /* ---------------- 奖品与概率配置（真实概率，合计100%，已按成本控制） ---------------- */
   const PRIZES = [
-    { id:'p98', name:'98折优惠券', desc:'下单立减2%',  icon:'🎫', tier:'common',    tierLabel:'普通', prob:28, c1:'#FF9FC0', c2:'#FF6FA5' },
-    { id:'p95', name:'95折优惠券', desc:'下单立减5%',  icon:'🎟️', tier:'common',    tierLabel:'普通', prob:22, c1:'#C4A6FF', c2:'#9A6EFF' },
-    { id:'d10', name:'预存加赠10元', desc:'预存账户多送10元', icon:'💰', tier:'uncommon', tierLabel:'优质', prob:18, c1:'#8FDCB8', c2:'#5CC08F' },
-    { id:'p90', name:'9折优惠券',  desc:'下单立减10%', icon:'🎁', tier:'uncommon', tierLabel:'优质', prob:14, c1:'#FFCE7A', c2:'#FFB13D' },
-    { id:'d18', name:'预存加赠18元', desc:'预存账户多送18元', icon:'💎', tier:'rare',     tierLabel:'稀有', prob:8,  c1:'#8FBFFF', c2:'#4C93FF' },
-    { id:'c5',  name:'现金返现5元', desc:'直接返还5元现金',  icon:'💵', tier:'rare',     tierLabel:'稀有', prob:6,  c1:'#FF9C9C', c2:'#FF6161' },
-    { id:'c8',  name:'现金返现8元', desc:'全场最高档奖励',   icon:'👑', tier:'legendary',tierLabel:'王牌', prob:4,  c1:'#FFD34D', c2:'#FF9A3D' },
+    { id:'p98', name:'98 折优惠券', desc:'下次点单立减 2%', icon:'🎫', tier:'common', tierLabel:'普通', prob:28, c1:'#FF9FC0', c2:'#FF6FA5' },
+    { id:'p95', name:'95 折优惠券', desc:'下次点单立减 5%', icon:'🎟️', tier:'common', tierLabel:'普通', prob:22, c1:'#C4A6FF', c2:'#9A6EFF' },
+    { id:'d10', name:'赠送余额 10r', desc:'仅供下次点单使用', icon:'💰', tier:'uncommon', tierLabel:'优质', prob:18, c1:'#8FDCB8', c2:'#5CC08F' },
+    { id:'d28', name:'赠送余额 28r', desc:'仅供下次点单使用', icon:'🎁', tier:'uncommon', tierLabel:'优质', prob:14, c1:'#FFCE7A', c2:'#FFB13D' },
+    { id:'d18', name:'赠送余额 18r', desc:'仅供下次点单使用', icon:'💎', tier:'rare',     tierLabel:'稀有', prob:8,  c1:'#8FBFFF', c2:'#4C93FF' },
+    { id:'c5',  name:'现金返现 5r', desc:'核销后立即到账',    icon:'💵', tier:'rare',     tierLabel:'稀有', prob:6,  c1:'#FF9C9C', c2:'#FF6161' },
+    { id:'c8',  name:'现金返现 8r', desc:'核销后立即到账',    icon:'👑', tier:'legendary',tierLabel:'王牌', prob:4,  c1:'#FFD34D', c2:'#FF9A3D' },
   ];
   const TIER_RANK = { common:1, uncommon:2, rare:3, legendary:4 };
   let CUM = []; (function(){ let acc=0; PRIZES.forEach(p=>{ acc+=p.prob; CUM.push(acc); }); })();
