@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#dff4ff">
   <title>幸运常驻转盘 · 垂耳兔电竞</title>
   <style>
-@import url('https://fonts.googleapis.com/css2?family=Huninn&family=Nunito:wght@600;700;800;900&family=ZCOOL+QingKe+HuangYou&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Huninn&family=Nunito:wght@600;700;800;900&family=ZCOOL+KuaiLe&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--pink:#f5a4c8;--pink-deep:#e987b6;--pink-soft:#fff2f8;--blue:#92d3f4;--blue-deep:#66b9e8;--baby:#cceeff;--ink:#635467;--muted:#927f92;--line:#cdeafa;--glass:rgba(255,255,255,.86);--candy:"ZCOOL QingKe HuangYou","Huninn","Microsoft YaHei",sans-serif}
+:root{--pink:#f5a4c8;--pink-deep:#e987b6;--pink-soft:#fff2f8;--blue:#92d3f4;--blue-deep:#66b9e8;--baby:#cceeff;--ink:#635467;--muted:#927f92;--line:#cdeafa;--glass:rgba(255,255,255,.86);--candy:"ZCOOL KuaiLe","Huninn","Microsoft YaHei",sans-serif}
 html{scroll-behavior:smooth}
 body{min-height:100vh;font-family:"Huninn","Microsoft YaHei","PingFang SC",sans-serif;color:var(--ink);background:#e7f6ff}
 button,a{font:inherit}
@@ -111,6 +111,14 @@ button,a{font:inherit}
 @media(min-width:521px){.intro{height:202px;min-height:202px}}
 .topbar{gap:10px}.back,.contact,.sound-toggle{box-sizing:border-box;border-radius:12px;font-size:11px}.back,.contact{min-height:40px}.back{padding:8px 12px;border-width:2px}.contact{padding:8px 13px;border:0}.sound-toggle{width:40px;height:40px;border-width:2px}.eyebrow{padding:6px 11px;border-width:1.5px;font-size:10px}.meta{padding:5px 10px;border-width:1.5px;font-size:10px}
 @media(max-width:520px){.back,.contact{padding:7px 9px;font-size:10px}.sound-toggle{width:36px;height:36px}}
+/* Readability pass: larger type while preserving the existing panel geometry. */
+.back,.contact,.sound-toggle{font-size:12px}.eyebrow{font-size:11px}.intro p{font-size:14px}.meta{font-size:11px}
+.panel-label{font-size:11px}.price strong{font-size:22px}.price span{font-size:11px}.wheel-center strong{font-size:21px}.wheel-center span{font-size:10px}
+.result-head h2{font-size:21px}.result-head p{font-size:13px}.result-state{font-size:11px}.pool-head h2{font-size:19px}.pool-head p{font-size:13px}.total{font-size:11px}
+.prize-name{font-size:14px}.prob{font-size:12px}.section-title{font-size:23px}.section-note{font-size:11px}.subhead h3{font-size:19px}.subhead span{font-size:13px}
+.empty{font-size:14px}.history-row .num{font-size:11px}.history-row strong{font-size:14px}.history-row time{font-size:11px}.rule p{font-size:14px}.footer{font-size:10px}
+.ticket-topline{font-size:12px}.ticket-topline strong{font-size:13px}.result-badge,.result-got{font-size:12px}.inline-result h2{font-size:25px}.audit-row{font-size:12px}.result-note{font-size:13px}.ticket-footer{font-size:11px}
+@media(max-width:520px){.back,.contact{font-size:11px}.intro p{font-size:13px}.meta{font-size:10px}.prize-name{font-size:13px}.prob{font-size:11px}.section-title{font-size:21px}.section-note{font-size:10px}.rule p{font-size:13px}.inline-result h2{font-size:23px}.audit-row{font-size:11px}}
 </style>
 </head>
 <body>
@@ -121,7 +129,7 @@ button,a{font:inherit}
       <a class="back" href="./index.html">← 返回首页</a>
       <div class="top-actions">
         <button class="sound-toggle" id="soundToggle" type="button" title="关闭音效" aria-label="关闭音效">🔊</button>
-        <a class="contact" href="https://kook.vip/HRXPjp" target="_blank" rel="noopener">联系下单 ↗</a>
+      <a class="contact" href="https://kook.vip/HRXPjp" target="_blank" rel="noopener">联系下单🐇</a>
       </div>
     </nav>
 
@@ -130,7 +138,7 @@ button,a{font:inherit}
       <h1>幸运常驻转盘</h1>
       <p>188R/1次，转动任务指针，从 8 项三角洲体验中解锁本次幸运任务。</p>
       <div class="meta-row">
-        <span class="meta">🐰 垂耳兔电竞 · KOOK 0608</span><span class="meta" id="dynamicTime">📅 正在同步时间…</span>
+        <span class="meta">🐰 垂耳兔电竞 · KOOK 7686</span><span class="meta" id="dynamicTime">📅 正在同步时间…</span>
       </div>
     </header>
 
@@ -160,7 +168,7 @@ button,a{font:inherit}
             <span>等待开始抽奖<br><small>点击左侧按钮，转出本次幸运结果</small></span>
           </div>
           <div class="inline-result-body" id="resultBody" hidden>
-            <div class="ticket-topline"><strong>BUNNY CLUB · LUCKY DRAW</strong><span id="ticketNo">NO. WAITING</span></div>
+            <div class="ticket-topline"><strong>BUNNY CLUB · LUCKY WHEEL</strong><span id="ticketNo">NO. WAITING</span></div>
             <div class="result-main">
               <div class="result-icon" id="resultIcon">🎡</div>
               <div>
@@ -177,11 +185,11 @@ button,a{font:inherit}
               <div class="audit-row"><strong>设备指纹</strong><span id="resultFingerprint">—</span></div>
               <div class="audit-row"><strong>核验码</strong><span id="resultToken">—</span></div>
             </div>
-            <p class="result-note">请保存本次抽奖凭证并联系 KOOK 0608，实际服务以双方确认订单为准。</p>
+            <p class="result-note">请保存本次抽奖凭证并联系 KOOK 7686，实际服务以双方确认订单为准。</p>
             <div class="result-actions">
               <button class="save-result" id="saveResult" type="button">保存截图</button>
             </div>
-            <div class="ticket-footer">LUCKY DRAW · 垂耳兔电竞 KOOK 0608</div>
+            <div class="ticket-footer">LUCKY WHEEL · 垂耳兔电竞 KOOK 7686</div>
           </div>
         </div>
       </aside>
@@ -209,14 +217,14 @@ button,a{font:inherit}
           <div class="rule"><span class="rule-num">2</span><p><strong>专属链接：</strong>此转盘链接仅供已下单板板使用，请勿对外传播或分享。</p></div>
           <div class="rule"><span class="rule-num">3</span><p><strong>诚信参与：</strong>参与者需遵守活动规则，严禁任何作弊行为；一经发现将取消结果，本转盘按页面公开概率抽取。</p></div>
           <div class="rule"><span class="rule-num">4</span><p><strong>抽奖次数：</strong>每支付 188R 可获得 1 次转动机会，额外次数请联系垂耳兔电竞客服确认。</p></div>
-          <div class="rule"><span class="rule-num">5</span><p><strong>获取与登记：</strong>成功下单后由客服或管理员发送转盘链接；中奖后请及时保存结果并联系垂耳兔电竞 KOOK 0608 登记，最终解释权归垂耳兔电竞所有。</p></div>
+          <div class="rule"><span class="rule-num">5</span><p><strong>获取与登记：</strong>成功下单后由客服或管理员发送转盘链接；中奖后请及时保存结果并联系垂耳兔电竞 KOOK 7686 登记，最终解释权归垂耳兔电竞所有。</p></div>
         </div>
         <div class="promo-art">
           <img src="./assets/bunny-club-kook-banner.png" alt="垂耳兔电竞 KOOK 7686 公粽号宣传图">
         </div>
       </div>
     </section>
-    <footer class="footer">© 2026 垂耳兔电竞 · KOOK 0608 · 幸运常驻转盘结果以最终下单确认为准</footer>
+    <footer class="footer">© 2026 垂耳兔电竞 · KOOK 0608 · 最终解释权归垂耳兔电竞所有</footer>
   </main>
 </div>
 
@@ -307,7 +315,7 @@ function saveReceiptImage(){
   c.save();c.shadowColor='rgba(126,165,192,.2)';c.shadowBlur=32;c.shadowOffsetY=18;drawReceiptPaper(c,58,38,784,1160);c.fillStyle='#fffdfd';c.fill();c.restore();
   drawReceiptPaper(c,58,38,784,1160);c.strokeStyle='#ef9fc4';c.lineWidth=4;c.stroke();
   drawSoftWatermark(c,900,1240,'垂耳兔电竞 · BUNNY CLUB');
-  c.fillStyle='#67b7e1';c.font='900 24px Microsoft YaHei';c.textAlign='left';c.fillText('BUNNY CLUB · LUCKY DRAW',96,104);c.textAlign='right';c.fillStyle='#9b8395';c.font='900 19px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,804,104);
+  c.fillStyle='#67b7e1';c.font='900 24px Microsoft YaHei';c.textAlign='left';c.fillText('BUNNY CLUB · LUCKY WHEEL',96,104);c.textAlign='right';c.fillStyle='#9b8395';c.font='900 19px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,804,104);
   c.setLineDash([10,10]);c.strokeStyle='#e3c1d2';c.lineWidth=2;c.beginPath();c.moveTo(96,138);c.lineTo(804,138);c.stroke();c.setLineDash([]);
   const prizeBg=c.createLinearGradient(96,165,804,315);prizeBg.addColorStop(0,soft);prizeBg.addColorStop(1,'#f1f9ff');c.fillStyle=prizeBg;c.beginPath();c.roundRect(96,166,708,166,24);c.fill();
   c.fillStyle='#fff';c.beginPath();c.roundRect(116,192,108,108,27);c.fill();c.strokeStyle='rgba(231,124,173,.18)';c.lineWidth=2;c.stroke();c.font='58px "Segoe UI Emoji"';c.textAlign='center';c.fillText(prize.icon,170,267);
@@ -320,15 +328,15 @@ function saveReceiptImage(){
   c.save();c.translate(184,873);c.rotate(-.12);c.strokeStyle=accent;c.lineWidth=4;c.globalAlpha=.72;c.beginPath();c.arc(0,0,60,0,Math.PI*2);c.stroke();c.beginPath();c.arc(0,0,49,0,Math.PI*2);c.stroke();c.fillStyle=accent;c.textAlign='center';c.font='900 25px Microsoft YaHei';c.fillText('已核验',0,-2);c.font='900 12px Arial';c.fillText('VERIFIED',0,22);c.restore();
   c.fillStyle='#765f73';c.textAlign='left';c.font='900 21px Microsoft YaHei';c.fillText('好运已装进这张票据',286,844);c.fillStyle='#a18a9d';c.font='800 16px Microsoft YaHei';c.fillText('请截图保存，并以核验码确认本次结果',286,876);drawCanvasHeart(c,744,850,22,accent,.45);drawCanvasSpark(c,780,890,15,'#72bce3',.55);
   c.setLineDash([9,9]);c.strokeStyle='#e3c5d5';c.lineWidth=2;c.beginPath();c.moveTo(96,951);c.lineTo(804,951);c.stroke();c.setLineDash([]);c.fillStyle='#d3a5bd';c.font='17px Microsoft YaHei';c.fillText('✂',105,958);
-  c.fillStyle='#927e91';c.font='800 17px Microsoft YaHei';canvasLines(c,'请保存本次抽奖凭证并联系 KOOK 0608，实际服务以双方确认订单为准。',96,995,708,27);
-  c.setLineDash([5,10]);c.strokeStyle='#d9c0cf';c.lineWidth=2;c.beginPath();c.moveTo(210,1080);c.lineTo(690,1080);c.stroke();c.setLineDash([]);drawCanvasHeart(c,394,1118,18,'#ef8db9',.55);drawCanvasSpark(c,450,1118,13,'#82c6e9',.6);drawCanvasHeart(c,506,1118,18,'#b89ae8',.5);c.textAlign='center';c.fillStyle='#67b7e1';c.font='900 17px Microsoft YaHei';c.fillText('THANK YOU · 垂耳兔电竞 KOOK 0608',450,1166);
+  c.fillStyle='#927e91';c.font='800 17px Microsoft YaHei';canvasLines(c,'请保存本次抽奖凭证并联系 KOOK 7686，实际服务以双方确认订单为准。',96,995,708,27);
+  c.setLineDash([5,10]);c.strokeStyle='#d9c0cf';c.lineWidth=2;c.beginPath();c.moveTo(210,1080);c.lineTo(690,1080);c.stroke();c.setLineDash([]);drawCanvasHeart(c,394,1118,18,'#ef8db9',.55);drawCanvasSpark(c,450,1118,13,'#82c6e9',.6);drawCanvasHeart(c,506,1118,18,'#b89ae8',.5);c.textAlign='center';c.fillStyle='#67b7e1';c.font='900 17px Microsoft YaHei';c.fillText('THANK YOU · 垂耳兔电竞 KOOK 7686',450,1166);
   out.toBlob(blob=>{if(!blob){toast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`幸运转盘-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);saveButton.textContent='已保存';saveButton.classList.add('is-saved');toast('结果图片已保存')},'image/png');
 }
 function toast(message){const el=document.getElementById('toast');el.textContent=message;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),1700)}
 function legacyCopy(text){const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();let copied=false;try{copied=document.execCommand('copy')}catch{}area.remove();return copied}
 async function copyResult(){if(!currentResult)return;const {prize,audit}=currentResult,text=`垂耳兔电竞 · 幸运常驻转盘\n抽中：${prize.name}\n开奖时间：${audit.displayTime}\n地区 IP：${audit.region}\n设备：${audit.device}\n环境：${audit.environment}\n设备指纹：FP:${audit.fp}\n核验码：${audit.token}`;let copied=false;try{if(!navigator.clipboard)throw new Error();await navigator.clipboard.writeText(text);copied=true}catch{copied=legacyCopy(text)}if(copied){copyButton.textContent='已复制';copyButton.classList.add('is-copied');toast('抽奖结果已复制')}else{toast('复制失败，请截图保存')}}
 function canvasLines(ctx,text,x,y,maxWidth,lineHeight){let line='';for(const char of String(text)){const next=line+char;if(ctx.measureText(next).width>maxWidth&&line){ctx.fillText(line,x,y);line=char;y+=lineHeight}else line=next}if(line)ctx.fillText(line,x,y);return y}
-function saveResultImage(){if(!currentResult)return;const {prize,audit}=currentResult,out=document.createElement('canvas');out.width=900;out.height=1080;const c=out.getContext('2d'),gradient=c.createLinearGradient(0,0,900,1080);gradient.addColorStop(0,'#fff2f8');gradient.addColorStop(.52,'#fffafd');gradient.addColorStop(1,'#eaf8ff');c.fillStyle=gradient;c.fillRect(0,0,900,1080);c.fillStyle='#ffffff';c.strokeStyle='#ef9fc4';c.lineWidth=5;c.beginPath();c.roundRect(55,55,790,970,30);c.fill();c.stroke();c.fillStyle='#69b6df';c.font='900 24px Microsoft YaHei';c.fillText('BUNNY CLUB · LUCKY DRAW',95,115);c.textAlign='right';c.fillStyle='#a08798';c.font='800 20px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,805,115);c.textAlign='left';c.setLineDash([12,10]);c.strokeStyle='#e3c5d5';c.lineWidth=2;c.beginPath();c.moveTo(95,145);c.lineTo(805,145);c.stroke();c.setLineDash([]);c.font='48px "Segoe UI Emoji"';c.fillText(prize.icon,100,235);c.fillStyle='#9a8798';c.font='800 20px Microsoft YaHei';c.fillText('本次抽中',180,190);c.fillStyle='#e47eaf';c.font='900 34px Microsoft YaHei';let y=canvasLines(c,prize.name,180,235,590,48);y+=54;c.fillStyle='#fff8fb';c.strokeStyle='#e3c5d5';c.lineWidth=2;c.setLineDash([8,7]);c.beginPath();c.roundRect(95,y,710,360,20);c.fill();c.stroke();c.setLineDash([]);const rows=[['开奖时间',audit.displayTime],['地区 IP',audit.region],['设备信息',`${audit.device} · ${audit.environment}`],['设备指纹',`FP:${audit.fp}`],['核验码',audit.token]];let rowY=y+55;for(const [label,value] of rows){c.fillStyle='#6c596b';c.font='900 20px Microsoft YaHei';c.fillText(label,125,rowY);c.fillStyle='#8f7b8d';c.font='700 19px Microsoft YaHei';rowY=canvasLines(c,value,270,rowY,500,28)+52}c.fillStyle='#927e91';c.font='800 19px Microsoft YaHei';canvasLines(c,'请保存本次抽奖凭证并联系 KOOK 0608，实际服务以双方确认订单为准。',95,915,710,30);c.textAlign='center';c.fillStyle='#72bce3';c.font='900 18px Microsoft YaHei';c.fillText('LUCKY DRAW · 垂耳兔电竞 KOOK 0608',450,980);out.toBlob(blob=>{if(!blob){toast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`幸运转盘-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);saveButton.textContent='✓';saveButton.classList.add('is-saved');toast('结果图片已保存')},'image/png')}
+function saveResultImage(){if(!currentResult)return;const {prize,audit}=currentResult,out=document.createElement('canvas');out.width=900;out.height=1080;const c=out.getContext('2d'),gradient=c.createLinearGradient(0,0,900,1080);gradient.addColorStop(0,'#fff2f8');gradient.addColorStop(.52,'#fffafd');gradient.addColorStop(1,'#eaf8ff');c.fillStyle=gradient;c.fillRect(0,0,900,1080);c.fillStyle='#ffffff';c.strokeStyle='#ef9fc4';c.lineWidth=5;c.beginPath();c.roundRect(55,55,790,970,30);c.fill();c.stroke();c.fillStyle='#69b6df';c.font='900 24px Microsoft YaHei';c.fillText('BUNNY CLUB · LUCKY WHEEL',95,115);c.textAlign='right';c.fillStyle='#a08798';c.font='800 20px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,805,115);c.textAlign='left';c.setLineDash([12,10]);c.strokeStyle='#e3c5d5';c.lineWidth=2;c.beginPath();c.moveTo(95,145);c.lineTo(805,145);c.stroke();c.setLineDash([]);c.font='48px "Segoe UI Emoji"';c.fillText(prize.icon,100,235);c.fillStyle='#9a8798';c.font='800 20px Microsoft YaHei';c.fillText('本次抽中',180,190);c.fillStyle='#e47eaf';c.font='900 34px Microsoft YaHei';let y=canvasLines(c,prize.name,180,235,590,48);y+=54;c.fillStyle='#fff8fb';c.strokeStyle='#e3c5d5';c.lineWidth=2;c.setLineDash([8,7]);c.beginPath();c.roundRect(95,y,710,360,20);c.fill();c.stroke();c.setLineDash([]);const rows=[['开奖时间',audit.displayTime],['地区 IP',audit.region],['设备信息',`${audit.device} · ${audit.environment}`],['设备指纹',`FP:${audit.fp}`],['核验码',audit.token]];let rowY=y+55;for(const [label,value] of rows){c.fillStyle='#6c596b';c.font='900 20px Microsoft YaHei';c.fillText(label,125,rowY);c.fillStyle='#8f7b8d';c.font='700 19px Microsoft YaHei';rowY=canvasLines(c,value,270,rowY,500,28)+52}c.fillStyle='#927e91';c.font='800 19px Microsoft YaHei';canvasLines(c,'请保存本次抽奖凭证并联系 KOOK 7686，实际服务以双方确认订单为准。',95,915,710,30);c.textAlign='center';c.fillStyle='#72bce3';c.font='900 18px Microsoft YaHei';c.fillText('LUCKY WHEEL · 垂耳兔电竞 KOOK 7686',450,980);out.toBlob(blob=>{if(!blob){toast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`幸运转盘-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);saveButton.textContent='✓';saveButton.classList.add('is-saved');toast('结果图片已保存')},'image/png')}
 function updateSound(){soundButton.textContent=soundEnabled?'🔊':'🔇';soundButton.title=soundEnabled?'关闭音效':'开启音效';soundButton.setAttribute('aria-label',soundButton.title)}
 button.addEventListener('click',spin);soundButton.addEventListener('click',()=>{soundEnabled=!soundEnabled;localStorage.setItem(SOUND_KEY,soundEnabled?'on':'off');updateSound();if(soundEnabled)tone(784,0,.18,'sine',.12);toast(soundEnabled?'音效已开启':'音效已关闭')});saveButton.addEventListener('click',saveReceiptImage);
 drawWheel();renderPrizes();renderHistory();updateSound();createAmbient();const timeEl=document.getElementById('dynamicTime');const tickClock=()=>timeEl.textContent=`📅 ${formatTime()}`;tickClock();setInterval(tickClock,1000);ipReady=loadIpRegion();
