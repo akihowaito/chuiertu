@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#ffd8ee">
   <title>今日趣味单 · 垂耳兔电竞</title>
   <style>
-@import url('https://fonts.googleapis.com/css2?family=Huninn&family=Nunito:wght@600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Huninn&family=Nunito:wght@600;700;800;900&family=ZCOOL+KuaiLe&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --pink:#ff70b5;--pink-deep:#f13f9d;--baby:#a7dcff;--blue:#55b8f5;
@@ -164,7 +164,7 @@ button{border:0}
 @media(max-width:520px){.shell{padding:12px 11px 30px}.topbar{align-items:center}.back,.kook-link{padding:7px 9px;font-size:10px}.sound-toggle{width:36px;height:36px}.intro{padding:18px 0 14px}.intro h1{font-size:31px}.audit-item{padding:9px}.draw-stage{padding:18px 13px;min-height:465px}.stage-top{left:12px;right:12px}.gift-zone{transform:scale(.92);margin-top:25px}.pool-panel,.draw-stage,.history,.redeem{border-radius:16px}.prize-item{grid-template-columns:32px 1fr auto}.prize-name{font-size:10px}.result-card{padding:20px 15px}.result-actions{grid-template-columns:1fr}.section-title-row{align-items:start}.brand-banner{aspect-ratio:773/300}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 /* Blind box redesign preview */
-:root{--pink:#f5a4c8;--pink-deep:#e987b6;--pink-soft:#fff2f8;--blue:#92d3f4;--blue-deep:#66b9e8;--baby:#cceeff;--ink:#635467;--muted:#927f92;--line:#cdeafa;--candy:"上首软糖体","SSRuanTangTi","Huninn","Microsoft YaHei",sans-serif}
+:root{--pink:#f5a4c8;--pink-deep:#e987b6;--pink-soft:#fff2f8;--blue:#92d3f4;--blue-deep:#66b9e8;--baby:#cceeff;--ink:#635467;--muted:#927f92;--line:#cdeafa;--candy:"ZCOOL KuaiLe","Huninn","Microsoft YaHei",sans-serif}
 .page{background:linear-gradient(125deg,rgba(255,195,222,.46),transparent 35%),linear-gradient(235deg,rgba(179,225,250,.52),transparent 40%),linear-gradient(155deg,#fffafd,#fff0f7 43%,#edf9ff 72%,#d9f1ff)}.page::after{display:none}.shell{width:min(1120px,100%);padding:18px 18px 42px}
 .back{color:#62acd7;background:rgba(255,255,255,.9);border-color:var(--line)}.kook-link{background:linear-gradient(135deg,#ef77b0,#f3a5c9 48%,#85c9ee);box-shadow:0 5px 0 rgba(105,177,218,.2)}.sound-toggle{color:#62acd7;border-color:var(--line)}
 .intro{padding:22px 0 16px}.eyebrow{color:#e584b2}.intro h1{font-family:var(--candy);font-size:clamp(34px,6vw,52px);font-weight:400;color:#e787b5;background:linear-gradient(100deg,#ed8fba,#f3a8cb 48%,#77bfe9);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #fff) drop-shadow(0 5px 8px rgba(120,160,185,.16))}.intro p{font-size:12px}.meta-pill{border:1.5px solid rgba(238,170,201,.58);background:rgba(255,255,255,.8)}
@@ -207,6 +207,7 @@ button{border:0}
 .history-ticket:hover{background:#e8f7ff}.history-ticket:focus-visible{outline:3px solid rgba(104,197,249,.25);outline-offset:2px}
 .result-close{position:absolute;top:13px;right:13px;z-index:5;display:grid;place-items:center;width:34px;height:34px;border:1.5px solid color-mix(in srgb,var(--tier-color) 38%,white);border-radius:50%;background:rgba(255,255,255,.9);color:var(--tier-color);font-size:20px;line-height:1;cursor:pointer;box-shadow:0 4px 0 color-mix(in srgb,var(--tier-color) 12%,transparent)}
 .result-close[hidden]{display:none}.result-close:hover{transform:translateY(-1px);background:#fff}.result-close:active{transform:translateY(2px);box-shadow:none}
+.fun-facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;text-align:left}.fun-fact{min-width:0;padding:10px 11px;border:1.5px solid color-mix(in srgb,var(--tier-color) 22%,white);border-radius:12px;background:rgba(255,255,255,.72)}.fun-fact.wide{grid-column:1/-1}.fun-fact strong{display:block;margin-bottom:3px;color:var(--tier-color);font-size:10px}.fun-fact span{display:block;color:#796778;font-size:11px;line-height:1.55;font-weight:900;overflow-wrap:anywhere}
 .result-overlay .inline-result{border:3px solid color-mix(in srgb,var(--tier-color) 62%,#9ddff5);border-radius:24px;background:linear-gradient(145deg,#fffafd 4%,var(--tier-soft) 58%,#effaff);box-shadow:0 10px 0 color-mix(in srgb,var(--tier-color) 15%,transparent),0 24px 64px rgba(47,25,52,.2)}
 .result-overlay .inline-result-body{padding:28px 28px 25px}
 .result-overlay .inline-result-body::before{inset:11px;border:1.5px solid rgba(255,255,255,.9);border-radius:16px;background:none;opacity:1;pointer-events:none}
@@ -217,7 +218,7 @@ button{border:0}
 .result-overlay .result-main>div:last-child{display:contents}.result-overlay .result-kicker{order:1;background:#fff;border-width:1px;font-size:12px}.result-overlay .result-got{order:3;margin-top:2px;font-size:13px}.result-overlay .inline-result h2{order:4;margin-top:2px;font-size:27px;line-height:1.38}
 .result-time-chip{position:relative;z-index:1;width:max-content;max-width:100%;margin:7px auto 0;padding:7px 13px;border:1px solid color-mix(in srgb,var(--tier-color) 28%,white);border-radius:999px;background:rgba(255,255,255,.82);color:#907b8e;font-size:11px;font-weight:900}
 .result-overlay .result-note{position:relative;z-index:1;margin-top:13px;font-size:12px}.result-overlay .result-actions,.result-overlay .ticket-footer{position:relative;z-index:1}
-@media(max-width:520px){.result-overlay .inline-result-body{padding:24px 18px 22px}.result-overlay .result-main{display:flex;padding-top:16px}.result-overlay .result-icon{font-size:54px}.result-overlay .inline-result h2{font-size:22px}.result-close{top:10px;right:10px;width:32px;height:32px}}
+@media(max-width:520px){.result-overlay .inline-result-body{padding:24px 18px 22px}.result-overlay .result-main{display:flex;padding-top:16px}.result-overlay .result-icon{font-size:54px}.result-overlay .inline-result h2{font-size:22px}.result-close{top:10px;right:10px;width:32px;height:32px}.fun-facts{grid-template-columns:1fr}}
 @media(max-width:520px){.draw-layout>.pool-panel .prize-list{grid-template-columns:1fr}.gift-reward{font-size:58px}.result-overlay .result-main{grid-template-columns:54px minmax(0,1fr);gap:11px}.result-overlay .result-icon{font-size:48px}.result-overlay .inline-result h2{font-size:20px}.history-row{grid-template-columns:auto minmax(0,1fr) auto}.history-row time{display:none}}
 /* Lightweight celebration: transform/opacity only for smooth rendering. */
 .result-overlay::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 28% 30%,rgba(255,181,218,.24),transparent 24%),radial-gradient(circle at 72% 68%,rgba(154,218,250,.22),transparent 27%);opacity:0;transform:scale(.92)}
@@ -294,7 +295,7 @@ button{border:0}
     <header class="intro">
       <div class="eyebrow"><span class="live-dot"></span>常驻开放 · 随时可玩</div>
       <h1>今日趣味单</h1>
-      <p>纯娱乐随机推荐，从 23 种趣味玩法中抽取今天适合下什么单。</p>
+      <p>纯娱乐随机推荐，从 24 种趣味玩法中抽取今天适合下什么单。</p>
       <div class="intro-meta">
         <span class="meta-pill">🐰 垂耳兔电竞 · KOOK 7686</span>
         <span class="meta-pill" id="dynamicTime">📅 正在同步时间…</span>
@@ -330,13 +331,13 @@ button{border:0}
       </div>
 
       <aside class="pool-panel" aria-label="趣味玩法与随机概率">
-        <div class="panel-head"><div class="panel-head-row"><h2>今日玩法清单</h2><span class="odds-total">23 种 · 等概率</span></div><p>每种玩法均为 1/23 概率，使用浏览器加密随机数。</p></div>
+        <div class="panel-head"><div class="panel-head-row"><h2>今日玩法清单</h2><span class="odds-total">24 种 · 等概率</span></div><p>每种玩法均为 1/24 概率，概率为随机数，纯看运气捏！</p></div>
         <div class="prize-list" id="prizeList"></div>
       </aside>
     </section>
 
     <section class="section records" aria-label="趣味推荐记录与玩法说明">
-      <div class="section-title-row"><h2 class="section-title">娱乐记录</h2><span class="section-note">仅保存在当前浏览器</span></div>
+      <div class="section-title-row"><h2 class="section-title">娱乐记录</h2></div>
       <div class="support-grid">
         <div class="history">
           <div class="subhead"><div><h3>我的趣味单记录</h3><span id="historyCount">还没有抽取记录</span></div></div>
@@ -350,7 +351,7 @@ button{border:0}
         <div class="redeem">
           <div class="subhead"><div><h3>怎么玩</h3><span>三步获得今日灵感</span></div></div>
           <div class="steps">
-            <div class="step"><span class="step-num">1</span><div><strong>随机抽取</strong><p>轻点礼盒，从 23 种玩法中等概率抽取一项。</p></div></div>
+            <div class="step"><span class="step-num">1</span><div><strong>随机抽取</strong><p>轻点礼盒，从 24 种玩法中等概率抽取一项。</p></div></div>
             <div class="step"><span class="step-num">2</span><div><strong>看看灵感</strong><p>把结果当作今天点单方向，也可以继续抽取。</p></div></div>
             <div class="step"><span class="step-num">3</span><div><strong>自由决定</strong><p>推荐结果纯属娱乐，实际是否下单由你自己决定。</p></div></div>
           </div>
@@ -369,27 +370,31 @@ button{border:0}
   <div class="result-floaters" aria-hidden="true"><span>🎮</span><span>🛡️</span><span>🎧</span><span>🎯</span><span>🎲</span><span>🐶</span><span>🎴</span><span>♈</span></div>
   <div class="inline-result tier-common" id="resultCard" aria-live="polite">
     <div class="inline-result-body" id="resultBody">
-      <button class="result-close" id="resultClose" type="button" aria-label="关闭截图预览" hidden>×</button>
+      <button class="result-close" id="resultClose" type="button" aria-label="关闭结果">×</button>
       <div class="ticket-topline"><strong>BUNNY CLUB · TODAY FUN PICK</strong><span id="ticketNo">NO. WAITING</span></div>
       <div class="result-main">
         <div class="result-icon" id="resultIcon">🎁</div>
-        <div><div class="result-kicker" id="resultKicker">等概率推荐 · 1/23</div><div class="result-got">今天推荐</div><h2 id="resultTitle">等待抽取玩法</h2></div>
+        <div><div class="result-kicker" id="resultKicker">等概率推荐 · 1/24</div><div class="result-got">今天推荐</div><h2 id="resultTitle">等待抽取玩法</h2></div>
       </div>
       <div class="ticket-cut" aria-hidden="true"><span>✂</span></div>
-      <div class="result-audit" aria-label="随机推荐记录信息">
-        <div class="result-audit-row"><strong>抽取时间</strong><span id="resultTime">—</span></div><div class="result-audit-row"><strong>地区 IP</strong><span id="resultIp">—</span></div><div class="result-audit-row"><strong>设备信息</strong><span id="resultDevice">—</span></div><div class="result-audit-row"><strong>设备指纹</strong><span id="resultFingerprint">—</span></div><div class="result-audit-row"><strong>记录码</strong><span id="resultAuditToken">—</span></div>
+      <div class="fun-facts" aria-label="今日趣味签信息">
+        <div class="fun-fact"><strong>今日心情</strong><span id="resultMood">—</span></div>
+        <div class="fun-fact"><strong>幸运色</strong><span id="resultLuckyColor">—</span></div>
+        <div class="fun-fact wide"><strong>推荐心语</strong><span id="resultMessage">—</span></div>
+        <div class="fun-fact"><strong>心动指数</strong><span id="resultHeartScore">—</span></div>
+        <div class="fun-fact"><strong>趣味签号</strong><span id="resultAuditToken">—</span></div>
       </div>
       <div class="result-time-chip">抽取时间 <span id="resultDisplayTime">—</span></div>
       <p class="result-note">纯娱乐随机推荐，实际下单内容请按你的心情决定。</p>
       <div class="result-actions"><button class="save-result" id="saveResult" type="button">保存截图</button></div>
-      <div class="ticket-footer">TODAY FUN PICK · 垂耳兔电竞 KOOK 7686</div>
+      <div class="ticket-footer">垂耳兔电竞 · HAVE FUN</div>
     </div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite">截图已保存</div>
 
 <script>
-const EQUAL_PROBABILITY=100/23;
+const EQUAL_PROBABILITY=100/24;
 const prizes=[
   {name:'体验单',icon:'🎮',color:'#ec5aa8',soft:'#fff0f7'},
   {name:'保底单',icon:'🛡️',color:'#8c61df',soft:'#f5edff'},
@@ -413,8 +418,12 @@ const prizes=[
   {name:'银行趣味单',icon:'🏦',color:'#4a9f82',soft:'#ecfbf6'},
   {name:'卡牌大师单',icon:'🃏',color:'#9c66d8',soft:'#f7efff'},
   {name:'十二星座趣味单',icon:'♈',color:'#668bd8',soft:'#eff4ff'},
-  {name:'金陵十三钗抽牌单',icon:'🎴',color:'#dc5f93',soft:'#fff0f6'}
+  {name:'金陵十三钗抽牌单',icon:'🎴',color:'#dc5f93',soft:'#fff0f6'},
+  {name:'未知趣味单',icon:'❔',color:'#5ca9c9',soft:'#eefaff'}
 ].map(prize=>({...prize,prob:EQUAL_PROBABILITY}));
+const moods=['元气满满','轻松随缘','想要一点惊喜','快乐加倍','适合大胆尝试','慢慢来也很好','今天超有灵感','想和朋友一起玩'];
+const messages=['今天把快乐放在第一位。','跟着第一感觉走，也许会有惊喜。','不用追求完美，玩得开心就很好。','给今天留一点随机的小浪漫。','换一种玩法，也是在解锁新的自己。','好运正在路上，先从开心开始。','今天适合轻松一点，享受过程就好。','选到什么不重要，快乐才是隐藏大奖。'];
+const luckyColors=['樱花粉','宝宝蓝','薄荷绿','奶油黄','葡萄紫','蜜桃橘','云朵白','晴空蓝'];
 const STORAGE_KEY='chuiertu_today_fun_pick_history_v1';
 const SOUND_KEY='chuiertu_blindbox_sound_v1';
 const els={
@@ -423,10 +432,9 @@ const els={
   card:document.getElementById('resultCard'),icon:document.getElementById('resultIcon'),kicker:document.getElementById('resultKicker'),
   resultTitle:document.getElementById('resultTitle'),resultBody:document.getElementById('resultBody'),save:document.getElementById('saveResult'),toast:document.getElementById('toast'),history:document.getElementById('historyList'),
   sound:document.getElementById('soundToggle'),flash:document.getElementById('screenFlash'),time:document.getElementById('dynamicTime'),
-  resultTime:document.getElementById('resultTime'),resultIp:document.getElementById('resultIp'),
-  resultDevice:document.getElementById('resultDevice'),resultFingerprint:document.getElementById('resultFingerprint'),resultAuditToken:document.getElementById('resultAuditToken'),resultDisplayTime:document.getElementById('resultDisplayTime')
+  resultMood:document.getElementById('resultMood'),resultMessage:document.getElementById('resultMessage'),resultLuckyColor:document.getElementById('resultLuckyColor'),resultHeartScore:document.getElementById('resultHeartScore'),resultAuditToken:document.getElementById('resultAuditToken'),resultDisplayTime:document.getElementById('resultDisplayTime')
 };
-let drawing=false,currentResult=null,resultDismissible=false;
+let drawing=false,currentResult=null,openedScrollY=0,resultFocusTimer=0;
 let soundEnabled=localStorage.getItem(SOUND_KEY)!=='off';
 let audioContext=null;
 const sessionMeta={
@@ -528,9 +536,13 @@ function spawnConfetti(count){
 }
 function spawnBurstWord(text,color,border){const item=document.createElement('div');item.className='burst-word';item.textContent=text;item.style.color=color;item.style.borderColor=border;document.body.appendChild(item);setTimeout(()=>item.remove(),1150)}
 function triggerResultEffects(prize){triggerScreenFlash(prize);playResultSound(15);haptic([45,25,60]);spawnConfetti(12);spawnBurstWord('今日推荐','#df5b9f','#f3a9cc')}
-function tierFor(){return{className:'tier-common',label:'等概率推荐 · 1/23'}}
+function tierFor(){return{className:'tier-common',label:'等概率推荐 · 1/24'}}
+function randomItem(items){return items[Math.floor(secureRandom()*items.length)]}
+function createFunProfile(){
+  return{mood:randomItem(moods),message:randomItem(messages),luckyColor:randomItem(luckyColors),heartScore:`${72+Math.floor(secureRandom()*28)}%`};
+}
 async function createAuditToken(prize,code,audit){
-  const source=[code,prize.name,audit.time,audit.region,audit.device,audit.fingerprint].join('|');
+  const source=[code,prize.name,audit.time,audit.mood,audit.message,audit.luckyColor,audit.heartScore].join('|');
   if(crypto.subtle){const bytes=new TextEncoder().encode(source);const digest=await crypto.subtle.digest('SHA-256',bytes);return [...new Uint8Array(digest)].slice(0,6).map(value=>value.toString(16).padStart(2,'0')).join('').toUpperCase()}
   let hash=2166136261;for(let i=0;i<source.length;i++){hash^=source.charCodeAt(i);hash=Math.imul(hash,16777619)}return (hash>>>0).toString(16).toUpperCase().padStart(8,'0');
 }
@@ -567,13 +579,14 @@ function renderHistory(){
 function showHistoryTicket(index){
   const item=readHistory()[index];if(!item)return;
   const prize=prizes.find(entry=>entry.name===item.name)||{name:item.name,prob:EQUAL_PROBABILITY,icon:item.icon||'🎁',color:'#ec5aa8',soft:'#fff0f7'};
-  const audit={time:item.audit?.time||item.time,displayTime:item.audit?.displayTime||formatFullTime(item.time),region:item.audit?.region||'历史记录',device:item.audit?.device||'记录时设备',environment:item.audit?.environment||'',fingerprint:item.audit?.fingerprint||'HISTORY',token:item.audit?.token||String(item.code||'HISTORYTICKET').replace(/[^A-Z0-9]/gi,'').slice(-12).toUpperCase().padStart(12,'0')};
+  const fallback=createFunProfile();
+  const audit={time:item.audit?.time||item.time,displayTime:item.audit?.displayTime||formatFullTime(item.time),mood:item.audit?.mood||fallback.mood,message:item.audit?.message||fallback.message,luckyColor:item.audit?.luckyColor||fallback.luckyColor,heartScore:item.audit?.heartScore||fallback.heartScore,token:item.audit?.token||String(item.code||'HISTORYTICKET').replace(/[^A-Z0-9]/gi,'').slice(-12).toUpperCase().padStart(12,'0')};
   currentResult={prize,code:item.code||'',audit};els.save.textContent='保存截图';els.save.classList.remove('is-saved');showResult(prize,currentResult.code,audit,true);
 }
 function escapeHtml(value){const div=document.createElement('div');div.textContent=value;return div.innerHTML}
 function formatTime(value){return new Intl.DateTimeFormat('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(value))}
 function renderPrizeList(){
-  document.getElementById('prizeList').innerHTML=prizes.map(prize=>`<div class="prize-item" style="--item-color:${prize.color};--item-bg:${prize.soft}"><span class="prize-icon">${prize.icon}</span><span class="prize-name">${prize.name}</span><span class="odds">1/23</span></div>`).join('');
+  document.getElementById('prizeList').innerHTML=prizes.map(prize=>`<div class="prize-item" style="--item-color:${prize.color};--item-bg:${prize.soft}"><span class="prize-icon">${prize.icon}</span><span class="prize-name">${prize.name}</span><span class="odds">1/24</span></div>`).join('');
 }
 function wait(ms){return new Promise(resolve=>setTimeout(resolve,ms))}
 async function draw(){
@@ -581,19 +594,19 @@ async function draw(){
   els.title.textContent='正在摇一摇今日灵感…';els.hint.textContent='加密随机序列已生成，请稍等一下';els.button.textContent='随机抽取中…';
   let tickStep=0;const tickTimer=setInterval(()=>playTick((tickStep++)%6),125);
   await wait(850);clearInterval(tickTimer);playOpen();els.title.textContent='今日趣味签正在揭晓…';els.hint.textContent='看看今天最适合玩哪一种';els.gift.classList.remove('opening');els.gift.classList.add('open');els.giftZone.classList.remove('is-opening');els.giftZone.classList.add('is-open');els.giftReward.classList.add('show');burst(prize);
-  await wait(650);if(sessionMeta.region.includes('正在')){els.title.textContent='正在生成核验信息…';els.hint.textContent='同步地区、设备与浏览器信息'}await ipReady;const resultTime=Date.now();
-  const audit={time:new Date(resultTime).toISOString(),displayTime:formatFullTime(resultTime),region:sessionMeta.region,device:sessionMeta.device,environment:sessionMeta.environment,fingerprint:sessionMeta.fingerprint,token:''};
+  await wait(650);els.title.textContent='正在制作今日趣味签…';els.hint.textContent='心情与推荐心语正在装进签里';const resultTime=Date.now(),funProfile=createFunProfile();
+  const audit={time:new Date(resultTime).toISOString(),displayTime:formatFullTime(resultTime),...funProfile,token:''};
   audit.token=await createAuditToken(prize,code,audit);currentResult={prize,code,audit};addHistory(prize,code,audit);showResult(prize,code,audit);triggerResultEffects(prize);
   els.title.textContent='今天的趣味玩法已推荐';els.hint.textContent='结果已自动保存在下方记录';els.button.textContent='再抽一次';els.button.classList.remove('is-drawing');els.button.disabled=false;drawing=false;
   setTimeout(()=>{els.gift.classList.remove('open');els.giftZone.classList.remove('is-open');els.giftReward.classList.remove('show')},1800);
 }
-function showResult(prize,code,audit,dismissible=false){
-  resultDismissible=dismissible;els.close.hidden=!dismissible;
+function showResult(prize,code,audit){
+  openedScrollY=window.scrollY;
   const tier=tierFor(prize.prob);els.card.className=`inline-result ${tier.className} has-result`;els.card.style.setProperty('--tier-color',prize.color);els.card.style.setProperty('--tier-soft',prize.soft);els.icon.textContent=prize.icon;els.kicker.textContent=tier.label;els.resultTitle.textContent=prize.name;
-  els.resultTime.textContent=audit.displayTime;els.resultDisplayTime.textContent=audit.displayTime;els.resultIp.textContent=audit.region;els.resultDevice.textContent=`${audit.device} · ${audit.environment}`;els.resultFingerprint.textContent=`FP:${audit.fingerprint}`;els.resultAuditToken.textContent=audit.token;document.getElementById('ticketNo').textContent=`NO. ${audit.token.slice(0,8)}`;
-  els.resultBody.hidden=false;els.overlay.classList.add('show');document.body.style.overflow='hidden';setTimeout(()=>els.save.focus(),280);
+  els.resultDisplayTime.textContent=audit.displayTime;els.resultMood.textContent=audit.mood;els.resultMessage.textContent=audit.message;els.resultLuckyColor.textContent=audit.luckyColor;els.resultHeartScore.textContent=audit.heartScore;els.resultAuditToken.textContent=audit.token;document.getElementById('ticketNo').textContent=`NO. ${audit.token.slice(0,8)}`;
+  els.resultBody.hidden=false;els.overlay.classList.add('show');document.body.style.overflow='hidden';clearTimeout(resultFocusTimer);resultFocusTimer=setTimeout(()=>{if(els.overlay.classList.contains('show'))els.save.focus({preventScroll:true})},280);
 }
-function closeResult(){els.overlay.classList.remove('show');document.body.style.overflow='';els.button.focus()}
+function closeResult(){clearTimeout(resultFocusTimer);els.overlay.classList.remove('show');document.body.style.overflow='';requestAnimationFrame(()=>window.scrollTo({top:openedScrollY,left:0,behavior:'instant'}))}
 function canvasLines(ctx,text,x,y,maxWidth,lineHeight){let line='';for(const char of String(text)){const next=line+char;if(ctx.measureText(next).width>maxWidth&&line){ctx.fillText(line,x,y);line=char;y+=lineHeight}else line=next}if(line)ctx.fillText(line,x,y);return y}
 function drawTicketPaper(ctx,x,y,width,height,teeth=18,tooth=13){const step=width/teeth;ctx.beginPath();ctx.moveTo(x,y+tooth);for(let i=0;i<teeth;i++){ctx.lineTo(x+i*step+step/2,y);ctx.lineTo(x+(i+1)*step,y+tooth)}ctx.lineTo(x+width,y+height-tooth);for(let i=teeth-1;i>=0;i--){ctx.lineTo(x+i*step+step/2,y+height);ctx.lineTo(x+i*step,y+height-tooth)}ctx.closePath()}
 function drawTicketHeart(ctx,x,y,size,color,alpha=.25){ctx.save();ctx.translate(x,y);ctx.scale(size/24,size/24);ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,7);ctx.bezierCurveTo(-13,-3,-15,13,0,21);ctx.bezierCurveTo(15,13,13,-3,0,7);ctx.fill();ctx.restore()}
@@ -609,11 +622,11 @@ function saveTicketImage(){
   const prizeBg=c.createLinearGradient(96,165,804,315);prizeBg.addColorStop(0,soft);prizeBg.addColorStop(1,'#f1f9ff');c.fillStyle=prizeBg;c.beginPath();c.roundRect(96,166,708,166,24);c.fill();c.fillStyle='#fff';c.beginPath();c.roundRect(116,192,108,108,27);c.fill();c.strokeStyle='rgba(231,124,173,.18)';c.lineWidth=2;c.stroke();c.font='58px "Segoe UI Emoji"';c.textAlign='center';c.fillText(prize.icon,170,267);
   c.textAlign='left';c.fillStyle=accent;c.font='900 16px Microsoft YaHei';c.fillText(`${tierFor(prize.prob).label}`,252,205);c.fillStyle='#9a8798';c.font='800 18px Microsoft YaHei';c.fillText('今天推荐玩法',252,239);c.fillStyle=accent;c.font='900 31px Microsoft YaHei';canvasLines(c,prize.name,252,278,510,39);
   c.strokeStyle='#dfc4d3';c.lineWidth=2;c.beginPath();c.moveTo(82,366);c.lineTo(818,366);c.stroke();c.fillStyle='#edf8fe';c.beginPath();c.arc(59,366,14,0,Math.PI*2);c.fill();c.beginPath();c.arc(841,366,14,0,Math.PI*2);c.fill();c.fillStyle='#d6a7c0';c.font='18px Microsoft YaHei';c.fillText('✂',95,373);
-  c.fillStyle='#6d5a6b';c.font='900 18px Microsoft YaHei';c.fillText('截图信息 / 随机记录',96,411);c.fillStyle='#fff9fc';c.strokeStyle='#e4c9d7';c.lineWidth=2;c.beginPath();c.roundRect(96,432,708,346,20);c.fill();c.stroke();
-  const rows=[['抽取时间',audit.displayTime],['地区 IP',audit.region],['设备信息',`${audit.device} · ${audit.environment}`],['设备指纹',`FP:${audit.fingerprint}`],['记录码',audit.token]];let rowY=478;rows.forEach(([label,value],index)=>{c.fillStyle='#6c596b';c.font='900 18px Microsoft YaHei';c.fillText(label,124,rowY);c.fillStyle='#8f7b8d';c.font='800 18px Microsoft YaHei';canvasLines(c,value,270,rowY,500,26);if(index<rows.length-1){c.strokeStyle='#f0e2ea';c.lineWidth=1;c.beginPath();c.moveTo(124,rowY+30);c.lineTo(776,rowY+30);c.stroke()}rowY+=62});
+  c.fillStyle='#6d5a6b';c.font='900 18px Microsoft YaHei';c.fillText('今日趣味签 / 心情记录',96,411);c.fillStyle='#fff9fc';c.strokeStyle='#e4c9d7';c.lineWidth=2;c.beginPath();c.roundRect(96,432,708,346,20);c.fill();c.stroke();
+  const rows=[['抽取时间',audit.displayTime],['今日心情',audit.mood],['推荐心语',audit.message],['幸运色',audit.luckyColor],['心动指数',audit.heartScore],['趣味签号',audit.token]];let rowY=470;rows.forEach(([label,value],index)=>{c.fillStyle='#6c596b';c.font='900 17px Microsoft YaHei';c.fillText(label,124,rowY);c.fillStyle='#8f7b8d';c.font='800 17px Microsoft YaHei';canvasLines(c,value,270,rowY,500,23);if(index<rows.length-1){c.strokeStyle='#f0e2ea';c.lineWidth=1;c.beginPath();c.moveTo(124,rowY+25);c.lineTo(776,rowY+25);c.stroke()}rowY+=52});
   c.save();c.translate(184,872);c.rotate(-.12);c.strokeStyle=accent;c.lineWidth=4;c.globalAlpha=.72;c.beginPath();c.arc(0,0,60,0,Math.PI*2);c.stroke();c.beginPath();c.arc(0,0,49,0,Math.PI*2);c.stroke();c.fillStyle=accent;c.textAlign='center';c.font='900 25px Microsoft YaHei';c.fillText('已抽取',0,-2);c.font='900 12px Arial';c.fillText('FUN PICK',0,22);c.restore();
   c.fillStyle='#765f73';c.textAlign='left';c.font='900 21px Microsoft YaHei';c.fillText('今天就玩这一单',286,844);c.fillStyle='#a18a9d';c.font='800 16px Microsoft YaHei';c.fillText('纯娱乐随机推荐，跟着心情决定就好',286,876);drawTicketHeart(c,744,850,22,accent,.45);drawTicketSpark(c,780,890,15,'#72bce3',.55);
-  c.strokeStyle='#e3c5d5';c.lineWidth=2;c.beginPath();c.moveTo(96,950);c.lineTo(804,950);c.stroke();c.fillStyle='#927e91';c.font='800 18px Microsoft YaHei';c.textAlign='center';c.fillText('本结果仅供娱乐参考，不代表实际订单或奖励',450,1000);c.fillStyle='#67b7e1';c.font='900 17px Microsoft YaHei';c.fillText('HAVE FUN · 垂耳兔电竞 KOOK 7686',450,1088);drawTicketHeart(c,420,1042,18,'#ef8db9',.55);drawTicketSpark(c,450,1042,12,'#82c6e9',.6);drawTicketHeart(c,480,1042,18,'#b89ae8',.5);
+  c.strokeStyle='#e3c5d5';c.lineWidth=2;c.beginPath();c.moveTo(96,950);c.lineTo(804,950);c.stroke();c.fillStyle='#927e91';c.font='800 18px Microsoft YaHei';c.textAlign='center';c.fillText('本结果仅供娱乐参考，不代表实际订单或奖励',450,1000);c.fillStyle='#67b7e1';c.font='900 17px Microsoft YaHei';c.fillText('垂耳兔电竞 · HAVE FUN',450,1088);drawTicketHeart(c,420,1042,18,'#ef8db9',.55);drawTicketSpark(c,450,1042,12,'#82c6e9',.6);drawTicketHeart(c,480,1042,18,'#b89ae8',.5);
   out.toBlob(blob=>{if(!blob){showToast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`今日趣味单-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);els.save.textContent='截图已保存';els.save.classList.add('is-saved');showToast('趣味单截图已保存')},'image/png');
 }
 function saveHorizontalTicketImage(){
@@ -625,12 +638,12 @@ function saveHorizontalTicketImage(){
   c.fillStyle='#67b7e1';c.font='900 25px Microsoft YaHei';c.textAlign='left';c.fillText('BUNNY CLUB · TODAY FUN PICK',85,103);c.fillStyle='#9b8395';c.font='900 17px Microsoft YaHei';c.fillText('今日趣味单截图信息',85,130);
   const prizeBg=c.createLinearGradient(85,155,885,315);prizeBg.addColorStop(0,soft);prizeBg.addColorStop(1,'#eef9ff');c.fillStyle=prizeBg;c.beginPath();c.roundRect(85,155,800,165,24);c.fill();c.fillStyle=accent;c.beginPath();c.roundRect(85,176,7,123,4);c.fill();c.fillStyle='#fff';c.beginPath();c.roundRect(112,183,112,110,26);c.fill();c.strokeStyle='rgba(231,124,173,.18)';c.lineWidth=2;c.stroke();c.font='60px "Segoe UI Emoji"';c.textAlign='center';c.fillText(prize.icon,168,257);
   c.textAlign='left';c.fillStyle='#9a8798';c.font='800 18px Microsoft YaHei';c.fillText('今天推荐玩法',252,210);c.fillStyle=accent;c.font='900 34px Microsoft YaHei';canvasLines(c,prize.name,252,260,590,42);
-  c.fillStyle='#fff9fc';c.beginPath();c.roundRect(85,345,800,305,20);c.fill();c.save();c.strokeStyle='#e5bfd3';c.lineWidth=2;c.setLineDash([10,8]);c.beginPath();c.roundRect(85,345,800,305,20);c.stroke();c.beginPath();c.moveTo(108,405);c.lineTo(862,405);c.moveTo(108,463);c.lineTo(862,463);c.moveTo(108,552);c.lineTo(862,552);c.moveTo(470,405);c.lineTo(470,463);c.moveTo(470,552);c.lineTo(470,628);c.stroke();c.restore();c.fillStyle='#6d5a6b';c.font='900 18px Microsoft YaHei';c.fillText('截图信息 / 随机记录',112,385);
-  c.fillStyle='#6c596b';c.font='900 17px Microsoft YaHei';c.fillText('抽取时间',112,432);c.fillText('地区 IP',490,432);c.fillText('设备信息',112,504);c.fillText('设备指纹',112,590);c.fillText('记录码',490,590);c.fillStyle='#8f7b8d';c.font='800 17px Microsoft YaHei';canvasLines(c,audit.displayTime,225,432,240,24);canvasLines(c,audit.region,590,432,260,24);canvasLines(c,`${audit.device} · ${audit.environment}`,225,504,620,24);c.fillText(`FP:${audit.fingerprint}`,225,590);c.fillText(audit.token,590,590);
+  c.fillStyle='#fff9fc';c.beginPath();c.roundRect(85,345,800,305,20);c.fill();c.save();c.strokeStyle='#e5bfd3';c.lineWidth=2;c.setLineDash([10,8]);c.beginPath();c.roundRect(85,345,800,305,20);c.stroke();c.beginPath();c.moveTo(108,405);c.lineTo(862,405);c.moveTo(108,468);c.lineTo(862,468);c.moveTo(108,548);c.lineTo(862,548);c.moveTo(470,405);c.lineTo(470,468);c.moveTo(470,548);c.lineTo(470,628);c.stroke();c.restore();c.fillStyle='#6d5a6b';c.font='900 18px Microsoft YaHei';c.fillText('今日趣味签 / 心情记录',112,385);
+  c.fillStyle='#6c596b';c.font='900 16px Microsoft YaHei';c.fillText('抽取时间',112,432);c.fillText('今日心情',490,432);c.fillText('推荐心语',112,497);c.fillText('幸运色',112,580);c.fillText('心动指数',490,580);c.fillStyle='#8f7b8d';c.font='800 16px Microsoft YaHei';canvasLines(c,audit.displayTime,215,432,245,22);canvasLines(c,audit.mood,590,432,250,22);canvasLines(c,audit.message,215,497,620,23);c.fillText(audit.luckyColor,215,580);c.fillText(audit.heartScore,590,580);c.fillStyle='#b197aa';c.font='800 13px Microsoft YaHei';c.fillText(`趣味签号 ${audit.token}`,112,625);
   c.strokeStyle='#dfc4d3';c.lineWidth=2;c.beginPath();c.moveTo(930,75);c.lineTo(930,685);c.stroke();c.fillStyle='#d6a7c0';c.font='20px Microsoft YaHei';c.fillText('✂',919,112);
   c.textAlign='center';c.fillStyle='#67b7e1';c.font='900 18px Microsoft YaHei';c.fillText('今日趣味单截图',1142,105);c.fillStyle='#9b8395';c.font='900 17px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,1142,135);c.fillStyle=soft;c.beginPath();c.roundRect(1062,170,160,150,34);c.fill();c.font='78px "Segoe UI Emoji"';c.fillText(prize.icon,1142,273);c.fillStyle=soft;c.beginPath();c.roundRect(1080,342,124,34,17);c.fill();c.fillStyle=accent;c.font='900 14px Microsoft YaHei';c.fillText('今日趣味签',1142,364);
   c.save();c.translate(1142,470);c.rotate(-.1);c.strokeStyle=accent;c.lineWidth=4;c.globalAlpha=.72;c.beginPath();c.arc(0,0,68,0,Math.PI*2);c.stroke();c.beginPath();c.arc(0,0,56,0,Math.PI*2);c.stroke();c.fillStyle=accent;c.font='900 27px Microsoft YaHei';c.fillText('已抽取',0,-3);c.font='900 12px Arial';c.fillText('FUN PICK',0,22);c.restore();
-  c.fillStyle='#765f73';c.font='900 18px Microsoft YaHei';c.fillText('纯娱乐随机推荐',1142,585);c.fillText('跟着心情决定',1142,614);c.fillStyle='#67b7e1';c.font='900 15px Microsoft YaHei';c.fillText('KOOK 7686 · HAVE FUN',1142,665);c.font='28px "Segoe UI Emoji"';c.fillText('🎮',1142,705);
+  c.fillStyle='#765f73';c.font='900 18px Microsoft YaHei';c.fillText(audit.mood,1142,585);c.font='800 15px Microsoft YaHei';canvasLines(c,audit.message,1142,614,245,22);c.fillStyle='#67b7e1';c.font='900 15px Microsoft YaHei';c.fillText('垂耳兔电竞 · HAVE FUN',1142,675);c.font='28px "Segoe UI Emoji"';c.fillText('🎮',1142,710);
   out.toBlob(blob=>{if(!blob){showToast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`今日趣味单-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);els.save.textContent='截图已保存';els.save.classList.add('is-saved');showToast('趣味单截图已保存');setTimeout(closeResult,650)},'image/png');
 }
 function showToast(message){els.toast.textContent=message;els.toast.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>els.toast.classList.remove('show'),1700)}
@@ -639,9 +652,9 @@ els.button.addEventListener('click',draw);els.gift.addEventListener('click',draw
 els.gift.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();draw()}});
 els.save.addEventListener('click',saveHorizontalTicketImage);
 els.history.addEventListener('click',event=>{const button=event.target.closest('[data-ticket-index]');if(button)showHistoryTicket(Number(button.dataset.ticketIndex))});
-els.close.addEventListener('click',()=>{if(resultDismissible)closeResult()});els.overlay.addEventListener('click',event=>{if(resultDismissible&&event.target===els.overlay)closeResult()});document.addEventListener('keydown',event=>{if(resultDismissible&&event.key==='Escape'&&els.overlay.classList.contains('show'))closeResult()});
+els.close.addEventListener('click',closeResult);els.overlay.addEventListener('click',event=>{if(event.target===els.overlay)closeResult()});document.addEventListener('keydown',event=>{if(event.key==='Escape'&&els.overlay.classList.contains('show'))closeResult()});
 els.sound.addEventListener('click',()=>{soundEnabled=!soundEnabled;localStorage.setItem(SOUND_KEY,soundEnabled?'on':'off');if(soundEnabled){resumeAudio();const context=getAudioContext();beep(784,'sine',.13,0,.18,context)}updateSoundButton();showToast(soundEnabled?'音效已开启':'音效已关闭')});
-renderPrizeList();renderHistory();updateSoundButton();updateDynamicTime();setInterval(updateDynamicTime,1000);ipReady=loadIpRegion();
+renderPrizeList();renderHistory();updateSoundButton();updateDynamicTime();setInterval(updateDynamicTime,1000);
 </script>
 </body>
 </html>
