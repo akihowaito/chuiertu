@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffd8ee">
-  <title>心动常驻盲盒 · 垂耳兔电竞</title>
+  <title>今日趣味单 · 垂耳兔电竞</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Huninn&family=Nunito:wght@600;700;800;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
@@ -272,6 +272,7 @@ button{border:0}
 .shell{padding:18px 18px 42px}.topbar{min-height:48px}.intro{box-sizing:border-box;min-height:198px;padding:22px 0 16px}.intro h1{margin-top:10px;font-size:clamp(34px,6vw,52px);line-height:1.12}.intro p{margin-top:9px;font-size:12px;line-height:1.7}.intro-meta{margin-top:11px;gap:7px}.meta-pill{padding:5px 9px;border-style:solid}
 .records .history-list{min-height:185px;max-height:none;overflow-y:visible}.records .history{align-self:stretch}
 .result-time-chip{border-width:1.5px;border-style:dashed}
+.draw-layout>.pool-panel .prize-list{max-height:590px;overflow-y:auto}
 @media(max-width:520px){.intro{min-height:184px;padding:18px 0 14px}.records .history-list{min-height:185px}}
 @media(min-width:521px){.intro{height:202px;min-height:202px}}
 .topbar{gap:10px}.back,.kook-link,.sound-toggle{box-sizing:border-box;border-radius:12px;font-size:11px}.back,.kook-link{min-height:40px}.back{padding:8px 12px;border-width:2px}.kook-link{padding:8px 13px;border:0}.sound-toggle{width:40px;height:40px;border-width:2px}.eyebrow{padding:6px 11px;border-width:1.5px;font-size:10px}.meta-pill{padding:5px 10px;border-width:1.5px;font-size:10px}
@@ -286,33 +287,33 @@ button{border:0}
       <a class="back" href="./index.html" aria-label="返回活动首页">← 返回首页</a>
       <div class="top-actions">
         <button class="sound-toggle" id="soundToggle" type="button" title="关闭音效" aria-label="关闭音效">🔊</button>
-        <a class="kook-link" href="https://kook.vip/HRXPjp" target="_blank" rel="noopener">联系下单 ↗</a>
+        <a class="kook-link" href="https://kook.vip/HRXPjp" target="_blank" rel="noopener">联系下单🐇</a>
       </div>
     </nav>
 
     <header class="intro">
       <div class="eyebrow"><span class="live-dot"></span>常驻开放 · 随时可玩</div>
-      <h1>心动常驻盲盒</h1>
-      <p>188R/1次，开启礼盒，从 8 项三角洲任务中解锁本次幸运体验。</p>
+      <h1>今日趣味单</h1>
+      <p>纯娱乐随机推荐，从 23 种趣味玩法中抽取今天适合下什么单。</p>
       <div class="intro-meta">
-        <span class="meta-pill">🎀 垂耳兔电竞 · KOOK 7686</span>
+        <span class="meta-pill">🐰 垂耳兔电竞 · KOOK 7686</span>
         <span class="meta-pill" id="dynamicTime">📅 正在同步时间…</span>
       </div>
     </header>
 
-    <section class="draw-layout" aria-label="常驻盲盒抽取区">
+    <section class="draw-layout" aria-label="今日趣味单随机推荐区">
       <div class="draw-stage">
         <div class="stage-top">
-          <span class="stage-label">TASK BLIND BOX</span>
-          <span class="price"><strong>188R</strong><span>/1次</span></span>
+          <span class="stage-label">TODAY FUN PICK</span>
+          <span class="price"><strong>纯娱乐</strong><span>/随时抽</span></span>
         </div>
         <div class="gift-zone" id="giftZone">
           <div class="halo" aria-hidden="true"></div>
-          <div class="gift-floaters" aria-hidden="true"><span>🛡️</span><span>💼</span><span>🔧</span><span>🔴</span><span>🎯</span><span>⚡</span><span>🔑</span><span>💎</span></div>
+          <div class="gift-floaters" aria-hidden="true"><span>🎮</span><span>🛡️</span><span>🎧</span><span>🎯</span><span>🎲</span><span>🐶</span><span>🎴</span><span>♈</span></div>
           <div class="gift-shadow" aria-hidden="true"></div>
           <div class="gift-reward" id="giftReward" aria-hidden="true">🎁</div>
           <div class="gift-anchor">
-            <div class="gift" id="gift" role="button" tabindex="0" aria-label="点击开启盲盒">
+            <div class="gift" id="gift" role="button" tabindex="0" aria-label="点击抽取今日趣味单">
               <div class="bow">🎀</div>
               <div class="gift-lid"></div>
               <div class="gift-body"></div>
@@ -321,37 +322,37 @@ button{border:0}
           </div>
         </div>
         <div class="stage-copy" aria-live="polite">
-          <strong id="stageTitle">一份好运正在礼盒里等你</strong>
-          <span id="stageHint">轻点礼盒，让它为你拆开今天的幸运任务</span>
+          <strong id="stageTitle">今天适合玩什么单？</strong>
+          <span id="stageHint">轻点礼盒，随机抽一张今日趣味推荐</span>
         </div>
-        <button class="draw-button" id="drawButton" type="button">开启心动盲盒</button>
-        <p class="fine-print">抽中后请保存截图。请联系垂耳兔客服兑换奖励。</p>
+        <button class="draw-button" id="drawButton" type="button">抽取今日趣味单</button>
+        <p class="fine-print">本功能仅供娱乐参考，不代表实际订单或奖励。</p>
       </div>
 
-      <aside class="pool-panel" aria-label="奖池与概率">
-        <div class="panel-head"><div class="panel-head-row"><h2>常驻任务公开概率</h2><span class="odds-total">总概率 100%</span></div><p>8 项奖励独立抽取，使用浏览器加密随机数。</p></div>
+      <aside class="pool-panel" aria-label="趣味玩法与随机概率">
+        <div class="panel-head"><div class="panel-head-row"><h2>今日玩法清单</h2><span class="odds-total">23 种 · 等概率</span></div><p>每种玩法均为 1/23 概率，使用浏览器加密随机数。</p></div>
         <div class="prize-list" id="prizeList"></div>
       </aside>
     </section>
 
-    <section class="section records" aria-label="抽取记录与结果使用说明">
-      <div class="section-title-row"><h2 class="section-title">抽取记录</h2><span class="section-note">仅保存在当前浏览器</span></div>
+    <section class="section records" aria-label="趣味推荐记录与玩法说明">
+      <div class="section-title-row"><h2 class="section-title">娱乐记录</h2><span class="section-note">仅保存在当前浏览器</span></div>
       <div class="support-grid">
         <div class="history">
-          <div class="subhead"><div><h3>我的任务记录</h3><span id="historyCount">还没有开启记录</span></div></div>
+          <div class="subhead"><div><h3>我的趣味单记录</h3><span id="historyCount">还没有抽取记录</span></div></div>
           <div class="stats">
-            <div class="stat"><strong id="drawCount">0</strong><span>累计开启</span></div>
-            <div class="stat"><strong id="uniqueCount">0</strong><span>解锁任务</span></div>
-            <div class="stat"><strong id="rareCount">0</strong><span>稀有任务</span></div>
+            <div class="stat"><strong id="drawCount">0</strong><span>累计抽取</span></div>
+            <div class="stat"><strong id="uniqueCount">0</strong><span>解锁玩法</span></div>
+            <div class="stat"><strong id="rareCount">0</strong><span>今日抽取</span></div>
           </div>
           <div class="history-list" id="historyList"></div>
         </div>
         <div class="redeem">
-          <div class="subhead"><div><h3>结果怎么使用</h3><span>三步完成确认</span></div></div>
+          <div class="subhead"><div><h3>怎么玩</h3><span>三步获得今日灵感</span></div></div>
           <div class="steps">
-            <div class="step"><span class="step-num">1</span><div><strong>开启盲盒</strong><p>支付 188R 可开启 1 次，抽取并保存本次任务结果。</p></div></div>
-            <div class="step"><span class="step-num">2</span><div><strong>保存截图</strong><p>点击开奖结果中的“保存截图”，保留完整核验信息。</p></div></div>
-            <div class="step"><span class="step-num">3</span><div><strong>联系客服</strong><p>请联系垂耳兔客服兑换奖励，以实际沟通和下单确认为准。</p></div></div>
+            <div class="step"><span class="step-num">1</span><div><strong>随机抽取</strong><p>轻点礼盒，从 23 种玩法中等概率抽取一项。</p></div></div>
+            <div class="step"><span class="step-num">2</span><div><strong>看看灵感</strong><p>把结果当作今天点单方向，也可以继续抽取。</p></div></div>
+            <div class="step"><span class="step-num">3</span><div><strong>自由决定</strong><p>推荐结果纯属娱乐，实际是否下单由你自己决定。</p></div></div>
           </div>
           <div class="redeem-cta"><a class="redeem-primary" href="https://kook.vip/HRXPjp" target="_blank" rel="noopener">联系垂耳兔客服</a><a class="redeem-home" href="./index.html">活动首页</a></div>
           <div class="promo-art"><img src="./assets/bunny-club-kook-banner.png" alt="垂耳兔电竞 KOOK 7686 宣传图"></div>
@@ -359,46 +360,62 @@ button{border:0}
       </div>
     </section>
 
-    <footer class="footer">© 2026 垂耳兔电竞 · BUNNY CLUB · 心动常驻盲盒结果以最终下单确认为准</footer>
+    <footer class="footer">© 2026 垂耳兔电竞 · KOOK 7686 · 今日趣味单仅供娱乐参考</footer>
   </main>
 </div>
 
 <div class="screen-flash" id="screenFlash" aria-hidden="true"></div>
 <div class="result-overlay" id="resultOverlay" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
-  <div class="result-floaters" aria-hidden="true"><span>🛡️</span><span>💼</span><span>🔧</span><span>🔴</span><span>🎯</span><span>⚡</span><span>🔑</span><span>💎</span></div>
+  <div class="result-floaters" aria-hidden="true"><span>🎮</span><span>🛡️</span><span>🎧</span><span>🎯</span><span>🎲</span><span>🐶</span><span>🎴</span><span>♈</span></div>
   <div class="inline-result tier-common" id="resultCard" aria-live="polite">
     <div class="inline-result-body" id="resultBody">
       <button class="result-close" id="resultClose" type="button" aria-label="关闭截图预览" hidden>×</button>
-      <div class="ticket-topline"><strong>BUNNY CLUB · BLIND BOX</strong><span id="ticketNo">NO. WAITING</span></div>
+      <div class="ticket-topline"><strong>BUNNY CLUB · TODAY FUN PICK</strong><span id="ticketNo">NO. WAITING</span></div>
       <div class="result-main">
         <div class="result-icon" id="resultIcon">🎁</div>
-        <div><div class="result-kicker" id="resultKicker">常驻任务 · 15%</div><div class="result-got">本次幸运抽中</div><h2 id="resultTitle">你的盲盒奖励</h2></div>
+        <div><div class="result-kicker" id="resultKicker">等概率推荐 · 1/23</div><div class="result-got">今天推荐</div><h2 id="resultTitle">等待抽取玩法</h2></div>
       </div>
       <div class="ticket-cut" aria-hidden="true"><span>✂</span></div>
-      <div class="result-audit" aria-label="开奖核验信息">
-        <div class="result-audit-row"><strong>开奖时间</strong><span id="resultTime">—</span></div><div class="result-audit-row"><strong>地区 IP</strong><span id="resultIp">—</span></div><div class="result-audit-row"><strong>设备信息</strong><span id="resultDevice">—</span></div><div class="result-audit-row"><strong>设备指纹</strong><span id="resultFingerprint">—</span></div><div class="result-audit-row"><strong>核验码</strong><span id="resultAuditToken">—</span></div>
+      <div class="result-audit" aria-label="随机推荐记录信息">
+        <div class="result-audit-row"><strong>抽取时间</strong><span id="resultTime">—</span></div><div class="result-audit-row"><strong>地区 IP</strong><span id="resultIp">—</span></div><div class="result-audit-row"><strong>设备信息</strong><span id="resultDevice">—</span></div><div class="result-audit-row"><strong>设备指纹</strong><span id="resultFingerprint">—</span></div><div class="result-audit-row"><strong>记录码</strong><span id="resultAuditToken">—</span></div>
       </div>
-      <div class="result-time-chip">开奖时间 <span id="resultDisplayTime">—</span></div>
-      <p class="result-note">请先保存本次截图，再联系垂耳兔客服兑换奖励。</p>
+      <div class="result-time-chip">抽取时间 <span id="resultDisplayTime">—</span></div>
+      <p class="result-note">纯娱乐随机推荐，实际下单内容请按你的心情决定。</p>
       <div class="result-actions"><button class="save-result" id="saveResult" type="button">保存截图</button></div>
-      <div class="ticket-footer">BLIND BOX · 垂耳兔电竞 KOOK 7686</div>
+      <div class="ticket-footer">TODAY FUN PICK · 垂耳兔电竞 KOOK 7686</div>
     </div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite">截图已保存</div>
 
 <script>
+const EQUAL_PROBABILITY=100/23;
 const prizes=[
-  {name:'绝密保底666w',prob:15,icon:'🛡️',color:'#ec5aa8',soft:'#fff0f7'},
-  {name:'单局888w+单局三个大保险',prob:12,icon:'💼',color:'#8c61df',soft:'#f5edff'},
-  {name:'绝密666w+拼出4把>70w的枪械',prob:16,icon:'🔧',color:'#e98a35',soft:'#fff4e8'},
-  {name:'绝密666w+单局1红',prob:11,icon:'🔴',color:'#ef5b6f',soft:'#fff0f2'},
-  {name:'绝密666w+拼出一把>20w的左轮',prob:15,icon:'🎯',color:'#2da393',soft:'#ecfff9'},
-  {name:'单局888w不够不结',prob:17,icon:'⚡',color:'#bd65dc',soft:'#faefff'},
-  {name:'绝密666w+任意房卡',prob:11,icon:'🔑',color:'#3b9dd8',soft:'#ecf9ff'},
-  {name:'绝密累计1088w保底',prob:3,icon:'💎',color:'#178fd4',soft:'#eaf8ff'}
-];
-const STORAGE_KEY='chuiertu_188_blindbox_history_v1';
+  {name:'体验单',icon:'🎮',color:'#ec5aa8',soft:'#fff0f7'},
+  {name:'保底单',icon:'🛡️',color:'#8c61df',soft:'#f5edff'},
+  {name:'陪玩单',icon:'🎧',color:'#3b9dd8',soft:'#ecf9ff'},
+  {name:'Bingo单',icon:'🎯',color:'#2da393',soft:'#ecfff9'},
+  {name:'飞行棋趣味单',icon:'🎲',color:'#e98a35',soft:'#fff4e8'},
+  {name:'趣味单1.0',icon:'🌱',color:'#54b98b',soft:'#effff7'},
+  {name:'趣味单2.0',icon:'🌸',color:'#ef76ad',soft:'#fff1f7'},
+  {name:'趣味单3.0',icon:'✨',color:'#a56be0',soft:'#f8f0ff'},
+  {name:'嘉豪单',icon:'👑',color:'#e3a020',soft:'#fff8e5'},
+  {name:'娱乐机密护航单',icon:'🕶️',color:'#6d72d8',soft:'#f1f2ff'},
+  {name:'小狗主人单',icon:'🐶',color:'#db8a58',soft:'#fff5ed'},
+  {name:'刀皮收集者',icon:'🔪',color:'#6a9ac7',soft:'#eff8ff'},
+  {name:'课程表趣味单',icon:'📚',color:'#7a87d8',soft:'#f2f4ff'},
+  {name:'双妹小时趣味单',icon:'👯',color:'#e26aa9',soft:'#fff0f7'},
+  {name:'悬赏令趣味单',icon:'📜',color:'#cf8b43',soft:'#fff7e9'},
+  {name:'除红行动单',icon:'🚨',color:'#eb5f72',soft:'#fff0f2'},
+  {name:'布丁棉衣橱单',icon:'👗',color:'#d66fc2',soft:'#fff1fc'},
+  {name:'环游太平洋',icon:'🌊',color:'#258fcf',soft:'#eaf8ff'},
+  {name:'小小巨人',icon:'🗿',color:'#7a8794',soft:'#f2f6f8'},
+  {name:'银行趣味单',icon:'🏦',color:'#4a9f82',soft:'#ecfbf6'},
+  {name:'卡牌大师单',icon:'🃏',color:'#9c66d8',soft:'#f7efff'},
+  {name:'十二星座趣味单',icon:'♈',color:'#668bd8',soft:'#eff4ff'},
+  {name:'金陵十三钗抽牌单',icon:'🎴',color:'#dc5f93',soft:'#fff0f6'}
+].map(prize=>({...prize,prob:EQUAL_PROBABILITY}));
+const STORAGE_KEY='chuiertu_today_fun_pick_history_v1';
 const SOUND_KEY='chuiertu_blindbox_sound_v1';
 const els={
   gift:document.getElementById('gift'),giftReward:document.getElementById('giftReward'),spark:document.getElementById('giftSpark'),button:document.getElementById('drawButton'),
@@ -510,29 +527,20 @@ function spawnConfetti(count){
   for(let i=0;i<count;i++){const item=document.createElement('span');item.className='confetti';item.textContent=symbols[Math.floor(secureRandom()*symbols.length)];item.style.left=`${secureRandom()*100}vw`;item.style.setProperty('--drift',`${Math.round((secureRandom()-.5)*130)}px`);item.style.setProperty('--dur',`${1.35+secureRandom()*.9}s`);item.style.setProperty('--delay',`${secureRandom()*.45}s`);item.style.fontSize=`${12+Math.round(secureRandom()*9)}px`;document.body.appendChild(item);setTimeout(()=>item.remove(),2800)}
 }
 function spawnBurstWord(text,color,border){const item=document.createElement('div');item.className='burst-word';item.textContent=text;item.style.color=color;item.style.borderColor=border;document.body.appendChild(item);setTimeout(()=>item.remove(),1150)}
-function triggerResultEffects(prize){
-  triggerScreenFlash(prize);playResultSound(prize.prob);
-  if(prize.prob<=3){haptic([70,35,80,35,110]);spawnConfetti(18);spawnBurstWord('WOW!','#20aeea','#7dd3fc')}
-  else if(prize.prob<=12){haptic([55,30,70]);spawnConfetti(12);spawnBurstWord('抽中啦','#9b4dff','#c084fc')}
-  else{haptic([35]);spawnConfetti(8)}
-}
-function tierFor(probability){return probability<=3?{className:'tier-legendary',label:'典藏任务 · 3%'}:probability<=12?{className:'tier-rare',label:`稀有任务 · ${probability}%`}:{className:'tier-common',label:`常驻任务 · ${probability}%`}}
+function triggerResultEffects(prize){triggerScreenFlash(prize);playResultSound(15);haptic([45,25,60]);spawnConfetti(12);spawnBurstWord('今日推荐','#df5b9f','#f3a9cc')}
+function tierFor(){return{className:'tier-common',label:'等概率推荐 · 1/23'}}
 async function createAuditToken(prize,code,audit){
   const source=[code,prize.name,audit.time,audit.region,audit.device,audit.fingerprint].join('|');
   if(crypto.subtle){const bytes=new TextEncoder().encode(source);const digest=await crypto.subtle.digest('SHA-256',bytes);return [...new Uint8Array(digest)].slice(0,6).map(value=>value.toString(16).padStart(2,'0')).join('').toUpperCase()}
   let hash=2166136261;for(let i=0;i<source.length;i++){hash^=source.charCodeAt(i);hash=Math.imul(hash,16777619)}return (hash>>>0).toString(16).toUpperCase().padStart(8,'0');
 }
-function rollPrize(){
-  let cursor=secureRandom()*100;
-  for(const prize of prizes){cursor-=prize.prob;if(cursor<0)return prize}
-  return prizes[prizes.length-1];
-}
+function rollPrize(){return prizes[Math.floor(secureRandom()*prizes.length)]}
 function makeCode(){
   const now=new Date();
   const stamp=`${String(now.getFullYear()).slice(2)}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}`;
   const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let tail='';
   for(let i=0;i<6;i++)tail+=chars[Math.floor(secureRandom()*chars.length)];
-  return `B188-${stamp}-${tail}`;
+  return `FUN-${stamp}-${tail}`;
 }
 function burst(selectedPrize){
   const rewardSymbols=[selectedPrize.icon,...prizes.map(prize=>prize.icon)];
@@ -551,32 +559,32 @@ function addHistory(prize,code,audit){
 }
 function renderHistory(){
   const items=readHistory();
-  document.getElementById('drawCount').textContent=items.length;document.getElementById('uniqueCount').textContent=new Set(items.map(item=>item.name)).size;document.getElementById('rareCount').textContent=items.filter(item=>item.prob<=12).length;
+  const today=new Date().toDateString();document.getElementById('drawCount').textContent=items.length;document.getElementById('uniqueCount').textContent=new Set(items.map(item=>item.name)).size;document.getElementById('rareCount').textContent=items.filter(item=>new Date(item.time).toDateString()===today).length;
   document.getElementById('historyCount').textContent=items.length?`已保存 ${items.length} 次结果`:'还没有抽取记录';
-  if(!items.length){els.history.innerHTML='<div class="history-empty">第一次任务还在礼盒里等你。<br>开启后，结果会自动保存在这里。</div>';return}
+  if(!items.length){els.history.innerHTML='<div class="history-empty">今天的趣味灵感还在礼盒里。<br>抽取后，结果会自动保存在这里。</div>';return}
   els.history.innerHTML=items.map((item,index)=>`<div class="history-row"><span class="num">#${items.length-index}</span><strong>${item.icon} ${escapeHtml(item.name)}</strong><time>${formatTime(item.time)}</time><button class="history-ticket" type="button" data-ticket-index="${index}" aria-label="查看${escapeHtml(item.name)}的截图">查看截图</button></div>`).join('');
 }
 function showHistoryTicket(index){
   const item=readHistory()[index];if(!item)return;
-  const prize=prizes.find(entry=>entry.name===item.name||entry.icon===item.icon)||{name:item.name,prob:item.prob||15,icon:item.icon||'🎁',color:'#ec5aa8',soft:'#fff0f7'};
+  const prize=prizes.find(entry=>entry.name===item.name)||{name:item.name,prob:EQUAL_PROBABILITY,icon:item.icon||'🎁',color:'#ec5aa8',soft:'#fff0f7'};
   const audit={time:item.audit?.time||item.time,displayTime:item.audit?.displayTime||formatFullTime(item.time),region:item.audit?.region||'历史记录',device:item.audit?.device||'记录时设备',environment:item.audit?.environment||'',fingerprint:item.audit?.fingerprint||'HISTORY',token:item.audit?.token||String(item.code||'HISTORYTICKET').replace(/[^A-Z0-9]/gi,'').slice(-12).toUpperCase().padStart(12,'0')};
   currentResult={prize,code:item.code||'',audit};els.save.textContent='保存截图';els.save.classList.remove('is-saved');showResult(prize,currentResult.code,audit,true);
 }
 function escapeHtml(value){const div=document.createElement('div');div.textContent=value;return div.innerHTML}
 function formatTime(value){return new Intl.DateTimeFormat('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).format(new Date(value))}
 function renderPrizeList(){
-  document.getElementById('prizeList').innerHTML=prizes.map(prize=>`<div class="prize-item" style="--item-color:${prize.color};--item-bg:${prize.soft}"><span class="prize-icon">${prize.icon}</span><span class="prize-name">${prize.name}</span><span class="odds">${prize.prob}%</span></div>`).join('');
+  document.getElementById('prizeList').innerHTML=prizes.map(prize=>`<div class="prize-item" style="--item-color:${prize.color};--item-bg:${prize.soft}"><span class="prize-icon">${prize.icon}</span><span class="prize-name">${prize.name}</span><span class="odds">1/23</span></div>`).join('');
 }
 function wait(ms){return new Promise(resolve=>setTimeout(resolve,ms))}
 async function draw(){
   if(drawing)return;drawing=true;const prize=rollPrize(),code=makeCode();els.giftReward.textContent=prize.icon;els.giftReward.classList.remove('show');resumeAudio();playShake();haptic([40,30,40]);els.button.disabled=true;els.button.classList.add('is-drawing');els.gift.classList.remove('open');els.gift.classList.add('opening');els.giftZone.classList.remove('is-open');els.giftZone.classList.add('is-opening');els.overlay.classList.remove('show');els.card.className='inline-result tier-common';els.card.style.removeProperty('--tier-color');els.card.style.removeProperty('--tier-soft');els.save.textContent='保存截图';els.save.classList.remove('is-saved');
-  els.title.textContent='正在摇一摇幸运礼盒…';els.hint.textContent='加密随机序列已生成，请稍等一下';els.button.textContent='好运开启中…';
+  els.title.textContent='正在摇一摇今日灵感…';els.hint.textContent='加密随机序列已生成，请稍等一下';els.button.textContent='随机抽取中…';
   let tickStep=0;const tickTimer=setInterval(()=>playTick((tickStep++)%6),125);
-  await wait(850);clearInterval(tickTimer);playOpen();els.title.textContent='礼盒正在打开…';els.hint.textContent='奖励马上就会从礼盒里掉出来';els.gift.classList.remove('opening');els.gift.classList.add('open');els.giftZone.classList.remove('is-opening');els.giftZone.classList.add('is-open');els.giftReward.classList.add('show');burst(prize);
+  await wait(850);clearInterval(tickTimer);playOpen();els.title.textContent='今日趣味签正在揭晓…';els.hint.textContent='看看今天最适合玩哪一种';els.gift.classList.remove('opening');els.gift.classList.add('open');els.giftZone.classList.remove('is-opening');els.giftZone.classList.add('is-open');els.giftReward.classList.add('show');burst(prize);
   await wait(650);if(sessionMeta.region.includes('正在')){els.title.textContent='正在生成核验信息…';els.hint.textContent='同步地区、设备与浏览器信息'}await ipReady;const resultTime=Date.now();
   const audit={time:new Date(resultTime).toISOString(),displayTime:formatFullTime(resultTime),region:sessionMeta.region,device:sessionMeta.device,environment:sessionMeta.environment,fingerprint:sessionMeta.fingerprint,token:''};
   audit.token=await createAuditToken(prize,code,audit);currentResult={prize,code,audit};addHistory(prize,code,audit);showResult(prize,code,audit);triggerResultEffects(prize);
-  els.title.textContent='今天的幸运任务已解锁';els.hint.textContent='结果已自动保存在下方记录';els.button.textContent='再开一次';els.button.classList.remove('is-drawing');els.button.disabled=false;drawing=false;
+  els.title.textContent='今天的趣味玩法已推荐';els.hint.textContent='结果已自动保存在下方记录';els.button.textContent='再抽一次';els.button.classList.remove('is-drawing');els.button.disabled=false;drawing=false;
   setTimeout(()=>{els.gift.classList.remove('open');els.giftZone.classList.remove('is-open');els.giftReward.classList.remove('show')},1800);
 }
 function showResult(prize,code,audit,dismissible=false){
@@ -596,17 +604,17 @@ function saveTicketImage(){
   const bg=c.createLinearGradient(0,0,900,1180);bg.addColorStop(0,'#fff0f7');bg.addColorStop(.5,'#fffafd');bg.addColorStop(1,'#e8f7ff');c.fillStyle=bg;c.fillRect(0,0,900,1180);
   [[65,120,18,'#ef8db9'],[835,180,14,'#7cc5eb'],[52,850,16,'#8bcbea'],[848,1010,20,'#ef8db9']].forEach(([x,y,s,color])=>drawTicketHeart(c,x,y,s,color));[[80,260,12,'#f4b85e'],[820,335,10,'#87c8ea'],[92,730,12,'#e98bb8']].forEach(([x,y,s,color])=>drawTicketSpark(c,x,y,s,color));
   c.save();c.shadowColor='rgba(126,165,192,.2)';c.shadowBlur=32;c.shadowOffsetY=18;drawTicketPaper(c,58,38,784,1100);c.fillStyle='#fffdfd';c.fill();c.restore();drawTicketPaper(c,58,38,784,1100);c.strokeStyle='#ef9fc4';c.lineWidth=4;c.stroke();
-  c.save();c.globalAlpha=.035;c.fillStyle='#89c9ec';c.font='900 78px Microsoft YaHei';c.textAlign='center';c.translate(450,640);c.rotate(-.16);c.fillText('BLIND BOX',0,0);c.restore();
-  c.fillStyle='#67b7e1';c.font='900 24px Microsoft YaHei';c.textAlign='left';c.fillText('BUNNY CLUB · BLIND BOX',96,104);c.textAlign='right';c.fillStyle='#9b8395';c.font='900 19px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,804,104);c.strokeStyle='#e3c1d2';c.lineWidth=2;c.beginPath();c.moveTo(96,138);c.lineTo(804,138);c.stroke();
+  c.save();c.globalAlpha=.035;c.fillStyle='#89c9ec';c.font='900 70px Microsoft YaHei';c.textAlign='center';c.translate(450,640);c.rotate(-.16);c.fillText('TODAY FUN PICK',0,0);c.restore();
+  c.fillStyle='#67b7e1';c.font='900 24px Microsoft YaHei';c.textAlign='left';c.fillText('BUNNY CLUB · TODAY FUN PICK',96,104);c.textAlign='right';c.fillStyle='#9b8395';c.font='900 19px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,804,104);c.strokeStyle='#e3c1d2';c.lineWidth=2;c.beginPath();c.moveTo(96,138);c.lineTo(804,138);c.stroke();
   const prizeBg=c.createLinearGradient(96,165,804,315);prizeBg.addColorStop(0,soft);prizeBg.addColorStop(1,'#f1f9ff');c.fillStyle=prizeBg;c.beginPath();c.roundRect(96,166,708,166,24);c.fill();c.fillStyle='#fff';c.beginPath();c.roundRect(116,192,108,108,27);c.fill();c.strokeStyle='rgba(231,124,173,.18)';c.lineWidth=2;c.stroke();c.font='58px "Segoe UI Emoji"';c.textAlign='center';c.fillText(prize.icon,170,267);
-  c.textAlign='left';c.fillStyle=accent;c.font='900 16px Microsoft YaHei';c.fillText(`${tierFor(prize.prob).label}`,252,205);c.fillStyle='#9a8798';c.font='800 18px Microsoft YaHei';c.fillText('本次幸运抽中',252,239);c.fillStyle=accent;c.font='900 31px Microsoft YaHei';canvasLines(c,prize.name,252,278,510,39);
+  c.textAlign='left';c.fillStyle=accent;c.font='900 16px Microsoft YaHei';c.fillText(`${tierFor(prize.prob).label}`,252,205);c.fillStyle='#9a8798';c.font='800 18px Microsoft YaHei';c.fillText('今天推荐玩法',252,239);c.fillStyle=accent;c.font='900 31px Microsoft YaHei';canvasLines(c,prize.name,252,278,510,39);
   c.strokeStyle='#dfc4d3';c.lineWidth=2;c.beginPath();c.moveTo(82,366);c.lineTo(818,366);c.stroke();c.fillStyle='#edf8fe';c.beginPath();c.arc(59,366,14,0,Math.PI*2);c.fill();c.beginPath();c.arc(841,366,14,0,Math.PI*2);c.fill();c.fillStyle='#d6a7c0';c.font='18px Microsoft YaHei';c.fillText('✂',95,373);
-  c.fillStyle='#6d5a6b';c.font='900 18px Microsoft YaHei';c.fillText('截图信息 / 奖励核验',96,411);c.fillStyle='#fff9fc';c.strokeStyle='#e4c9d7';c.lineWidth=2;c.beginPath();c.roundRect(96,432,708,346,20);c.fill();c.stroke();
-  const rows=[['开奖时间',audit.displayTime],['地区 IP',audit.region],['设备信息',`${audit.device} · ${audit.environment}`],['设备指纹',`FP:${audit.fingerprint}`],['核验码',audit.token]];let rowY=478;rows.forEach(([label,value],index)=>{c.fillStyle='#6c596b';c.font='900 18px Microsoft YaHei';c.fillText(label,124,rowY);c.fillStyle='#8f7b8d';c.font='800 18px Microsoft YaHei';canvasLines(c,value,270,rowY,500,26);if(index<rows.length-1){c.strokeStyle='#f0e2ea';c.lineWidth=1;c.beginPath();c.moveTo(124,rowY+30);c.lineTo(776,rowY+30);c.stroke()}rowY+=62});
-  c.save();c.translate(184,872);c.rotate(-.12);c.strokeStyle=accent;c.lineWidth=4;c.globalAlpha=.72;c.beginPath();c.arc(0,0,60,0,Math.PI*2);c.stroke();c.beginPath();c.arc(0,0,49,0,Math.PI*2);c.stroke();c.fillStyle=accent;c.textAlign='center';c.font='900 25px Microsoft YaHei';c.fillText('已核验',0,-2);c.font='900 12px Arial';c.fillText('VERIFIED',0,22);c.restore();
-  c.fillStyle='#765f73';c.textAlign='left';c.font='900 21px Microsoft YaHei';c.fillText('好运已装进这张奖励截图',286,844);c.fillStyle='#a18a9d';c.font='800 16px Microsoft YaHei';c.fillText('请保存截图，并以核验码确认本次结果',286,876);drawTicketHeart(c,744,850,22,accent,.45);drawTicketSpark(c,780,890,15,'#72bce3',.55);
-  c.strokeStyle='#e3c5d5';c.lineWidth=2;c.beginPath();c.moveTo(96,950);c.lineTo(804,950);c.stroke();c.fillStyle='#927e91';c.font='800 18px Microsoft YaHei';c.textAlign='center';c.fillText('请联系垂耳兔客服兑换奖励',450,1000);c.fillStyle='#67b7e1';c.font='900 17px Microsoft YaHei';c.fillText('THANK YOU · 垂耳兔电竞 KOOK 7686',450,1088);drawTicketHeart(c,420,1042,18,'#ef8db9',.55);drawTicketSpark(c,450,1042,12,'#82c6e9',.6);drawTicketHeart(c,480,1042,18,'#b89ae8',.5);
-  out.toBlob(blob=>{if(!blob){showToast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`心动盲盒-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);els.save.textContent='截图已保存';els.save.classList.add('is-saved');showToast('奖励截图已保存')},'image/png');
+  c.fillStyle='#6d5a6b';c.font='900 18px Microsoft YaHei';c.fillText('截图信息 / 随机记录',96,411);c.fillStyle='#fff9fc';c.strokeStyle='#e4c9d7';c.lineWidth=2;c.beginPath();c.roundRect(96,432,708,346,20);c.fill();c.stroke();
+  const rows=[['抽取时间',audit.displayTime],['地区 IP',audit.region],['设备信息',`${audit.device} · ${audit.environment}`],['设备指纹',`FP:${audit.fingerprint}`],['记录码',audit.token]];let rowY=478;rows.forEach(([label,value],index)=>{c.fillStyle='#6c596b';c.font='900 18px Microsoft YaHei';c.fillText(label,124,rowY);c.fillStyle='#8f7b8d';c.font='800 18px Microsoft YaHei';canvasLines(c,value,270,rowY,500,26);if(index<rows.length-1){c.strokeStyle='#f0e2ea';c.lineWidth=1;c.beginPath();c.moveTo(124,rowY+30);c.lineTo(776,rowY+30);c.stroke()}rowY+=62});
+  c.save();c.translate(184,872);c.rotate(-.12);c.strokeStyle=accent;c.lineWidth=4;c.globalAlpha=.72;c.beginPath();c.arc(0,0,60,0,Math.PI*2);c.stroke();c.beginPath();c.arc(0,0,49,0,Math.PI*2);c.stroke();c.fillStyle=accent;c.textAlign='center';c.font='900 25px Microsoft YaHei';c.fillText('已抽取',0,-2);c.font='900 12px Arial';c.fillText('FUN PICK',0,22);c.restore();
+  c.fillStyle='#765f73';c.textAlign='left';c.font='900 21px Microsoft YaHei';c.fillText('今天就玩这一单',286,844);c.fillStyle='#a18a9d';c.font='800 16px Microsoft YaHei';c.fillText('纯娱乐随机推荐，跟着心情决定就好',286,876);drawTicketHeart(c,744,850,22,accent,.45);drawTicketSpark(c,780,890,15,'#72bce3',.55);
+  c.strokeStyle='#e3c5d5';c.lineWidth=2;c.beginPath();c.moveTo(96,950);c.lineTo(804,950);c.stroke();c.fillStyle='#927e91';c.font='800 18px Microsoft YaHei';c.textAlign='center';c.fillText('本结果仅供娱乐参考，不代表实际订单或奖励',450,1000);c.fillStyle='#67b7e1';c.font='900 17px Microsoft YaHei';c.fillText('HAVE FUN · 垂耳兔电竞 KOOK 7686',450,1088);drawTicketHeart(c,420,1042,18,'#ef8db9',.55);drawTicketSpark(c,450,1042,12,'#82c6e9',.6);drawTicketHeart(c,480,1042,18,'#b89ae8',.5);
+  out.toBlob(blob=>{if(!blob){showToast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`今日趣味单-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);els.save.textContent='截图已保存';els.save.classList.add('is-saved');showToast('趣味单截图已保存')},'image/png');
 }
 function saveHorizontalTicketImage(){
   if(!currentResult)return;const {prize,audit}=currentResult,out=document.createElement('canvas');out.width=1400;out.height=760;const c=out.getContext('2d'),accent=prize.color,soft=prize.soft;
@@ -614,16 +622,16 @@ function saveHorizontalTicketImage(){
   c.save();c.shadowColor='rgba(106,154,184,.2)';c.shadowBlur=30;c.shadowOffsetY=16;c.fillStyle='#fffdfd';c.beginPath();c.roundRect(45,45,1310,670,30);c.fill();c.restore();c.strokeStyle='#ef9fc4';c.lineWidth=4;c.beginPath();c.roundRect(45,45,1310,670,30);c.stroke();c.save();c.strokeStyle='rgba(153,214,245,.48)';c.lineWidth=1.5;c.beginPath();c.roundRect(58,58,1284,644,22);c.stroke();c.restore();
   drawSoftWatermark(c,1400,760,'垂耳兔电竞 · BUNNY CLUB');
   c.fillStyle='#eaf8ff';for(const [x,y,r] of [[45,380,19],[1355,380,19],[930,45,14],[930,715,14]]){c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fill()}
-  c.fillStyle='#67b7e1';c.font='900 25px Microsoft YaHei';c.textAlign='left';c.fillText('BUNNY CLUB · BLIND BOX',85,103);c.fillStyle='#9b8395';c.font='900 17px Microsoft YaHei';c.fillText('盲盒奖励截图信息',85,130);
+  c.fillStyle='#67b7e1';c.font='900 25px Microsoft YaHei';c.textAlign='left';c.fillText('BUNNY CLUB · TODAY FUN PICK',85,103);c.fillStyle='#9b8395';c.font='900 17px Microsoft YaHei';c.fillText('今日趣味单截图信息',85,130);
   const prizeBg=c.createLinearGradient(85,155,885,315);prizeBg.addColorStop(0,soft);prizeBg.addColorStop(1,'#eef9ff');c.fillStyle=prizeBg;c.beginPath();c.roundRect(85,155,800,165,24);c.fill();c.fillStyle=accent;c.beginPath();c.roundRect(85,176,7,123,4);c.fill();c.fillStyle='#fff';c.beginPath();c.roundRect(112,183,112,110,26);c.fill();c.strokeStyle='rgba(231,124,173,.18)';c.lineWidth=2;c.stroke();c.font='60px "Segoe UI Emoji"';c.textAlign='center';c.fillText(prize.icon,168,257);
-  c.textAlign='left';c.fillStyle='#9a8798';c.font='800 18px Microsoft YaHei';c.fillText('本次幸运抽中',252,210);c.fillStyle=accent;c.font='900 34px Microsoft YaHei';canvasLines(c,prize.name,252,260,590,42);
-  c.fillStyle='#fff9fc';c.beginPath();c.roundRect(85,345,800,305,20);c.fill();c.save();c.strokeStyle='#e5bfd3';c.lineWidth=2;c.setLineDash([10,8]);c.beginPath();c.roundRect(85,345,800,305,20);c.stroke();c.beginPath();c.moveTo(108,405);c.lineTo(862,405);c.moveTo(108,463);c.lineTo(862,463);c.moveTo(108,552);c.lineTo(862,552);c.moveTo(470,405);c.lineTo(470,463);c.moveTo(470,552);c.lineTo(470,628);c.stroke();c.restore();c.fillStyle='#6d5a6b';c.font='900 18px Microsoft YaHei';c.fillText('截图信息 / 奖励核验',112,385);
-  c.fillStyle='#6c596b';c.font='900 17px Microsoft YaHei';c.fillText('开奖时间',112,432);c.fillText('地区 IP',490,432);c.fillText('设备信息',112,504);c.fillText('设备指纹',112,590);c.fillText('核验码',490,590);c.fillStyle='#8f7b8d';c.font='800 17px Microsoft YaHei';canvasLines(c,audit.displayTime,225,432,240,24);canvasLines(c,audit.region,590,432,260,24);canvasLines(c,`${audit.device} · ${audit.environment}`,225,504,620,24);c.fillText(`FP:${audit.fingerprint}`,225,590);c.fillText(audit.token,590,590);
+  c.textAlign='left';c.fillStyle='#9a8798';c.font='800 18px Microsoft YaHei';c.fillText('今天推荐玩法',252,210);c.fillStyle=accent;c.font='900 34px Microsoft YaHei';canvasLines(c,prize.name,252,260,590,42);
+  c.fillStyle='#fff9fc';c.beginPath();c.roundRect(85,345,800,305,20);c.fill();c.save();c.strokeStyle='#e5bfd3';c.lineWidth=2;c.setLineDash([10,8]);c.beginPath();c.roundRect(85,345,800,305,20);c.stroke();c.beginPath();c.moveTo(108,405);c.lineTo(862,405);c.moveTo(108,463);c.lineTo(862,463);c.moveTo(108,552);c.lineTo(862,552);c.moveTo(470,405);c.lineTo(470,463);c.moveTo(470,552);c.lineTo(470,628);c.stroke();c.restore();c.fillStyle='#6d5a6b';c.font='900 18px Microsoft YaHei';c.fillText('截图信息 / 随机记录',112,385);
+  c.fillStyle='#6c596b';c.font='900 17px Microsoft YaHei';c.fillText('抽取时间',112,432);c.fillText('地区 IP',490,432);c.fillText('设备信息',112,504);c.fillText('设备指纹',112,590);c.fillText('记录码',490,590);c.fillStyle='#8f7b8d';c.font='800 17px Microsoft YaHei';canvasLines(c,audit.displayTime,225,432,240,24);canvasLines(c,audit.region,590,432,260,24);canvasLines(c,`${audit.device} · ${audit.environment}`,225,504,620,24);c.fillText(`FP:${audit.fingerprint}`,225,590);c.fillText(audit.token,590,590);
   c.strokeStyle='#dfc4d3';c.lineWidth=2;c.beginPath();c.moveTo(930,75);c.lineTo(930,685);c.stroke();c.fillStyle='#d6a7c0';c.font='20px Microsoft YaHei';c.fillText('✂',919,112);
-  c.textAlign='center';c.fillStyle='#67b7e1';c.font='900 18px Microsoft YaHei';c.fillText('盲盒奖励截图',1142,105);c.fillStyle='#9b8395';c.font='900 17px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,1142,135);c.fillStyle=soft;c.beginPath();c.roundRect(1062,170,160,150,34);c.fill();c.font='78px "Segoe UI Emoji"';c.fillText(prize.icon,1142,273);c.fillStyle=soft;c.beginPath();c.roundRect(1080,342,124,34,17);c.fill();c.fillStyle=accent;c.font='900 14px Microsoft YaHei';c.fillText('专属兑换凭证',1142,364);
-  c.save();c.translate(1142,470);c.rotate(-.1);c.strokeStyle=accent;c.lineWidth=4;c.globalAlpha=.72;c.beginPath();c.arc(0,0,68,0,Math.PI*2);c.stroke();c.beginPath();c.arc(0,0,56,0,Math.PI*2);c.stroke();c.fillStyle=accent;c.font='900 27px Microsoft YaHei';c.fillText('已核验',0,-3);c.font='900 12px Arial';c.fillText('VERIFIED',0,22);c.restore();
-  c.fillStyle='#765f73';c.font='900 18px Microsoft YaHei';c.fillText('请联系垂耳兔客服',1142,585);c.fillText('兑换奖励',1142,614);c.fillStyle='#67b7e1';c.font='900 15px Microsoft YaHei';c.fillText('KOOK 7686 · THANK YOU',1142,665);c.font='28px "Segoe UI Emoji"';c.fillText('🎀',1142,705);
-  out.toBlob(blob=>{if(!blob){showToast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`心动盲盒-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);els.save.textContent='截图已保存';els.save.classList.add('is-saved');showToast('奖励截图已保存');setTimeout(closeResult,650)},'image/png');
+  c.textAlign='center';c.fillStyle='#67b7e1';c.font='900 18px Microsoft YaHei';c.fillText('今日趣味单截图',1142,105);c.fillStyle='#9b8395';c.font='900 17px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,1142,135);c.fillStyle=soft;c.beginPath();c.roundRect(1062,170,160,150,34);c.fill();c.font='78px "Segoe UI Emoji"';c.fillText(prize.icon,1142,273);c.fillStyle=soft;c.beginPath();c.roundRect(1080,342,124,34,17);c.fill();c.fillStyle=accent;c.font='900 14px Microsoft YaHei';c.fillText('今日趣味签',1142,364);
+  c.save();c.translate(1142,470);c.rotate(-.1);c.strokeStyle=accent;c.lineWidth=4;c.globalAlpha=.72;c.beginPath();c.arc(0,0,68,0,Math.PI*2);c.stroke();c.beginPath();c.arc(0,0,56,0,Math.PI*2);c.stroke();c.fillStyle=accent;c.font='900 27px Microsoft YaHei';c.fillText('已抽取',0,-3);c.font='900 12px Arial';c.fillText('FUN PICK',0,22);c.restore();
+  c.fillStyle='#765f73';c.font='900 18px Microsoft YaHei';c.fillText('纯娱乐随机推荐',1142,585);c.fillText('跟着心情决定',1142,614);c.fillStyle='#67b7e1';c.font='900 15px Microsoft YaHei';c.fillText('KOOK 7686 · HAVE FUN',1142,665);c.font='28px "Segoe UI Emoji"';c.fillText('🎮',1142,705);
+  out.toBlob(blob=>{if(!blob){showToast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`今日趣味单-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);els.save.textContent='截图已保存';els.save.classList.add('is-saved');showToast('趣味单截图已保存');setTimeout(closeResult,650)},'image/png');
 }
 function showToast(message){els.toast.textContent=message;els.toast.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>els.toast.classList.remove('show'),1700)}
 
