@@ -330,7 +330,7 @@
     <h2 class="notice-title" id="noticeTitle">📌 参与注意事项</h2>
     <ol class="notice-list">
       <li>优惠券及赠送余额仅供下次点单使用，不可抵扣本次订单。</li>
-      <li>现金返现奖励核销后立即到账。</li>
+      <li>现金返现奖励将在24小时内发放。</li>
       <li>完成消费后才可参与刮奖，不支持先刮奖后消费。</li>
       <li>参与门槛待定，最终以活动公告为准。</li>
     </ol>
@@ -403,8 +403,8 @@
     { id:'d10', name:'赠送余额 10r', desc:'仅供下次点单使用', icon:'💰', tier:'uncommon', tierLabel:'优质', prob:18, c1:'#8FDCB8', c2:'#5CC08F' },
     { id:'d28', name:'赠送余额 28r', desc:'仅供下次点单使用', icon:'🎁', tier:'uncommon', tierLabel:'优质', prob:14, c1:'#FFCE7A', c2:'#FFB13D' },
     { id:'d18', name:'赠送余额 18r', desc:'仅供下次点单使用', icon:'💎', tier:'rare',     tierLabel:'稀有', prob:8,  c1:'#8FBFFF', c2:'#4C93FF' },
-    { id:'c5',  name:'现金返现 5r', desc:'核销后立即到账',    icon:'💵', tier:'rare',     tierLabel:'稀有', prob:6,  c1:'#FF9C9C', c2:'#FF6161' },
-    { id:'c8',  name:'现金返现 8r', desc:'核销后立即到账',    icon:'👑', tier:'legendary',tierLabel:'王牌', prob:4,  c1:'#FFD34D', c2:'#FF9A3D' },
+    { id:'c5',  name:'现金返现 5r', desc:'将在24小时内发放', icon:'💵', tier:'rare',     tierLabel:'稀有', prob:6,  c1:'#FF9C9C', c2:'#FF6161' },
+    { id:'c8',  name:'现金返现 8r', desc:'将在24小时内发放', icon:'👑', tier:'legendary',tierLabel:'王牌', prob:4,  c1:'#FFD34D', c2:'#FF9A3D' },
   ];
   const TIER_RANK = { common:1, uncommon:2, rare:3, legendary:4 };
   let CUM = []; (function(){ let acc=0; PRIZES.forEach(p=>{ acc+=p.prob; CUM.push(acc); }); })();
