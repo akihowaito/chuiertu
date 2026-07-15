@@ -21,11 +21,16 @@
     .theme-switch:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(159,216,244,.25)}
     .theme-switch__icon{font-size:16px}.theme-switch__text{white-space:nowrap}
     .angel-sky{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .35s}
-    .angel-sky::before{content:"";position:absolute;left:-8%;right:-8%;bottom:-135px;height:270px;background:radial-gradient(ellipse at 8% 20%,rgba(255,255,255,.9) 0 26%,transparent 27%),radial-gradient(ellipse at 28% 35%,rgba(255,255,255,.82) 0 31%,transparent 32%),radial-gradient(ellipse at 52% 16%,rgba(255,255,255,.9) 0 34%,transparent 35%),radial-gradient(ellipse at 76% 35%,rgba(255,255,255,.82) 0 31%,transparent 32%),radial-gradient(ellipse at 94% 20%,rgba(255,255,255,.9) 0 26%,transparent 27%);filter:drop-shadow(0 -8px 18px rgba(157,210,239,.14))}
-    .angel-sky::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 14%,rgba(255,242,190,.2),transparent 18%),radial-gradient(circle at 12% 44%,rgba(255,255,255,.7),transparent 12%),radial-gradient(circle at 88% 54%,rgba(255,255,255,.68),transparent 13%)}
+    .angel-sky::before{content:"";position:absolute;z-index:4;left:-4%;right:-4%;bottom:-54px;height:154px;background:radial-gradient(ellipse 9% 58% at 4% 62%,#fff 0 96%,transparent 100%),radial-gradient(ellipse 11% 68% at 14% 58%,#fff 0 96%,transparent 100%),radial-gradient(ellipse 13% 82% at 27% 65%,#fff 0 96%,transparent 100%),radial-gradient(ellipse 12% 72% at 41% 55%,#fff 0 96%,transparent 100%),radial-gradient(ellipse 14% 88% at 55% 64%,#fff 0 96%,transparent 100%),radial-gradient(ellipse 12% 72% at 69% 54%,#fff 0 96%,transparent 100%),radial-gradient(ellipse 13% 82% at 82% 64%,#fff 0 96%,transparent 100%),radial-gradient(ellipse 11% 68% at 94% 58%,#fff 0 96%,transparent 100%),linear-gradient(#fff,#fff);filter:drop-shadow(0 -10px 18px rgba(133,197,232,.16))}
+    .angel-sky::after{content:"";position:absolute;z-index:3;left:-7%;right:-7%;bottom:18px;height:104px;background:radial-gradient(ellipse 10% 64% at 5% 82%,rgba(220,242,255,.88) 0 96%,transparent 100%),radial-gradient(ellipse 13% 86% at 20% 88%,rgba(249,230,242,.9) 0 96%,transparent 100%),radial-gradient(ellipse 11% 70% at 36% 78%,rgba(225,244,255,.9) 0 96%,transparent 100%),radial-gradient(ellipse 14% 92% at 53% 91%,rgba(250,232,244,.9) 0 96%,transparent 100%),radial-gradient(ellipse 12% 75% at 70% 78%,rgba(224,244,255,.9) 0 96%,transparent 100%),radial-gradient(ellipse 14% 88% at 87% 88%,rgba(249,231,243,.9) 0 96%,transparent 100%);opacity:.72;filter:blur(.2px)}
     body[data-site-theme="angel"] .angel-sky{opacity:1}
-    .angel-sky span{position:absolute;color:#fff;text-shadow:0 0 12px rgba(233,199,123,.7);opacity:.42;will-change:transform;animation:angelGlide var(--time) ease-in-out var(--delay) infinite}
+    .angel-sky span{position:absolute;z-index:2;color:#fff;text-shadow:0 0 12px rgba(233,199,123,.7);opacity:.42;will-change:transform;animation:angelGlide var(--time) ease-in-out var(--delay) infinite}
+    .angel-cloud{position:absolute;z-index:1;width:150px;height:42px;border-radius:999px;background:rgba(255,255,255,.55);filter:drop-shadow(0 8px 18px rgba(128,190,226,.1));animation:cloudDrift var(--cloud-time,18s) ease-in-out infinite alternate}
+    .angel-cloud::before,.angel-cloud::after{content:"";position:absolute;border-radius:50%;background:inherit}
+    .angel-cloud::before{width:72px;height:72px;left:20px;bottom:8px}.angel-cloud::after{width:92px;height:92px;right:18px;bottom:2px}
+    .angel-cloud--one{left:5%;top:24%;transform:scale(.82);--cloud-time:17s}.angel-cloud--two{right:7%;top:34%;transform:scale(1.05);--cloud-time:22s}.angel-cloud--three{left:48%;top:67%;transform:scale(.68);--cloud-time:19s;opacity:.7}
     @keyframes angelGlide{0%,100%{transform:translate3d(0,8px,0) rotate(-7deg);opacity:.16}45%{transform:translate3d(var(--drift),-14px,0) rotate(8deg);opacity:.46}}
+    @keyframes cloudDrift{from{margin-left:-10px;opacity:.42}to{margin-left:18px;opacity:.7}}
     body[data-site-theme="angel"]{background-image:radial-gradient(circle at 18% 9%,rgba(255,224,239,.88),transparent 36%),radial-gradient(circle at 83% 12%,rgba(212,239,255,.9),transparent 38%),linear-gradient(135deg,#fff9fc 0%,#f8f5ff 48%,#effaff 100%)!important}
     body[data-site-theme="angel"] .page{background-image:linear-gradient(120deg,rgba(255,239,247,.64),rgba(241,249,255,.68))!important}
     body[data-site-theme="angel"] h1,body[data-site-theme="angel"] .hero-title{background:linear-gradient(100deg,#ef8fbd 12%,#d8b15e 50%,#78bfe8 88%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;filter:drop-shadow(0 3px 0 rgba(255,255,255,.95)) drop-shadow(0 8px 12px rgba(151,199,230,.15))}
@@ -48,14 +53,16 @@
       .activity-dock__panel{max-height:0;opacity:0;overflow:hidden;transform:translateY(8px);pointer-events:none;transition:max-height .3s ease,opacity .2s,transform .3s}
       .activity-dock.is-open .activity-dock__panel{max-height:230px;opacity:1;transform:none;pointer-events:auto}
       .activity-dock__link{min-height:40px;padding:8px 11px}.activity-dock__label{font-size:11px}
+      .angel-sky::before{bottom:-42px;height:118px}.angel-sky::after{bottom:6px;height:84px}.angel-cloud{transform:scale(.58)}.angel-cloud--three{display:none}
     }
-    @media(prefers-reduced-motion:reduce){.angel-sky span{animation:none}.theme-switch,.activity-dock__link,.activity-dock__panel{transition:none}}
+    @media(prefers-reduced-motion:reduce){.angel-sky span,.angel-cloud{animation:none}.theme-switch,.activity-dock__link,.activity-dock__panel{transition:none}}
   `;
   document.head.appendChild(style);
 
   const sky=document.createElement('div');
   sky.className='angel-sky';sky.setAttribute('aria-hidden','true');
-  ['✦','✧','☁','⋆','♡','✦'].forEach((symbol,index)=>{
+  ['one','two','three'].forEach(name=>{const cloud=document.createElement('i');cloud.className=`angel-cloud angel-cloud--${name}`;sky.appendChild(cloud)});
+  ['✦','🪽','✧','⋆','🪽','✦'].forEach((symbol,index)=>{
     const item=document.createElement('span');item.textContent=symbol;
     item.style.left=`${8+(index*17)%84}%`;item.style.top=`${12+(index*19)%72}%`;
     item.style.fontSize=`${14+(index%3)*5}px`;item.style.setProperty('--time',`${7+index*1.3}s`);
