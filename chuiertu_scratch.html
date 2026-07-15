@@ -232,492 +232,7 @@
   .scratch-card{filter:drop-shadow(0 12px 18px rgba(190,110,160,.24)) drop-shadow(0 3px 0 rgba(255,255,255,.72))}
   .start-btn{min-width:210px;min-height:48px;padding:12px 24px;border-radius:16px;background:#ff75b6;box-shadow:0 8px 0 #d94391,0 15px 28px rgba(235,151,190,.16);font-size:14px;animation:none}
   .start-btn:hover{transform:translateY(-2px);filter:brightness(1.02)}
-  .start-btn:active{transform:translateY(4px);box-shadow:0 4px 0 #d94391}
-  .deck-tip{font-size:12px;line-height:1.6;font-weight:800;color:var(--muted)}
-  .game-actions .btn{min-width:180px;min-height:42px;border-radius:13px;border:1.5px solid #efb3cf;box-shadow:0 5px 0 rgba(225,153,187,.12)}
-  .info-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);gap:14px;align-items:stretch;padding:12px;border:2px solid transparent;border-radius:18px;background:linear-gradient(rgba(255,255,255,.58),rgba(249,253,255,.66)) padding-box,linear-gradient(135deg,#f5b2d0,#fff,#a9ddf7) border-box;box-shadow:0 8px 0 rgba(155,211,241,.16),0 18px 36px rgba(139,196,225,.08)}
-  .panel{margin:0;padding:17px 16px;border:2px solid rgba(169,221,247,.65);border-radius:14px;background:rgba(255,255,255,.84);box-shadow:none}
-  .lace-trim::before,.lace-trim::after{display:none}
-  .panel-title{padding-bottom:12px;border-bottom:1.5px solid rgba(169,221,255,.78);font-size:18px;line-height:1.45;font-weight:900;letter-spacing:0}
-  .panel-title .mini{font-size:11px;line-height:1.5;font-weight:900;color:#5baad5}
-  .prize-list{gap:8px}
-  .prize-row{min-height:54px;padding:9px 11px;border:1.5px solid #d6edf9;border-radius:12px;background:rgba(255,255,255,.88)}
-  .prize-row .name{font-size:13px;line-height:1.5;font-weight:900}.prize-row .desc{font-size:11px;line-height:1.55;font-weight:800}.prize-row .odds{font-size:11px;font-weight:900}
-  .odds-note{margin-top:11px;border:1px solid #f7e2b8;background:#fffaf0;font-size:11px;line-height:1.65;font-weight:800}
-  .history-list{max-height:430px;min-height:280px;padding-right:3px}
-  .history-item{min-height:50px;padding:9px 10px;border-color:#dceefa;background:rgba(255,255,255,.92);font-size:12px}
-  .history-item .hi-name{font-size:12px;line-height:1.45;font-weight:900}.history-item .hi-time{font-size:10px;line-height:1.5;font-weight:800}
-  .history-empty{display:grid;place-items:center;min-height:250px;font-size:13px;line-height:1.75;font-weight:800}
-  .result-card{border:3px solid transparent;border-radius:18px;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#f5a7ca,#fff,#94d5f5) border-box;box-shadow:0 12px 0 rgba(116,190,231,.14),0 28px 70px rgba(99,84,103,.24)}
-  footer{margin-top:24px;padding:22px 8px 3px;font-size:9px;line-height:1.6;font-weight:800;color:#52a8d7}
-
-  /* Match the permanent wheel's final typography and icon scale. */
-  .back,.contact,.sound-toggle{font-size:12px}
-  .hero .eyebrow{font-size:11px}
-  .hero .sub{font-size:14px}
-  .meta-pill{font-size:11px}
-  .game-title{font-size:23px}
-  .game-hint,.deck-tip{font-size:13px}
-  .panel-title{font-size:19px}
-  .panel-title .mini{font-size:13px}
-  .prize-row .ic{width:40px;font-size:20px}
-  .prize-row .name{font-size:14px}
-  .prize-row .desc{font-size:12px}
-  .prize-row .tier-badge{font-size:11px}
-  .prize-row .odds{font-size:12px}
-  .odds-note{font-size:12px}
-  @keyframes livePulse{50%{transform:scale(.72);opacity:.65}}
-  @media(max-width:820px){.info-grid{grid-template-columns:1fr}.history-list{min-height:190px;max-height:none}.history-empty{min-height:170px}}
-  @media(max-width:520px){
-    .wrap{padding:12px 10px 30px}.back,.contact{padding:7px 9px;font-size:11px}.sound-toggle{width:36px;height:36px;font-size:11px}
-    .hero{height:auto;min-height:184px;padding:18px 0 14px}.hero h1{font-size:31px}.game-zone{padding:14px 0 22px}
-    .hero .sub{font-size:13px}.meta-pill{font-size:10px}.game-title{font-size:21px}.game-hint,.deck-tip{font-size:12px}.info-grid{padding:8px;gap:10px;border-radius:16px}.panel{padding:14px 12px}.panel-title{font-size:17px}.panel-title .mini{font-size:11px}
-    .prize-row{gap:8px;padding:9px}.prize-row .ic{font-size:20px;width:34px}.prize-row .name{font-size:13px}.prize-row .desc{font-size:11.5px}.prize-row .tier-badge{padding:3px 6px;font-size:10px}.prize-row .odds{width:34px;font-size:11px}
-    .activity-notice{padding:14px 12px}.notice-title{font-size:16px}.notice-list{grid-template-columns:1fr}.notice-list li{font-size:12px}.history-item{grid-template-columns:auto minmax(0,1fr) auto}.history-item .hi-time{display:none}.history-save{padding:6px 8px}
-  }
-</style>
-</head>
-<body>
-
-<div class="floaters" id="floaters"></div>
-<canvas id="confettiCanvas"></canvas>
-
-<div class="wrap">
-  <nav class="topbar" aria-label="页面导航">
-    <a class="back" href="./index.html">← 返回首页</a>
-    <div class="top-actions">
-      <button class="sound-toggle" id="soundToggle" type="button" title="关闭音效" aria-label="关闭音效">🔊</button>
-      <a class="contact" href="https://kook.vip/HRXPjp" target="_blank" rel="noopener">联系下单🐇</a>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <div class="eyebrow"><span class="live-dot"></span>常驻开放 · 随时可刮</div>
-    <h1>心动常驻刮刮乐</h1>
-    <div class="sub">三选一刮开惊喜，从 7 档优惠与返现奖励中抽取本次心动福利。</div>
-    <div class="intro-meta">
-      <span class="meta-pill">🐰 垂耳兔电竞 · KOOK 7686</span>
-      <span class="meta-pill" id="dynamicTime">📅 正在同步时间…</span>
-    </div>
-  </header>
-
-  <main class="scratch-content">
-
-  <!-- 1. 刮刮乐游戏区 -->
-  <div class="game-zone">
-    <div class="game-title">🍈 三选一刮刮乐</div>
-    <div class="game-hint" id="gameHint">点击下方按钮，发牌后选一张刮开惊喜吧</div>
-
-    <div class="cards-stage" id="cardsStage"></div>
-
-    <div class="confirm-wrap" id="confirmWrap">
-      <button class="confirm-btn" id="confirmBtn">✓ 确认选择这张</button>
-      <div class="confirm-tip">还没确定？可以直接点击另外一张重新选择</div>
-    </div>
-
-    <div class="start-wrap" id="startWrap">
-      <button class="start-btn" id="startBtn">🎴 开始刮奖</button>
-      <div class="deck-tip">每一局都有优惠券在等你哦</div>
-    </div>
-
-    <div class="game-actions">
-      <button class="btn hidden" id="resetBtn">🔄 再来一局</button>
-    </div>
-  </div>
-
-  <!-- 2. 中奖概率 -->
-  <div class="info-grid">
-  <div class="panel lace-trim">
-    <div class="panel-title">🎯 中奖概率<span class="mini">共 7 档奖励</span></div>
-    <div class="prize-list" id="prizeList"></div>
-    <div class="odds-note">7 档奖励按公开概率随机抽取，优惠券、赠送余额与现金返现均以实际开奖结果为准。</div>
-  </div>
-
-  <!-- 3. 历史记录 -->
-  <div class="panel lace-trim">
-    <div class="panel-title">📜 历史记录<span class="mini" id="historyMeta">共 0 次 · 最佳 —</span></div>
-    <div class="history-list" id="historyList">
-      <div class="history-empty">🎀 还没有刮奖记录哦～</div>
-    </div>
-  </div>
-  </div>
-
-  <section class="activity-notice" aria-labelledby="noticeTitle">
-    <h2 class="notice-title" id="noticeTitle">📌 参与注意事项</h2>
-    <ol class="notice-list">
-      <li>优惠券及赠送余额仅供下次点单使用，不可抵扣本次订单。</li>
-      <li>现金返现奖励将在24小时内发放。</li>
-      <li>完成消费后才可参与刮奖，不支持先刮奖后消费。</li>
-      <li>参与门槛待定，最终以活动公告为准。</li>
-    </ol>
-  </section>
-  </main>
-
-  <footer>© 2026 垂耳兔电竞 · 最终解释权归垂耳兔电竞所有 · akihowaito</footer>
-</div>
-
-<div class="result-overlay" id="resultOverlay">
-  <div class="result-card">
-    <button class="result-close" id="resultClose" type="button" aria-label="关闭结果">×</button>
-    <div class="rc-icon" id="rcIcon">🎁</div>
-    <div class="rc-title">✨ 恭喜刮中 ✨</div>
-    <div class="rc-name" id="rcName">--</div>
-    <div class="rc-desc" id="rcDesc">--</div>
-    <div class="rc-tip">请保存本次抽奖凭证，并联系<span class="support-emphasis">垂耳兔客服</span>，实际服务以双方确认订单为准。</div>
-    <button class="save-scratch-result" id="saveScratchResult" type="button">保存截图</button>
-  </div>
-</div>
-
-<script>
-(function(){
-  "use strict";
-
-  const SOUND_KEY='chuiertu_scratch_sound_v1';
-  const HISTORY_KEY='chuiertu_scratch_history_v2';
-  let soundEnabled=localStorage.getItem(SOUND_KEY)!=='off';
-  let ipRegion='正在获取地区…';
-
-  function getDeviceLabel(){
-    const ua=navigator.userAgent||'';
-    const os=/Windows/i.test(ua)?'Windows 电脑':/iPhone/i.test(ua)?'iPhone':/iPad/i.test(ua)?'iPad':/Android/i.test(ua)?'Android 设备':/Mac/i.test(ua)?'Mac 电脑':'未知设备';
-    const browser=/Edg\//.test(ua)?'Edge':/Chrome\//.test(ua)?'Chrome':/Firefox\//.test(ua)?'Firefox':/Safari\//.test(ua)?'Safari':'未知浏览器';
-    return `${os} · ${browser}`;
-  }
-  function getEnvironment(){return `${screen.width||'?'}×${screen.height||'?'} · ${Intl.DateTimeFormat().resolvedOptions().timeZone||'未知时区'}`}
-  function getFingerprint(){
-    const raw=[navigator.userAgent,screen.width,screen.height,screen.colorDepth,Intl.DateTimeFormat().resolvedOptions().timeZone,navigator.language,navigator.hardwareConcurrency].join('|');
-    let hash=0x9A7B3C;for(let i=0;i<raw.length;i++){hash=Math.imul(hash^raw.charCodeAt(i),0x5BD1E995);hash^=hash>>>15}
-    return(hash>>>0).toString(36).toUpperCase().padStart(6,'0').slice(0,6);
-  }
-  function formatAuditTime(value){return new Intl.DateTimeFormat('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',weekday:'short',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date(value)).replaceAll('/','.')}
-  function cleanRegion(values){return [...new Set(values.filter(value=>value&&value!=='null'&&value!=='undefined'))].join(' · ')}
-  async function fetchJson(url){const response=await fetch(url,{cache:'no-store'});if(!response.ok)throw new Error('region unavailable');return response.json()}
-  async function loadIpRegion(){
-    try{const data=await fetchJson('https://myip.ipip.net/json');if(data.ret==='ok'&&Array.isArray(data.data?.location)){const [country,region,city]=data.data.location;ipRegion=cleanRegion([region,city])||cleanRegion([country])||'地区暂不可用';return ipRegion}}catch{}
-    try{const data=await fetchJson('https://ipwho.is/?fields=success,country,region,city');if(data.success){ipRegion=cleanRegion([data.region,data.city])||cleanRegion([data.country])||'地区暂不可用';return ipRegion}}catch{}
-    ipRegion='地区暂不可用';return ipRegion;
-  }
-  async function createAuditToken(prize,audit){
-    const source=[prize.name,audit.time,audit.region,audit.device,audit.fingerprint].join('|');
-    if(crypto.subtle){const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(source));return[...new Uint8Array(digest)].slice(0,6).map(value=>value.toString(16).padStart(2,'0')).join('').toUpperCase()}
-    let hash=2166136261;for(let i=0;i<source.length;i++){hash^=source.charCodeAt(i);hash=Math.imul(hash,16777619)}return(hash>>>0).toString(16).toUpperCase();
-  }
-  const ipReady=loadIpRegion();
-
-  function updateClock(){
-    const now=new Date();
-    const date=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Singapore',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short'}).format(now).replaceAll('/','.');
-    const time=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Singapore',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);
-    document.getElementById('dynamicTime').textContent='📅 '+date+' · '+time;
-  }
-  updateClock(); setInterval(updateClock,1000);
-
-  /* ---------------- 奖品与概率配置（真实概率，合计100%，已按成本控制） ---------------- */
-  const PRIZES = [
-    { id:'p98', name:'98 折优惠券', desc:'下次点单立减 2%', icon:'🎫', tier:'common', tierLabel:'普通', prob:28, c1:'#FF9FC0', c2:'#FF6FA5' },
-    { id:'p95', name:'95 折优惠券', desc:'下次点单立减 5%', icon:'🎟️', tier:'common', tierLabel:'普通', prob:22, c1:'#C4A6FF', c2:'#9A6EFF' },
-    { id:'d10', name:'赠送余额 10r', desc:'仅供下次点单使用', icon:'💰', tier:'uncommon', tierLabel:'优质', prob:20, c1:'#8FDCB8', c2:'#5CC08F' },
-    { id:'d18', name:'赠送余额 18r', desc:'仅供下次点单使用', icon:'💎', tier:'rare',     tierLabel:'稀有', prob:12, c1:'#8FBFFF', c2:'#4C93FF' },
-    { id:'d28', name:'赠送余额 28r', desc:'仅供下次点单使用', icon:'🎁', tier:'uncommon', tierLabel:'优质', prob:8,  c1:'#FFCE7A', c2:'#FFB13D' },
-    { id:'c5',  name:'现金返现 5r', desc:'将在24小时内发放', icon:'💵', tier:'rare',     tierLabel:'稀有', prob:6,  c1:'#FF9C9C', c2:'#FF6161' },
-    { id:'c8',  name:'现金返现 8r', desc:'将在24小时内发放', icon:'👑', tier:'legendary',tierLabel:'王牌', prob:4,  c1:'#FFD34D', c2:'#FF9A3D' },
-  ];
-  if(PRIZES.reduce((total,prize)=>total+prize.prob,0)!==100) throw new Error('奖项概率合计必须为100%');
-  const TIER_RANK = { common:1, uncommon:2, rare:3, legendary:4 };
-  let CUM = []; (function(){ let acc=0; PRIZES.forEach(p=>{ acc+=p.prob; CUM.push(acc); }); })();
-  function weightedPick(){ const r=Math.random()*100; for(let i=0;i<PRIZES.length;i++){ if(r<CUM[i]) return PRIZES[i]; } return PRIZES[PRIZES.length-1]; }
-
-  /* ---------------- 状态 ---------------- */
-  function readHistory(){
-    try{
-      const saved=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');
-      return Array.isArray(saved)?saved.filter(item=>item&&item.name&&item.time).slice(0,20):[];
-    }catch{return[]}
-  }
-  let history=readHistory();
-  let totalPlays=history.length,bestRank=0,bestName='—';
-  history.forEach(item=>{const rank=TIER_RANK[item.tier]||0;if(rank>bestRank){bestRank=rank;bestName=item.name}});
-  let phase = 'pregame'; // pregame | shuffling | idle | selected | chosen | revealed
-  let chosenIndex = null, assignedPrize = null, currentResult = null;
-  const cardCtx = []; // per card runtime data
-
-  /* ---------------- 音效 ---------------- */
-  let audioCtx = null;
-  function ensureAudio(){
-    if(!soundEnabled) return;
-    if(!audioCtx){ const AC=window.AudioContext||window.webkitAudioContext; if(AC) audioCtx=new AC(); }
-    if(audioCtx && audioCtx.state==='suspended') audioCtx.resume();
-  }
-  function playTone(freq,startOffset,dur,type,peak){
-    if(!soundEnabled || !audioCtx) return;
-    const t0=audioCtx.currentTime+startOffset;
-    const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
-    osc.type=type||'sine'; osc.frequency.setValueAtTime(freq,t0);
-    gain.gain.setValueAtTime(0,t0);
-    gain.gain.linearRampToValueAtTime(peak||0.15,t0+0.02);
-    gain.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
-    osc.connect(gain).connect(audioCtx.destination);
-    osc.start(t0); osc.stop(t0+dur+0.03);
-  }
-  function playClick(){ ensureAudio(); playTone(880,0,0.06,'square',0.07); }
-  function playWhoosh(){
-    ensureAudio(); if(!soundEnabled || !audioCtx) return;
-    const dur=0.35; const bufferSize=Math.floor(audioCtx.sampleRate*dur);
-    const buffer=audioCtx.createBuffer(1,bufferSize,audioCtx.sampleRate);
-    const data=buffer.getChannelData(0);
-    for(let i=0;i<bufferSize;i++) data[i]=(Math.random()*2-1)*(1-i/bufferSize)*0.4;
-    const src=audioCtx.createBufferSource(); src.buffer=buffer;
-    const bp=audioCtx.createBiquadFilter(); bp.type='bandpass';
-    bp.frequency.setValueAtTime(600,audioCtx.currentTime);
-    bp.frequency.exponentialRampToValueAtTime(2200,audioCtx.currentTime+dur);
-    src.connect(bp).connect(audioCtx.destination); src.start();
-  }
-  let lastScratchSoundAt=0;
-  function playScratchNoise(){
-    if(!soundEnabled || !audioCtx) return;
-    const now=performance.now(); if(now-lastScratchSoundAt<90) return; lastScratchSoundAt=now;
-    const dur=0.06; const bufferSize=Math.floor(audioCtx.sampleRate*dur);
-    const buffer=audioCtx.createBuffer(1,bufferSize,audioCtx.sampleRate);
-    const data=buffer.getChannelData(0);
-    for(let i=0;i<bufferSize;i++) data[i]=(Math.random()*2-1)*0.35;
-    const noise=audioCtx.createBufferSource(); noise.buffer=buffer;
-    const bp=audioCtx.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=2400; bp.Q.value=0.8;
-    const g=audioCtx.createGain(); g.gain.value=0.5;
-    noise.connect(bp).connect(g).connect(audioCtx.destination); noise.start();
-  }
-  function playReveal(tier){
-    ensureAudio();
-    const melodies = {
-      common:[[659,0,0.10],[880,0.09,0.16]],
-      uncommon:[[659,0,0.09],[784,0.08,0.09],[988,0.16,0.20]],
-      rare:[[523,0,0.09],[659,0.08,0.09],[784,0.16,0.09],[1047,0.24,0.26]],
-      legendary:[[523,0,0.08],[659,0.07,0.08],[784,0.14,0.08],[988,0.21,0.08],[1319,0.28,0.42]]
-    };
-    (melodies[tier]||melodies.common).forEach(([f,s,d])=>playTone(f,s,d,'triangle',0.20));
-  }
-
-  /* ---------------- 彩带特效 ---------------- */
-  const confettiCanvas=document.getElementById('confettiCanvas');
-  const cctx=confettiCanvas.getContext('2d');
-  let particles=[], confettiRAF=null;
-  function resizeConfetti(){
-    confettiCanvas.width=window.innerWidth*devicePixelRatio;
-    confettiCanvas.height=window.innerHeight*devicePixelRatio;
-    confettiCanvas.style.width=window.innerWidth+'px';
-    confettiCanvas.style.height=window.innerHeight+'px';
-  }
-  resizeConfetti(); window.addEventListener('resize', resizeConfetti);
-  function spawnConfetti(x,y,tier){
-    const colors = tier==='legendary' ? ['#FFD34D','#FF9FC0','#FFF3B0','#FFB84D']
-      : tier==='rare' ? ['#8FBFFF','#FF9C9C','#FFD1D1','#C4A6FF']
-      : ['#FF9FC0','#C4A6FF','#8FDCB8','#FFCE7A'];
-    const count = tier==='legendary'?70:tier==='rare'?50:36;
-    for(let i=0;i<count;i++){
-      const angle=Math.random()*Math.PI*2, speed=2+Math.random()*5;
-      particles.push({ x:x*devicePixelRatio, y:y*devicePixelRatio,
-        vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed-3,
-        size:4+Math.random()*5, color:colors[Math.floor(Math.random()*colors.length)],
-        life:1, rot:Math.random()*Math.PI*2, vr:(Math.random()-0.5)*0.3 });
-    }
-    if(!confettiRAF) confettiRAF=requestAnimationFrame(tickConfetti);
-  }
-  function tickConfetti(){
-    cctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-    particles.forEach(p=>{
-      p.vy+=0.12; p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr; p.life-=0.014;
-      cctx.save(); cctx.globalAlpha=Math.max(p.life,0);
-      cctx.translate(p.x,p.y); cctx.rotate(p.rot);
-      cctx.fillStyle=p.color; cctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
-      cctx.restore();
-    });
-    particles=particles.filter(p=>p.life>0 && p.y<confettiCanvas.height+50);
-    if(particles.length>0){ confettiRAF=requestAnimationFrame(tickConfetti); }
-    else { confettiRAF=null; cctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height); }
-  }
-
-  /* ---------------- 概率列表渲染 ---------------- */
-  const prizeListEl=document.getElementById('prizeList');
-  PRIZES.forEach(p=>{
-    const row=document.createElement('div');
-    row.className='prize-row tier-'+p.tier;
-    row.innerHTML='<div class="ic">'+p.icon+'</div>'+
-      '<div class="info"><div class="name">'+p.name+'</div><div class="desc">'+p.desc+'</div></div>'+
-      '<div class="tier-badge">'+p.tierLabel+'</div>'+
-      '<div class="odds">'+p.prob+'%</div>';
-    prizeListEl.appendChild(row);
-  });
-
-  /* ---------------- 漂浮装饰 ---------------- */
-  const floatIcons=['🎀','💗','🌸','✨','💝','🍈'];
-  const floatersEl=document.getElementById('floaters');
-  for(let i=0;i<10;i++){
-    const s=document.createElement('span');
-    s.textContent=floatIcons[i%floatIcons.length];
-    s.style.left=(Math.random()*96)+'%';
-    s.style.fontSize=(14+Math.random()*14)+'px';
-    s.style.animationDuration=(9+Math.random()*10)+'s';
-    s.style.animationDelay=(Math.random()*8)+'s';
-    floatersEl.appendChild(s);
-  }
-
-  /* ---------------- 邮票造型 clip-path 生成 ---------------- */
-  function buildStampPath(w,h,bumpR){
-    bumpR = bumpR || Math.max(5, Math.round(Math.min(w,h)*0.045));
-    const nx = Math.max(4, Math.round(w/(2*bumpR)));
-    const ny = Math.max(3, Math.round(h/(2*bumpR)));
-    const rx = w/(2*nx), ry = h/(2*ny);
-    const steps = 8;
-    function edge(P0,P1,n,normal){
-      let s='';
-      for(let i=0;i<n;i++){
-        const t0={x:P0.x+(P1.x-P0.x)*(i/n), y:P0.y+(P1.y-P0.y)*(i/n)};
-        const t1={x:P0.x+(P1.x-P0.x)*((i+1)/n), y:P0.y+(P1.y-P0.y)*((i+1)/n)};
-        const M={x:(t0.x+t1.x)/2,y:(t0.y+t1.y)/2};
-        const U={x:(t1.x-t0.x)/2,y:(t1.y-t0.y)/2};
-        const rmag=Math.hypot(U.x,U.y);
-        for(let k=0;k<=steps;k++){
-          const phi=Math.PI - Math.PI*k/steps;
-          const cosf=Math.cos(phi), sinf=Math.sin(phi);
-          const px=M.x+cosf*U.x+sinf*rmag*normal.x;
-          const py=M.y+cosf*U.y+sinf*rmag*normal.y;
-          s += 'L'+px.toFixed(2)+','+py.toFixed(2)+' ';
-        }
-      }
-      return s;
-    }
-    let d='M0,0 ';
-    d += edge({x:0,y:0},{x:w,y:0}, nx, {x:0,y:-1});
-    d += edge({x:w,y:0},{x:w,y:h}, ny, {x:1,y:0});
-    d += edge({x:w,y:h},{x:0,y:h}, nx, {x:0,y:1});
-    d += edge({x:0,y:h},{x:0,y:0}, ny, {x:-1,y:0});
-    d += 'Z';
-    return d;
-  }
-
-  /* ---------------- 刮层绘制 ---------------- */
-  function drawCover(ctx,w,h,label){
-    ctx.clearRect(0,0,w,h);
-    const grad=ctx.createLinearGradient(0,0,w,h);
-    grad.addColorStop(0,'#E7E3EA'); grad.addColorStop(1,'#C9C3D2');
-    ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
-    ctx.strokeStyle='rgba(255,255,255,0.28)'; ctx.lineWidth=1;
-    for(let x=-h;x<w;x+=8){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x+h,h); ctx.stroke(); }
-    ctx.save();
-    ctx.globalAlpha=0.13; ctx.fillStyle='#6B4A5A'; ctx.font='bold 10px sans-serif';
-    ctx.translate(w/2,h/2); ctx.rotate(-Math.PI/9); ctx.translate(-w/2,-h/2);
-    for(let yy=-10; yy<h+20; yy+=20){ for(let xx=-20; xx<w+50; xx+=68){ ctx.fillText('垂耳兔CLUB', xx, yy); } }
-    ctx.restore();
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillStyle='rgba(110,90,105,0.9)';
-    const isSelectable=label==='点击选择';
-    const isWaiting=label==='等待确认';
-    ctx.font='bold '+Math.round(h*0.30)+'px sans-serif';
-    ctx.fillText(isSelectable?'👆':(isWaiting?'✓':'🍈'), w*0.28, h*0.5);
-    ctx.font='bold '+Math.round(h*0.15)+'px sans-serif';
-    ctx.fillStyle='#5C4152';
-    ctx.fillText(label||'准备发牌', w*0.62, h*0.5);
-  }
-
-  /* ---------------- 卡片构建（横排三张，baby pink 内嵌边框） ---------------- */
-  const stage = document.getElementById('cardsStage');
-  let CARD_W=0, CARD_H=0, GAP=10, BORDER=5, MAT=4, INNER_W=0, INNER_H=0;
-
-  function layoutStage(){
-    const stageW = stage.clientWidth || (stage.parentElement.clientWidth - 4);
-    GAP = stageW >= 700 ? 20 : (stageW >= 520 ? 14 : 8);
-
-    if(phase==='pregame'){
-      // 预备阶段：卡组放大，居中单叠展示
-      CARD_W = Math.min(260, stageW * 0.68);
-      CARD_H = CARD_W * 0.72;
-    } else {
-      // 发牌后：横排三张
-      CARD_W = Math.min(220, (stageW - GAP*2) / 3);
-      CARD_H = CARD_W * 0.72;
-    }
-    BORDER = Math.max(6, Math.round(CARD_W*0.065));   // 粉色外边框厚度
-    MAT = Math.max(3, Math.round(CARD_W*0.022));      // 白色内间隔厚度
-    const gapW = CARD_W - BORDER*2, gapH = CARD_H - BORDER*2;
-    INNER_W = CARD_W - (BORDER+MAT)*2;
-    INNER_H = CARD_H - (BORDER+MAT)*2;
-    stage.style.height = CARD_H + 'px';
-    const outerClip = "path('"+buildStampPath(CARD_W, CARD_H)+"')";
-    const gapClip = "path('"+buildStampPath(gapW, gapH)+"')";
-    const innerClip = "path('"+buildStampPath(INNER_W, INNER_H)+"')";
-    cardCtx.forEach((c,i)=>{
-      c.wrap.style.width = CARD_W+'px';
-      c.wrap.style.height = CARD_H+'px';
-      c.wrap.style.marginLeft = '0px';
-      c.wrap.style.clipPath = outerClip;
-      c.gap.style.left = BORDER+'px';
-      c.gap.style.top = BORDER+'px';
-      c.gap.style.width = gapW+'px';
-      c.gap.style.height = gapH+'px';
-      c.gap.style.clipPath = gapClip;
-      c.body.style.left = (BORDER+MAT)+'px';
-      c.body.style.top = (BORDER+MAT)+'px';
-      c.body.style.width = INNER_W+'px';
-      c.body.style.height = INNER_H+'px';
-      c.body.style.clipPath = innerClip;
-      const dpr = window.devicePixelRatio||1;
-      c.canvas.width = INNER_W*dpr; c.canvas.height = INNER_H*dpr;
-      c.canvas.style.width=INNER_W+'px'; c.canvas.style.height=INNER_H+'px';
-      c.ctx.setTransform(dpr,0,0,dpr,0,0);
-      if(phase==='pregame'){
-        drawCover(c.ctx, INNER_W, INNER_H, '准备发牌');
-        c.wrap.style.transition = 'none';
-        c.wrap.style.transform = 'translate(calc(-50% + '+c.deckX+'px),0) rotate('+c.deckRot+'deg)';
-      } else {
-        const coverLabel=phase==='chosen'&&i===chosenIndex?'刮开此涂层':(phase==='selected'&&i===chosenIndex?'等待确认':'点击选择');
-        drawCover(c.ctx, INNER_W, INNER_H, coverLabel);
-        setFinalTransform(c, i, false);
-      }
-    });
-  }
-
-  function setFinalTransform(c, i, animate){
-    const x = (i-1)*(CARD_W+GAP);
-    const selected = (phase==='selected'||phase==='chosen') && i===chosenIndex;
-    c.wrap.style.transition = animate ? 'transform .55s cubic-bezier(.22,1.15,.4,1)' : 'none';
-    c.wrap.style.transform = 'translate(calc(-50% + '+x+'px), '+(selected?-10:0)+'px) rotate(0deg) scale('+(selected?1.035:1)+')';
-  }
-
-  function buildCard(index){
-    const wrap=document.createElement('div');
-    wrap.className='scratch-card';
-    wrap.innerHTML =
-      '<div class="card-gap"></div>'+
-      '<div class="card-body">'+
-        '<div class="prize-face" id="face'+index+'"></div>'+
-        '<canvas id="canvas'+index+'"></canvas>'+
-      '</div>'+
-      '<div class="select-badge">✓ 已选中</div>'+
-      '<div class="lock-badge">🔒</div>';
-    stage.appendChild(wrap);
-    const canvas = wrap.querySelector('canvas');
-    const gap = wrap.querySelector('.card-gap');
-    const body = wrap.querySelector('.card-body');
-    const deckX = (index-1)*16;
-    const deckRot = (index-1)*9;
-    cardCtx[index] = { wrap, gap, body, canvas, ctx:canvas.getContext('2d'), drawing:false, deckX, deckRot };
-    wrap.style.zIndex = index===1 ? 3 : 1;
-
-    wrap.style.transform = 'translate(calc(-50% + '+deckX+'px),0) rotate('+deckRot+'deg)';
-
-    function getPos(evt){
-      const rect=canvas.getBoundingClientRect();
-      const p = evt.touches ? evt.touches[0] : evt;
-      return { x:p.clientX-rect.left, y:p.clientY-rect.top };
-    }
-    function scratchAt(pos){
-      const ctx=cardCtx[index].ctx;
-      ctx.globalCompositeOperation='destination-out';
-      ctx.beginPath();
-      ctx.arc(pos.x,pos.y, Math.max(INNER_W,INNER_H)*0.13, 0, Math.PI*2);
-      ctx.fill();
-      playScratchNoise();
-    }
-    function calcRatio(){
+  .start-btn:active{transform…6689 tokens truncated…on calcRatio(){
       const dpr=window.devicePixelRatio||1;
       const stepPx = 6*dpr;
       let cleared=0,total=0;
@@ -735,7 +250,7 @@
       if(phase==='chosen' && index!==chosenIndex) return;
       evt.preventDefault(); ensureAudio();
       if(phase==='idle'||phase==='selected'){
-        chosenIndex=index; assignedPrize=null; phase='selected';
+        chosenIndex=index; phase='selected';
         cardCtx.forEach((c,i)=>{
           c.wrap.classList.toggle('selected',i===index);
           drawCover(c.ctx,INNER_W,INNER_H,i===index?'等待确认':'点击选择');
@@ -797,11 +312,12 @@
     const rank=TIER_RANK[prize.tier];
     if(rank>bestRank){ bestRank=rank; bestName=prize.name; }
     await ipReady;const time=new Date().toISOString();const audit={time,displayTime:formatAuditTime(time),region:ipRegion,device:getDeviceLabel(),environment:getEnvironment(),fingerprint:getFingerprint(),token:''};audit.token=await createAuditToken(prize,audit);
-    const entry={id:prize.id,icon:prize.icon,name:prize.name,desc:prize.desc,tier:prize.tier,tierLabel:prize.tierLabel,c1:prize.c1,c2:prize.c2,prob:prize.prob,time,sequence:totalPlays,audit};
+    audit.activityCode=activeCodeState?.code||'';audit.receiptId=activeCodeState?.receiptId||audit.token;
+    const entry={id:prize.id,icon:prize.icon,name:prize.name,desc:prize.desc,tier:prize.tier,tierLabel:prize.tierLabel,c1:prize.c1,c2:prize.c2,prob:prize.prob,time,sequence:totalPlays,audit,activityCode:audit.activityCode,receiptId:audit.receiptId};
     history.unshift(entry);
     history=history.slice(0,20);
     localStorage.setItem(HISTORY_KEY,JSON.stringify(history));
-    currentResult=entry;
+    currentResult=entry;codeGate?.complete({audit,prizeId:prize.id});
     updateHistoryUI();
     return entry;
   }
@@ -884,8 +400,8 @@
     c.fillStyle='#69b6df';c.textAlign='left';c.font='900 13px Huninn, Microsoft YaHei';c.fillText('DEVICE VERIFICATION · 设备核验信息',175,513);
     c.strokeStyle='rgba(224,205,218,.72)';c.lineWidth=1;c.beginPath();c.moveTo(170,526);c.lineTo(1030,526);c.moveTo(170,574);c.lineTo(1030,574);c.moveTo(170,612);c.lineTo(1030,612);c.moveTo(600,526);c.lineTo(600,574);c.moveTo(600,612);c.lineTo(600,640);c.stroke();
     const drawAuditCell=(label,value,x,y,maxWidth,labelWidth=82)=>{c.textAlign='left';c.fillStyle='#725e70';c.font='900 14px Huninn, Microsoft YaHei';c.fillText(label,x,y);c.fillStyle='#927f90';c.font='800 15px Huninn, Microsoft YaHei';drawWrappedText(c,value,x+labelWidth,y,maxWidth-labelWidth,19,2)};
-    drawAuditCell('地区 IP',audit.region,175,557,405);
-    drawAuditCell('设备指纹',`FP:${audit.fingerprint}`,620,557,405);
+    drawAuditCell('活动口令',audit.activityCode||'历史记录未保存',175,557,405);
+    drawAuditCell('凭证编号',audit.receiptId||audit.token,620,557,405);
     drawAuditCell('设备信息',`${audit.device} · ${audit.environment}`,175,600,840);
     drawAuditCell('核验码',audit.token,175,638,405);
     c.textAlign='left';c.fillStyle='#69b6df';c.font='900 14px Huninn, Microsoft YaHei';c.fillText('垂耳兔电竞 · Kook 7686',620,638);
@@ -935,7 +451,7 @@
   document.getElementById('confirmBtn').addEventListener('click', function(){
     if(phase!=='selected'||chosenIndex===null) return;
     ensureAudio();
-    assignedPrize=weightedPick();
+    if(!assignedPrize)return;
     phase='chosen';
     lockOtherCards(chosenIndex);
     renderPrizeFace(chosenIndex,assignedPrize);
@@ -947,8 +463,9 @@
     playClick();
   });
 
-  document.getElementById('startBtn').addEventListener('click', function(){
-    ensureAudio(); playClick();
+  const startButton=document.getElementById('startBtn');startButton.disabled=true;
+  startButton.addEventListener('click', function(){
+    if(!codeGate?.canPlay()){codeGate?.open();return}activeCodeState=codeGate.consume();assignedPrize=PRIZES.find(item=>item.id===activeCodeState?.prizeId);if(!assignedPrize)return;ensureAudio(); playClick();
     document.getElementById('startWrap').classList.add('hidden');
     phase = 'shuffling';
     layoutStage(); // 卡组从大尺寸单叠切换为发牌用的横排三张尺寸
@@ -995,6 +512,8 @@
     if(soundEnabled){ensureAudio();playTone(784,0,.14,'sine',.12)}
   });
   updateSoundButton();
+
+  (async()=>{codeGate=await BunnyCodeGate.mount({activity:'scratch',prefix:'RABBITCLUB',playButton:startButton,label:'兑换刮刮乐口令'});const restored=codeGate.getState();if(restored?.status==='completed'&&restored.audit){const prize=PRIZES.find(item=>item.id===restored.prizeId);if(prize){currentResult={...prize,time:restored.audit.time,audit:restored.audit,activityCode:restored.code,receiptId:restored.receiptId};showResultOverlay(currentResult)}}})();
 
 })();
 </script>
