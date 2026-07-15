@@ -653,6 +653,6 @@ els.close.addEventListener('click',closeResult);els.overlay.addEventListener('cl
 els.sound.addEventListener('click',()=>{soundEnabled=!soundEnabled;localStorage.setItem(SOUND_KEY,soundEnabled?'on':'off');if(soundEnabled){resumeAudio();const context=getAudioContext();beep(784,'sine',.13,0,.18,context)}updateSoundButton();showToast(soundEnabled?'音效已开启':'音效已关闭')});
 renderPrizeList();renderHistory();updateSoundButton();updateDynamicTime();setInterval(updateDynamicTime,1000);
 </script>
+<script src="./assets/activity-theme-nav.js"></script>
 </body>
 </html>
-
