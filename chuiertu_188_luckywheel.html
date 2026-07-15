@@ -348,6 +348,7 @@ button.addEventListener('click',spin);soundButton.addEventListener('click',()=>{
 drawWheel();renderPrizes();renderHistory();updateSound();createAmbient();const timeEl=document.getElementById('dynamicTime');const tickClock=()=>timeEl.textContent=`📅 ${formatTime()}`;tickClock();setInterval(tickClock,1000);ipReady=loadIpRegion();
 (async()=>{codeGate=await BunnyCodeGate.mount({activity:'wheel',prefix:'BUNNYCLUB',playButton:button,label:'兑换转盘口令'});const restored=codeGate.getState();if(restored?.status==='completed'&&restored.audit){const prize=prizes.find(item=>item.id===restored.prizeId);if(prize){currentResult={prize,audit:restored.audit};showResult(prize,restored.audit);statusEl.textContent=`上次抽中：${prize.name}`}}})();
 </script>
-<script src="./assets/activity-theme-nav.js"></script>
+<script src="./assets/activity-theme-nav.js?v=20260716-cloud3"></script>
 </body>
 </html>
+
