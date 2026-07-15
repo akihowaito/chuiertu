@@ -62,14 +62,14 @@
     function renderCooldown(){
       const remaining=cooldownRemaining();
       if(!remaining){confirm.disabled=false;if(timer){clearInterval(timer);timer=null}return false}
-      confirm.disabled=true;error.textContent=`输错次数较多，请 ${Math.ceil(remaining/60000)} 分钟后再试`;
+      confirm.disabled=true;error.textContent='连续输错 3 次，请 24 小时后再试';
       if(!timer)timer=setInterval(renderCooldown,1000);
       return true;
     }
     function fail(message){
       const previous=read(attemptKey,{count:0,until:0});let count=((previous.until&&previous.until<=Date.now())?0:(previous.count||0))+1,until=0;
-      if(count>=5){count=0;until=Date.now()+10*60*1000}
-      write(attemptKey,{count,until});error.textContent=until?'连续输错 5 次，请 10 分钟后再试':`${message}（还可尝试 ${5-count} 次）`;renderCooldown();
+      if(count>=3){count=0;until=Date.now()+24*60*60*1000}
+      write(attemptKey,{count,until});error.textContent=until?'连续输错 3 次，请 24 小时后再试':`${message}（还可尝试 ${3-count} 次）`;renderCooldown();
     }
     function close(){modal.hidden=true;document.body.style.overflow='';input.value='';error.textContent=''}
     function open(){modal.hidden=false;document.body.style.overflow='hidden';renderCooldown();setTimeout(()=>input.focus(),30)}
