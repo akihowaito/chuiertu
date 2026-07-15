@@ -1001,7 +1001,7 @@
   });
   updateSoundButton();
 
-  (async()=>{codeGate=await BunnyCodeGate.mount({activity:'scratch',prefix:'RABBITCLUB',playButton:startButton,label:'兑换刮刮乐口令'});const restored=codeGate.getState();if(restored?.status==='completed'&&restored.audit){const prize=PRIZES.find(item=>item.id===restored.prizeId);if(prize){currentResult={...prize,time:restored.audit.time,audit:restored.audit,activityCode:restored.code,receiptId:restored.receiptId};showResultOverlay(currentResult)}}})();
+  (async()=>{codeGate=await BunnyCodeGate.mount({activity:'scratch',prefix:'RABBITCLUB',playButton:startButton,label:'兑换刮刮乐口令'});const restored=codeGate.getState();if(restored?.status==='completed'&&restored.audit){const prize=PRIZES.find(item=>item.id===restored.prizeId);if(prize)currentResult={...prize,time:restored.audit.time,audit:restored.audit,activityCode:restored.code,receiptId:restored.receiptId}}})();
 
 })();
 </script>
