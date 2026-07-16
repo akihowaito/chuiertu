@@ -15,14 +15,14 @@
   style.id='activity-theme-nav-style';
   style.textContent=`
     :root{--angel-pink:#f2a8cc;--angel-blue:#9fd8f4;--angel-gold:#e9c77b;--angel-ink:#685669}
-    body{transition:background-color .35s ease,background-image .35s ease}
+    body{position:relative;min-height:100vh;transition:background-color .35s ease,background-image .35s ease}
     .theme-switch{position:fixed;z-index:72;right:24px;top:84px;display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:8px 13px;border:1.5px solid rgba(242,168,204,.72);border-radius:999px;background:rgba(255,255,255,.9);box-shadow:0 5px 0 rgba(159,216,244,.24),0 12px 25px rgba(105,85,106,.1);color:#755f72;font:900 12px/1.2 "Huninn","PingFang SC","Microsoft YaHei",sans-serif;cursor:pointer;backdrop-filter:blur(9px);transition:transform .2s,box-shadow .2s,background .2s}
     .theme-switch:hover{transform:translateY(-2px);box-shadow:0 7px 0 rgba(159,216,244,.25),0 16px 28px rgba(105,85,106,.13)}
     .theme-switch:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(159,216,244,.25)}
     .theme-switch__icon{font-size:16px}.theme-switch__text{white-space:nowrap}
     .angel-sky{position:fixed;inset:0;z-index:1;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .35s}
     body[data-site-theme="angel"] .angel-sky{opacity:1}
-    .angel-cloud-bank{position:fixed;z-index:1;left:0;right:0;bottom:0;height:126px;overflow:hidden;pointer-events:none;opacity:0;transform:translateZ(0);transition:opacity .35s}
+    .angel-cloud-bank{position:absolute;z-index:1;left:0;right:0;bottom:0;height:126px;overflow:hidden;pointer-events:none;opacity:0;transform:translateZ(0);transition:opacity .35s}
     .angel-cloud-bank::before{content:"";position:absolute;z-index:2;left:-4%;right:-4%;bottom:-28px;height:126px;background:radial-gradient(ellipse 9% 58% at 4% 72%,rgba(255,255,255,.58) 0 94%,transparent 100%),radial-gradient(ellipse 11% 68% at 14% 70%,rgba(255,255,255,.52) 0 94%,transparent 100%),radial-gradient(ellipse 13% 82% at 27% 77%,rgba(255,255,255,.56) 0 94%,transparent 100%),radial-gradient(ellipse 12% 72% at 41% 68%,rgba(255,255,255,.5) 0 94%,transparent 100%),radial-gradient(ellipse 14% 88% at 55% 78%,rgba(255,255,255,.58) 0 94%,transparent 100%),radial-gradient(ellipse 12% 72% at 69% 67%,rgba(255,255,255,.5) 0 94%,transparent 100%),radial-gradient(ellipse 13% 82% at 82% 77%,rgba(255,255,255,.56) 0 94%,transparent 100%),radial-gradient(ellipse 11% 68% at 94% 70%,rgba(255,255,255,.52) 0 94%,transparent 100%);filter:drop-shadow(0 -8px 16px rgba(133,197,232,.12))}
     .angel-cloud-bank::after{content:"";position:absolute;z-index:1;left:-7%;right:-7%;bottom:18px;height:104px;background:radial-gradient(ellipse 10% 64% at 5% 82%,rgba(220,242,255,.88) 0 96%,transparent 100%),radial-gradient(ellipse 13% 86% at 20% 88%,rgba(249,230,242,.9) 0 96%,transparent 100%),radial-gradient(ellipse 11% 70% at 36% 78%,rgba(225,244,255,.9) 0 96%,transparent 100%),radial-gradient(ellipse 14% 92% at 53% 91%,rgba(250,232,244,.9) 0 96%,transparent 100%),radial-gradient(ellipse 12% 75% at 70% 78%,rgba(224,244,255,.9) 0 96%,transparent 100%),radial-gradient(ellipse 14% 88% at 87% 88%,rgba(249,231,243,.9) 0 96%,transparent 100%);opacity:.72;filter:blur(.2px)}
     body[data-site-theme="angel"] .angel-cloud-bank{opacity:1}
