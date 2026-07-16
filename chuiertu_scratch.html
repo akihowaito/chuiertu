@@ -892,7 +892,7 @@
     c.strokeStyle='rgba(224,205,218,.72)';c.lineWidth=1;c.beginPath();c.moveTo(170,526);c.lineTo(1030,526);c.moveTo(170,574);c.lineTo(1030,574);c.moveTo(170,612);c.lineTo(1030,612);c.moveTo(600,526);c.lineTo(600,574);c.moveTo(600,612);c.lineTo(600,640);c.stroke();
     const drawAuditCell=(label,value,x,y,maxWidth,labelWidth=82)=>{c.textAlign='left';c.fillStyle='#725e70';c.font='900 14px Huninn, Microsoft YaHei';c.fillText(label,x,y);c.fillStyle='#927f90';c.font='800 15px Huninn, Microsoft YaHei';drawWrappedText(c,value,x+labelWidth,y,maxWidth-labelWidth,19,2)};
     drawAuditCell('活动口令',audit.activityCode||'历史记录未保存',175,557,405);
-    drawAuditCell('凭证编号',audit.receiptId||audit.token,620,557,405);
+    drawAuditCell('地区 IP',audit.region||'地区暂不可用',620,557,405);
     drawAuditCell('设备信息',`${audit.device} · ${audit.environment}`,175,600,840);
     drawAuditCell('核验码',audit.token,175,638,405);
     c.textAlign='left';c.fillStyle='#69b6df';c.font='900 14px Huninn, Microsoft YaHei';c.fillText('垂耳兔电竞 · Kook 7686',620,638);
