@@ -840,9 +840,9 @@
     let line='',lines=[];for(const char of String(text)){const next=line+char;if(ctx.measureText(next).width>maxWidth&&line){lines.push(line);line=char}else line=next}if(line)lines.push(line);
     lines.slice(0,maxLines).forEach((value,index)=>ctx.fillText(value,x,y+index*lineHeight));return y+(Math.min(lines.length,maxLines)-1)*lineHeight;
   }
-  function drawScratchWatermark(ctx,width,height){
+  function drawScratchWatermark(ctx,width,height,text='垂耳兔电竞 · BUNNY CLUB'){
     ctx.save();ctx.beginPath();ctx.rect(65,45,width-130,height-90);ctx.clip();ctx.translate(width/2,height/2);ctx.rotate(-.18);ctx.globalAlpha=.07;ctx.fillStyle='#77727a';ctx.font='500 16px Huninn, Microsoft YaHei';ctx.textAlign='center';
-    for(let y=-height;y<=height;y+=78){for(let x=-width;x<=width;x+=260){ctx.fillText('垂耳兔电竞 · BUNNY CLUB',x,y)}}ctx.restore();
+    for(let y=-height;y<=height;y+=78){for(let x=-width;x<=width;x+=260){ctx.fillText(text,x,y)}}ctx.restore();
   }
   function softenColor(hex,amount=.82){
     const raw=String(hex||'#ff9fc0').replace('#','');
@@ -855,13 +855,16 @@
     if(!result)return;await document.fonts.ready;
     const audit=result.audit||{displayTime:formatAuditTime(result.time),region:'历史记录',device:'记录时设备',environment:'环境信息未保存',fingerprint:'HISTORY',token:String(result.id||result.time||'HISTORY').replace(/[^A-Z0-9]/gi,'').slice(-12).toUpperCase().padStart(12,'0')};
     const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=760;const c=canvas.getContext('2d');
-    const bg=c.createLinearGradient(0,0,1200,760);bg.addColorStop(0,'#fff1f8');bg.addColorStop(.5,'#fffafd');bg.addColorStop(1,'#e8f7ff');c.fillStyle=bg;c.fillRect(0,0,1200,760);
-    c.save();c.translate(612,378);c.rotate(-.024);drawScallopedPanel(c,-500,-285,1000,570,'#d8f1ff',9,25);c.restore();
-    c.save();c.shadowColor='rgba(104,162,198,.2)';c.shadowBlur=28;c.shadowOffsetY=18;drawScallopedPanel(c,90,70,1020,620,'#ffcfe3',9,25);c.restore();
-    drawScallopedPanel(c,90,70,1020,620,'#ffcfe3',9,25);c.fillStyle='#fff';c.fillRect(122,102,956,556);c.strokeStyle='#fff';c.lineWidth=8;c.strokeRect(112,92,976,576);drawScratchWatermark(c,1200,760);
-    c.textAlign='left';c.fillStyle='#59afe0';c.font='900 25px Huninn, Microsoft YaHei';c.fillText('BUNNY CLUB · SCRATCH RESULT',155,150);
+    const isAngel=document.body.dataset.siteTheme==='angel';
+    const ticket=isAngel?{bg1:'#fff8ed',bg2:'#fff5fa',bg3:'#eaf8ff',back:'#dcefff',edge:'#f2d38a',paper:'#fffef9',header:'#c89d43',line:'#e3c980',watermark:'ANGEL WISH · 垂耳兔电竞'}:{bg1:'#fff1f8',bg2:'#fffafd',bg3:'#e8f7ff',back:'#d8f1ff',edge:'#ffcfe3',paper:'#fff',header:'#59afe0',line:'#ebbad1',watermark:'垂耳兔电竞 · BUNNY CLUB'};
+    const bg=c.createLinearGradient(0,0,1200,760);bg.addColorStop(0,ticket.bg1);bg.addColorStop(.5,ticket.bg2);bg.addColorStop(1,ticket.bg3);c.fillStyle=bg;c.fillRect(0,0,1200,760);
+    c.save();c.translate(612,378);c.rotate(-.024);drawScallopedPanel(c,-500,-285,1000,570,ticket.back,9,25);c.restore();
+    c.save();c.shadowColor='rgba(104,162,198,.2)';c.shadowBlur=28;c.shadowOffsetY=18;drawScallopedPanel(c,90,70,1020,620,ticket.edge,9,25);c.restore();
+    drawScallopedPanel(c,90,70,1020,620,ticket.edge,9,25);c.fillStyle=ticket.paper;c.fillRect(122,102,956,556);c.strokeStyle='#fff';c.lineWidth=8;c.strokeRect(112,92,976,576);drawScratchWatermark(c,1200,760,ticket.watermark);
+    if(isAngel){c.font='30px "Segoe UI Emoji"';c.textAlign='center';c.fillStyle='#d0ad5d';c.fillText('🪽',127,143);c.fillText('🪽',1074,640)}
+    c.textAlign='left';c.fillStyle=ticket.header;c.font='900 25px Huninn, Microsoft YaHei';c.fillText(isAngel?'ANGEL WISH · SCRATCH RESULT':'BUNNY CLUB · SCRATCH RESULT',155,150);
     c.textAlign='right';c.fillStyle='#9a8293';c.font='900 18px Huninn, Microsoft YaHei';c.fillText('祈愿刮刮乐',1045,148);
-    c.strokeStyle='#ebbad1';c.lineWidth=2;c.setLineDash([10,9]);c.beginPath();c.moveTo(155,177);c.lineTo(1045,177);c.stroke();c.setLineDash([]);
+    c.strokeStyle=ticket.line;c.lineWidth=2;c.setLineDash([10,9]);c.beginPath();c.moveTo(155,177);c.lineTo(1045,177);c.stroke();c.setLineDash([]);
     const cardGradient=c.createLinearGradient(155,202,1045,467);cardGradient.addColorStop(0,softenColor(result.c1,.84));cardGradient.addColorStop(.52,'#fff9fc');cardGradient.addColorStop(1,softenColor(result.c2,.78));
     c.save();c.shadowColor='rgba(99,161,203,.16)';c.shadowBlur=20;c.shadowOffsetY=9;c.fillStyle=cardGradient;c.beginPath();c.roundRect(155,202,890,265,24);c.fill();c.restore();
     c.strokeStyle='rgba(255,255,255,.95)';c.lineWidth=5;c.beginPath();c.roundRect(164,211,872,247,19);c.stroke();
