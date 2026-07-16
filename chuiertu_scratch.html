@@ -856,7 +856,7 @@
     const audit=result.audit||{displayTime:formatAuditTime(result.time),region:'历史记录',device:'记录时设备',environment:'环境信息未保存',fingerprint:'HISTORY',token:String(result.id||result.time||'HISTORY').replace(/[^A-Z0-9]/gi,'').slice(-12).toUpperCase().padStart(12,'0')};
     const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=760;const c=canvas.getContext('2d');
     const isAngel=document.body.dataset.siteTheme==='angel';
-    const ticket=isAngel?{bg1:'#fff8ed',bg2:'#fff5fa',bg3:'#eaf8ff',back:'#dcefff',edge:'#f2d38a',paper:'#fffef9',header:'#c89d43',line:'#e3c980',watermark:'ANGEL WISH · 垂耳兔电竞'}:{bg1:'#fff1f8',bg2:'#fffafd',bg3:'#e8f7ff',back:'#d8f1ff',edge:'#ffcfe3',paper:'#fff',header:'#59afe0',line:'#ebbad1',watermark:'垂耳兔电竞 · BUNNY CLUB'};
+    const ticket=isAngel?{bg1:'#fff8ed',bg2:'#fff5fa',bg3:'#eaf8ff',back:'#dcefff',edge:'#f2d38a',paper:'#fffef9',header:'#c89d43',line:'#e3c980',watermark:'垂耳兔电竞 · BUNNY CLUB'}:{bg1:'#fff1f8',bg2:'#fffafd',bg3:'#e8f7ff',back:'#d8f1ff',edge:'#ffcfe3',paper:'#fff',header:'#59afe0',line:'#ebbad1',watermark:'垂耳兔电竞 · BUNNY CLUB'};
     const bg=c.createLinearGradient(0,0,1200,760);bg.addColorStop(0,ticket.bg1);bg.addColorStop(.5,ticket.bg2);bg.addColorStop(1,ticket.bg3);c.fillStyle=bg;c.fillRect(0,0,1200,760);
     c.save();c.translate(612,378);c.rotate(-.024);drawScallopedPanel(c,-500,-285,1000,570,ticket.back,9,25);c.restore();
     c.save();c.shadowColor='rgba(104,162,198,.2)';c.shadowBlur=28;c.shadowOffsetY=18;drawScallopedPanel(c,90,70,1020,620,ticket.edge,9,25);c.restore();
