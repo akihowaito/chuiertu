@@ -308,6 +308,9 @@ function drawCanvasHeart(ctx,x,y,size,color,alpha=.22){
 function drawCanvasSpark(ctx,x,y,size,color,alpha=.22){
   ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.translate(x,y);ctx.beginPath();ctx.moveTo(0,-size);ctx.quadraticCurveTo(2, -2, size,0);ctx.quadraticCurveTo(2,2,0,size);ctx.quadraticCurveTo(-2,2,-size,0);ctx.quadraticCurveTo(-2,-2,0,-size);ctx.fill();ctx.restore();
 }
+function drawCanvasCloud(ctx,x,y,scale=1,alpha=.34){
+  ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.globalAlpha=alpha;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-28,4,25,0,Math.PI*2);ctx.arc(0,-10,35,0,Math.PI*2);ctx.arc(34,4,28,0,Math.PI*2);ctx.roundRect(-58,2,118,34,17);ctx.fill();ctx.restore();
+}
 function drawSoftWatermark(ctx,width,height,text){
   ctx.save();ctx.beginPath();ctx.rect(72,52,width-144,height-104);ctx.clip();ctx.translate(width/2,height/2);ctx.rotate(-.2);ctx.globalAlpha=.105;ctx.fillStyle='#77727a';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='500 18px Microsoft YaHei';
   for(let y=-height;y<=height;y+=88){for(let x=-width;x<=width;x+=300){ctx.fillText(text,x,y)}}ctx.restore();
@@ -315,27 +318,31 @@ function drawSoftWatermark(ctx,width,height,text){
 function saveReceiptImage(){
   if(!currentResult)return;const {prize,audit}=currentResult,out=document.createElement('canvas');out.width=900;out.height=1240;const c=out.getContext('2d');
   const accent=prize.color,soft=prize.soft;
-  const bg=c.createLinearGradient(0,0,900,1240);bg.addColorStop(0,'#fff0f7');bg.addColorStop(.48,'#fffafd');bg.addColorStop(1,'#e8f7ff');c.fillStyle=bg;c.fillRect(0,0,900,1240);
+  const isAngel=document.body.dataset.siteTheme==='angel';
+  const ticket=isAngel?{bg1:'#fff8ed',bg2:'#fff5fa',bg3:'#eaf8ff',paper:'#fffef9',border:'#e2c271',header:'#c89d43',line:'#e7d4a4',detail:'#fffaf1',cut:'#edf8fe',watermark:'ANGEL WISH · 垂耳兔电竞'}:{bg1:'#fff0f7',bg2:'#fffafd',bg3:'#e8f7ff',paper:'#fffdfd',border:'#ef9fc4',header:'#67b7e1',line:'#e3c1d2',detail:'#fff9fc',cut:'#edf8fe',watermark:'垂耳兔电竞 · BUNNY CLUB'};
+  const bg=c.createLinearGradient(0,0,900,1240);bg.addColorStop(0,ticket.bg1);bg.addColorStop(.48,ticket.bg2);bg.addColorStop(1,ticket.bg3);c.fillStyle=bg;c.fillRect(0,0,900,1240);
   [[68,120,18,'#ef8db9'],[832,178,14,'#7cc5eb'],[52,895,16,'#8bcbea'],[850,1040,20,'#ef8db9'],[112,1160,12,'#ef8db9']].forEach(([x,y,s,color])=>drawCanvasHeart(c,x,y,s,color));
   [[80,260,12,'#f4b85e'],[826,330,10,'#87c8ea'],[92,745,12,'#e98bb8'],[812,820,13,'#f4b85e'],[774,1140,9,'#87c8ea']].forEach(([x,y,s,color])=>drawCanvasSpark(c,x,y,s,color));
-  c.save();c.shadowColor='rgba(126,165,192,.2)';c.shadowBlur=32;c.shadowOffsetY=18;drawReceiptPaper(c,58,38,784,1160);c.fillStyle='#fffdfd';c.fill();c.restore();
-  drawReceiptPaper(c,58,38,784,1160);c.strokeStyle='#ef9fc4';c.lineWidth=4;c.stroke();
-  drawSoftWatermark(c,900,1240,'垂耳兔电竞 · BUNNY CLUB');
-  c.fillStyle='#67b7e1';c.font='900 24px Microsoft YaHei';c.textAlign='left';c.fillText('BUNNY CLUB · LUCKY WHEEL',96,104);c.textAlign='right';c.fillStyle='#9b8395';c.font='900 19px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,804,104);
-  c.setLineDash([10,10]);c.strokeStyle='#e3c1d2';c.lineWidth=2;c.beginPath();c.moveTo(96,138);c.lineTo(804,138);c.stroke();c.setLineDash([]);
-  const prizeBg=c.createLinearGradient(96,165,804,315);prizeBg.addColorStop(0,soft);prizeBg.addColorStop(1,'#f1f9ff');c.fillStyle=prizeBg;c.beginPath();c.roundRect(96,166,708,166,24);c.fill();
+  if(isAngel){drawCanvasCloud(c,92,196,.72,.4);drawCanvasCloud(c,810,1080,.8,.34);c.font='28px "Segoe UI Emoji"';c.fillStyle='#d0ad5d';c.textAlign='center';c.fillText('🪽',78,104);c.fillText('🪽',822,1135)}
+  c.save();c.shadowColor='rgba(126,165,192,.2)';c.shadowBlur=32;c.shadowOffsetY=18;drawReceiptPaper(c,58,38,784,1160);c.fillStyle=ticket.paper;c.fill();c.restore();
+  drawReceiptPaper(c,58,38,784,1160);c.strokeStyle=ticket.border;c.lineWidth=4;c.stroke();
+  drawSoftWatermark(c,900,1240,ticket.watermark);
+  if(isAngel){c.font='25px "Segoe UI Emoji"';c.textAlign='left';c.fillStyle='#cba755';c.fillText('🪽',88,106)}
+  c.fillStyle=ticket.header;c.font='900 24px Microsoft YaHei';c.textAlign='left';c.fillText(isAngel?'ANGEL WISH · LUCKY WHEEL':'BUNNY CLUB · LUCKY WHEEL',isAngel?122:96,104);c.textAlign='right';c.fillStyle='#9b8395';c.font='900 19px Microsoft YaHei';c.fillText(`NO. ${audit.token.slice(0,8)}`,804,104);
+  c.setLineDash([10,10]);c.strokeStyle=ticket.line;c.lineWidth=2;c.beginPath();c.moveTo(96,138);c.lineTo(804,138);c.stroke();c.setLineDash([]);
+  const prizeBg=c.createLinearGradient(96,165,804,315);prizeBg.addColorStop(0,soft);prizeBg.addColorStop(1,isAngel?'#fff8e8':'#f1f9ff');c.fillStyle=prizeBg;c.beginPath();c.roundRect(96,166,708,166,24);c.fill();
   c.fillStyle='#fff';c.beginPath();c.roundRect(116,192,108,108,27);c.fill();c.strokeStyle='rgba(231,124,173,.18)';c.lineWidth=2;c.stroke();c.font='58px "Segoe UI Emoji"';c.textAlign='center';c.fillText(prize.icon,170,267);
   c.textAlign='left';c.fillStyle=accent;c.font='900 16px Microsoft YaHei';c.fillText(`常驻任务 · ${prize.prob}%`,252,205);c.fillStyle='#9a8798';c.font='800 18px Microsoft YaHei';c.fillText('本次幸运抽中',252,239);c.fillStyle=accent;c.font='900 31px Microsoft YaHei';canvasLines(c,prize.name,252,278,510,39);
-  c.setLineDash([8,9]);c.strokeStyle='#dfc4d3';c.lineWidth=2;c.beginPath();c.moveTo(82,366);c.lineTo(818,366);c.stroke();c.setLineDash([]);c.fillStyle='#edf8fe';c.beginPath();c.arc(59,366,14,0,Math.PI*2);c.fill();c.beginPath();c.arc(841,366,14,0,Math.PI*2);c.fill();c.fillStyle='#d6a7c0';c.font='18px Microsoft YaHei';c.fillText('✂',95,373);
+  c.setLineDash([8,9]);c.strokeStyle=ticket.line;c.lineWidth=2;c.beginPath();c.moveTo(82,366);c.lineTo(818,366);c.stroke();c.setLineDash([]);c.fillStyle=ticket.cut;c.beginPath();c.arc(59,366,14,0,Math.PI*2);c.fill();c.beginPath();c.arc(841,366,14,0,Math.PI*2);c.fill();c.fillStyle=isAngel?'#c8a04e':'#d6a7c0';c.font='18px Microsoft YaHei';c.fillText('✂',95,373);
   c.fillStyle='#6d5a6b';c.font='900 18px Microsoft YaHei';c.fillText('LUCKY DETAILS / 抽奖核验',96,411);
-  c.fillStyle='#fff9fc';c.strokeStyle='#e4c9d7';c.lineWidth=2;c.setLineDash([7,7]);c.beginPath();c.roundRect(96,432,708,346,20);c.fill();c.stroke();c.setLineDash([]);
+  c.fillStyle=ticket.detail;c.strokeStyle=isAngel?'#e5d2a4':'#e4c9d7';c.lineWidth=2;c.setLineDash([7,7]);c.beginPath();c.roundRect(96,432,708,346,20);c.fill();c.stroke();c.setLineDash([]);
   const rows=[['活动口令',audit.activityCode||'历史记录未保存'],['开奖时间',audit.displayTime],['地区 IP',audit.region],['设备信息',`${audit.device} · ${audit.environment}`],['核验码',audit.receiptId||audit.token]];let rowY=478;
   rows.forEach(([label,value],index)=>{c.fillStyle='#6c596b';c.font='900 18px Microsoft YaHei';c.fillText(label,124,rowY);c.fillStyle='#8f7b8d';c.font='800 18px Microsoft YaHei';canvasLines(c,value,270,rowY,500,26);if(index<rows.length-1){c.strokeStyle='#f0e2ea';c.lineWidth=1;c.beginPath();c.moveTo(124,rowY+30);c.lineTo(776,rowY+30);c.stroke()}rowY+=62});
   c.save();c.translate(184,873);c.rotate(-.12);c.strokeStyle=accent;c.lineWidth=4;c.globalAlpha=.72;c.beginPath();c.arc(0,0,60,0,Math.PI*2);c.stroke();c.beginPath();c.arc(0,0,49,0,Math.PI*2);c.stroke();c.fillStyle=accent;c.textAlign='center';c.font='900 25px Microsoft YaHei';c.fillText('已核验',0,-2);c.font='900 12px Arial';c.fillText('VERIFIED',0,22);c.restore();
   c.fillStyle='#765f73';c.textAlign='left';c.font='900 21px Microsoft YaHei';c.fillText('好运已装进这张票据',286,844);c.fillStyle='#a18a9d';c.font='800 16px Microsoft YaHei';c.fillText('请截图保存，并以核验码确认本次结果',286,876);drawCanvasHeart(c,744,850,22,accent,.45);drawCanvasSpark(c,780,890,15,'#72bce3',.55);
   c.setLineDash([9,9]);c.strokeStyle='#e3c5d5';c.lineWidth=2;c.beginPath();c.moveTo(96,951);c.lineTo(804,951);c.stroke();c.setLineDash([]);c.fillStyle='#d3a5bd';c.font='17px Microsoft YaHei';c.fillText('✂',105,958);
   c.font='800 17px Microsoft YaHei';c.textAlign='left';c.fillStyle='#927e91';const receiptLead='请保存本次抽奖凭证，并联系';c.fillText(receiptLead,96,1005);const supportX=96+c.measureText(receiptLead).width,supportText='垂耳兔客服';c.font='900 17px Microsoft YaHei';const supportWidth=c.measureText(supportText).width;c.fillStyle='#fff0f7';c.beginPath();c.roundRect(supportX-5,983,supportWidth+10,28,7);c.fill();c.fillStyle='#df4f9a';c.fillText(supportText,supportX,1005);c.fillStyle='#927e91';c.font='800 17px Microsoft YaHei';c.fillText('，实际服务以双方确认订单为准。',supportX+supportWidth+6,1005);
-  c.setLineDash([5,10]);c.strokeStyle='#d9c0cf';c.lineWidth=2;c.beginPath();c.moveTo(210,1080);c.lineTo(690,1080);c.stroke();c.setLineDash([]);drawCanvasHeart(c,394,1118,18,'#ef8db9',.55);drawCanvasSpark(c,450,1118,13,'#82c6e9',.6);drawCanvasHeart(c,506,1118,18,'#b89ae8',.5);c.textAlign='center';c.fillStyle='#67b7e1';c.font='900 17px Microsoft YaHei';c.fillText('THANK YOU · 垂耳兔电竞 Kook 7686',450,1166);
+  c.setLineDash([5,10]);c.strokeStyle=isAngel?'#dfc889':'#d9c0cf';c.lineWidth=2;c.beginPath();c.moveTo(210,1080);c.lineTo(690,1080);c.stroke();c.setLineDash([]);drawCanvasHeart(c,394,1118,18,'#ef8db9',.55);drawCanvasSpark(c,450,1118,13,isAngel?'#dfbd63':'#82c6e9',.6);drawCanvasHeart(c,506,1118,18,'#b89ae8',.5);c.textAlign='center';c.fillStyle=ticket.header;c.font='900 17px Microsoft YaHei';c.fillText(isAngel?'ANGEL WISH · 垂耳兔电竞 Kook 7686':'THANK YOU · 垂耳兔电竞 Kook 7686',450,1166);
   out.toBlob(blob=>{if(!blob){toast('图片生成失败');return}const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`心愿常驻转盘-${audit.token.slice(0,8)}.png`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);saveButton.textContent='已保存';saveButton.classList.add('is-saved');toast('结果图片已保存')},'image/png');
 }
 function toast(message){const el=document.getElementById('toast');el.textContent=message;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),1700)}
