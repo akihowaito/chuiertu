@@ -203,7 +203,7 @@ button,a{font:inherit}
       <div class="section-title-row"><h2 class="section-title">公开概率与记录</h2></div>
       <div class="support-grid">
         <div class="pool-panel" aria-label="任务奖池与概率">
-          <div class="pool-head"><div class="pool-title-row"><h2>🎡 常驻任务公开概率</h2><span class="total">总概率 100%</span></div><p>每个口令按公开概率独立生成，因此本批次实际数量可能存在随机波动。</p></div>
+          <div class="pool-head"><div class="pool-title-row"><h2>🎡 常驻任务公开概率</h2><span class="total">总概率 100%</span></div><p>8 项任务等概率独立抽取，每项 12.5%，总概率 100%。</p></div>
           <div class="prize-list" id="prizeList"></div>
         </div>
         <div class="history">
@@ -239,14 +239,14 @@ button,a{font:inherit}
 <script src="./assets/activity-code-gate.js"></script>
 <script>
 const prizes=[
-  {id:'w1',name:'绝密保底累计888w',short:'累计888w',prob:15,icon:'🛡️',color:'#ec5aa8',soft:'#fff0f7'},
-  {id:'w2',name:'绝密单局888w+单局三个大保险',short:'888w+保险',prob:12,icon:'💼',color:'#8c61df',soft:'#f5edff'},
-  {id:'w3',name:'绝密单局888w+拼出4把>70W的枪械',short:'拼4把枪械',prob:16,icon:'🔧',color:'#e98a35',soft:'#fff4e8'},
-  {id:'w4',name:'绝密单局888w+任意房卡',short:'任意房卡',prob:11,icon:'🔑',color:'#3b9dd8',soft:'#ecf9ff'},
-  {id:'w5',name:'绝密单局888w+拼出一把>20w的左轮',short:'拼左轮',prob:15,icon:'🎯',color:'#2da393',soft:'#ecfff9'},
-  {id:'w6',name:'绝密单局888w+单局1红',short:'单局1红',prob:17,icon:'🔴',color:'#ef5b6f',soft:'#fff0f2'},
-  {id:'w7',name:'绝密单局1000w',short:'单局1000w',prob:11,icon:'⚡',color:'#bd65dc',soft:'#faefff'},
-  {id:'w8',name:'绝密累计1088w保底',short:'1088w保底',prob:3,icon:'💎',color:'#178fd4',soft:'#eaf8ff'}
+  {id:'w1',name:'绝密保底累计888w',short:'累计888w',prob:12.5,icon:'🛡️',color:'#ec5aa8',soft:'#fff0f7'},
+  {id:'w2',name:'绝密单局888w+单局三个大保险',short:'888w+保险',prob:12.5,icon:'💼',color:'#8c61df',soft:'#f5edff'},
+  {id:'w3',name:'绝密单局888w+拼出4把>70W的枪械',short:'拼4把枪械',prob:12.5,icon:'🔧',color:'#e98a35',soft:'#fff4e8'},
+  {id:'w4',name:'绝密单局888w+任意房卡',short:'任意房卡',prob:12.5,icon:'🔑',color:'#3b9dd8',soft:'#ecf9ff'},
+  {id:'w5',name:'绝密单局888w+拼出一把>20w的左轮',short:'拼左轮',prob:12.5,icon:'🎯',color:'#2da393',soft:'#ecfff9'},
+  {id:'w6',name:'绝密单局888w+单局1红',short:'单局1红',prob:12.5,icon:'🔴',color:'#ef5b6f',soft:'#fff0f2'},
+  {id:'w7',name:'绝密单局1000w',short:'单局1000w',prob:12.5,icon:'⚡',color:'#bd65dc',soft:'#faefff'},
+  {id:'w8',name:'绝密累计1088w保底',short:'1088w保底',prob:12.5,icon:'💎',color:'#178fd4',soft:'#eaf8ff'}
 ];
 const STORAGE_KEY='chuiertu_188_wheel_history_v1';const SOUND_KEY='chuiertu_188_wheel_sound_v1';
 const canvas=document.getElementById('wheel');const ctx=canvas.getContext('2d');const button=document.getElementById('spinButton');const shell=document.getElementById('wheelShell');const wheelWrap=document.querySelector('.wheel-wrap');const statusEl=document.getElementById('spinStatus');
@@ -266,7 +266,7 @@ function drawWheel(){
   ctx.beginPath();ctx.arc(c,c,r,0,Math.PI*2);ctx.lineWidth=11;ctx.strokeStyle='#fff';ctx.stroke();ctx.beginPath();ctx.arc(c,c,r-30,0,Math.PI*2);ctx.setLineDash([13,10]);ctx.lineWidth=3;ctx.strokeStyle='rgba(240,76,163,.32)';ctx.stroke();ctx.setLineDash([]);
 }
 function renderPrizes(){document.getElementById('prizeList').innerHTML=prizes.map(prize=>`<div class="prize" role="listitem" tabindex="0" aria-label="${prize.name}，概率 ${prize.prob}%" style="--color:${prize.color};--soft:${prize.soft}"><span class="prize-icon">${prize.icon}</span><span class="prize-name">${prize.name}</span><span class="prob">${prize.prob}%</span></div>`).join('')}
-function pickPrize(){let value=secureRandom()*100;for(let index=0;index<prizes.length;index++){value-=prizes[index].prob;if(value<0)return {prize:prizes[index],index}}return {prize:prizes.at(-1),index:prizes.length-1}}
+function pickPrize(){const total=prizes.reduce((sum,prize)=>sum+prize.prob,0);let value=secureRandom()*total;for(let index=0;index<prizes.length;index++){value-=prizes[index].prob;if(value<0)return {prize:prizes[index],index}}return {prize:prizes.at(-1),index:prizes.length-1}}
 function getAudio(){if(!soundEnabled)return null;if(!audioContext){try{audioContext=new(window.AudioContext||window.webkitAudioContext)()}catch{return null}}if(audioContext.state==='suspended')audioContext.resume();return audioContext}
 function tone(freq,start,duration,type='sine',volume=.05){const ac=getAudio();if(!ac)return;const osc=ac.createOscillator(),gain=ac.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,ac.currentTime+start);gain.gain.setValueAtTime(.0001,ac.currentTime+start);gain.gain.exponentialRampToValueAtTime(volume,ac.currentTime+start+.025);gain.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+start+duration);osc.connect(gain);gain.connect(ac.destination);osc.start(ac.currentTime+start);osc.stop(ac.currentTime+start+duration+.04)}
 function playStart(){tone(520,0,.1,'triangle',.055);tone(660,.08,.12,'triangle',.05);tone(880,.18,.18,'sine',.045)}
