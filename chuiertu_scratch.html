@@ -416,13 +416,13 @@
 
   /* ---------------- 奖品与概率配置（真实概率，合计100%，已按成本控制） ---------------- */
   const PRIZES = [
-    { id:'p98', name:'98 折优惠券', desc:'下次点单立减 2%', icon:'🎫', tier:'common', tierLabel:'普通', prob:28, c1:'#FF9FC0', c2:'#FF6FA5' },
-    { id:'p95', name:'95 折优惠券', desc:'下次点单立减 5%', icon:'🎟️', tier:'common', tierLabel:'普通', prob:22, c1:'#C4A6FF', c2:'#9A6EFF' },
-    { id:'d10', name:'赠送余额 10r', desc:'仅供下次点单使用', icon:'💰', tier:'uncommon', tierLabel:'优质', prob:20, c1:'#8FDCB8', c2:'#5CC08F' },
-    { id:'d18', name:'赠送余额 18r', desc:'仅供下次点单使用', icon:'💎', tier:'rare',     tierLabel:'稀有', prob:12, c1:'#8FBFFF', c2:'#4C93FF' },
-    { id:'d28', name:'赠送余额 28r', desc:'仅供下次点单使用', icon:'🎁', tier:'uncommon', tierLabel:'优质', prob:8,  c1:'#FFCE7A', c2:'#FFB13D' },
-    { id:'c5',  name:'现金返现 5r', desc:'将在24小时内发放', icon:'💵', tier:'rare',     tierLabel:'稀有', prob:6,  c1:'#FF9C9C', c2:'#FF6161' },
-    { id:'c8',  name:'现金返现 8r', desc:'将在24小时内发放', icon:'👑', tier:'legendary',tierLabel:'王牌', prob:4,  c1:'#FFD34D', c2:'#FF9A3D' },
+    { id:'p98', name:'98 折优惠券', desc:'下次点单立减 2%', icon:'🎫', tier:'common', tierLabel:'小确幸', prob:28, c1:'#FF9FC0', c2:'#FF6FA5' },
+    { id:'p95', name:'95 折优惠券', desc:'下次点单立减 5%', icon:'🎟️', tier:'common', tierLabel:'小确幸', prob:22, c1:'#C4A6FF', c2:'#9A6EFF' },
+    { id:'d10', name:'赠送余额 10r', desc:'仅供下次点单使用', icon:'💰', tier:'uncommon', tierLabel:'心动', prob:20, c1:'#8FDCB8', c2:'#5CC08F' },
+    { id:'d18', name:'赠送余额 18r', desc:'仅供下次点单使用', icon:'💎', tier:'rare',     tierLabel:'闪耀', prob:12, c1:'#8FBFFF', c2:'#4C93FF' },
+    { id:'d28', name:'赠送余额 28r', desc:'仅供下次点单使用', icon:'🎁', tier:'rare',     tierLabel:'闪耀', prob:8,  c1:'#FFCE7A', c2:'#FFB13D' },
+    { id:'c5',  name:'现金返现 5r', desc:'将在24小时内发放', icon:'💵', tier:'rare',     tierLabel:'闪耀', prob:6,  c1:'#FF9C9C', c2:'#FF6161' },
+    { id:'c8',  name:'现金返现 8r', desc:'将在24小时内发放', icon:'👑', tier:'legendary',tierLabel:'天选', prob:4,  c1:'#FFD34D', c2:'#FF9A3D' },
   ];
   if(PRIZES.reduce((total,prize)=>total+prize.prob,0)!==100) throw new Error('奖项概率合计必须为100%');
   const TIER_RANK = { common:1, uncommon:2, rare:3, legendary:4 };
@@ -434,7 +434,7 @@
   function readHistory(){
     try{
       const saved=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');
-      return Array.isArray(saved)?saved.filter(item=>item&&item.name&&item.time).slice(0,20):[];
+      return Array.isArray(saved)?saved.filter(item=>item&&item.name&&item.time).slice(0,20).map(item=>{const current=PRIZES.find(prize=>prize.id===item.id);return current?{...item,tier:current.tier,tierLabel:current.tierLabel}:item}):[];
     }catch{return[]}
   }
   let history=readHistory();
