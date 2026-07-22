@@ -149,8 +149,6 @@
     .prize-row:hover .tier-badge{transform:translateY(-1px) scale(1.06);filter:brightness(1.05)}
     .prize-row:hover .odds{transform:scale(1.08);color:#EC5AA8}
   }
-  .prize-row:active{transform:translateY(1px) scale(.992);box-shadow:0 2px 0 rgba(130,198,234,.08)}
-  .prize-row:focus-visible{outline:3px solid rgba(146,211,244,.4);outline-offset:2px}
   .prize-row .ic{ font-size:20px; width:26px; text-align:center; transform-origin:50% 70%; transition:transform .22s cubic-bezier(.2,1.35,.4,1); }
   .prize-row .info{ flex:1; min-width:0; }
   .prize-row .name{ font-size:13.5px; font-weight:700; color:var(--text-dark); }
@@ -551,8 +549,6 @@
   PRIZES.forEach(p=>{
     const row=document.createElement('div');
     row.className='prize-row tier-'+p.tier;
-    row.tabIndex=0;
-    row.setAttribute('aria-label',p.name+'，'+p.tierLabel+'，中奖概率 '+p.prob+'%');
     row.innerHTML='<div class="ic">'+p.icon+'</div>'+
       '<div class="info"><div class="name">'+p.name+'</div><div class="desc">'+p.desc+'</div></div>'+
       '<div class="tier-badge">'+p.tierLabel+'</div>'+
